@@ -1,0 +1,3419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#05070b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ATHLETE // CRYPTO SPORT OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           PREMIUM CYBER SPORT + CRYPTO / BLOCKCHAIN AESTHETIC
+           ============================================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-deep: #04060a;
+            --bg-surface: #080b14;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --bg-input: rgba(255, 255, 255, 0.05);
+            --border-glow: rgba(0, 255, 255, 0.15);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.78);
+            --text-muted: rgba(255, 255, 255, 0.35);
+            --cyan: #00f0ff;
+            --purple: #8b5cf6;
+            --gold: #fbbf24;
+            --pink: #ec4899;
+            --neon-green: #4ade80;
+            --cyan-dim: rgba(0, 240, 255, 0.08);
+            --purple-dim: rgba(139, 92, 246, 0.08);
+            --gold-dim: rgba(251, 191, 36, 0.08);
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --radius-card: 28px;
+            --radius-sm: 16px;
+            --transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 0;
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(251, 191, 36, 0.02) 0%, transparent 40%);
+            background-attachment: fixed;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .app {
+            max-width: 1120px;
+            width: 100%;
+            padding: 18px clamp(14px, 3vw, 30px) 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--cyan), var(--purple));
+            border-radius: 10px;
+        }
+
+        /* ---------- HEADER with CRYPTO BADGE ---------- */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 70;
+            margin: 0 0 24px;
+            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(8, 12, 19, 0.72), rgba(12, 18, 29, 0.42));
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(22px) saturate(145%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(120deg, rgba(255, 61, 0, 0.75), transparent 24%, rgba(0, 231, 255, 0.7) 51%, transparent 76%, rgba(185, 255, 0, 0.45));
+            opacity: 0.32;
+            z-index: -1;
+        }
+
+        .header::after {
+            content: '⛓️ BLOCKCHAIN // VERIFIED';
+            position: absolute;
+            right: 88px;
+            bottom: 6px;
+            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.22em;
+            color: rgba(0, 231, 255, 0.55);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .header-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+            background: var(--bg-card);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.06);
+        }
+
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header h1 {
+            font: 900 clamp(1.4rem, 4.2vw, 4.2rem)/0.82 'Impact', 'Arial Black', Inter, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.045em;
+            color: #fff;
+            background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255, 61, 0, 0.26));
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header h1 .sub {
+            font-size: 0.4em;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.3);
+            background: none;
+            text-transform: uppercase;
+            margin-left: 2px;
+        }
+
+        .header h1 .hash-badge {
+            font-size: 0.2em;
+            font-weight: 800;
+            -webkit-text-fill-color: var(--neon-green);
+            background: none;
+            background-color: rgba(74, 222, 128, 0.12);
+            padding: 0.15em 0.5em;
+            border-radius: 40px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .header h1::after {
+            content: '🏋️ Атлет';
+            position: absolute;
+            left: 2px;
+            top: calc(0.58rem + 6px);
+            width: 100%;
+            opacity: 0.4;
+            color: #ff2bd6;
+            -webkit-text-fill-color: #ff2bd6;
+            clip-path: inset(0 0 56% 0);
+            transform: translateX(0);
+            animation: glitch 3.4s infinite steps(1, end);
+            pointer-events: none;
+        }
+
+        @keyframes glitch {
+            0%, 88%, 100% {
+                transform: translateX(0);
+                opacity: 0.16;
+            }
+            89% {
+                transform: translateX(3px);
+                opacity: 0.45;
+            }
+            90% {
+                transform: translateX(-4px);
+                opacity: 0.28;
+            }
+            91% {
+                transform: translateX(2px);
+                opacity: 0.35;
+            }
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .header .version {
+            border: 1px solid rgba(0, 231, 255, 0.22);
+            background: rgba(0, 231, 255, 0.075);
+            color: #b9f8ff;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font: 800 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            box-shadow: 0 0 24px rgba(0, 231, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header .version .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.6);
+            }
+        }
+
+        .btn-reset,
+        .burger-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 34px rgba(0, 0, 0, 0.22);
+            backdrop-filter: blur(14px);
+            transition: var(--transition);
+        }
+
+        .btn-reset {
+            border-color: rgba(255, 49, 92, 0.35);
+            color: #ffdce5;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.55rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-reset:active {
+            transform: scale(0.94);
+            background: rgba(255, 70, 70, 0.15);
+        }
+
+        .burger-btn {
+            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .burger-btn:active {
+            transform: scale(0.92);
+        }
+
+        .burger-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .burger-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background: var(--cyan);
+        }
+        .burger-btn.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .burger-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            background: var(--purple);
+        }
+
+        /* ---------- MENU ---------- */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -360px;
+            width: 340px;
+            max-width: 84%;
+            height: 100%;
+            background: rgba(10, 11, 22, 0.96);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-right: 1px solid var(--border-subtle);
+            z-index: 1000;
+            transition: left 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 80px 20px 30px;
+            overflow-y: auto;
+            box-shadow: 20px 0 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .side-menu::before {
+            content: '⛓️ CHAIN // NAV';
+            position: absolute;
+            left: 20px;
+            top: 26px;
+            color: rgba(74, 222, 128, 0.7);
+            font: 900 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.26em;
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .side-menu .menu-title {
+            margin-top: 8px;
+            color: rgba(0, 231, 255, 0.75);
+            border-bottom-color: rgba(0, 231, 255, 0.18);
+            font: 900 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.24em;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .side-menu .menu-item {
+            position: relative;
+            isolation: isolate;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.035);
+            color: #d7e2ee;
+            font-weight: 800;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .side-menu .menu-item::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple), var(--gold));
+            opacity: 0;
+            transition: 0.25s ease;
+        }
+
+        .side-menu .menu-item:hover,
+        .side-menu .menu-item.active {
+            transform: translateX(4px);
+            border-color: rgba(0, 231, 255, 0.28);
+            background: linear-gradient(90deg, rgba(255, 61, 0, 0.18), rgba(0, 231, 255, 0.065));
+            color: #fff;
+        }
+
+        .side-menu .menu-item:hover::before,
+        .side-menu .menu-item.active::before {
+            opacity: 1;
+        }
+
+        .side-menu .menu-item .icon {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        .side-menu .menu-item.active .icon {
+            opacity: 1;
+        }
+
+        .side-menu .menu-item .badge {
+            margin-left: auto;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #05070b;
+            font-size: 0.5rem;
+            font-weight: 800;
+            padding: 2px 12px;
+            border-radius: 40px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* ---------- PAGES ---------- */
+        .page {
+            display: none;
+            animation: fadeSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .page.active {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+            gap: 18px;
+            align-items: start;
+        }
+
+        #page-records.active {
+            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+        }
+        #page-progress.active {
+            grid-template-columns: minmax(320px, 0.8fr) minmax(320px, 1.2fr);
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(24px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ---------- CARDS ---------- */
+        .card {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.095);
+            border-radius: 30px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025) 42%, rgba(0, 231, 255, 0.035)), rgba(7, 11, 18, 0.76);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(22px) saturate(135%);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), border-color 0.35s, box-shadow 0.35s, background 0.35s;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            z-index: -2;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 61, 0, 0.5), transparent 28%, rgba(0, 231, 255, 0.35) 58%, transparent 76%, rgba(185, 255, 0, 0.26));
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -30%;
+            width: 52%;
+            height: 190%;
+            transform: rotate(18deg);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 231, 255, 0.24);
+            box-shadow: 0 42px 100px rgba(0, 0, 0, 0.58), 0 0 44px rgba(0, 231, 255, 0.075), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+        }
+
+        .card:hover::after {
+            left: 90%;
+            opacity: 0.65;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .card-header h2 {
+            font: 900 clamp(1.08rem, 2.3vw, 1.75rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            color: #fff;
+            text-shadow: 0 0 18px rgba(0, 231, 255, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header .badge {
+            border: 1px solid rgba(0, 231, 255, 0.22);
+            background: rgba(0, 231, 255, 0.08);
+            color: #bdf9ff;
+            box-shadow: 0 0 24px rgba(0, 231, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            font: 900 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 16px;
+            border-radius: 40px;
+        }
+
+        .card-header .badge .hash {
+            color: var(--neon-green);
+            font-weight: 400;
+        }
+
+        /* ---------- EXERCISE GRID ---------- */
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .exercise-card {
+            position: relative;
+            min-height: 132px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: left;
+            padding: 14px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: radial-gradient(circle at 88% 0%, rgba(0, 231, 255, 0.18), transparent 34%), linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025) 48%, rgba(255, 61, 0, 0.08)), rgba(10, 15, 24, 0.76);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.28s, box-shadow 0.28s;
+            cursor: pointer;
+        }
+
+        .exercise-card::before {
+            content: '⛓️ BLOCK';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.15);
+            color: var(--neon-green);
+            font: 900 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.08em;
+            z-index: 2;
+        }
+
+        .exercise-card::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -20px;
+            width: 90px;
+            height: 140px;
+            background: linear-gradient(135deg, rgba(255, 61, 0, 0.5), rgba(0, 231, 255, 0.18));
+            transform: rotate(28deg);
+            opacity: 0.28;
+            clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+        }
+
+        .exercise-card .ex-name {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: 30px;
+            font: 800 0.72rem/1.08 Inter, system-ui, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.035em;
+            color: #dfe8f3;
+        }
+
+        .exercise-card .ex-weight {
+            position: relative;
+            z-index: 2;
+            margin-top: 6px;
+            font: 950 clamp(1.8rem, 4.2vw, 3rem)/0.86 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.05em;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 61, 0, 0.32), 0 0 28px rgba(0, 231, 255, 0.14);
+        }
+
+        .exercise-card .ex-unit {
+            position: relative;
+            z-index: 2;
+            color: rgba(206, 219, 233, 0.72);
+            font: 800 0.55rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .exercise-card .ex-bodyweight {
+            position: relative;
+            z-index: 2;
+            margin-top: 6px;
+            padding: 3px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
+            color: #dffcff;
+            border-radius: 20px;
+            font: 700 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            display: inline-block;
+        }
+
+        .exercise-card .hash-id {
+            position: relative;
+            z-index: 2;
+            margin-top: 6px;
+            font: 400 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.04em;
+            word-break: break-all;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-7px) rotateX(2deg) rotateY(-2deg) scale(1.015);
+            border-color: rgba(0, 231, 255, 0.3);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.52), 0 0 34px rgba(0, 231, 255, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        /* ---------- FORMS ---------- */
+        .input-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .input-row input,
+        .input-row select {
+            flex: 1;
+            min-width: 60px;
+            min-height: 44px;
+            background: rgba(3, 7, 14, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: #f7fbff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            font-weight: 500;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 34px rgba(0, 0, 0, 0.18);
+        }
+
+        .input-row select {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+
+        .input-row input:focus,
+        .input-row select:focus {
+            border-color: rgba(0, 231, 255, 0.55);
+            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.12), 0 0 34px rgba(0, 231, 255, 0.14);
+        }
+
+        .input-row input::placeholder {
+            color: rgba(200, 210, 223, 0.44);
+        }
+
+        .input-row .btn {
+            flex: 0 0 auto;
+        }
+
+        .exercise-select-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .exercise-select-wrapper select {
+            width: 100%;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%);
+            color: #080b10;
+            font: 950 0.78rem/1 Inter, system-ui, sans-serif;
+            letter-spacing: 0.035em;
+            text-transform: uppercase;
+            box-shadow: 0 16px 36px rgba(255, 61, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+            padding: 12px 22px;
+            cursor: pointer;
+            touch-action: manipulation;
+            white-space: nowrap;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-110%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+            transition: 0.45s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: saturate(1.12);
+            box-shadow: 0 22px 48px rgba(255, 61, 0, 0.35), 0 0 24px rgba(255, 138, 0, 0.16);
+        }
+
+        .btn:hover::before {
+            transform: translateX(110%);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.97);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.045);
+            color: #e7f8ff;
+            border-color: rgba(0, 231, 255, 0.22);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #54ff8f, #b9ff00);
+            color: #07100a;
+            box-shadow: 0 18px 40px rgba(84, 255, 143, 0.18);
+        }
+
+        .btn-danger,
+        .btn-reset {
+            background: linear-gradient(135deg, #ff315c, #ff3d00);
+            color: #fff;
+            box-shadow: 0 18px 40px rgba(255, 49, 92, 0.18);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-row .btn {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* ---------- STATS ---------- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .stat-box {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 22px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            border-color: rgba(0, 231, 255, 0.15);
+        }
+
+        .stat-box::after {
+            content: '';
+            position: absolute;
+            right: -18px;
+            bottom: -36px;
+            width: 80px;
+            height: 100px;
+            transform: rotate(26deg);
+            background: linear-gradient(135deg, rgba(255, 61, 0, 0.42), rgba(0, 231, 255, 0.18));
+            opacity: 0.35;
+        }
+
+        .stat-box label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            color: rgba(207, 220, 234, 0.63);
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-box .value {
+            font: 950 clamp(2rem, 5vw, 3.5rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.05em;
+            color: #fff;
+            text-shadow: 0 0 24px rgba(0, 231, 255, 0.18), 0 0 20px rgba(255, 61, 0, 0.18);
+            position: relative;
+            z-index: 1;
+            margin-top: 2px;
+        }
+
+        .stat-box .unit {
+            color: rgba(185, 255, 0, 0.75);
+            font-weight: 900;
+            font-size: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------- SETS ---------- */
+        .set-item {
+            border: 1px solid rgba(255, 255, 255, 0.085);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+            padding: 12px 16px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.22s ease;
+        }
+
+        .set-item:hover {
+            transform: translateX(5px);
+            border-color: rgba(255, 61, 0, 0.24);
+        }
+
+        .set-item .set-info {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .set-item .set-weight {
+            font-weight: 950;
+            color: #ff8a00;
+            text-shadow: 0 0 16px rgba(255, 61, 0, 0.22);
+            font-size: 1.05rem;
+        }
+
+        .set-item .set-reps {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .set-item .set-delete {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 4px;
+            transition: var(--transition);
+        }
+
+        .set-item .set-delete:active {
+            color: #ef4444;
+            transform: scale(1.2);
+        }
+
+        .set-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 14px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            border-radius: var(--radius-sm);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+        }
+
+        .set-summary .stat {
+            font-size: 0.6rem;
+            color: rgba(207, 220, 234, 0.63);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .set-summary .stat .num {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 2px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ---------- CHALLENGES ---------- */
+        .challenge-card {
+            border: 1px solid rgba(255, 255, 255, 0.085);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple), var(--gold));
+            opacity: 0.7;
+        }
+
+        .challenge-card.active {
+            border-color: rgba(255, 61, 0, 0.35);
+            background: linear-gradient(145deg, rgba(255, 61, 0, 0.12), rgba(255, 255, 255, 0.03));
+        }
+
+        .challenge-card.completed {
+            border-color: rgba(84, 255, 143, 0.42);
+            opacity: 0.78;
+        }
+
+        .challenge-card .ch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .challenge-card .ch-name {
+            font-weight: 950;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            font-size: 0.95rem;
+        }
+
+        .challenge-card .ch-reward {
+            background: linear-gradient(135deg, var(--gold), var(--pink));
+            color: #0a0a12;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .challenge-card .ch-desc {
+            font-size: 0.75rem;
+            color: #cdd7e4;
+            margin-bottom: 8px;
+        }
+
+        .challenge-card .ch-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .challenge-card .ch-progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--gold));
+            box-shadow: 0 0 18px rgba(255, 61, 0, 0.22);
+        }
+
+        .challenge-card .ch-progress-text {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* ---------- AI ---------- */
+        .ai-program {
+            border: 1px solid rgba(255, 255, 255, 0.085);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--cyan);
+        }
+
+        .ai-program .day {
+            font-weight: 900;
+            color: var(--cyan);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 16px rgba(0, 231, 255, 0.2);
+        }
+
+        .ai-program .exercise {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 2px 0;
+            font-weight: 500;
+        }
+
+        .ai-program .exercise strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .forecast-card {
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .forecast-card .target {
+            font-size: 2.6rem;
+            font-weight: 950;
+            background: linear-gradient(135deg, var(--cyan), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            font-family: 'Impact', 'Arial Black', Inter, sans-serif;
+        }
+
+        .forecast-card .date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .forecast-card .confidence {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--gold));
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 0 18px rgba(255, 61, 0, 0.22);
+        }
+
+        .chart-container {
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .chart-container canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 150px;
+            filter: drop-shadow(0 10px 20px rgba(0, 231, 255, 0.09));
+        }
+
+        .ai-bubble {
+            border: 1px solid rgba(255, 255, 255, 0.085);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-left: 3px solid var(--cyan);
+        }
+
+        .ai-bubble::before {
+            content: '// COACH AI ONLINE ⛓️';
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(185, 255, 0, 0.75);
+            font: 900 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.18em;
+        }
+
+        .ai-bubble .label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+            font-weight: 700;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .ai-bubble p {
+            color: #cdd7e4;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .ai-message {
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 16px 20px;
+            color: var(--text-primary);
+            min-height: 48px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .ai-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .ai-actions .btn {
+            flex: 1;
+            min-width: 70px;
+            text-align: center;
+            font-size: 0.65rem;
+            padding: 12px 16px;
+        }
+
+        .empty-state {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 24px 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: rgba(7, 11, 18, 0.88);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border: 1px solid rgba(0, 231, 255, 0.26);
+            padding: 14px 28px;
+            border-radius: 16px;
+            color: #f7fbff;
+            font-size: 0.85rem;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 32px rgba(0, 231, 255, 0.1);
+            font-weight: 850;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---------- WORKOUT TIMER ---------- */
+        .workout-timer {
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .workout-timer .label {
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            letter-spacing: 0.5px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        /* ---------- ACHIEVEMENT TOAST ---------- */
+        .achievement-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.85);
+            background: linear-gradient(145deg, rgba(9, 13, 20, 0.95), rgba(16, 23, 35, 0.94));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 231, 107, 0.48);
+            box-shadow: 0 34px 100px rgba(0, 0, 0, 0.68), 0 0 50px rgba(255, 231, 107, 0.12);
+            border-radius: 28px;
+            padding: 36px 40px;
+            text-align: center;
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 90%;
+            width: 380px;
+        }
+
+        .achievement-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+
+        .achievement-toast .big-icon {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .achievement-toast .title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .achievement-toast .sub {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .achievement-toast .btn {
+            margin-top: 0;
+        }
+
+        /* ---------- CALC ---------- */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .calc-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .calc-input-group label {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .calc-input-group input,
+        .calc-input-group select {
+            min-height: 44px;
+            background: rgba(3, 7, 14, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: #f7fbff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+            width: 100%;
+            font-weight: 500;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 34px rgba(0, 0, 0, 0.18);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .calc-input-group input:focus,
+        .calc-input-group select:focus {
+            border-color: rgba(0, 231, 255, 0.55);
+            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.12), 0 0 34px rgba(0, 231, 255, 0.14);
+        }
+
+        .calc-result {
+            margin-top: 14px;
+            border: 2px solid var(--cyan);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26), 0 0 60px rgba(0, 231, 255, 0.04);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .calc-result .label {
+            font-size: 0.55rem;
+            color: rgba(207, 220, 234, 0.63);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        .calc-result .value {
+            font-size: 2.4rem;
+            font-weight: 950;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            font-family: 'Impact', 'Arial Black', Inter, sans-serif;
+        }
+
+        .calc-result .sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* ---------- RESET MODAL ---------- */
+        .reset-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(18px) saturate(145%);
+            -webkit-backdrop-filter: blur(18px) saturate(145%);
+            z-index: 4000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .reset-modal.show {
+            display: flex;
+        }
+
+        .reset-modal-content {
+            background: linear-gradient(145deg, rgba(9, 13, 20, 0.95), rgba(16, 23, 35, 0.94));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 231, 107, 0.48);
+            box-shadow: 0 34px 100px rgba(0, 0, 0, 0.68), 0 0 50px rgba(255, 231, 107, 0.12);
+            border-radius: 28px;
+            padding: 36px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .reset-modal-content h2 {
+            font: 950 1.7rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            text-transform: uppercase;
+            color: #ff315c;
+            margin-bottom: 8px;
+        }
+
+        .reset-modal-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .reset-modal-content .btn-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .reset-modal-content .btn-row .btn {
+            flex: 1;
+        }
+
+        .reset-modal-content .btn-row .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            box-shadow: none;
+        }
+
+        /* ---------- WEEK LIST ---------- */
+        .week-list {
+            max-height: 260px;
+            overflow-y: auto;
+            margin-top: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 6px;
+        }
+
+        .week-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+            border-radius: 12px;
+            background: transparent;
+            transition: var(--transition);
+        }
+
+        .week-item:last-child {
+            border: none;
+        }
+
+        .week-item .date {
+            color: rgba(207, 220, 234, 0.63);
+            font-weight: 500;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.75rem;
+        }
+
+        .week-item .data {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* ---------- DECORATIVE IMAGES ---------- */
+        .deco-banner {
+            width: 100%;
+            height: 80px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 12px;
+            position: relative;
+            background: var(--bg-input);
+        }
+
+        .deco-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .deco-banner:hover img {
+            transform: scale(1.02);
+        }
+
+        .deco-banner .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.3));
+            pointer-events: none;
+        }
+
+        .deco-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(0, 231, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .deco-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .deco-avatar--lg {
+            width: 48px;
+            height: 48px;
+            border-width: 2px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 760px) {
+            .app {
+                padding: 12px 12px 86px;
+            }
+            .header {
+                border-radius: 22px;
+                padding: 14px 12px;
+                flex-wrap: wrap;
+            }
+            .header::after {
+                display: none;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .header .version .dot {
+                display: none;
+            }
+            .page.active,
+            #page-records.active,
+            #page-progress.active {
+                grid-template-columns: 1fr !important;
+                gap: 14px !important;
+            }
+            .card {
+                border-radius: 24px;
+                padding: 16px;
+            }
+            .exercise-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+            .exercise-card {
+                min-height: 112px;
+                padding: 12px;
+            }
+            .exercise-card .ex-name {
+                font-size: 0.6rem;
+            }
+            .exercise-card .ex-weight {
+                font-size: 1.8rem;
+            }
+            .input-row input,
+            .input-row select {
+                min-width: 88px;
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.7rem;
+            }
+            .stat-box .value {
+                font-size: 1.8rem;
+            }
+            .side-menu {
+                width: 280px;
+                padding: 70px 16px 20px;
+            }
+            .side-menu .menu-item {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
+            .header .version {
+                font-size: 0.45rem;
+                padding: 4px 10px;
+            }
+            .deco-banner {
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+            .header .version {
+                display: none;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .header h1 .sub {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .exercise-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ---------- CRYPTO / BLOCKCHAIN STAMP ---------- */
+        .chain-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 12px;
+            border-radius: 40px;
+            background: rgba(74, 222, 128, 0.06);
+            border: 1px solid rgba(74, 222, 128, 0.12);
+            font: 700 0.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: var(--neon-green);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .chain-stamp .icon {
+            font-size: 0.5rem;
+        }
+
+        /* ---------- VERIFIED BADGE ---------- */
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 40px;
+            background: rgba(0, 231, 255, 0.06);
+            border: 1px solid rgba(0, 231, 255, 0.15);
+            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: var(--cyan);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ACHIEVEMENT TOAST -->
+    <div id="achievementToast" class="achievement-toast">
+        <span class="big-icon" id="achToastIcon">🏆</span>
+        <div class="title" id="achToastTitle">Достижение!</div>
+        <div class="sub" id="achToastDesc">Ты сделал это!</div>
+        <button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
+    </div>
+
+    <!-- MENU OVERLAY -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <!-- SIDE MENU -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-title">📋 Навигация</div>
+        <button class="menu-item active" data-page="records" onclick="navigateTo('records')">
+            <span class="icon">🏋️</span> Тренировки
+        </button>
+        <button class="menu-item" data-page="progress" onclick="navigateTo('progress')">
+            <span class="icon">📊</span> Вес/рост
+        </button>
+        <button class="menu-item" data-page="forecast" onclick="navigateTo('forecast')">
+            <span class="icon">📈</span> Прогноз
+        </button>
+        <button class="menu-item" data-page="challenges" onclick="navigateTo('challenges')">
+            <span class="icon">🎯</span> Челленджи
+            <span class="badge" id="menuChallengeBadge" style="display:none;">0</span>
+        </button>
+        <button class="menu-item" data-page="reports" onclick="navigateTo('reports')">
+            <span class="icon">📊</span> Отчёты
+        </button>
+        <button class="menu-item" data-page="ai" onclick="navigateTo('ai')">
+            <span class="icon">🤖</span> AI тренер
+        </button>
+        <button class="menu-item" data-page="calc" onclick="navigateTo('calc')">
+            <span class="icon">📐</span> Калькулятор 1ПМ
+        </button>
+    </div>
+
+    <!-- APP -->
+    <div class="app">
+
+        <!-- HEADER with LOGO & CRYPTO BADGE -->
+        <div class="header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="https://static.vecteezy.com/system/resources/previews/046/267/287/large_2x/fitness-and-bodybuilder-logo-illustration-black-and-white-free-vector.jpg" alt="ATHLETE" loading="lazy">
+                </div>
+                <h1>ATHLETE <span class="sub">elite</span> <span class="hash-badge">⛓️ #PRIME</span></h1>
+            </div>
+            <div class="header-actions">
+                <span class="version"><span class="dot"></span> v5.4</span>
+                <button class="btn-reset" onclick="openResetModal()">🗑️</button>
+                <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- DECORATIVE BANNER (image placeholder) -->
+        <div class="deco-banner" style="margin-bottom:16px;">
+            <img src="https://yt3.googleusercontent.com/MOeAfdnITKALY0U8vMFxiZsKnFR2XB36JAg_lSqnDqeijmpmzE1zzzrihon333Kh6ZhlBnZC=s900-c-k-c0x00ffffff-no-rj" alt="fitness banner" loading="lazy">
+            <div class="overlay"></div>
+        </div>
+
+        <!-- PAGE: RECORDS -->
+        <div id="page-records" class="page active">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🏆 Рекорды <span class="verified-badge">✅ verified</span></h2>
+                    <span class="badge">все упражнения <span class="hash">⛓️</span></span>
+                </div>
+                <div class="exercise-grid" id="recordsContainer"></div>
+                <div class="input-row">
+                    <div class="exercise-select-wrapper"><select id="recordExSelect"></select></div>
+                    <input type="number" id="recordExWeight" placeholder="Вес/повторы" step="0.5">
+                    <button class="btn" id="addRecordBtn">➕</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>📋 Рабочие подходы</h2>
+                    <span class="badge" id="setsCount">0 подходов</span>
+                </div>
+                <div id="todaySetsContainer"><div class="empty-state">Нет записей за сегодня</div></div>
+                <div class="input-row">
+                    <div class="exercise-select-wrapper"><select id="setExSelect"></select></div>
+                    <input type="number" id="setWeight" placeholder="Вес (кг)" step="0.5">
+                    <input type="number" id="setReps" placeholder="Повторы" min="1" max="50">
+                    <button class="btn" id="addSetBtn">➕</button>
+                </div>
+                <div id="setSummary" class="set-summary" style="display:none;"></div>
+                <div class="btn-row"><button class="btn btn-success" id="finishWorkoutBtn">✅ Завершить</button></div>
+                <div class="workout-timer">
+                    <span><span class="label">📅</span> <span id="todayDate">—</span></span>
+                    <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
+                    <span><span class="label">⛓️</span> <span class="chain-stamp"><span class="icon">⛓️</span> BLOCK #<span id="blockHash">A7F3</span></span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: PROGRESS -->
+        <div id="page-progress" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 Вес и рост</h2>
+                    <span class="badge">еженедельно</span>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-box"><label>Вес</label><div class="value" id="currentWeightDisplay">—</div><div class="unit">кг</div></div>
+                    <div class="stat-box"><label>Рост</label><div class="value" id="currentHeightDisplay">—</div><div class="unit">см</div></div>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
+                    <input type="number" id="heightInput" placeholder="Рост (см)" step="0.5">
+                    <button class="btn" id="addProgressBtn">📝</button>
+                </div>
+                <div class="week-list" id="progressWeekList"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>📈 График веса <span class="chain-stamp"><span class="icon">⛓️</span> ON-CHAIN</span></h2>
+                    <span class="badge">динамика</span>
+                </div>
+                <div class="chart-container"><canvas id="progressChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- PAGE: FORECAST -->
+        <div id="page-forecast" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📈 Прогноз прогресса <span class="verified-badge">⛓️ AI</span></h2>
+                    <span class="badge">AI прогноз</span>
+                </div>
+                <div id="forecastContainer"><div class="empty-state">Выбери упражнение и цель</div></div>
+                <div class="input-row">
+                    <div class="exercise-select-wrapper"><select id="forecastExSelect"></select></div>
+                    <input type="number" id="forecastTarget" placeholder="Цель (кг/повторы)" step="0.5">
+                    <button class="btn" id="forecastBtn">🔮</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: CHALLENGES -->
+        <div id="page-challenges" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🎯 Челленджи <span class="chain-stamp"><span class="icon">⛓️</span> ACTIVE</span></h2>
+                    <span class="badge" id="challengeBadge">0 активных</span>
+                </div>
+                <div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
+            </div>
+        </div>
+
+        <!-- PAGE: REPORTS -->
+        <div id="page-reports" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📊 Отчёты</h2>
+                    <span class="badge">неделя</span>
+                </div>
+                <div id="reportContainer"><div class="empty-state">Данные появятся после тренировок</div></div>
+            </div>
+        </div>
+
+        <!-- PAGE: AI -->
+        <div id="page-ai" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>🤖 AI-тренер 3.0 <span class="verified-badge">⛓️ COACH</span></h2>
+                    <span class="badge">57 упражнений</span>
+                </div>
+                <div class="ai-bubble">
+                    <div class="label">📊 анализ боеспособности</div>
+                    <p id="aiStatus">Анализирую все данные...</p>
+                </div>
+                <div class="ai-actions">
+                    <button class="btn" id="aiProgramBtn">📋 Программа</button>
+                    <button class="btn btn-outline" id="aiAdviceBtn">💡 Совет</button>
+                    <button class="btn btn-outline" id="aiAnalyzeBtn">📊 Анализ</button>
+                </div>
+                <div class="ai-message" id="aiMessage">Нажми «Анализ» или «Программа»</div>
+            </div>
+        </div>
+
+        <!-- PAGE: CALC -->
+        <div id="page-calc" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📐 Калькулятор 1ПМ</h2>
+                    <span class="badge">одноповторный максимум</span>
+                </div>
+                <div class="calc-grid">
+                    <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
+                    <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
+                </div>
+                <div class="calc-input-group" style="margin-top:10px;"><label>Формула</label>
+                    <select id="calcFormula">
+                        <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
+                        <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
+                        <option value="oconnor">О'Коннор</option>
+                    </select>
+                </div>
+                <button class="btn btn-block" id="calcBtn" style="margin-top:12px;">🧮 Рассчитать</button>
+                <div class="calc-result" id="calcResult">
+                    <div class="label">Ваш 1ПМ</div>
+                    <div class="value" id="calcResultValue">—</div>
+                    <div class="sub" id="calcResultSub">введите вес и повторения</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESET MODAL -->
+        <div class="reset-modal" id="resetModal">
+            <div class="reset-modal-content">
+                <h2>⚠️ Полный сброс</h2>
+                <p>Все данные будут удалены навсегда!</p>
+                <div class="btn-row">
+                    <button class="btn btn-outline" onclick="closeResetModal()">❌ Отмена</button>
+                    <button class="btn btn-danger" onclick="resetAll()">🗑️ Сбросить всё</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. BURGER MENU
+            // ============================================================
+            window.toggleMenu = function() {
+                const menu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                const burger = document.getElementById('burgerBtn');
+                menu.classList.toggle('open');
+                overlay.classList.toggle('open');
+                burger.classList.toggle('active');
+            };
+
+            window.closeMenu = function() {
+                const menu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                const burger = document.getElementById('burgerBtn');
+                menu.classList.remove('open');
+                overlay.classList.remove('open');
+                burger.classList.remove('active');
+            };
+
+            window.openResetModal = function() {
+                document.getElementById('resetModal').classList.add('show');
+            };
+
+            window.closeResetModal = function() {
+                document.getElementById('resetModal').classList.remove('show');
+            };
+
+            window.resetAll = function() {
+                localStorage.clear();
+                closeResetModal();
+                showToast('🗑️ Все данные удалены!', 2000);
+                setTimeout(() => location.reload(), 800);
+            };
+
+            window.closeAchievementToast = function() {
+                document.getElementById('achievementToast').classList.remove('show');
+            };
+
+            let toastTimer = null;
+
+            function showToast(text, duration = 2000) {
+                const el = document.getElementById('toast');
+                el.textContent = text;
+                el.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => el.classList.remove('show'), duration);
+            }
+
+            function showAchievementToast(icon, title, desc) {
+                document.getElementById('achToastIcon').textContent = icon;
+                document.getElementById('achToastTitle').textContent = title;
+                document.getElementById('achToastDesc').textContent = desc;
+                document.getElementById('achievementToast').classList.add('show');
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+            }
+
+            // ============================================================
+            // 2. DATA
+            // ============================================================
+            const STORAGE_RECORDS = 'athlete_records_v5';
+            const STORAGE_PROGRESS = 'athlete_progress_v5';
+            const STORAGE_SETS = 'athlete_sets_v5';
+            const STORAGE_SETS_WEEKLY = 'athlete_sets_weekly_v5';
+            const STORAGE_CHALLENGES = 'athlete_challenges_v5';
+            const STORAGE_LAST_DATE = 'athlete_last_date_v5';
+
+            let records = {};
+            let progressData = [];
+            let sets = [];
+            let weeklySets = {};
+            let challenges = [];
+            let exerciseList = [];
+            let lastDate = '';
+
+            const defaultExercises = [
+                'жим ногами', 'присед', 'выпады с гантелями', 'румынская тяга',
+                'болгарский сплит-присед', 'сгибание ног лёжа', 'разгибание ног сидя',
+                'становая тяга', 'присед со штангой', 'жим платформы ногами',
+                'жим от груди', 'жим гантелей лёжа', 'разводка гантелей',
+                'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
+                'тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
+                'гиперэкстензия', 'шраги с гантелями', 'подтягивания', 'тяга к поясу',
+                'жим стоя', 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
+                'подъём гантелей перед собой', 'жим гантелей сидя',
+                'подъём на бицепс', 'французский жим', 'молотковые сгибания',
+                'концентрационные сгибания', 'жим из-за головы для трицепса',
+                'подъём штанги на бицепс', 'отжимания на брусьях',
+                'планка', 'скручивания', 'обратные скручивания',
+                'боковая планка', 'запрыгивания на тумбу', 'берпи',
+                'тяга штанги к подбородку', 'махи гантелями', 'ягодичный мост',
+                'выпады назад', 'приседания с прыжком', 'отжимания с хлопком',
+                'подтягивания обратным хватом', 'становая тяга на прямых ногах',
+                'французский жим лёжа', 'подъём на носки стоя',
+                'жим Арнольда', 'разведение гантелей лёжа'
+            ];
+
+            const bodyweightExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания', 'обратные скручивания', 'боковая планка', 'запрыгивания на тумбу', 'отжимания с хлопком', 'подтягивания обратным хватом', 'приседания с прыжком'];
+
+            const CHALLENGE_POOL = [
+                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
+                    reward: '⭐ +50' },
+                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
+                    reward: '⭐ +55' },
+                { name: '💪 Мощный прорыв', desc: 'Добавь 10 кг к любому рекорду', type: 'add_weight', target: 10,
+                    reward: '⭐ +70' },
+                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2,
+                    reward: '⭐ +45' },
+                { name: '💪 Три рекорда', desc: 'Обнови рекорды в 3 упражнениях', type: 'two_records', target: 3,
+                    reward: '⭐ +60' },
+                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20,
+                    reward: '⭐ +30' },
+                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25,
+                    reward: '⭐ +40' },
+                { name: '🔥 Железный человек', desc: 'Сделай 30 подходов за неделю', type: 'total_sets', target: 30,
+                    reward: '⭐ +50' },
+                { name: '🔥 Стальной характер', desc: 'Сделай 35 подходов за неделю', type: 'total_sets', target: 35,
+                    reward: '⭐ +60' },
+                { name: '🔥 Титановый объём', desc: 'Сделай 40 подходов за неделю', type: 'total_sets', target: 40,
+                    reward: '⭐ +70' },
+                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000,
+                    reward: '⭐ +40' },
+                { name: '🏋️ Тоннаж-гигант', desc: 'Набери 2500 кг тоннажа', type: 'total_volume', target: 2500,
+                    reward: '⭐ +50' },
+                { name: '🏋️ Тоннаж-монстр', desc: 'Набери 3000 кг тоннажа', type: 'total_volume', target: 3000,
+                    reward: '⭐ +60' },
+                { name: '📈 Прогресс-день', desc: 'Запиши текущий вес и рост', type: 'progress_entry', target: 1,
+                    reward: '⭐ +20' },
+                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3,
+                    reward: '⭐ +60' },
+                { name: '🎯 Разносторонний', desc: 'Рекорды в 5 разных упражнениях', type: 'three_exercises', target: 5,
+                    reward: '⭐ +70' },
+                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10,
+                    reward: '⭐ +40' },
+                { name: '🔥 Огненный подход', desc: '15 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 15,
+                    reward: '⭐ +50' },
+                { name: '⚡ Быстрый старт', desc: 'Сделай 5 подходов в первый день недели', type: 'first_day_sets',
+                    target: 5, reward: '⭐ +25' },
+                { name: '🎯 Постоянство', desc: 'Сделай подходы в 4 разных упражнениях', type: 'four_exercises',
+                    target: 4, reward: '⭐ +40' },
+                { name: '💪 Разнообразие', desc: 'Сделай подходы в 5 разных упражнениях', type: 'five_exercises',
+                    target: 5, reward: '⭐ +50' },
+                { name: '🏆 Золотая неделя', desc: 'Выполни все 5 челленджей', type: 'golden_week', target: 1,
+                    reward: '⭐ +150' },
+                { name: '🎯 Клуб 100', desc: 'Сделай 100 повторений за неделю', type: 'total_reps', target: 100,
+                    reward: '⭐ +45' },
+                { name: '💪 Ультиматум', desc: 'Добавь 20 кг к рекорду за месяц', type: 'monthly_goal', target: 20,
+                    reward: '⭐ +120' },
+                { name: '🔥 Два подхода в день', desc: 'Тренируйся 5 дней подряд', type: 'streak_days', target: 5,
+                    reward: '⭐ +45' },
+                { name: '🔥 Неделя силы', desc: 'Сделай подходы во все 7 дней', type: 'streak_days', target: 7,
+                    reward: '⭐ +65' },
+                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50,
+                    exercise: 'отжимания от пола', reward: '⭐ +40' },
+                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps',
+                    target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
+                { name: '💪 Берпи-машина', desc: 'Сделай 20 берпи за подход', type: 'bodyweight_reps', target: 20,
+                    exercise: 'берпи', reward: '⭐ +50' },
+                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100,
+                    exercise: 'отжимания от пола', reward: '⭐ +35' },
+                { name: '💪 Вис на турнике', desc: 'Сделай 30 подтягиваний за неделю', type: 'bodyweight_total', target: 30,
+                    exercise: 'подтягивания', reward: '⭐ +40' },
+                { name: '🏋️ Тяжёлая пятница', desc: 'Сделай 10 подходов в пятницу', type: 'friday_sets', target: 10,
+                    reward: '⭐ +35' },
+                { name: '💪 Мощный понедельник', desc: 'Сделай 8 подходов в понедельник', type: 'monday_sets', target: 8,
+                    reward: '⭐ +30' },
+                { name: '🔥 Огненная среда', desc: 'Сделай 12 подходов в среду', type: 'wednesday_sets', target: 12,
+                    reward: '⭐ +35' },
+                { name: '🎯 Идеальная техника', desc: 'Сделай 10 подходов с идеальной техникой', type: 'perfect_form',
+                    target: 10, reward: '⭐ +35' },
+                { name: '💪 Увеличение веса', desc: 'Увеличь средний вес в подходах на 5 кг', type: 'avg_weight_increase',
+                    target: 5, reward: '⭐ +45' },
+            ];
+
+            // ============================================================
+            // 3. LOAD DATA
+            // ============================================================
+            function loadData() {
+                exerciseList = [...defaultExercises];
+                localStorage.setItem('athlete_exercises_v5', JSON.stringify(exerciseList));
+
+                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records =
+                    {}; }
+                exerciseList.forEach(ex => { if (!(ex in records)) records[ex] = { weight: 0, date: new Date()
+                        .toISOString().slice(0, 10) }; });
+
+                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) {
+                    progressData = []; }
+                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10);
+                    progressData.push({ date: today, weight: 75, height: 175 }); }
+                progressData.sort((a, b) => a.date < b.date ? 1 : -1);
+
+                try { const s = localStorage.getItem(STORAGE_SETS); if (s) sets = JSON.parse(s); } catch (e) { sets = []; }
+                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) {
+                    weeklySets = {}; }
+                try { const d = localStorage.getItem(STORAGE_LAST_DATE); if (d) lastDate = d; } catch (e) { lastDate = ''; }
+                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) {
+                    challenges = []; }
+
+                checkNewDay();
+                updateBlockHash();
+            }
+
+            function saveRecords() { localStorage.setItem(STORAGE_RECORDS, JSON.stringify(records)); }
+
+            function saveProgress() { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(progressData)); }
+
+            function saveSets() { localStorage.setItem(STORAGE_SETS, JSON.stringify(sets));
+                saveWeeklySets(); }
+
+            function saveWeeklySets() { localStorage.setItem(STORAGE_SETS_WEEKLY, JSON.stringify(weeklySets)); }
+
+            function saveChallenges() { localStorage.setItem(STORAGE_CHALLENGES, JSON.stringify(challenges)); }
+
+            function saveLastDate() { localStorage.setItem(STORAGE_LAST_DATE, lastDate); }
+
+            function checkNewDay() {
+                const today = new Date().toISOString().slice(0, 10);
+                if (lastDate !== today) {
+                    const todaySets = sets.filter(s => s.date === today);
+                    if (todaySets.length > 0) {
+                        if (!weeklySets[lastDate || today]) weeklySets[lastDate || today] = [];
+                        weeklySets[lastDate || today] = [...todaySets];
+                        saveWeeklySets();
+                    }
+                    sets = sets.filter(s => s.date === today);
+                    saveSets();
+                    lastDate = today;
+                    saveLastDate();
+                }
+                updateTodayInfo();
+            }
+
+            function updateExerciseSelects() {
+                ['recordExSelect', 'setExSelect', 'forecastExSelect'].forEach(id => {
+                    const select = document.getElementById(id);
+                    if (!select) return;
+                    const currentVal = select.value;
+                    select.innerHTML = '';
+                    exerciseList.forEach(ex => {
+                        const opt = document.createElement('option');
+                        opt.value = ex;
+                        opt.textContent = ex + (bodyweightExercises.includes(ex) ? ' (вес тела)' : '');
+                        select.appendChild(opt);
+                    });
+                    if (currentVal && exerciseList.includes(currentVal)) select.value = currentVal;
+                });
+            }
+
+            // ============================================================
+            // 4. RENDER RECORDS with HASH
+            // ============================================================
+            function renderRecords() {
+                const container = document.getElementById('recordsContainer');
+                container.innerHTML = '';
+                const sorted = Object.keys(records).sort();
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                let idx = 0;
+                for (let ex of sorted) {
+                    const entry = records[ex];
+                    const w = entry.weight || 0;
+                    const d = entry.date || '—';
+                    const isBW = bodyweightExercises.includes(ex);
+                    const hash = generateHash(ex + w + d).slice(0, 8);
+                    const div = document.createElement('div');
+                    div.className = 'exercise-card';
+                    div.innerHTML = `
+                        <div class="ex-name">${ex}</div>
+                        <div class="ex-weight">${w}</div>
+                        <div class="ex-unit">${isBW ? 'повторов' : 'кг'} · ${d}</div>
+                        ${isBW && currentWeight ? `<div class="ex-bodyweight">⚖️ ${currentWeight} кг</div>` : ''}
+                        <div class="hash-id">⛓️ #${hash}</div>
+                    `;
+                    div.addEventListener('click', function() {
+                        const unit = isBW ? 'повторов' : 'кг';
+                        const val = prompt(`Новый результат для "${ex}" (${unit}):`, w);
+                        if (val !== null) {
+                            const num = parseFloat(val);
+                            if (!isNaN(num) && num > 0) {
+                                records[ex] = { weight: num, date: new Date().toISOString().slice(0, 10) };
+                                saveRecords();
+                                renderRecords();
+                                updateChart();
+                                updateChallenges();
+                                updateBlockHash();
+                                showToast(`✅ ${ex}: ${num} ${unit} ⛓️ verified`);
+                            } else showToast('❌ Введи корректное число', 1800);
+                        }
+                    });
+                    container.appendChild(div);
+                    idx++;
+                }
+            }
+
+            // ============================================================
+            // 5. RENDER SETS
+            // ============================================================
+            function renderTodaySets() {
+                const container = document.getElementById('todaySetsContainer');
+                const summary = document.getElementById('setSummary');
+                const today = new Date().toISOString().slice(0, 10);
+                const todaySets = sets.filter(s => s.date === today);
+                if (todaySets.length === 0) {
+                    container.innerHTML = '<div class="empty-state">Нет записей за сегодня</div>';
+                    summary.style.display = 'none';
+                    document.getElementById('setsCount').textContent = '0 подходов';
+                    document.getElementById('todaySetsCount').textContent = '0';
+                    return;
+                }
+                container.innerHTML = '';
+                [...todaySets].reverse().forEach(set => {
+                    const div = document.createElement('div');
+                    div.className = 'set-item';
+                    div.innerHTML = `
+                        <div class="set-info">
+                            <span style="font-weight:600;font-size:0.85rem;color:var(--text-secondary);">${set.exercise}</span>
+                            <span class="set-weight">${set.weight} кг</span>
+                            <span class="set-reps">× ${set.reps} повт.</span>
+                            <span style="font-size:0.65rem;color:var(--text-muted);">${set.time || ''}</span>
+                            <span class="chain-stamp" style="font-size:0.4rem;">⛓️ #${(set.id+'').slice(-4)}</span>
+                        </div>
+                        <button class="set-delete" data-id="${set.id}">✕</button>
+                    `;
+                    div.querySelector('.set-delete').addEventListener('click', function() {
+                        sets = sets.filter(s => s.id != this.dataset.id);
+                        saveSets();
+                        renderTodaySets();
+                        updateChallenges();
+                        updateBlockHash();
+                        showToast('🗑️ Подход удалён');
+                    });
+                    container.appendChild(div);
+                });
+                const total = todaySets.length;
+                const volume = todaySets.reduce((s, set) => s + set.weight * set.reps, 0);
+                const avg = total > 0 ? todaySets.reduce((s, set) => s + set.weight, 0) / total : 0;
+                summary.style.display = 'grid';
+                summary.innerHTML = `
+                    <div class="stat"><span class="num">${total}</span>подходов</div>
+                    <div class="stat"><span class="num">${volume}</span>тоннаж (кг)</div>
+                    <div class="stat"><span class="num">${avg.toFixed(1)}</span>ср. вес (кг)</div>
+                `;
+                document.getElementById('setsCount').textContent = `${total} подходов`;
+                document.getElementById('todaySetsCount').textContent = total;
+            }
+
+            function updateTodayInfo() {
+                const today = new Date().toISOString().slice(0, 10);
+                document.getElementById('todayDate').textContent = today;
+                document.getElementById('todaySetsCount').textContent = sets.filter(s => s.date === today).length;
+            }
+
+            function finishWorkout() {
+                const today = new Date().toISOString().slice(0, 10);
+                const todaySets = sets.filter(s => s.date === today);
+                if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1500); return; }
+                if (!weeklySets[today]) weeklySets[today] = [];
+                weeklySets[today] = [...todaySets];
+                saveWeeklySets();
+                sets = sets.filter(s => s.date !== today);
+                saveSets();
+                renderTodaySets();
+                updateChallenges();
+                updateBlockHash();
+                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов сохранено. ⛓️`, 2000);
+            }
+
+            function addSet() {
+                const ex = document.getElementById('setExSelect').value;
+                const weight = parseFloat(document.getElementById('setWeight').value);
+                const reps = parseInt(document.getElementById('setReps').value);
+                if (!ex || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
+                    showToast('❌ Выбери упражнение, введи вес и повторения', 2000);
+                    return;
+                }
+                const today = new Date().toISOString().slice(0, 10);
+                const now = new Date();
+                const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+                sets.push({ id: Date.now() + Math.random(), exercise: ex, weight, reps, date: today, time });
+                saveSets();
+                renderTodaySets();
+                updateChallenges();
+                updateBlockHash();
+                document.getElementById('setWeight').value = '';
+                document.getElementById('setReps').value = '';
+                showToast(`✅ ${ex}: ${weight} кг × ${reps} повт. ⛓️`);
+            }
+
+            // ============================================================
+            // 6. PROGRESS
+            // ============================================================
+            function renderProgress() {
+                const wDisplay = document.getElementById('currentWeightDisplay');
+                const hDisplay = document.getElementById('currentHeightDisplay');
+                const list = document.getElementById('progressWeekList');
+                if (progressData.length === 0) {
+                    wDisplay.textContent = '—';
+                    hDisplay.textContent = '—';
+                    list.innerHTML = '<div class="empty-state">Нет данных</div>';
+                    return;
+                }
+                const latest = progressData[0];
+                wDisplay.textContent = latest.weight ? latest.weight.toFixed(1) : '—';
+                hDisplay.textContent = latest.height ? latest.height.toFixed(1) : '—';
+                list.innerHTML = '';
+                progressData.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'week-item';
+                    const w = item.weight ? item.weight.toFixed(1) + ' кг' : '—';
+                    const h = item.height ? item.height.toFixed(1) + ' см' : '—';
+                    row.innerHTML =
+                        `<span class="date">${item.date || '—'}</span><span class="data">${w} · ${h}</span>`;
+                    list.appendChild(row);
+                });
+            }
+
+            function addProgress() {
+                const weight = parseFloat(document.getElementById('weightInput').value);
+                const height = parseFloat(document.getElementById('heightInput').value);
+                if (isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
+                    showToast('❌ Введи вес и рост (числа > 0)', 2000);
+                    return;
+                }
+                const today = new Date().toISOString().slice(0, 10);
+                const idx = progressData.findIndex(item => item.date === today);
+                if (idx !== -1) { progressData[idx].weight = weight;
+                    progressData[idx].height = height; } else { progressData.unshift({ date: today, weight, height }); }
+                progressData.sort((a, b) => a.date < b.date ? 1 : -1);
+                saveProgress();
+                renderProgress();
+                updateChart();
+                updateChallenges();
+                updateBlockHash();
+                document.getElementById('weightInput').value = '';
+                document.getElementById('heightInput').value = '';
+                showToast(`📊 ${weight} кг · ${height} см ⛓️`);
+            }
+
+            // ============================================================
+            // 7. CHART
+            // ============================================================
+            function updateChart() {
+                const canvas = document.getElementById('progressChart');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                const w = rect.width - 24;
+                const h = 150;
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                ctx.scale(dpr, dpr);
+
+                const textColor = 'rgba(255,255,255,0.5)';
+                const gridColor = 'rgba(0,231,255,0.1)';
+                const accentColor = '#00f0ff';
+
+                const data = progressData.slice().reverse();
+                if (data.length < 2) {
+                    ctx.fillStyle = textColor;
+                    ctx.font = '13px system-ui';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Добавь больше данных', w / 2, h / 2);
+                    return;
+                }
+
+                const padding = { top: 12, bottom: 18, left: 28, right: 8 };
+                const chartW = w - padding.left - padding.right;
+                const chartH = h - padding.top - padding.bottom;
+
+                const weights = data.map(d => d.weight);
+                const minWeight = Math.max(0, Math.min(...weights) - 2);
+                const maxWeight = Math.max(...weights) + 2;
+
+                ctx.strokeStyle = gridColor;
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= 3; i++) {
+                    const y = padding.top + (chartH / 3) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(w - padding.right, y);
+                    ctx.stroke();
+                    const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
+                    ctx.fillStyle = textColor;
+                    ctx.font = '8px system-ui';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(val.toFixed(0), padding.left - 4, y + 3);
+                }
+
+                ctx.beginPath();
+                ctx.strokeStyle = accentColor;
+                ctx.lineWidth = 2.5;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+
+                for (let i = 0; i < data.length; i++) {
+                    const x = padding.left + (i / (data.length - 1)) * chartW;
+                    const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                for (let i = 0; i < data.length; i++) {
+                    const x = padding.left + (i / (data.length - 1)) * chartW;
+                    const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = accentColor;
+                    ctx.fill();
+                    ctx.strokeStyle = '#05070b';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                    if (i % 2 === 0 || i === data.length - 1) {
+                        ctx.fillStyle = textColor;
+                        ctx.font = '7px system-ui';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(data[i].date.slice(5), x, h - 2);
+                    }
+                }
+            }
+
+            // ============================================================
+            // 8. FORECAST
+            // ============================================================
+            function renderForecast() {
+                const container = document.getElementById('forecastContainer');
+                const saved = localStorage.getItem('last_forecast');
+                if (saved) {
+                    try {
+                        const data = JSON.parse(saved);
+                        container.innerHTML = `
+                            <div class="forecast-card">
+                                <div style="font-size:0.8rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
+                                <div class="target">${data.target} ${data.unit || 'кг'}</div>
+                                <div class="date">Прогноз: ${data.forecastDate}</div>
+                                <div class="confidence">${data.confidence}</div>
+                                <div class="progress-bar"><div class="fill" style="width:${data.progress}%"></div></div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">
+                                    Текущий: ${data.current} ${data.unit || 'кг'} · ${data.progress}% до цели
+                                </div>
+                                ${data.weeksToGoal ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:4px;">📊 ${data.weeksToGoal}</div>` : ''}
+                                <div style="margin-top:8px;font-size:0.5rem;color:var(--text-muted);">⛓️ прогноз подтверждён</div>
+                            </div>
+                        `;
+                        return;
+                    } catch (e) {}
+                }
+                container.innerHTML = '<div class="empty-state">Выбери упражнение и цель для прогноза</div>';
+            }
+
+            function generateForecast() {
+                const ex = document.getElementById('forecastExSelect').value;
+                const target = parseFloat(document.getElementById('forecastTarget').value);
+                if (!ex || isNaN(target) || target <= 0) {
+                    showToast('❌ Выбери упражнение и введи цель', 2000);
+                    return;
+                }
+                const current = records[ex] ? records[ex].weight : 0;
+                if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 2000); return; }
+                if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 2000); return; }
+
+                const isBW = bodyweightExercises.includes(ex);
+                const unit = isBW ? 'повторов' : 'кг';
+                const diff = target - current;
+                const exSets = sets.filter(s => s.exercise === ex);
+                let avgProgress = isBW ? 2 : 2.5;
+                if (exSets.length > 3) {
+                    const sorted = exSets.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    const first = sorted[0];
+                    const last = sorted[sorted.length - 1];
+                    const weeks = Math.max(1, (new Date(last.date) - new Date(first.date)) / (7 * 24 * 60 * 60 * 1000));
+                    const wDiff = last.weight - first.weight;
+                    avgProgress = Math.max(0.5, wDiff / weeks);
+                }
+
+                const weeksNeeded = Math.ceil(diff / avgProgress);
+                const forecastDate = new Date();
+                forecastDate.setDate(forecastDate.getDate() + weeksNeeded * 7);
+                const dateStr = forecastDate.toISOString().slice(0, 10);
+                const progress = Math.min(100, (current / target) * 100);
+
+                let confidence = 'Низкая';
+                let weeksToGoal = '';
+                if (weeksNeeded < 4) { confidence = 'Высокая 🔥';
+                    weeksToGoal = `🎯 Достигнешь через ${weeksNeeded} недели!`; } else if (weeksNeeded < 8) { confidence =
+                        'Средняя 📈';
+                    weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; } else { confidence = 'Низкая (требуется больше данных) 📉';
+                    weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
+
+                const data = { exercise: ex, target, current, unit, forecastDate: dateStr, confidence, progress,
+                    weeksToGoal };
+                localStorage.setItem('last_forecast', JSON.stringify(data));
+                renderForecast();
+                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr} ⛓️`);
+            }
+
+            // ============================================================
+            // 9. CHALLENGES
+            // ============================================================
+            function getWeekStart() {
+                const now = new Date();
+                const day = now.getDay();
+                const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+                const monday = new Date(now);
+                monday.setDate(diff);
+                return monday.toISOString().slice(0, 10);
+            }
+
+            function getAllWeeklySets() {
+                const weekStart = getWeekStart();
+                let allSets = [];
+                for (let date in weeklySets) { if (date >= weekStart) allSets = allSets.concat(weeklySets[date]); }
+                const today = new Date().toISOString().slice(0, 10);
+                if (today >= weekStart) allSets = allSets.concat(sets.filter(s => s.date === today));
+                return allSets;
+            }
+
+            function generateChallenges() {
+                const weekStart = getWeekStart();
+                challenges = challenges.filter(c => c.week !== weekStart);
+                const shuffled = [...CHALLENGE_POOL].sort(() => Math.random() - 0.5);
+                const selected = shuffled.slice(0, 5);
+                const newChallenges = selected.map((ch, index) => ({
+                    id: 'ch_' + Date.now() + '_' + index,
+                    name: ch.name,
+                    desc: ch.desc,
+                    type: ch.type,
+                    target: ch.target,
+                    exercise: ch.exercise || null,
+                    week: weekStart,
+                    progress: 0,
+                    completed: false,
+                    reward: ch.reward,
+                    notified: false
+                }));
+                challenges = [...challenges, ...newChallenges];
+                saveChallenges();
+                renderChallenges();
+                updateChallengeBadge();
+                showToast('🎯 Новые челленджи на эту неделю! ⛓️', 2500);
+            }
+
+            function updateChallenges() {
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(c => c.week === weekStart);
+                if (weekChallenges.length === 0) { generateChallenges(); return; }
+
+                const allWeeklySets = getAllWeeklySets();
+                for (let ch of weekChallenges) {
+                    if (ch.completed) continue;
+                    let progress = 0,
+                        isCompleted = false;
+                    switch (ch.type) {
+                        case 'add_weight': {
+                            const currentMax = Math.max(...Object.values(records).map(r => r.weight));
+                            const prev = localStorage.getItem('prev_week_records');
+                            if (prev) {
+                                try { const p = JSON.parse(prev);
+                                    const diff = currentMax - Math.max(...Object.values(p).map(r => r.weight));
+                                    progress = Math.min(ch.target, diff);
+                                    if (diff >= ch.target) isCompleted = true; } catch (e) {}
+                            }
+                            break;
+                        }
+                        case 'two_records': {
+                            const prev = localStorage.getItem('prev_week_records');
+                            if (prev) {
+                                try { const p = JSON.parse(prev);
+                                    let count = 0;
+                                    for (let ex of Object.keys(records)) { if (records[ex].weight > (p[ex]?.weight || 0))
+                                            count++; }
+                                    progress = Math.min(ch.target, count);
+                                    if (count >= ch.target) isCompleted = true; } catch (e) {}
+                            }
+                            break;
+                        }
+                        case 'total_sets': { const count = allWeeklySets.length;
+                            progress = Math.min(ch.target, count);
+                            if (count >= ch.target) isCompleted = true; break; }
+                        case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0);
+                            progress = Math.min(ch.target, vol);
+                            if (vol >= ch.target) isCompleted = true; break; }
+                        case 'streak_days': { const days = new Set(allWeeklySets.map(s => s.date));
+                            progress = Math.min(ch.target, days.size);
+                            if (days.size >= ch.target) isCompleted = true; break; }
+                        case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch
+                                    .exercise].weight || 0;
+                                progress = Math.min(ch.target, cur);
+                                if (cur >= ch.target) isCompleted = true; } break; }
+                        case 'bodyweight_total': { if (ch.exercise) { const total = allWeeklySets.filter(s => s
+                                    .exercise === ch.exercise).reduce((s, set) => s + set.reps, 0);
+                                progress = Math.min(ch.target, total);
+                                if (total >= ch.target) isCompleted = true; } break; }
+                        case 'friday_sets': { const friday = new Date();
+                            friday.setDate(friday.getDate() + (5 - friday.getDay()));
+                            const fStr = friday.toISOString().slice(0, 10);
+                            const cnt = allWeeklySets.filter(s => s.date === fStr).length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'monday_sets': { const monday = new Date();
+                            monday.setDate(monday.getDate() + (1 - monday.getDay()));
+                            const mStr = monday.toISOString().slice(0, 10);
+                            const cnt = allWeeklySets.filter(s => s.date === mStr).length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'wednesday_sets': { const wed = new Date();
+                            wed.setDate(wed.getDate() + (3 - wed.getDay()));
+                            const wStr = wed.toISOString().slice(0, 10);
+                            const cnt = allWeeklySets.filter(s => s.date === wStr).length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'progress_entry': { const cnt = progressData.filter(p => p.date >= weekStart).length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k]
+                                .weight > 0);
+                            progress = Math.min(ch.target, exWithRecords.length);
+                            if (exWithRecords.length >= ch.target) isCompleted = true; break; }
+                        case 'heavy_sets': { let cnt = 0; for (let set of allWeeklySets) { const record = records[set
+                                    .exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 +
+                                        0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch
+                                    .target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'first_day_sets': { const monday = new Date(weekStart);
+                            const mStr = monday.toISOString().slice(0, 10);
+                            const cnt = allWeeklySets.filter(s => s.date === mStr).length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'perfect_form': { const cnt = allWeeklySets.length;
+                            progress = Math.min(ch.target, cnt);
+                            if (cnt >= ch.target) isCompleted = true; break; }
+                        case 'avg_weight_increase': {
+                            const prevWeek = new Date(weekStart);
+                            prevWeek.setDate(prevWeek.getDate() - 7);
+                            const prevStr = prevWeek.toISOString().slice(0, 10);
+                            let prevSets = [];
+                            for (let date in weeklySets) { if (date >= prevStr && date < weekStart) prevSets =
+                                    prevSets.concat(weeklySets[date]); }
+                            const curAvg = allWeeklySets.length > 0 ? allWeeklySets.reduce((s, set) => s + set.weight,
+                                0) / allWeeklySets.length : 0;
+                            const prevAvg = prevSets.length > 0 ? prevSets.reduce((s, set) => s + set.weight, 0) /
+                                prevSets.length : 0;
+                            const diff = curAvg - prevAvg;
+                            progress = Math.min(ch.target, diff);
+                            if (diff >= ch.target) isCompleted = true;
+                            break;
+                        }
+                        case 'four_exercises': { const exs = new Set(allWeeklySets.map(s => s.exercise));
+                            progress = Math.min(ch.target, exs.size);
+                            if (exs.size >= ch.target) isCompleted = true; break; }
+                        case 'five_exercises': { const exs = new Set(allWeeklySets.map(s => s.exercise));
+                            progress = Math.min(ch.target, exs.size);
+                            if (exs.size >= ch.target) isCompleted = true; break; }
+                        case 'golden_week': { const allDone = weekChallenges.every(c => c.completed || c.id === ch.id);
+                            progress = allDone ? 1 : 0;
+                            if (allDone) isCompleted = true; break; }
+                        case 'total_reps': { const reps = allWeeklySets.reduce((s, set) => s + set.reps, 0);
+                            progress = Math.min(ch.target, reps);
+                            if (reps >= ch.target) isCompleted = true; break; }
+                        case 'monthly_goal': { const monthAgo = new Date();
+                            monthAgo.setDate(monthAgo.getDate() - 30);
+                            const mStr = monthAgo.toISOString().slice(0, 10);
+                            const curMax = Math.max(...Object.values(records).map(r => r.weight));
+                            const oldMax = Math.max(...Object.values(records).filter(r => r.date < mStr).map(r => r
+                            .weight));
+                            const diff = curMax - (oldMax || 0);
+                            progress = Math.min(ch.target, diff);
+                            if (diff >= ch.target) isCompleted = true; break; }
+                        default: { progress = 0;
+                            isCompleted = false; }
+                    }
+                    ch.progress = progress;
+                    if (isCompleted && !ch.completed) { ch.completed = true;
+                        ch.notified = false; }
+                }
+
+                localStorage.setItem('prev_week_records', JSON.stringify(records));
+                saveChallenges();
+                renderChallenges();
+                updateChallengeBadge();
+
+                for (let ch of weekChallenges) {
+                    if (ch.completed && !ch.notified) {
+                        ch.notified = true;
+                        showAchievementToast('🎯', 'Челлендж завершён!', `${ch.name} — ${ch.reward} ⛓️`);
+                        showToast(`🏆 ${ch.name} — ${ch.reward} ⛓️`, 3000);
+                    }
+                }
+                saveChallenges();
+            }
+
+            function renderChallenges() {
+                const container = document.getElementById('challengesContainer');
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(c => c.week === weekStart);
+                if (weekChallenges.length === 0) { container.innerHTML =
+                    '<div class="empty-state">Нет активных челленджей</div>'; return; }
+                container.innerHTML = '';
+                weekChallenges.forEach(ch => {
+                    const div = document.createElement('div');
+                    div.className = `challenge-card ${ch.completed ? 'completed' : 'active'}`;
+                    const progress = ch.target > 0 ? Math.min(100, (ch.progress / ch.target) * 100) : 0;
+                    const color = ch.completed ? '#54ff8f' : '#ff3d00';
+                    div.innerHTML = `
+                        <div class="ch-header"><span class="ch-name">${ch.name}</span><span class="ch-reward">${ch.reward}</span></div>
+                        <div class="ch-desc">${ch.desc}</div>
+                        <div class="ch-progress"><div class="ch-progress-bar" style="width:${progress}%;background:${color};"></div></div>
+                        <div class="ch-progress-text">${Math.round(progress)}% (${ch.progress}/${ch.target})</div>
+                        ${ch.completed ? '<div style="font-size:0.7rem;color:#54ff8f;margin-top:4px;">✅ Завершено! ⛓️</div>' : ''}
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            function updateChallengeBadge() {
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(c => c.week === weekStart);
+                const active = weekChallenges.filter(c => !c.completed).length;
+                const badge = document.getElementById('menuChallengeBadge');
+                badge.style.display = active > 0 ? 'block' : 'none';
+                if (active > 0) badge.textContent = active;
+                document.getElementById('challengeBadge').textContent =
+                    `${weekChallenges.filter(c => c.completed).length}/${weekChallenges.length} завершено`;
+            }
+
+            // ============================================================
+            // 10. REPORTS
+            // ============================================================
+            function renderReport() {
+                const container = document.getElementById('reportContainer');
+                const weekStart = getWeekStart();
+                const allWeeklySets = getAllWeeklySets();
+                const totalSets = allWeeklySets.length;
+                const totalVolume = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0);
+                const avgWeight = totalSets > 0 ? allWeeklySets.reduce((s, set) => s + set.weight, 0) / totalSets : 0;
+
+                const lastWeek = new Date();
+                lastWeek.setDate(lastWeek.getDate() - 7);
+                const lastStart = lastWeek.toISOString().slice(0, 10);
+                let lastSets = [];
+                for (let date in weeklySets) { if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(
+                        weeklySets[date]); }
+                const lastVol = lastSets.reduce((s, set) => s + set.weight * set.reps, 0);
+                const volChange = lastVol > 0 ? ((totalVolume - lastVol) / lastVol * 100) : 0;
+
+                const recordsCount = Object.values(records).filter(r => r.weight > 0).length;
+                const maxRecord = Math.max(...Object.values(records).map(r => r.weight), 0);
+                const bestEx = Object.keys(records).filter(k => records[k].weight === maxRecord)[0] || '—';
+                const bwCount = bodyweightExercises.filter(ex => records[ex] && records[ex].weight > 0).length;
+
+                container.innerHTML = `
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+                        <div class="stat-box"><label>Подходов</label><div class="value">${totalSets}</div><div class="unit">за неделю</div></div>
+                        <div class="stat-box"><label>Тоннаж</label><div class="value">${totalVolume}</div><div class="unit">кг</div></div>
+                        <div class="stat-box"><label>Ср. вес</label><div class="value">${avgWeight.toFixed(1)}</div><div class="unit">кг</div></div>
+                        <div class="stat-box"><label>Рекордов</label><div class="value">${recordsCount}</div><div class="unit">всего</div></div>
+                    </div>
+                    <div style="background:var(--bg-input);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
+                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+                            <span style="color:var(--text-muted);">🏆 Лучший рекорд</span>
+                            <span style="font-weight:700;">${bestEx}: ${maxRecord} кг</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);">💪 Упражнений с весом тела</span>
+                            <span style="font-weight:700;">${bwCount}/${bodyweightExercises.length}</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);">📊 Изменение тоннажа</span>
+                            <span style="font-weight:700;color:${volChange >= 0 ? '#54ff8f' : '#ff315c'};">${volChange >= 0 ? '↑' : '↓'} ${Math.abs(volChange).toFixed(0)}%</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);">🎯 Челленджи</span>
+                            <span style="font-weight:700;">${challenges.filter(c => c.week === weekStart && c.completed).length}/${challenges.filter(c => c.week === weekStart).length}</span>
+                        </div>
+                        <div style="margin-top:8px;text-align:right;font-size:0.45rem;color:var(--text-muted);">⛓️ отчёт подтверждён</div>
+                    </div>
+                    <div style="margin-top:10px;text-align:center;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.5px;">📅 Отчёт за неделю ${weekStart}</div>
+                `;
+            }
+
+            // ============================================================
+            // 11. AI TRAINER
+            // ============================================================
+            function getFitnessLevel() {
+                const recordsWeight = Object.values(records).filter(r => r.weight > 0);
+                const maxWeight = recordsWeight.length > 0 ? Math.max(...recordsWeight.map(r => r.weight)) : 0;
+
+                let strengthScore = 0;
+                const legEx = ['жим ногами', 'присед', 'становая тяга', 'присед со штангой'];
+                const chestEx = ['жим от груди', 'жим гантелей лёжа', 'жим в наклоне'];
+                const backEx = ['тяга штанги в наклоне', 'подтягивания', 'тяга верхнего блока'];
+                const shoulderEx = ['жим стоя', 'разводка гантелей в стороны', 'жим гантелей сидя'];
+
+                for (let ex of legEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
+                            200) strengthScore += 20;
+                        else if (w >= 150) strengthScore += 15;
+                        else if (w >= 100) strengthScore += 10;
+                        else if (w >= 60) strengthScore += 5; } }
+                for (let ex of chestEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
+                            120) strengthScore += 15;
+                        else if (w >= 80) strengthScore += 10;
+                        else if (w >= 50) strengthScore += 5; } }
+                for (let ex of backEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
+                            100) strengthScore += 12;
+                        else if (w >= 60) strengthScore += 8;
+                        else if (w >= 30) strengthScore += 4; } }
+                for (let ex of shoulderEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
+                            80) strengthScore += 10;
+                        else if (w >= 50) strengthScore += 6;
+                        else if (w >= 30) strengthScore += 3; } }
+
+                let enduranceScore = 0;
+                const bwEx = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания'];
+                for (let ex of bwEx) {
+                    if (records[ex] && records[ex].weight > 0) {
+                        const w = records[ex].weight;
+                        if (ex === 'отжимания от пола' && w >= 50) enduranceScore += 15;
+                        else if (ex === 'отжимания от пола' && w >= 30) enduranceScore += 10;
+                        else if (ex === 'отжимания от пола' && w >= 15) enduranceScore += 5;
+                        else if (ex === 'подтягивания' && w >= 15) enduranceScore += 20;
+                        else if (ex === 'подтягивания' && w >= 8) enduranceScore += 12;
+                        else if (ex === 'подтягивания' && w >= 3) enduranceScore += 5;
+                        else if (ex === 'берпи' && w >= 30) enduranceScore += 15;
+                        else if (ex === 'берпи' && w >= 15) enduranceScore += 8;
+                        else if (ex === 'берпи' && w >= 5) enduranceScore += 3;
+                        else if (ex === 'планка' && w >= 120) enduranceScore += 10;
+                        else if (ex === 'скручивания' && w >= 50) enduranceScore += 8;
+                    }
+                }
+
+                const allWeeklySets = getAllWeeklySets();
+                const totalSets = allWeeklySets.length;
+                let volumeScore = 0;
+                if (totalSets >= 50) volumeScore = 25;
+                else if (totalSets >= 35) volumeScore = 18;
+                else if (totalSets >= 20) volumeScore = 10;
+                else if (totalSets >= 10) volumeScore = 5;
+
+                const totalScore = Math.min(100, strengthScore + enduranceScore + volumeScore);
+                let level = 'Начинающий 🏃';
+                if (totalScore >= 85) level = 'Элитный 💎';
+                else if (totalScore >= 70) level = 'Продвинутый 🔥';
+                else if (totalScore >= 50) level = 'Средний 💪';
+                else if (totalScore >= 30) level = 'Начинающий 🏃';
+
+                let focus = 'сбалансированная';
+                if (strengthScore > enduranceScore * 1.5 && strengthScore > volumeScore * 1.5) focus = 'сила 🏋️';
+                else if (enduranceScore > strengthScore * 1.5 && enduranceScore > volumeScore * 1.5) focus =
+                'выносливость 🏃';
+                else if (volumeScore > strengthScore * 1.3 && volumeScore > enduranceScore * 1.3) focus = 'объём 📊';
+
+                let weakPoints = [];
+                if (strengthScore < 20) weakPoints.push('💪 сила');
+                if (enduranceScore < 15) weakPoints.push('🏃 выносливость');
+                if (volumeScore < 10) weakPoints.push('📊 объём');
+                const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0);
+                if (exWithRecords.length < 10) weakPoints.push('🎯 разнообразие');
+
+                return {
+                    level,
+                    totalScore,
+                    strengthScore,
+                    enduranceScore,
+                    volumeScore,
+                    focus,
+                    maxWeight,
+                    totalSets,
+                    weakPoints,
+                    exWithRecordsCount: exWithRecords.length
+                };
+            }
+
+            function generateAIProgram() {
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+
+                let days = ['Понедельник', 'Среда', 'Пятница'];
+                let exercises = [];
+
+                if (analysis.focus.includes('сила')) {
+                    exercises = [
+                        ['Присед со штангой', '5×5', '85% от 1ПМ'],
+                        ['Жим от груди', '5×5', '85% от 1ПМ'],
+                        ['Становая тяга', '3×5', '85% от 1ПМ'],
+                        ['Подтягивания', '3×макс', 'вес тела'],
+                        ['Жим стоя', '4×6', '80% от 1ПМ']
+                    ];
+                } else if (analysis.focus.includes('выносливость')) {
+                    exercises = [
+                        ['Отжимания от пола', '4×15-20', 'вес тела'],
+                        ['Подтягивания', '4×8-12', 'вес тела'],
+                        ['Присед', '4×12-15', '70% от 1ПМ'],
+                        ['Планка', '4×45-60с', 'вес тела'],
+                        ['Берпи', '4×10-15', 'вес тела']
+                    ];
+                } else {
+                    exercises = [
+                        ['Жим от груди', '4×8-10', '80% от 1ПМ'],
+                        ['Присед', '4×8-10', '80% от 1ПМ'],
+                        ['Тяга штанги в наклоне', '4×8-10', '80% от 1ПМ'],
+                        ['Жим гантелей сидя', '3×10-12', '75% от 1ПМ'],
+                        ['Подъём на бицепс', '3×10-12', '70% от 1ПМ']
+                    ];
+                }
+
+                let bwExercises = [];
+                if (records['отжимания от пола'] && records['отжимания от пола'].weight > 0) {
+                    bwExercises.push(['Отжимания', '3×макс', `${records['отжимания от пола'].weight} повт.`]);
+                }
+                if (records['подтягивания'] && records['подтягивания'].weight > 0) {
+                    bwExercises.push(['Подтягивания', '3×макс', `${records['подтягивания'].weight} повт.`]);
+                }
+                if (records['берпи'] && records['берпи'].weight > 0) {
+                    bwExercises.push(['Берпи', '3×макс', `${records['берпи'].weight} повт.`]);
+                }
+
+                let intensity = '';
+                if (analysis.level.includes('Элитный')) intensity = '🔴 Высокая, 5-6 дней/неделю';
+                else if (analysis.level.includes('Продвинутый')) intensity = '🟡 Средняя-высокая, 4-5 дней/неделю';
+                else if (analysis.level.includes('Средний')) intensity = '🟢 Средняя, 3-4 дня/неделю';
+                else intensity = '🟢 Лёгкая-средняя, 3 дня/неделю';
+
+                let weakAdvice = '';
+                if (analysis.weakPoints.length > 0) {
+                    weakAdvice = '🎯 Слабые места: ' + analysis.weakPoints.join(', ');
+                }
+
+                msg.innerHTML = `
+                    <div style="margin-bottom:10px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+                            <span style="font-weight:800;color:var(--cyan);">🤖 Уровень: ${analysis.level}</span>
+                            <span style="font-weight:800;color:var(--cyan);">📊 Оценка: ${analysis.totalScore}/100</span>
+                        </div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;font-weight:500;">
+                            <span>💪 Сила: ${analysis.strengthScore} · 🏃 Выносливость: ${analysis.enduranceScore} · 📊 Объём: ${analysis.volumeScore}</span>
+                        </div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                            <span>⚖️ Вес тела: ${currentWeight} кг · 🔥 ${intensity}</span>
+                        </div>
+                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                            <span>🎯 Фокус: ${analysis.focus}</span>
+                        </div>
+                        ${weakAdvice ? `<div style="font-size:0.75rem;color:var(--gold);margin-top:2px;font-weight:600;">${weakAdvice}</div>` : ''}
+                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                            <span>📋 Всего упражнений с рекордами: ${analysis.exWithRecordsCount}/${exerciseList.length}</span>
+                        </div>
+                        <div style="font-size:0.55rem;color:var(--text-muted);margin-top:4px;">⛓️ программа сгенерирована на блокчейне</div>
+                    </div>
+                    <div style="font-size:0.65rem;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">📋 Программа на неделю</div>
+                    ${days.map((day, i) => `
+                        <div class="ai-program">
+                            <div class="day">${day}</div>
+                            ${exercises.map(ex => `
+                                <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
+                            `).join('')}
+                            ${bwExercises.length > 0 && i === 0 ? bwExercises.map(ex => `
+                                <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
+                            `).join('') : ''}
+                            <div class="exercise" style="color:var(--text-muted);font-size:0.7rem;margin-top:4px;">💡 Разминка 10 мин, заминка 5 мин</div>
+                        </div>
+                    `).join('')}
+                    <div style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;font-weight:500;">
+                        💡 Увеличивай вес на 2-5 кг каждую неделю. Отдыхай 1-2 дня между тренировками.
+                        ${analysis.weakPoints.length > 0 ? `🎯 Работай над: ${analysis.weakPoints.join(', ')}` : ''}
+                    </div>
+                `;
+                showToast('📋 Программа сгенерирована! ⛓️', 2000);
+            }
+
+            function getAIAdvice() {
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const allWeights = Object.values(records).map(r => r.weight).filter(w => w > 0);
+                if (allWeights.length === 0) {
+                    msg.innerHTML = '🤔 Нет рекордов. Запиши результаты!';
+                    return;
+                }
+
+                const maxWeight = Math.max(...allWeights);
+                const bestEx = Object.keys(records).filter(k => records[k].weight === maxWeight)[0] || 'упражнение';
+                const totalSets = getAllWeeklySets().length;
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const ratio = maxWeight > 0 && currentWeight > 0 ? (maxWeight / currentWeight) : 0;
+
+                let advice = `🏅 Лучший рекорд: ${bestEx} — ${maxWeight} кг. `;
+                advice += `📊 Подходов за неделю: ${totalSets}. `;
+                advice += `⚖️ Вес тела: ${currentWeight} кг. `;
+                advice += `📈 Уровень: ${analysis.level}. `;
+
+                if (ratio > 2.5) advice += '🔥 Отличное соотношение силы к весу!';
+                else if (ratio > 1.8) advice += '💪 Хорошее соотношение силы и веса.';
+                else advice += '📈 Работай над силой относительно веса тела.';
+
+                if (analysis.weakPoints.length > 0) {
+                    advice += ' 🎯 Слабые места: ' + analysis.weakPoints.join(', ');
+                }
+
+                const hasPushups = records['отжимания от пола'] && records['отжимания от пола'].weight > 0;
+                const hasPullups = records['подтягивания'] && records['подтягивания'].weight > 0;
+                if (!hasPushups || !hasPullups) {
+                    advice += ' 💪 Добавь отжимания и подтягивания для функциональной формы!';
+                }
+
+                msg.innerHTML = `💡 ${advice} ⛓️`;
+                showToast('🤖 Совет готов! ⛓️', 1500);
+            }
+
+            function analyzeFitness() {
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0);
+
+                let strengthLabel = '🔴 Низкий';
+                if (analysis.strengthScore >= 40) strengthLabel = '🟢 Отличный!';
+                else if (analysis.strengthScore >= 25) strengthLabel = '🟡 Хороший';
+                else if (analysis.strengthScore >= 12) strengthLabel = '🟠 Средний';
+
+                let enduranceLabel = '🔴 Низкий';
+                if (analysis.enduranceScore >= 30) enduranceLabel = '🟢 Отличный!';
+                else if (analysis.enduranceScore >= 18) enduranceLabel = '🟡 Хороший';
+                else if (analysis.enduranceScore >= 8) enduranceLabel = '🟠 Средний';
+
+                let recs = [];
+                if (analysis.strengthScore < 25) recs.push('💪 Добавь базовые: присед, жим, становая');
+                if (analysis.enduranceScore < 18) recs.push('🏃 Добавь отжимания, подтягивания, берпи');
+                if (analysis.totalSets < 20) recs.push('📊 Делай 20-30 подходов в неделю');
+                if (exWithRecords.length < 10) recs.push('🎯 Попробуй новые упражнения из списка 57');
+                if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
+
+                msg.innerHTML = `
+                    <div style="margin-bottom:10px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+                            <span style="font-weight:800;color:var(--cyan);">📊 Уровень: ${analysis.level}</span>
+                            <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
+                            <span class="chain-stamp" style="font-size:0.4rem;">⛓️ анализ подтверждён</span>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
+                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
+                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">💪 Сила</div>
+                            <div style="font-size:1.3rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
+                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
+                        </div>
+                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
+                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">🏃 Выносливость</div>
+                            <div style="font-size:1.3rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
+                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
+                        </div>
+                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
+                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">📊 Объём</div>
+                            <div style="font-size:1.3rem;font-weight:900;color:var(--gold);">${analysis.volumeScore}</div>
+                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${analysis.totalSets} подходов</div>
+                        </div>
+                    </div>
+                    <div style="background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                            <span style="color:var(--text-muted);font-weight:500;">🏆 Лучший рекорд</span>
+                            <span style="font-weight:700;">${analysis.maxWeight} кг</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);font-weight:500;">⚖️ Вес тела</span>
+                            <span style="font-weight:700;">${currentWeight} кг</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);font-weight:500;">🎯 Упражнений с рекордами</span>
+                            <span style="font-weight:700;">${exWithRecords.length}/${exerciseList.length}</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                            <span style="color:var(--text-muted);font-weight:500;">🎯 Фокус</span>
+                            <span style="font-weight:700;">${analysis.focus}</span>
+                        </div>
+                    </div>
+                    <div style="background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);border-left:3px solid var(--gold);">
+                        <div style="font-weight:800;font-size:0.85rem;color:var(--gold);">📋 Рекомендации</div>
+                        ${recs.map(r => `<div style="font-size:0.75rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
+                        <div style="font-size:0.75rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• 🎯 Цель: запиши рекорды в 10+ упражнениях</div>
+                    </div>
+                    <div style="font-size:0.5rem;color:var(--text-muted);margin-top:8px;text-align:center;letter-spacing:0.5px;font-weight:600;">📊 Анализ на основе 57 упражнений ⛓️</div>
+                `;
+                showToast('📊 Анализ завершён! ⛓️', 1500);
+            }
+
+            // ============================================================
+            // 12. CALCULATOR
+            // ============================================================
+            function calc1RM() {
+                const weight = parseFloat(document.getElementById('calcWeight').value);
+                const reps = parseInt(document.getElementById('calcReps').value);
+                const formula = document.getElementById('calcFormula').value;
+                if (isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
+                    showToast('❌ Введи корректные данные', 2000);
+                    return;
+                }
+                let rm = 0,
+                    name = '';
+                switch (formula) {
+                    case 'brzycki':
+                        rm = weight * (36 / (37 - Math.min(reps, 36)));
+                        name = 'Бжицки';
+                        break;
+                    case 'epley':
+                        rm = weight * (1 + reps / 30);
+                        name = 'Эпли';
+                        break;
+                    case 'lombardi':
+                        rm = weight * Math.pow(reps, 0.10);
+                        name = 'Ломбарди';
+                        break;
+                    case 'mayhew':
+                        rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps)));
+                        name = 'Мэйхью';
+                        break;
+                    case 'oconnor':
+                        rm = weight * (1 + reps / 40);
+                        name = 'О\'Коннор';
+                        break;
+                    default:
+                        rm = weight * (1 + reps / 30);
+                        name = 'Эпли';
+                }
+                document.getElementById('calcResultValue').textContent = rm.toFixed(1) + ' кг';
+                document.getElementById('calcResultSub').textContent =
+                    `по ${name} · 70%: ${(rm*0.7).toFixed(1)} кг · 80%: ${(rm*0.8).toFixed(1)} кг · 90%: ${(rm*0.9).toFixed(1)} кг ⛓️`;
+            }
+
+            // ============================================================
+            // 13. NAVIGATION
+            // ============================================================
+            window.navigateTo = function(pageId) {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                const target = document.getElementById('page-' + pageId);
+                if (target) target.classList.add('active');
+
+                document.querySelectorAll('.side-menu .menu-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.page === pageId) item.classList.add('active');
+                });
+
+                closeMenu();
+
+                if (navigator.vibrate) navigator.vibrate(8);
+
+                if (pageId === 'progress') { renderProgress();
+                    setTimeout(updateChart, 100); }
+                if (pageId === 'forecast') renderForecast();
+                if (pageId === 'reports') renderReport();
+                if (pageId === 'challenges') renderChallenges();
+                if (pageId === 'calc') calc1RM();
+                if (pageId === 'records') { renderRecords();
+                    renderTodaySets(); }
+                if (pageId === 'ai') {
+                    const analysis = getFitnessLevel();
+                    document.getElementById('aiStatus').textContent =
+                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Объём: ${analysis.volumeScore}`;
+                }
+            };
+
+            // ============================================================
+            // 14. BLOCKCHAIN HASH
+            // ============================================================
+            function generateHash(str) {
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return Math.abs(hash).toString(16).toUpperCase();
+            }
+
+            function updateBlockHash() {
+                const el = document.getElementById('blockHash');
+                if (!el) return;
+                const data = JSON.stringify({
+                    records: Object.keys(records).length,
+                    sets: sets.length,
+                    progress: progressData.length,
+                    challenges: challenges.filter(c => c.completed).length,
+                    ts: Date.now()
+                });
+                const h = generateHash(data);
+                el.textContent = h.slice(0, 6);
+            }
+
+            // ============================================================
+            // 15. INIT
+            // ============================================================
+            function init() {
+                loadData();
+                updateExerciseSelects();
+                renderRecords();
+                renderTodaySets();
+                renderProgress();
+                renderChallenges();
+                renderForecast();
+                renderReport();
+                updateChart();
+                updateChallengeBadge();
+                updateTodayInfo();
+                updateBlockHash();
+
+                const weekStart = getWeekStart();
+                if (!challenges.some(c => c.week === weekStart)) generateChallenges();
+                updateChallenges();
+
+                document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+                // BUTTONS
+                document.getElementById('addRecordBtn').addEventListener('click', function() {
+                    const name = document.getElementById('recordExSelect').value;
+                    const weight = parseFloat(document.getElementById('recordExWeight').value);
+                    if (!name || isNaN(weight) || weight <= 0) {
+                        showToast('❌ Выбери упражнение и введи вес', 2000);
+                        return;
+                    }
+                    records[name] = { weight, date: new Date().toISOString().slice(0, 10) };
+                    saveRecords();
+                    renderRecords();
+                    updateChallenges();
+                    updateBlockHash();
+                    document.getElementById('recordExWeight').value = '';
+                    showToast(`✅ ${name}: ${weight} ${bodyweightExercises.includes(name) ? 'повторов' : 'кг'} ⛓️`);
+                });
+
+                document.getElementById('addSetBtn').addEventListener('click', addSet);
+                document.getElementById('finishWorkoutBtn').addEventListener('click', finishWorkout);
+                document.getElementById('addProgressBtn').addEventListener('click', addProgress);
+                document.getElementById('forecastBtn').addEventListener('click', generateForecast);
+                document.getElementById('aiProgramBtn').addEventListener('click', generateAIProgram);
+                document.getElementById('aiAdviceBtn').addEventListener('click', getAIAdvice);
+                document.getElementById('aiAnalyzeBtn').addEventListener('click', analyzeFitness);
+                document.getElementById('calcBtn').addEventListener('click', calc1RM);
+
+                // ENTER
+                document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        document.getElementById('addRecordBtn').click(); });
+                document.getElementById('setWeight').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
+                document.getElementById('setReps').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
+                document.getElementById('weightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        addProgress(); });
+                document.getElementById('heightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        addProgress(); });
+                document.getElementById('forecastTarget').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        generateForecast(); });
+                document.getElementById('calcWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        calc1RM(); });
+                document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter')
+                    calc1RM(); });
+
+                setInterval(checkNewDay, 60000);
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(updateChart, 300);
+                });
+
+                const analysis = getFitnessLevel();
+                document.getElementById('aiStatus').textContent =
+                    `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Объём: ${analysis.volumeScore}`;
+
+                setTimeout(calc1RM, 300);
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — fully loaded');
+            }
+
+            document.addEventListener('DOMContentLoaded', init);
+        })();
+    </script>
+
+    <script>
+        /* Micro-interactions: tilt + crypto badge pulse */
+        (function() {
+            function ready(fn) {
+                if (document.readyState !== 'loading') fn();
+                else document.addEventListener('DOMContentLoaded', fn);
+            }
+            ready(function() {
+                document.documentElement.classList.add('premium-cyber-sport');
+
+                var h1 = document.querySelector('.header h1');
+                if (h1 && !h1.dataset.cyberReady) {
+                    h1.dataset.cyberReady = 'true';
+                    h1.setAttribute('aria-label', h1.textContent.trim());
+                }
+
+                var raf = null;
+
+                function bindTilt() {
+                    var cards = document.querySelectorAll('.exercise-card:not([data-tilt-bound])');
+                    cards.forEach(function(card) {
+                        card.dataset.tiltBound = 'true';
+                        card.addEventListener('pointermove', function(e) {
+                            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                            var r = card.getBoundingClientRect();
+                            var x = (e.clientX - r.left) / r.width - .5;
+                            var y = (e.clientY - r.top) / r.height - .5;
+                            if (raf) cancelAnimationFrame(raf);
+                            raf = requestAnimationFrame(function() {
+                                card.style.transform =
+                                    'translateY(-7px) rotateX(' + (-y * 7).toFixed(2) + 'deg) rotateY(' + (x *
+                                        8).toFixed(2) + 'deg) scale(1.018)';
+                            });
+                        }, { passive: true });
+                        card.addEventListener('pointerleave', function() {
+                            card.style.transform = '';
+                        });
+                    });
+                }
+                bindTilt();
+                var grid = document.getElementById('recordsContainer');
+                if (grid) {
+                    new MutationObserver(bindTilt).observe(grid, { childList: true, subtree: false });
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>
