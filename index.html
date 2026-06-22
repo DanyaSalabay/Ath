@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           PREMIUM CYBER SPORT + CRYPTO / BLOCKCHAIN AESTHETIC
+           PREMIUM CYBER SPORT + CRYPTO — ОПТИМИЗИРОВАННАЯ ВЕРСИЯ
            ============================================================ */
 
         * {
@@ -44,7 +44,7 @@
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
             --radius-card: 28px;
             --radius-sm: 16px;
-            --transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         html {
@@ -61,19 +61,19 @@
             padding: 0;
             background-image:
                 radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, rgba(251, 191, 36, 0.02) 0%, transparent 40%);
+                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
             background-attachment: fixed;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
+        /* Упрощённая сетка — без анимации */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.008) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: 0;
@@ -100,19 +100,19 @@
             border-radius: 10px;
         }
 
-        /* ---------- HEADER with CRYPTO BADGE ---------- */
+        /* ---------- HEADER ---------- */
         .header {
             position: sticky;
             top: 0;
             z-index: 70;
             margin: 0 0 24px;
-            padding: 16px 20px;
+            padding: 14px 20px;
             border: 1px solid rgba(255, 255, 255, 0.09);
             border-radius: 28px;
-            background: linear-gradient(135deg, rgba(8, 12, 19, 0.72), rgba(12, 18, 29, 0.42));
-            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(22px) saturate(145%);
-            overflow: hidden;
+            background: rgba(8, 12, 19, 0.85);
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -121,38 +121,64 @@
         .header::before {
             content: '';
             position: absolute;
-            inset: -2px;
+            inset: -1px;
             border-radius: inherit;
-            background: linear-gradient(120deg, rgba(255, 61, 0, 0.75), transparent 24%, rgba(0, 231, 255, 0.7) 51%, transparent 76%, rgba(185, 255, 0, 0.45));
-            opacity: 0.32;
+            background: linear-gradient(120deg, rgba(255, 61, 0, 0.3), transparent 24%, rgba(0, 231, 255, 0.3) 51%, transparent 76%, rgba(185, 255, 0, 0.2));
+            opacity: 0.3;
             z-index: -1;
         }
 
-        .header::after {
-            content: '⛓️ BLOCKCHAIN // VERIFIED';
-            position: absolute;
-            right: 88px;
-            bottom: 6px;
-            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.22em;
-            color: rgba(0, 231, 255, 0.55);
+        /* Убираем анимированный ::after и ::before на h1 */
+        .header h1 {
+            font: 900 clamp(1.2rem, 3.8vw, 3.8rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: -0.045em;
+            background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(255, 61, 0, 0.15));
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header h1 .sub {
+            font-size: 0.35em;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.3);
+            background: none;
+            text-transform: uppercase;
+        }
+
+        .header h1 .hash-badge {
+            font-size: 0.2em;
+            font-weight: 800;
+            -webkit-text-fill-color: var(--neon-green);
+            background: none;
+            background-color: rgba(74, 222, 128, 0.1);
+            padding: 0.1em 0.5em;
+            border-radius: 40px;
+            border: 1px solid rgba(74, 222, 128, 0.15);
+            letter-spacing: 0.05em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .header-logo {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.08);
             flex-shrink: 0;
             background: var(--bg-card);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.06);
         }
 
         .header-logo img {
@@ -162,93 +188,20 @@
             display: block;
         }
 
-        .header h1 {
-            font: 900 clamp(1.4rem, 4.2vw, 4.2rem)/0.82 'Impact', 'Arial Black', Inter, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.045em;
-            color: #fff;
-            background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255, 61, 0, 0.26));
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .header h1 .sub {
-            font-size: 0.4em;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.3);
-            background: none;
-            text-transform: uppercase;
-            margin-left: 2px;
-        }
-
-        .header h1 .hash-badge {
-            font-size: 0.2em;
-            font-weight: 800;
-            -webkit-text-fill-color: var(--neon-green);
-            background: none;
-            background-color: rgba(74, 222, 128, 0.12);
-            padding: 0.15em 0.5em;
-            border-radius: 40px;
-            border: 1px solid rgba(74, 222, 128, 0.2);
-            letter-spacing: 0.05em;
-            text-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-
-        .header h1::after {
-            content: '🏋️ Атлет';
-            position: absolute;
-            left: 2px;
-            top: calc(0.58rem + 6px);
-            width: 100%;
-            opacity: 0.4;
-            color: #ff2bd6;
-            -webkit-text-fill-color: #ff2bd6;
-            clip-path: inset(0 0 56% 0);
-            transform: translateX(0);
-            animation: glitch 3.4s infinite steps(1, end);
-            pointer-events: none;
-        }
-
-        @keyframes glitch {
-            0%, 88%, 100% {
-                transform: translateX(0);
-                opacity: 0.16;
-            }
-            89% {
-                transform: translateX(3px);
-                opacity: 0.45;
-            }
-            90% {
-                transform: translateX(-4px);
-                opacity: 0.28;
-            }
-            91% {
-                transform: translateX(2px);
-                opacity: 0.35;
-            }
-        }
-
         .header-actions {
             display: flex;
             gap: 8px;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .header .version {
-            border: 1px solid rgba(0, 231, 255, 0.22);
-            background: rgba(0, 231, 255, 0.075);
+            border: 1px solid rgba(0, 231, 255, 0.2);
+            background: rgba(0, 231, 255, 0.06);
             color: #b9f8ff;
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 999px;
-            font: 800 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            box-shadow: 0 0 24px rgba(0, 231, 255, 0.1);
+            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -256,64 +209,57 @@
 
         .header .version .dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: var(--neon-green);
-            animation: pulse-dot 1.8s ease-in-out infinite;
+            animation: pulse-dot 2s ease-in-out infinite;
         }
 
         @keyframes pulse-dot {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(0.6);
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .btn-reset,
         .burger-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 34px rgba(0, 0, 0, 0.22);
-            backdrop-filter: blur(14px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .btn-reset {
-            border-color: rgba(255, 49, 92, 0.35);
+            border-color: rgba(255, 49, 92, 0.3);
             color: #ffdce5;
-            padding: 6px 12px;
+            padding: 4px 12px;
             border-radius: 40px;
             font-weight: 700;
-            font-size: 0.55rem;
-            cursor: pointer;
+            font-size: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            background: rgba(255, 49, 92, 0.08);
         }
 
         .btn-reset:active {
             transform: scale(0.94);
-            background: rgba(255, 70, 70, 0.15);
         }
 
         .burger-btn {
             border-radius: 14px;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            cursor: pointer;
+            gap: 4px;
             padding: 10px;
             position: relative;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .burger-btn:active {
@@ -322,7 +268,7 @@
 
         .burger-btn span {
             display: block;
-            width: 20px;
+            width: 18px;
             height: 2px;
             background: var(--text-primary);
             border-radius: 4px;
@@ -330,7 +276,7 @@
         }
 
         .burger-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(4px, 4px);
             background: var(--cyan);
         }
         .burger-btn.active span:nth-child(2) {
@@ -338,7 +284,7 @@
             transform: scaleX(0);
         }
         .burger-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: rotate(-45deg) translate(4px, -4px);
             background: var(--purple);
         }
 
@@ -349,13 +295,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.65);
             z-index: 999;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s ease;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .menu-overlay.open {
@@ -371,24 +317,14 @@
             max-width: 84%;
             height: 100%;
             background: rgba(10, 11, 22, 0.96);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-right: 1px solid var(--border-subtle);
             z-index: 1000;
-            transition: left 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             padding: 80px 20px 30px;
             overflow-y: auto;
             box-shadow: 20px 0 80px rgba(0, 0, 0, 0.6);
-        }
-
-        .side-menu::before {
-            content: '⛓️ CHAIN // NAV';
-            position: absolute;
-            left: 20px;
-            top: 26px;
-            color: rgba(74, 222, 128, 0.7);
-            font: 900 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.26em;
         }
 
         .side-menu.open {
@@ -397,51 +333,50 @@
 
         .side-menu .menu-title {
             margin-top: 8px;
-            color: rgba(0, 231, 255, 0.75);
-            border-bottom-color: rgba(0, 231, 255, 0.18);
-            font: 900 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.24em;
+            color: rgba(0, 231, 255, 0.7);
+            border-bottom: 1px solid rgba(0, 231, 255, 0.12);
+            font: 900 0.65rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.2em;
             padding-bottom: 14px;
-            border-bottom: 1px solid var(--border-subtle);
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
         .side-menu .menu-item {
             position: relative;
-            isolation: isolate;
-            margin-bottom: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.035);
+            margin-bottom: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
             color: #d7e2ee;
-            font-weight: 800;
+            font-weight: 700;
             overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 14px 18px;
-            border-radius: 16px;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 14px;
             width: 100%;
             text-align: left;
             cursor: pointer;
             transition: var(--transition);
+            font-size: 0.85rem;
         }
 
         .side-menu .menu-item::before {
             content: '';
             position: absolute;
             inset: 0 auto 0 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--cyan), var(--purple), var(--gold));
+            width: 3px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple));
             opacity: 0;
-            transition: 0.25s ease;
+            transition: 0.2s ease;
         }
 
         .side-menu .menu-item:hover,
         .side-menu .menu-item.active {
-            transform: translateX(4px);
-            border-color: rgba(0, 231, 255, 0.28);
-            background: linear-gradient(90deg, rgba(255, 61, 0, 0.18), rgba(0, 231, 255, 0.065));
+            transform: translateX(3px);
+            border-color: rgba(0, 231, 255, 0.2);
+            background: rgba(255, 61, 0, 0.08);
             color: #fff;
         }
 
@@ -451,10 +386,11 @@
         }
 
         .side-menu .menu-item .icon {
-            font-size: 1.2rem;
-            width: 28px;
+            font-size: 1.1rem;
+            width: 24px;
             text-align: center;
             opacity: 0.6;
+            flex-shrink: 0;
         }
 
         .side-menu .menu-item.active .icon {
@@ -465,254 +401,241 @@
             margin-left: auto;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             color: #05070b;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             font-weight: 800;
-            padding: 2px 12px;
+            padding: 1px 10px;
             border-radius: 40px;
-            min-width: 20px;
+            min-width: 18px;
             text-align: center;
         }
 
         /* ---------- PAGES ---------- */
         .page {
             display: none;
-            animation: fadeSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .page.active {
             display: grid !important;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-            gap: 18px;
+            gap: 16px;
             align-items: start;
+            animation: fadeSlide 0.3s ease;
         }
 
         #page-records.active {
-            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+            grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
         }
         #page-progress.active {
-            grid-template-columns: minmax(320px, 0.8fr) minmax(320px, 1.2fr);
+            grid-template-columns: minmax(300px, 0.8fr) minmax(300px, 1.2fr);
         }
 
         @keyframes fadeSlide {
-            from {
-                opacity: 0;
-                transform: translateY(24px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ---------- CARDS ---------- */
         .card {
             position: relative;
-            isolation: isolate;
             overflow: hidden;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.095);
-            border-radius: 30px;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025) 42%, rgba(0, 231, 255, 0.035)), rgba(7, 11, 18, 0.76);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(22px) saturate(135%);
-            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), border-color 0.35s, box-shadow 0.35s, background 0.35s;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            background: rgba(7, 11, 18, 0.8);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
         }
 
         .card::before {
             content: '';
             position: absolute;
             inset: -1px;
-            z-index: -2;
+            z-index: -1;
             border-radius: inherit;
-            background: linear-gradient(135deg, rgba(255, 61, 0, 0.5), transparent 28%, rgba(0, 231, 255, 0.35) 58%, transparent 76%, rgba(185, 255, 0, 0.26));
-            opacity: 0.18;
-            pointer-events: none;
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: -60%;
-            left: -30%;
-            width: 52%;
-            height: 190%;
-            transform: rotate(18deg);
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            opacity: 0;
-            transition: 0.5s ease;
+            background: linear-gradient(135deg, rgba(255, 61, 0, 0.25), transparent 30%, rgba(0, 231, 255, 0.2) 60%, transparent 80%, rgba(185, 255, 0, 0.15));
+            opacity: 0.2;
             pointer-events: none;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 231, 255, 0.24);
-            box-shadow: 0 42px 100px rgba(0, 0, 0, 0.58), 0 0 44px rgba(0, 231, 255, 0.075), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-        }
-
-        .card:hover::after {
-            left: 90%;
-            opacity: 0.65;
+            transform: translateY(-3px);
+            border-color: rgba(0, 231, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 231, 255, 0.04);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             flex-wrap: wrap;
             gap: 6px;
         }
 
         .card-header h2 {
-            font: 900 clamp(1.08rem, 2.3vw, 1.75rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            font: 900 clamp(0.95rem, 2vw, 1.5rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
             text-transform: uppercase;
             letter-spacing: -0.025em;
             color: #fff;
-            text-shadow: 0 0 18px rgba(0, 231, 255, 0.12);
+            text-shadow: 0 0 18px rgba(0, 231, 255, 0.08);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .card-header .badge {
-            border: 1px solid rgba(0, 231, 255, 0.22);
-            background: rgba(0, 231, 255, 0.08);
+            border: 1px solid rgba(0, 231, 255, 0.15);
+            background: rgba(0, 231, 255, 0.05);
             color: #bdf9ff;
-            box-shadow: 0 0 24px rgba(0, 231, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            font: 900 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.08em;
+            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            padding: 4px 16px;
+            padding: 3px 14px;
             border-radius: 40px;
+            flex-shrink: 0;
         }
 
-        .card-header .badge .hash {
+        .chain-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 40px;
+            background: rgba(74, 222, 128, 0.05);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             color: var(--neon-green);
-            font-weight: 400;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 40px;
+            background: rgba(0, 231, 255, 0.05);
+            border: 1px solid rgba(0, 231, 255, 0.12);
+            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: var(--cyan);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
         /* ---------- EXERCISE GRID ---------- */
         .exercise-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
-            gap: 12px;
-            margin-bottom: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .exercise-card {
             position: relative;
-            min-height: 132px;
+            min-height: 110px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: flex-start;
             text-align: left;
-            padding: 14px;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: radial-gradient(circle at 88% 0%, rgba(0, 231, 255, 0.18), transparent 34%), linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025) 48%, rgba(255, 61, 0, 0.08)), rgba(10, 15, 24, 0.76);
-            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(10, 15, 24, 0.7);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.28s, box-shadow 0.28s;
+            transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
             cursor: pointer;
         }
 
         .exercise-card::before {
             content: '⛓️ BLOCK';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 3px 10px;
+            top: 8px;
+            left: 8px;
+            padding: 2px 8px;
             border-radius: 999px;
-            background: rgba(74, 222, 128, 0.08);
-            border: 1px solid rgba(74, 222, 128, 0.15);
+            background: rgba(74, 222, 128, 0.06);
+            border: 1px solid rgba(74, 222, 128, 0.1);
             color: var(--neon-green);
-            font: 900 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.08em;
-            z-index: 2;
-        }
-
-        .exercise-card::after {
-            content: '';
-            position: absolute;
-            right: -30px;
-            top: -20px;
-            width: 90px;
-            height: 140px;
-            background: linear-gradient(135deg, rgba(255, 61, 0, 0.5), rgba(0, 231, 255, 0.18));
-            transform: rotate(28deg);
-            opacity: 0.28;
-            clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+            font: 700 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.06em;
+            z-index: 1;
         }
 
         .exercise-card .ex-name {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             width: 100%;
-            margin-top: 30px;
-            font: 800 0.72rem/1.08 Inter, system-ui, sans-serif;
+            margin-top: 24px;
+            font: 700 0.6rem/1.1 Inter, system-ui, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.035em;
+            letter-spacing: 0.03em;
             color: #dfe8f3;
         }
 
         .exercise-card .ex-weight {
             position: relative;
-            z-index: 2;
-            margin-top: 6px;
-            font: 950 clamp(1.8rem, 4.2vw, 3rem)/0.86 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.05em;
+            z-index: 1;
+            margin-top: 4px;
+            font: 900 clamp(1.4rem, 3.2vw, 2.4rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.04em;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255, 61, 0, 0.32), 0 0 28px rgba(0, 231, 255, 0.14);
+            text-shadow: 0 0 16px rgba(255, 61, 0, 0.2), 0 0 20px rgba(0, 231, 255, 0.1);
         }
 
         .exercise-card .ex-unit {
             position: relative;
-            z-index: 2;
-            color: rgba(206, 219, 233, 0.72);
-            font: 800 0.55rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            z-index: 1;
+            color: rgba(206, 219, 233, 0.6);
+            font: 700 0.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
         }
 
         .exercise-card .ex-bodyweight {
             position: relative;
-            z-index: 2;
-            margin-top: 6px;
-            padding: 3px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.06);
+            z-index: 1;
+            margin-top: 4px;
+            padding: 2px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
             color: #dffcff;
             border-radius: 20px;
-            font: 700 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             display: inline-block;
         }
 
         .exercise-card .hash-id {
             position: relative;
-            z-index: 2;
-            margin-top: 6px;
-            font: 400 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: rgba(255, 255, 255, 0.2);
-            letter-spacing: 0.04em;
-            word-break: break-all;
+            z-index: 1;
+            margin-top: 4px;
+            font: 400 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: 0.03em;
+        }
+
+        .exercise-card:active {
+            transform: scale(0.96);
         }
 
         .exercise-card:hover {
-            transform: translateY(-7px) rotateX(2deg) rotateY(-2deg) scale(1.015);
-            border-color: rgba(0, 231, 255, 0.3);
-            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.52), 0 0 34px rgba(0, 231, 255, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            border-color: rgba(0, 231, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         /* ---------- FORMS ---------- */
         .input-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-top: 12px;
+            margin-top: 10px;
             align-items: center;
         }
 
@@ -720,49 +643,43 @@
         .input-row select {
             flex: 1;
             min-width: 60px;
-            min-height: 44px;
-            background: rgba(3, 7, 14, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 12px 16px;
+            min-height: 40px;
+            background: rgba(3, 7, 14, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 14px;
             color: #f7fbff;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             outline: none;
             transition: var(--transition);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 34px rgba(0, 0, 0, 0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .input-row select {
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 44px;
+            background-position: right 14px center;
+            padding-right: 38px;
         }
 
         .input-row input:focus,
         .input-row select:focus {
-            border-color: rgba(0, 231, 255, 0.55);
-            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.12), 0 0 34px rgba(0, 231, 255, 0.14);
+            border-color: rgba(0, 231, 255, 0.4);
+            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.06);
         }
 
         .input-row input::placeholder {
-            color: rgba(200, 210, 223, 0.44);
-        }
-
-        .input-row .btn {
-            flex: 0 0 auto;
+            color: rgba(200, 210, 223, 0.35);
         }
 
         .exercise-select-wrapper {
             position: relative;
             flex: 1;
-            min-width: 100px;
+            min-width: 80px;
         }
 
         .exercise-select-wrapper select {
@@ -773,62 +690,48 @@
         .btn {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
+            border: none;
+            border-radius: 14px;
             background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%);
             color: #080b10;
-            font: 950 0.78rem/1 Inter, system-ui, sans-serif;
-            letter-spacing: 0.035em;
+            font: 800 0.7rem/1 Inter, system-ui, sans-serif;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-            box-shadow: 0 16px 36px rgba(255, 61, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.32);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-            padding: 12px 22px;
+            box-shadow: 0 12px 30px rgba(255, 61, 0, 0.2);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            padding: 10px 18px;
             cursor: pointer;
             touch-action: manipulation;
             white-space: nowrap;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            transform: translateX(-110%);
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
-            transition: 0.45s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            filter: saturate(1.12);
-            box-shadow: 0 22px 48px rgba(255, 61, 0, 0.35), 0 0 24px rgba(255, 138, 0, 0.16);
-        }
-
-        .btn:hover::before {
-            transform: translateX(110%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .btn:active {
-            transform: translateY(0) scale(0.97);
+            transform: scale(0.95);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 36px rgba(255, 61, 0, 0.25);
         }
 
         .btn-outline {
-            background: rgba(255, 255, 255, 0.045);
+            background: rgba(255, 255, 255, 0.04);
             color: #e7f8ff;
-            border-color: rgba(0, 231, 255, 0.22);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 231, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .btn-success {
             background: linear-gradient(135deg, #54ff8f, #b9ff00);
             color: #07100a;
-            box-shadow: 0 18px 40px rgba(84, 255, 143, 0.18);
+            box-shadow: 0 12px 30px rgba(84, 255, 143, 0.15);
         }
 
-        .btn-danger,
-        .btn-reset {
+        .btn-danger {
             background: linear-gradient(135deg, #ff315c, #ff3d00);
             color: #fff;
-            box-shadow: 0 18px 40px rgba(255, 49, 92, 0.18);
+            box-shadow: 0 12px 30px rgba(255, 49, 92, 0.15);
         }
 
         .btn-block {
@@ -838,14 +741,14 @@
 
         .btn-row {
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
 
         .btn-row .btn {
             flex: 1;
-            min-width: 80px;
+            min-width: 70px;
             text-align: center;
         }
 
@@ -853,44 +756,31 @@
         .stats-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 14px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .stat-box {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 22px;
-            padding: 16px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            padding: 14px 10px;
             text-align: center;
             transition: var(--transition);
         }
 
         .stat-box:hover {
-            border-color: rgba(0, 231, 255, 0.15);
-        }
-
-        .stat-box::after {
-            content: '';
-            position: absolute;
-            right: -18px;
-            bottom: -36px;
-            width: 80px;
-            height: 100px;
-            transform: rotate(26deg);
-            background: linear-gradient(135deg, rgba(255, 61, 0, 0.42), rgba(0, 231, 255, 0.18));
-            opacity: 0.35;
+            border-color: rgba(0, 231, 255, 0.1);
         }
 
         .stat-box label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             text-transform: uppercase;
-            color: rgba(207, 220, 234, 0.63);
-            letter-spacing: 0.08em;
+            color: rgba(207, 220, 234, 0.5);
+            letter-spacing: 0.06em;
             font-weight: 700;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             position: relative;
@@ -898,59 +788,58 @@
         }
 
         .stat-box .value {
-            font: 950 clamp(2rem, 5vw, 3.5rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.05em;
+            font: 900 clamp(1.6rem, 4vw, 3rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.04em;
             color: #fff;
-            text-shadow: 0 0 24px rgba(0, 231, 255, 0.18), 0 0 20px rgba(255, 61, 0, 0.18);
+            text-shadow: 0 0 20px rgba(0, 231, 255, 0.12);
             position: relative;
             z-index: 1;
             margin-top: 2px;
         }
 
         .stat-box .unit {
-            color: rgba(185, 255, 0, 0.75);
-            font-weight: 900;
-            font-size: 0.6rem;
+            color: rgba(185, 255, 0, 0.6);
+            font-weight: 800;
+            font-size: 0.55rem;
             position: relative;
             z-index: 1;
         }
 
         /* ---------- SETS ---------- */
         .set-item {
-            border: 1px solid rgba(255, 255, 255, 0.085);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            border-radius: 18px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-            padding: 12px 16px;
-            margin-bottom: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            padding: 10px 14px;
+            margin-bottom: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.22s ease;
+            transition: 0.2s ease;
         }
 
         .set-item:hover {
-            transform: translateX(5px);
-            border-color: rgba(255, 61, 0, 0.24);
+            transform: translateX(4px);
+            border-color: rgba(255, 61, 0, 0.15);
         }
 
         .set-item .set-info {
             display: flex;
-            gap: 14px;
+            gap: 10px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .set-item .set-weight {
-            font-weight: 950;
+            font-weight: 900;
             color: #ff8a00;
-            text-shadow: 0 0 16px rgba(255, 61, 0, 0.22);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .set-item .set-reps {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
         }
 
@@ -958,7 +847,7 @@
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             padding: 0 4px;
             transition: var(--transition);
@@ -966,34 +855,32 @@
 
         .set-item .set-delete:active {
             color: #ef4444;
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
 
         .set-summary {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-top: 12px;
-            padding: 14px;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            border-radius: var(--radius-sm);
+            gap: 8px;
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .set-summary .stat {
-            font-size: 0.6rem;
-            color: rgba(207, 220, 234, 0.63);
+            font-size: 0.55rem;
+            color: rgba(207, 220, 234, 0.5);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             font-weight: 700;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .set-summary .stat .num {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 900;
             color: var(--text-primary);
             display: block;
@@ -1005,12 +892,12 @@
 
         /* ---------- CHALLENGES ---------- */
         .challenge-card {
-            border: 1px solid rgba(255, 255, 255, 0.085);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            border-radius: 18px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-            padding: 16px 18px;
-            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            padding: 14px 16px;
+            margin-bottom: 8px;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -1020,57 +907,57 @@
             content: '';
             position: absolute;
             inset: 0 auto 0 0;
-            width: 5px;
-            background: linear-gradient(180deg, var(--cyan), var(--purple), var(--gold));
-            opacity: 0.7;
+            width: 4px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple));
+            opacity: 0.6;
         }
 
         .challenge-card.active {
-            border-color: rgba(255, 61, 0, 0.35);
-            background: linear-gradient(145deg, rgba(255, 61, 0, 0.12), rgba(255, 255, 255, 0.03));
+            border-color: rgba(255, 61, 0, 0.2);
+            background: rgba(255, 61, 0, 0.04);
         }
 
         .challenge-card.completed {
-            border-color: rgba(84, 255, 143, 0.42);
-            opacity: 0.78;
+            border-color: rgba(84, 255, 143, 0.25);
+            opacity: 0.7;
         }
 
         .challenge-card .ch-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             flex-wrap: wrap;
             gap: 4px;
         }
 
         .challenge-card .ch-name {
-            font-weight: 950;
+            font-weight: 800;
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 0.02em;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         .challenge-card .ch-reward {
             background: linear-gradient(135deg, var(--gold), var(--pink));
             color: #0a0a12;
-            padding: 2px 14px;
+            padding: 1px 12px;
             border-radius: 40px;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 800;
             text-transform: uppercase;
         }
 
         .challenge-card .ch-desc {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #cdd7e4;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .challenge-card .ch-progress {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.07);
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 4px;
             overflow: hidden;
         }
@@ -1078,42 +965,39 @@
         .challenge-card .ch-progress-bar {
             height: 100%;
             border-radius: 4px;
-            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--gold));
-            box-shadow: 0 0 18px rgba(255, 61, 0, 0.22);
+            transition: width 0.6s ease;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
         }
 
         .challenge-card .ch-progress-text {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 3px;
             text-align: right;
             font-weight: 600;
         }
 
         /* ---------- AI ---------- */
         .ai-program {
-            border: 1px solid rgba(255, 255, 255, 0.085);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            border-radius: 18px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-            padding: 16px 18px;
-            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
             border-left: 3px solid var(--cyan);
         }
 
         .ai-program .day {
             font-weight: 900;
             color: var(--cyan);
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 0.4px;
+            margin-bottom: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 16px rgba(0, 231, 255, 0.2);
         }
 
         .ai-program .exercise {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             padding: 2px 0;
             font-weight: 500;
@@ -1125,144 +1009,129 @@
         }
 
         .forecast-card {
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
         }
 
         .forecast-card .target {
-            font-size: 2.6rem;
-            font-weight: 950;
+            font-size: 2.2rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--cyan), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             font-family: 'Impact', 'Arial Black', Inter, sans-serif;
         }
 
         .forecast-card .date {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .forecast-card .confidence {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 600;
         }
 
         .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.07);
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 4px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .progress-bar .fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--gold));
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
             border-radius: 4px;
-            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 0 18px rgba(255, 61, 0, 0.22);
+            transition: width 0.6s ease;
         }
 
         .chart-container {
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 10px;
             margin-top: 10px;
         }
 
         .chart-container canvas {
             width: 100% !important;
             height: auto !important;
-            max-height: 150px;
-            filter: drop-shadow(0 10px 20px rgba(0, 231, 255, 0.09));
+            max-height: 140px;
         }
 
         .ai-bubble {
-            border: 1px solid rgba(255, 255, 255, 0.085);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            border-radius: 18px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-            padding: 16px 20px;
-            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
             border-left: 3px solid var(--cyan);
         }
 
-        .ai-bubble::before {
-            content: '// COACH AI ONLINE ⛓️';
-            display: block;
-            margin-bottom: 8px;
-            color: rgba(185, 255, 0, 0.75);
-            font: 900 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.18em;
-        }
-
         .ai-bubble .label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 4px;
+            letter-spacing: 0.06em;
+            margin-bottom: 3px;
             font-weight: 700;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .ai-bubble p {
             color: #cdd7e4;
-            line-height: 1.6;
-            font-size: 0.9rem;
+            line-height: 1.5;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
         .ai-message {
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 16px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 14px 18px;
             color: var(--text-primary);
-            min-height: 48px;
-            margin-top: 12px;
-            font-size: 0.9rem;
-            line-height: 1.7;
+            min-height: 44px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            line-height: 1.6;
             font-weight: 500;
         }
 
         .ai-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .ai-actions .btn {
             flex: 1;
-            min-width: 70px;
+            min-width: 65px;
             text-align: center;
-            font-size: 0.65rem;
-            padding: 12px 16px;
+            font-size: 0.6rem;
+            padding: 10px 14px;
         }
 
         .empty-state {
             color: var(--text-muted);
             text-align: center;
-            padding: 24px 0;
-            font-size: 0.85rem;
+            padding: 20px 0;
+            font-size: 0.8rem;
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
@@ -1270,25 +1139,25 @@
         /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
-            top: 22px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            background: rgba(7, 11, 18, 0.88);
-            backdrop-filter: blur(18px) saturate(160%);
-            -webkit-backdrop-filter: blur(18px) saturate(160%);
-            border: 1px solid rgba(0, 231, 255, 0.26);
-            padding: 14px 28px;
-            border-radius: 16px;
+            background: rgba(7, 11, 18, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 231, 255, 0.15);
+            padding: 12px 24px;
+            border-radius: 14px;
             color: #f7fbff;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             z-index: 2000;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 0.4s ease;
             pointer-events: none;
             max-width: 90%;
             text-align: center;
-            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 32px rgba(0, 231, 255, 0.1);
-            font-weight: 850;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
         }
 
         .toast.show {
@@ -1298,19 +1167,17 @@
 
         /* ---------- WORKOUT TIMER ---------- */
         .workout-timer {
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 10px 14px;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            margin-top: 10px;
+            margin-top: 8px;
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
             font-weight: 500;
         }
@@ -1319,8 +1186,8 @@
             font-weight: 700;
             color: var(--cyan);
             text-transform: uppercase;
-            font-size: 0.65rem;
-            letter-spacing: 0.5px;
+            font-size: 0.6rem;
+            letter-spacing: 0.4px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
@@ -1329,21 +1196,21 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.85);
-            background: linear-gradient(145deg, rgba(9, 13, 20, 0.95), rgba(16, 23, 35, 0.94));
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(255, 231, 107, 0.48);
-            box-shadow: 0 34px 100px rgba(0, 0, 0, 0.68), 0 0 50px rgba(255, 231, 107, 0.12);
-            border-radius: 28px;
-            padding: 36px 40px;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(9, 13, 20, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 231, 107, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border-radius: 24px;
+            padding: 30px 34px;
             text-align: center;
             z-index: 3000;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
             max-width: 90%;
-            width: 380px;
+            width: 360px;
         }
 
         .achievement-toast.show {
@@ -1353,13 +1220,13 @@
         }
 
         .achievement-toast .big-icon {
-            font-size: 3.6rem;
+            font-size: 3rem;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .achievement-toast .title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--gold), var(--pink));
             -webkit-background-clip: text;
@@ -1368,9 +1235,9 @@
         }
 
         .achievement-toast .sub {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             font-weight: 500;
         }
 
@@ -1382,82 +1249,79 @@
         .calc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .calc-input-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
 
         .calc-input-group label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .calc-input-group input,
         .calc-input-group select {
-            min-height: 44px;
-            background: rgba(3, 7, 14, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 12px 16px;
+            min-height: 40px;
+            background: rgba(3, 7, 14, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 10px 14px;
             color: #f7fbff;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             outline: none;
             transition: var(--transition);
             width: 100%;
             font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 34px rgba(0, 0, 0, 0.18);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .calc-input-group input:focus,
         .calc-input-group select:focus {
-            border-color: rgba(0, 231, 255, 0.55);
-            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.12), 0 0 34px rgba(0, 231, 255, 0.14);
+            border-color: rgba(0, 231, 255, 0.4);
+            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.06);
         }
 
         .calc-result {
-            margin-top: 14px;
-            border: 2px solid var(--cyan);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26), 0 0 60px rgba(0, 231, 255, 0.04);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 20px;
+            margin-top: 12px;
+            border: 2px solid rgba(0, 231, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
         }
 
         .calc-result .label {
-            font-size: 0.55rem;
-            color: rgba(207, 220, 234, 0.63);
+            font-size: 0.5rem;
+            color: rgba(207, 220, 234, 0.5);
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             font-weight: 700;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
         .calc-result .value {
-            font-size: 2.4rem;
-            font-weight: 950;
+            font-size: 2rem;
+            font-weight: 900;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             font-family: 'Impact', 'Arial Black', Inter, sans-serif;
         }
 
         .calc-result .sub {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 500;
         }
 
@@ -1468,9 +1332,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.78);
-            backdrop-filter: blur(18px) saturate(145%);
-            -webkit-backdrop-filter: blur(18px) saturate(145%);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 4000;
             display: none;
             align-items: center;
@@ -1483,36 +1347,36 @@
         }
 
         .reset-modal-content {
-            background: linear-gradient(145deg, rgba(9, 13, 20, 0.95), rgba(16, 23, 35, 0.94));
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(255, 231, 107, 0.48);
-            box-shadow: 0 34px 100px rgba(0, 0, 0, 0.68), 0 0 50px rgba(255, 231, 107, 0.12);
-            border-radius: 28px;
-            padding: 36px;
+            background: rgba(9, 13, 20, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 231, 107, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border-radius: 24px;
+            padding: 30px;
             max-width: 380px;
             width: 100%;
             text-align: center;
         }
 
         .reset-modal-content h2 {
-            font: 950 1.7rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            font: 900 1.4rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
             text-transform: uppercase;
             color: #ff315c;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .reset-modal-content p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+            line-height: 1.5;
             font-weight: 500;
         }
 
         .reset-modal-content .btn-row {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .reset-modal-content .btn-row .btn {
@@ -1521,33 +1385,30 @@
 
         .reset-modal-content .btn-row .btn-outline {
             background: transparent;
-            border: 1px solid var(--border-subtle);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-secondary);
             box-shadow: none;
         }
 
         /* ---------- WEEK LIST ---------- */
         .week-list {
-            max-height: 260px;
+            max-height: 220px;
             overflow-y: auto;
-            margin-top: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 18px 42px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(14px);
-            border-radius: 18px;
-            padding: 6px;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 4px;
         }
 
         .week-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.85rem;
-            border-radius: 12px;
+            padding: 8px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.8rem;
+            border-radius: 10px;
             background: transparent;
-            transition: var(--transition);
         }
 
         .week-item:last-child {
@@ -1555,10 +1416,10 @@
         }
 
         .week-item .date {
-            color: rgba(207, 220, 234, 0.63);
+            color: rgba(207, 220, 234, 0.5);
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         .week-item .data {
@@ -1566,16 +1427,16 @@
             color: var(--text-secondary);
         }
 
-        /* ---------- DECORATIVE IMAGES ---------- */
+        /* ---------- DECORATIVE BANNER ---------- */
         .deco-banner {
             width: 100%;
-            height: 80px;
-            border-radius: 18px;
+            height: 72px;
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 14px;
             position: relative;
-            background: var(--bg-input);
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .deco-banner img {
@@ -1583,57 +1444,28 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: var(--transition);
-        }
-
-        .deco-banner:hover img {
-            transform: scale(1.02);
         }
 
         .deco-banner .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.3));
+            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.2));
             pointer-events: none;
-        }
-
-        .deco-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid rgba(0, 231, 255, 0.2);
-            flex-shrink: 0;
-        }
-
-        .deco-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .deco-avatar--lg {
-            width: 48px;
-            height: 48px;
-            border-width: 2px;
         }
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 760px) {
             .app {
-                padding: 12px 12px 86px;
+                padding: 10px 10px 80px;
             }
             .header {
-                border-radius: 22px;
-                padding: 14px 12px;
+                border-radius: 20px;
+                padding: 12px 14px;
                 flex-wrap: wrap;
-            }
-            .header::after {
-                display: none;
+                gap: 6px;
             }
             .header h1 {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
             }
             .header .version .dot {
                 display: none;
@@ -1642,53 +1474,68 @@
             #page-records.active,
             #page-progress.active {
                 grid-template-columns: 1fr !important;
-                gap: 14px !important;
+                gap: 12px !important;
             }
             .card {
-                border-radius: 24px;
-                padding: 16px;
+                border-radius: 20px;
+                padding: 14px;
             }
             .exercise-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
+                gap: 8px;
             }
             .exercise-card {
-                min-height: 112px;
-                padding: 12px;
+                min-height: 95px;
+                padding: 10px;
             }
             .exercise-card .ex-name {
-                font-size: 0.6rem;
+                font-size: 0.5rem;
+                margin-top: 18px;
             }
             .exercise-card .ex-weight {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             .input-row input,
             .input-row select {
-                min-width: 88px;
-                padding: 10px 12px;
-                font-size: 0.8rem;
+                min-width: 70px;
+                padding: 8px 12px;
+                font-size: 0.75rem;
+                min-height: 36px;
             }
             .btn {
-                padding: 10px 16px;
-                font-size: 0.7rem;
+                padding: 8px 14px;
+                font-size: 0.6rem;
             }
             .stat-box .value {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             .side-menu {
                 width: 280px;
                 padding: 70px 16px 20px;
             }
             .side-menu .menu-item {
-                font-size: 0.85rem;
-                padding: 12px 14px;
+                font-size: 0.8rem;
+                padding: 10px 14px;
             }
             .header .version {
-                font-size: 0.45rem;
-                padding: 4px 10px;
+                font-size: 0.4rem;
+                padding: 3px 8px;
             }
             .deco-banner {
-                height: 60px;
+                height: 50px;
+            }
+            .header-logo {
+                width: 32px;
+                height: 32px;
+            }
+            .burger-btn {
+                width: 34px;
+                height: 34px;
+                padding: 8px;
+            }
+            .burger-btn span {
+                width: 16px;
+                height: 2px;
             }
         }
 
@@ -1700,7 +1547,7 @@
                 display: none;
             }
             .header h1 {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
             .header h1 .sub {
                 display: none;
@@ -1709,7 +1556,7 @@
 
         @media (min-width: 768px) {
             .exercise-grid {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
 
@@ -1719,42 +1566,7 @@
             *::after {
                 animation: none !important;
                 transition: none !important;
-                scroll-behavior: auto !important;
             }
-        }
-
-        /* ---------- CRYPTO / BLOCKCHAIN STAMP ---------- */
-        .chain-stamp {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 2px 12px;
-            border-radius: 40px;
-            background: rgba(74, 222, 128, 0.06);
-            border: 1px solid rgba(74, 222, 128, 0.12);
-            font: 700 0.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: var(--neon-green);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .chain-stamp .icon {
-            font-size: 0.5rem;
-        }
-
-        /* ---------- VERIFIED BADGE ---------- */
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 2px 10px;
-            border-radius: 40px;
-            background: rgba(0, 231, 255, 0.06);
-            border: 1px solid rgba(0, 231, 255, 0.15);
-            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: var(--cyan);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
         }
     </style>
 </head>
@@ -1804,11 +1616,11 @@
     <!-- APP -->
     <div class="app">
 
-        <!-- HEADER with LOGO & CRYPTO BADGE -->
+        <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <div class="header-logo">
-                    <img src="https://static.vecteezy.com/system/resources/previews/046/267/287/large_2x/fitness-and-bodybuilder-logo-illustration-black-and-white-free-vector.jpg" alt="ATHLETE" loading="lazy">
+                    <img src="https://static.vecteezy.com/system/resources/previews/046/267/287/large_2x/fitness-and-bodybuilder-logo-illustration-black-and-white-free-vector.jpg" alt="ATHLETE" loading="lazy" decoding="async">
                 </div>
                 <h1>ATHLETE <span class="sub">elite</span> <span class="hash-badge">⛓️ #PRIME</span></h1>
             </div>
@@ -1821,9 +1633,9 @@
             </div>
         </div>
 
-        <!-- DECORATIVE BANNER (image placeholder) -->
-        <div class="deco-banner" style="margin-bottom:16px;">
-            <img src="https://yt3.googleusercontent.com/MOeAfdnITKALY0U8vMFxiZsKnFR2XB36JAg_lSqnDqeijmpmzE1zzzrihon333Kh6ZhlBnZC=s900-c-k-c0x00ffffff-no-rj" alt="fitness banner" loading="lazy">
+        <!-- DECORATIVE BANNER -->
+        <div class="deco-banner">
+            <img src="https://yt3.googleusercontent.com/MOeAfdnITKALY0U8vMFxiZsKnFR2XB36JAg_lSqnDqeijmpmzE1zzzrihon333Kh6ZhlBnZC=s900-c-k-c0x00ffffff-no-rj" alt="fitness banner" loading="lazy" decoding="async">
             <div class="overlay"></div>
         </div>
 
@@ -1832,7 +1644,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>🏆 Рекорды <span class="verified-badge">✅ verified</span></h2>
-                    <span class="badge">все упражнения <span class="hash">⛓️</span></span>
+                    <span class="badge">все упражнения</span>
                 </div>
                 <div class="exercise-grid" id="recordsContainer"></div>
                 <div class="input-row">
@@ -1859,7 +1671,7 @@
                 <div class="workout-timer">
                     <span><span class="label">📅</span> <span id="todayDate">—</span></span>
                     <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
-                    <span><span class="label">⛓️</span> <span class="chain-stamp"><span class="icon">⛓️</span> BLOCK #<span id="blockHash">A7F3</span></span></span>
+                    <span><span class="label">⛓️</span> <span class="chain-stamp">BLOCK #<span id="blockHash">A7F3</span></span></span>
                 </div>
             </div>
         </div>
@@ -1884,7 +1696,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h2>📈 График веса <span class="chain-stamp"><span class="icon">⛓️</span> ON-CHAIN</span></h2>
+                    <h2>📈 График веса <span class="chain-stamp">⛓️ ON-CHAIN</span></h2>
                     <span class="badge">динамика</span>
                 </div>
                 <div class="chart-container"><canvas id="progressChart"></canvas></div>
@@ -1911,7 +1723,7 @@
         <div id="page-challenges" class="page">
             <div class="card">
                 <div class="card-header">
-                    <h2>🎯 Челленджи <span class="chain-stamp"><span class="icon">⛓️</span> ACTIVE</span></h2>
+                    <h2>🎯 Челленджи <span class="chain-stamp">⛓️ ACTIVE</span></h2>
                     <span class="badge" id="challengeBadge">0 активных</span>
                 </div>
                 <div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
@@ -1967,7 +1779,7 @@
                         <option value="oconnor">О'Коннор</option>
                     </select>
                 </div>
-                <button class="btn btn-block" id="calcBtn" style="margin-top:12px;">🧮 Рассчитать</button>
+                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">🧮 Рассчитать</button>
                 <div class="calc-result" id="calcResult">
                     <div class="label">Ваш 1ПМ</div>
                     <div class="value" id="calcResultValue">—</div>
@@ -1995,7 +1807,7 @@
             'use strict';
 
             // ============================================================
-            // 1. BURGER MENU
+            // 1. БУРГЕР-МЕНЮ
             // ============================================================
             window.toggleMenu = function() {
                 const menu = document.getElementById('sideMenu');
@@ -2027,7 +1839,7 @@
                 localStorage.clear();
                 closeResetModal();
                 showToast('🗑️ Все данные удалены!', 2000);
-                setTimeout(() => location.reload(), 800);
+                setTimeout(() => location.reload(), 600);
             };
 
             window.closeAchievementToast = function() {
@@ -2049,11 +1861,11 @@
                 document.getElementById('achToastTitle').textContent = title;
                 document.getElementById('achToastDesc').textContent = desc;
                 document.getElementById('achievementToast').classList.add('show');
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+                if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
             }
 
             // ============================================================
-            // 2. DATA
+            // 2. ДАННЫЕ
             // ============================================================
             const STORAGE_RECORDS = 'athlete_records_v5';
             const STORAGE_PROGRESS = 'athlete_progress_v5';
@@ -2245,20 +2057,19 @@
             }
 
             // ============================================================
-            // 4. RENDER RECORDS with HASH
+            // 4. RENDER RECORDS
             // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
                 container.innerHTML = '';
                 const sorted = Object.keys(records).sort();
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
-                let idx = 0;
                 for (let ex of sorted) {
                     const entry = records[ex];
                     const w = entry.weight || 0;
                     const d = entry.date || '—';
                     const isBW = bodyweightExercises.includes(ex);
-                    const hash = generateHash(ex + w + d).slice(0, 8);
+                    const hash = generateHash(ex + w + d).slice(0, 6);
                     const div = document.createElement('div');
                     div.className = 'exercise-card';
                     div.innerHTML = `
@@ -2280,12 +2091,11 @@
                                 updateChart();
                                 updateChallenges();
                                 updateBlockHash();
-                                showToast(`✅ ${ex}: ${num} ${unit} ⛓️ verified`);
-                            } else showToast('❌ Введи корректное число', 1800);
+                                showToast(`✅ ${ex}: ${num} ${unit} ⛓️`);
+                            } else showToast('❌ Введи корректное число', 1600);
                         }
                     });
                     container.appendChild(div);
-                    idx++;
                 }
             }
 
@@ -2305,16 +2115,17 @@
                     return;
                 }
                 container.innerHTML = '';
-                [...todaySets].reverse().forEach(set => {
+                const reversed = [...todaySets].reverse();
+                for (let set of reversed) {
                     const div = document.createElement('div');
                     div.className = 'set-item';
                     div.innerHTML = `
                         <div class="set-info">
-                            <span style="font-weight:600;font-size:0.85rem;color:var(--text-secondary);">${set.exercise}</span>
+                            <span style="font-weight:600;font-size:0.8rem;color:var(--text-secondary);">${set.exercise}</span>
                             <span class="set-weight">${set.weight} кг</span>
                             <span class="set-reps">× ${set.reps} повт.</span>
-                            <span style="font-size:0.65rem;color:var(--text-muted);">${set.time || ''}</span>
-                            <span class="chain-stamp" style="font-size:0.4rem;">⛓️ #${(set.id+'').slice(-4)}</span>
+                            <span style="font-size:0.6rem;color:var(--text-muted);">${set.time || ''}</span>
+                            <span class="chain-stamp" style="font-size:0.35rem;">⛓️ #${(set.id+'').slice(-4)}</span>
                         </div>
                         <button class="set-delete" data-id="${set.id}">✕</button>
                     `;
@@ -2327,7 +2138,7 @@
                         showToast('🗑️ Подход удалён');
                     });
                     container.appendChild(div);
-                });
+                }
                 const total = todaySets.length;
                 const volume = todaySets.reduce((s, set) => s + set.weight * set.reps, 0);
                 const avg = total > 0 ? todaySets.reduce((s, set) => s + set.weight, 0) / total : 0;
@@ -2350,7 +2161,7 @@
             function finishWorkout() {
                 const today = new Date().toISOString().slice(0, 10);
                 const todaySets = sets.filter(s => s.date === today);
-                if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1500); return; }
+                if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1400); return; }
                 if (!weeklySets[today]) weeklySets[today] = [];
                 weeklySets[today] = [...todaySets];
                 saveWeeklySets();
@@ -2359,7 +2170,7 @@
                 renderTodaySets();
                 updateChallenges();
                 updateBlockHash();
-                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов сохранено. ⛓️`, 2000);
+                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов`, 1800);
             }
 
             function addSet() {
@@ -2367,7 +2178,7 @@
                 const weight = parseFloat(document.getElementById('setWeight').value);
                 const reps = parseInt(document.getElementById('setReps').value);
                 if (!ex || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-                    showToast('❌ Выбери упражнение, введи вес и повторения', 2000);
+                    showToast('❌ Выбери упражнение, введи вес и повторения', 1800);
                     return;
                 }
                 const today = new Date().toISOString().slice(0, 10);
@@ -2380,7 +2191,7 @@
                 updateBlockHash();
                 document.getElementById('setWeight').value = '';
                 document.getElementById('setReps').value = '';
-                showToast(`✅ ${ex}: ${weight} кг × ${reps} повт. ⛓️`);
+                showToast(`✅ ${ex}: ${weight} кг × ${reps} повт.`);
             }
 
             // ============================================================
@@ -2400,7 +2211,7 @@
                 wDisplay.textContent = latest.weight ? latest.weight.toFixed(1) : '—';
                 hDisplay.textContent = latest.height ? latest.height.toFixed(1) : '—';
                 list.innerHTML = '';
-                progressData.forEach(item => {
+                for (let item of progressData) {
                     const row = document.createElement('div');
                     row.className = 'week-item';
                     const w = item.weight ? item.weight.toFixed(1) + ' кг' : '—';
@@ -2408,14 +2219,14 @@
                     row.innerHTML =
                         `<span class="date">${item.date || '—'}</span><span class="data">${w} · ${h}</span>`;
                     list.appendChild(row);
-                });
+                }
             }
 
             function addProgress() {
                 const weight = parseFloat(document.getElementById('weightInput').value);
                 const height = parseFloat(document.getElementById('heightInput').value);
                 if (isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
-                    showToast('❌ Введи вес и рост (числа > 0)', 2000);
+                    showToast('❌ Введи вес и рост (числа > 0)', 1800);
                     return;
                 }
                 const today = new Date().toISOString().slice(0, 10);
@@ -2430,40 +2241,42 @@
                 updateBlockHash();
                 document.getElementById('weightInput').value = '';
                 document.getElementById('heightInput').value = '';
-                showToast(`📊 ${weight} кг · ${height} см ⛓️`);
+                showToast(`📊 ${weight} кг · ${height} см`);
             }
 
             // ============================================================
-            // 7. CHART
+            // 7. CHART (оптимизированный)
             // ============================================================
+            let chartTimer = null;
+
             function updateChart() {
                 const canvas = document.getElementById('progressChart');
                 if (!canvas) return;
                 const ctx = canvas.getContext('2d');
                 const rect = canvas.parentElement.getBoundingClientRect();
                 const dpr = window.devicePixelRatio || 1;
-                const w = rect.width - 24;
-                const h = 150;
+                const w = rect.width - 20;
+                const h = 140;
                 canvas.width = w * dpr;
                 canvas.height = h * dpr;
                 canvas.style.width = w + 'px';
                 canvas.style.height = h + 'px';
                 ctx.scale(dpr, dpr);
 
-                const textColor = 'rgba(255,255,255,0.5)';
-                const gridColor = 'rgba(0,231,255,0.1)';
+                const textColor = 'rgba(255,255,255,0.4)';
+                const gridColor = 'rgba(0,231,255,0.08)';
                 const accentColor = '#00f0ff';
 
                 const data = progressData.slice().reverse();
                 if (data.length < 2) {
                     ctx.fillStyle = textColor;
-                    ctx.font = '13px system-ui';
+                    ctx.font = '12px system-ui';
                     ctx.textAlign = 'center';
                     ctx.fillText('Добавь больше данных', w / 2, h / 2);
                     return;
                 }
 
-                const padding = { top: 12, bottom: 18, left: 28, right: 8 };
+                const padding = { top: 10, bottom: 16, left: 24, right: 6 };
                 const chartW = w - padding.left - padding.right;
                 const chartH = h - padding.top - padding.bottom;
 
@@ -2481,14 +2294,14 @@
                     ctx.stroke();
                     const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
                     ctx.fillStyle = textColor;
-                    ctx.font = '8px system-ui';
+                    ctx.font = '7px system-ui';
                     ctx.textAlign = 'right';
-                    ctx.fillText(val.toFixed(0), padding.left - 4, y + 3);
+                    ctx.fillText(val.toFixed(0), padding.left - 3, y + 2);
                 }
 
                 ctx.beginPath();
                 ctx.strokeStyle = accentColor;
-                ctx.lineWidth = 2.5;
+                ctx.lineWidth = 2;
                 ctx.lineJoin = 'round';
                 ctx.lineCap = 'round';
 
@@ -2504,15 +2317,15 @@
                     const x = padding.left + (i / (data.length - 1)) * chartW;
                     const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
                     ctx.beginPath();
-                    ctx.arc(x, y, 4, 0, Math.PI * 2);
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
                     ctx.fillStyle = accentColor;
                     ctx.fill();
                     ctx.strokeStyle = '#05070b';
-                    ctx.lineWidth = 1.5;
+                    ctx.lineWidth = 1.2;
                     ctx.stroke();
                     if (i % 2 === 0 || i === data.length - 1) {
                         ctx.fillStyle = textColor;
-                        ctx.font = '7px system-ui';
+                        ctx.font = '6px system-ui';
                         ctx.textAlign = 'center';
                         ctx.fillText(data[i].date.slice(5), x, h - 2);
                     }
@@ -2530,16 +2343,15 @@
                         const data = JSON.parse(saved);
                         container.innerHTML = `
                             <div class="forecast-card">
-                                <div style="font-size:0.8rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
+                                <div style="font-size:0.75rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
                                 <div class="target">${data.target} ${data.unit || 'кг'}</div>
                                 <div class="date">Прогноз: ${data.forecastDate}</div>
                                 <div class="confidence">${data.confidence}</div>
                                 <div class="progress-bar"><div class="fill" style="width:${data.progress}%"></div></div>
-                                <div style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">
+                                <div style="font-size:0.65rem;color:var(--text-muted);margin-top:3px;">
                                     Текущий: ${data.current} ${data.unit || 'кг'} · ${data.progress}% до цели
                                 </div>
-                                ${data.weeksToGoal ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:4px;">📊 ${data.weeksToGoal}</div>` : ''}
-                                <div style="margin-top:8px;font-size:0.5rem;color:var(--text-muted);">⛓️ прогноз подтверждён</div>
+                                ${data.weeksToGoal ? `<div style="font-size:0.65rem;color:var(--gold);margin-top:3px;">📊 ${data.weeksToGoal}</div>` : ''}
                             </div>
                         `;
                         return;
@@ -2552,12 +2364,12 @@
                 const ex = document.getElementById('forecastExSelect').value;
                 const target = parseFloat(document.getElementById('forecastTarget').value);
                 if (!ex || isNaN(target) || target <= 0) {
-                    showToast('❌ Выбери упражнение и введи цель', 2000);
+                    showToast('❌ Выбери упражнение и введи цель', 1800);
                     return;
                 }
                 const current = records[ex] ? records[ex].weight : 0;
-                if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 2000); return; }
-                if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 2000); return; }
+                if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 1800); return; }
+                if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 1800); return; }
 
                 const isBW = bodyweightExercises.includes(ex);
                 const unit = isBW ? 'повторов' : 'кг';
@@ -2591,7 +2403,7 @@
                     weeksToGoal };
                 localStorage.setItem('last_forecast', JSON.stringify(data));
                 renderForecast();
-                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr} ⛓️`);
+                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr}`);
             }
 
             // ============================================================
@@ -2637,7 +2449,7 @@
                 saveChallenges();
                 renderChallenges();
                 updateChallengeBadge();
-                showToast('🎯 Новые челленджи на эту неделю! ⛓️', 2500);
+                showToast('🎯 Новые челленджи на эту неделю!', 2000);
             }
 
             function updateChallenges() {
@@ -2781,8 +2593,8 @@
                 for (let ch of weekChallenges) {
                     if (ch.completed && !ch.notified) {
                         ch.notified = true;
-                        showAchievementToast('🎯', 'Челлендж завершён!', `${ch.name} — ${ch.reward} ⛓️`);
-                        showToast(`🏆 ${ch.name} — ${ch.reward} ⛓️`, 3000);
+                        showAchievementToast('🎯', 'Челлендж завершён!', `${ch.name} — ${ch.reward}`);
+                        showToast(`🏆 ${ch.name} — ${ch.reward}`, 2500);
                     }
                 }
                 saveChallenges();
@@ -2795,7 +2607,7 @@
                 if (weekChallenges.length === 0) { container.innerHTML =
                     '<div class="empty-state">Нет активных челленджей</div>'; return; }
                 container.innerHTML = '';
-                weekChallenges.forEach(ch => {
+                for (let ch of weekChallenges) {
                     const div = document.createElement('div');
                     div.className = `challenge-card ${ch.completed ? 'completed' : 'active'}`;
                     const progress = ch.target > 0 ? Math.min(100, (ch.progress / ch.target) * 100) : 0;
@@ -2805,10 +2617,10 @@
                         <div class="ch-desc">${ch.desc}</div>
                         <div class="ch-progress"><div class="ch-progress-bar" style="width:${progress}%;background:${color};"></div></div>
                         <div class="ch-progress-text">${Math.round(progress)}% (${ch.progress}/${ch.target})</div>
-                        ${ch.completed ? '<div style="font-size:0.7rem;color:#54ff8f;margin-top:4px;">✅ Завершено! ⛓️</div>' : ''}
+                        ${ch.completed ? '<div style="font-size:0.65rem;color:#54ff8f;margin-top:3px;">✅ Завершено!</div>' : ''}
                     `;
                     container.appendChild(div);
-                });
+                }
             }
 
             function updateChallengeBadge() {
@@ -2848,32 +2660,31 @@
                 const bwCount = bodyweightExercises.filter(ex => records[ex] && records[ex].weight > 0).length;
 
                 container.innerHTML = `
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
                         <div class="stat-box"><label>Подходов</label><div class="value">${totalSets}</div><div class="unit">за неделю</div></div>
                         <div class="stat-box"><label>Тоннаж</label><div class="value">${totalVolume}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Ср. вес</label><div class="value">${avgWeight.toFixed(1)}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Рекордов</label><div class="value">${recordsCount}</div><div class="unit">всего</div></div>
                     </div>
-                    <div style="background:var(--bg-input);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);">
-                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
                             <span style="color:var(--text-muted);">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${bestEx}: ${maxRecord} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">💪 Упражнений с весом тела</span>
                             <span style="font-weight:700;">${bwCount}/${bodyweightExercises.length}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">📊 Изменение тоннажа</span>
                             <span style="font-weight:700;color:${volChange >= 0 ? '#54ff8f' : '#ff315c'};">${volChange >= 0 ? '↑' : '↓'} ${Math.abs(volChange).toFixed(0)}%</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.85rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">🎯 Челленджи</span>
                             <span style="font-weight:700;">${challenges.filter(c => c.week === weekStart && c.completed).length}/${challenges.filter(c => c.week === weekStart).length}</span>
                         </div>
-                        <div style="margin-top:8px;text-align:right;font-size:0.45rem;color:var(--text-muted);">⛓️ отчёт подтверждён</div>
                     </div>
-                    <div style="margin-top:10px;text-align:center;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.5px;">📅 Отчёт за неделю ${weekStart}</div>
+                    <div style="margin-top:8px;text-align:center;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.4px;">📅 Отчёт за неделю ${weekStart}</div>
                 `;
             }
 
@@ -3026,27 +2837,26 @@
                 }
 
                 msg.innerHTML = `
-                    <div style="margin-bottom:10px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
                             <span style="font-weight:800;color:var(--cyan);">🤖 Уровень: ${analysis.level}</span>
                             <span style="font-weight:800;color:var(--cyan);">📊 Оценка: ${analysis.totalScore}/100</span>
                         </div>
-                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:4px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:3px;font-weight:500;">
                             <span>💪 Сила: ${analysis.strengthScore} · 🏃 Выносливость: ${analysis.enduranceScore} · 📊 Объём: ${analysis.volumeScore}</span>
                         </div>
-                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
                             <span>⚖️ Вес тела: ${currentWeight} кг · 🔥 ${intensity}</span>
                         </div>
-                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
                             <span>🎯 Фокус: ${analysis.focus}</span>
                         </div>
-                        ${weakAdvice ? `<div style="font-size:0.75rem;color:var(--gold);margin-top:2px;font-weight:600;">${weakAdvice}</div>` : ''}
-                        <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                        ${weakAdvice ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:2px;font-weight:600;">${weakAdvice}</div>` : ''}
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
                             <span>📋 Всего упражнений с рекордами: ${analysis.exWithRecordsCount}/${exerciseList.length}</span>
                         </div>
-                        <div style="font-size:0.55rem;color:var(--text-muted);margin-top:4px;">⛓️ программа сгенерирована на блокчейне</div>
                     </div>
-                    <div style="font-size:0.65rem;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">📋 Программа на неделю</div>
+                    <div style="font-size:0.6rem;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">📋 Программа на неделю</div>
                     ${days.map((day, i) => `
                         <div class="ai-program">
                             <div class="day">${day}</div>
@@ -3056,15 +2866,15 @@
                             ${bwExercises.length > 0 && i === 0 ? bwExercises.map(ex => `
                                 <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
                             `).join('') : ''}
-                            <div class="exercise" style="color:var(--text-muted);font-size:0.7rem;margin-top:4px;">💡 Разминка 10 мин, заминка 5 мин</div>
+                            <div class="exercise" style="color:var(--text-muted);font-size:0.65rem;margin-top:3px;">💡 Разминка 10 мин, заминка 5 мин</div>
                         </div>
                     `).join('')}
-                    <div style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;font-weight:500;">
+                    <div style="font-size:0.65rem;color:var(--text-muted);margin-top:5px;font-weight:500;">
                         💡 Увеличивай вес на 2-5 кг каждую неделю. Отдыхай 1-2 дня между тренировками.
                         ${analysis.weakPoints.length > 0 ? `🎯 Работай над: ${analysis.weakPoints.join(', ')}` : ''}
                     </div>
                 `;
-                showToast('📋 Программа сгенерирована! ⛓️', 2000);
+                showToast('📋 Программа сгенерирована!', 1800);
             }
 
             function getAIAdvice() {
@@ -3101,8 +2911,8 @@
                     advice += ' 💪 Добавь отжимания и подтягивания для функциональной формы!';
                 }
 
-                msg.innerHTML = `💡 ${advice} ⛓️`;
-                showToast('🤖 Совет готов! ⛓️', 1500);
+                msg.innerHTML = `💡 ${advice}`;
+                showToast('🤖 Совет готов!', 1400);
             }
 
             function analyzeFitness() {
@@ -3129,56 +2939,55 @@
                 if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
 
                 msg.innerHTML = `
-                    <div style="margin-bottom:10px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
                             <span style="font-weight:800;color:var(--cyan);">📊 Уровень: ${analysis.level}</span>
                             <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
-                            <span class="chain-stamp" style="font-size:0.4rem;">⛓️ анализ подтверждён</span>
                         </div>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;">
-                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
-                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">💪 Сила</div>
-                            <div style="font-size:1.3rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
-                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">💪 Сила</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
                         </div>
-                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
-                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">🏃 Выносливость</div>
-                            <div style="font-size:1.3rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
-                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🏃 Выносливость</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
                         </div>
-                        <div style="background:var(--bg-input);padding:10px;border-radius:var(--radius-sm);text-align:center;border:1px solid var(--border-subtle);">
-                            <div style="font-size:0.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">📊 Объём</div>
-                            <div style="font-size:1.3rem;font-weight:900;color:var(--gold);">${analysis.volumeScore}</div>
-                            <div style="font-size:0.5rem;color:var(--text-secondary);font-weight:600;">${analysis.totalSets} подходов</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">📊 Объём</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">${analysis.volumeScore}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${analysis.totalSets} подходов</div>
                         </div>
                     </div>
-                    <div style="background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);margin-bottom:8px;">
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);margin-bottom:6px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
                             <span style="color:var(--text-muted);font-weight:500;">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${analysis.maxWeight} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
                             <span style="color:var(--text-muted);font-weight:500;">⚖️ Вес тела</span>
                             <span style="font-weight:700;">${currentWeight} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
                             <span style="color:var(--text-muted);font-weight:500;">🎯 Упражнений с рекордами</span>
                             <span style="font-weight:700;">${exWithRecords.length}/${exerciseList.length}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
                             <span style="color:var(--text-muted);font-weight:500;">🎯 Фокус</span>
                             <span style="font-weight:700;">${analysis.focus}</span>
                         </div>
                     </div>
-                    <div style="background:var(--bg-input);padding:12px;border-radius:var(--radius-sm);border-left:3px solid var(--gold);">
-                        <div style="font-weight:800;font-size:0.85rem;color:var(--gold);">📋 Рекомендации</div>
-                        ${recs.map(r => `<div style="font-size:0.75rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
-                        <div style="font-size:0.75rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• 🎯 Цель: запиши рекорды в 10+ упражнениях</div>
+                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border-left:3px solid var(--gold);">
+                        <div style="font-weight:800;font-size:0.8rem;color:var(--gold);">📋 Рекомендации</div>
+                        ${recs.map(r => `<div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
+                        <div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• 🎯 Цель: запиши рекорды в 10+ упражнениях</div>
                     </div>
-                    <div style="font-size:0.5rem;color:var(--text-muted);margin-top:8px;text-align:center;letter-spacing:0.5px;font-weight:600;">📊 Анализ на основе 57 упражнений ⛓️</div>
+                    <div style="font-size:0.45rem;color:var(--text-muted);margin-top:6px;text-align:center;letter-spacing:0.4px;font-weight:600;">📊 Анализ на основе 57 упражнений</div>
                 `;
-                showToast('📊 Анализ завершён! ⛓️', 1500);
+                showToast('📊 Анализ завершён!', 1400);
             }
 
             // ============================================================
@@ -3189,7 +2998,7 @@
                 const reps = parseInt(document.getElementById('calcReps').value);
                 const formula = document.getElementById('calcFormula').value;
                 if (isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-                    showToast('❌ Введи корректные данные', 2000);
+                    showToast('❌ Введи корректные данные', 1800);
                     return;
                 }
                 let rm = 0,
@@ -3221,7 +3030,7 @@
                 }
                 document.getElementById('calcResultValue').textContent = rm.toFixed(1) + ' кг';
                 document.getElementById('calcResultSub').textContent =
-                    `по ${name} · 70%: ${(rm*0.7).toFixed(1)} кг · 80%: ${(rm*0.8).toFixed(1)} кг · 90%: ${(rm*0.9).toFixed(1)} кг ⛓️`;
+                    `по ${name} · 70%: ${(rm*0.7).toFixed(1)} кг · 80%: ${(rm*0.8).toFixed(1)} кг · 90%: ${(rm*0.9).toFixed(1)} кг`;
             }
 
             // ============================================================
@@ -3239,10 +3048,10 @@
 
                 closeMenu();
 
-                if (navigator.vibrate) navigator.vibrate(8);
+                if (navigator.vibrate) navigator.vibrate(6);
 
                 if (pageId === 'progress') { renderProgress();
-                    setTimeout(updateChart, 100); }
+                    setTimeout(updateChart, 80); }
                 if (pageId === 'forecast') renderForecast();
                 if (pageId === 'reports') renderReport();
                 if (pageId === 'challenges') renderChallenges();
@@ -3280,7 +3089,7 @@
                     ts: Date.now()
                 });
                 const h = generateHash(data);
-                el.textContent = h.slice(0, 6);
+                el.textContent = h.slice(0, 5);
             }
 
             // ============================================================
@@ -3295,7 +3104,8 @@
                 renderChallenges();
                 renderForecast();
                 renderReport();
-                updateChart();
+                // отложенный рендер графика
+                setTimeout(updateChart, 100);
                 updateChallengeBadge();
                 updateTodayInfo();
                 updateBlockHash();
@@ -3311,7 +3121,7 @@
                     const name = document.getElementById('recordExSelect').value;
                     const weight = parseFloat(document.getElementById('recordExWeight').value);
                     if (!name || isNaN(weight) || weight <= 0) {
-                        showToast('❌ Выбери упражнение и введи вес', 2000);
+                        showToast('❌ Выбери упражнение и введи вес', 1800);
                         return;
                     }
                     records[name] = { weight, date: new Date().toISOString().slice(0, 10) };
@@ -3320,7 +3130,7 @@
                     updateChallenges();
                     updateBlockHash();
                     document.getElementById('recordExWeight').value = '';
-                    showToast(`✅ ${name}: ${weight} ${bodyweightExercises.includes(name) ? 'повторов' : 'кг'} ⛓️`);
+                    showToast(`✅ ${name}: ${weight} ${bodyweightExercises.includes(name) ? 'повторов' : 'кг'}`);
                 });
 
                 document.getElementById('addSetBtn').addEventListener('click', addSet);
@@ -3348,70 +3158,27 @@
                 document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter')
                     calc1RM(); });
 
+                // Таймер проверки дня
                 setInterval(checkNewDay, 60000);
+
+                // Оптимизированный resize с throttle
                 let resizeTimer;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(updateChart, 300);
+                    resizeTimer = setTimeout(() => {
+                        updateChart();
+                    }, 200);
                 });
 
                 const analysis = getFitnessLevel();
                 document.getElementById('aiStatus').textContent =
                     `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Объём: ${analysis.volumeScore}`;
 
-                setTimeout(calc1RM, 300);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — fully loaded');
+                setTimeout(calc1RM, 200);
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — оптимизированная версия');
             }
 
             document.addEventListener('DOMContentLoaded', init);
-        })();
-    </script>
-
-    <script>
-        /* Micro-interactions: tilt + crypto badge pulse */
-        (function() {
-            function ready(fn) {
-                if (document.readyState !== 'loading') fn();
-                else document.addEventListener('DOMContentLoaded', fn);
-            }
-            ready(function() {
-                document.documentElement.classList.add('premium-cyber-sport');
-
-                var h1 = document.querySelector('.header h1');
-                if (h1 && !h1.dataset.cyberReady) {
-                    h1.dataset.cyberReady = 'true';
-                    h1.setAttribute('aria-label', h1.textContent.trim());
-                }
-
-                var raf = null;
-
-                function bindTilt() {
-                    var cards = document.querySelectorAll('.exercise-card:not([data-tilt-bound])');
-                    cards.forEach(function(card) {
-                        card.dataset.tiltBound = 'true';
-                        card.addEventListener('pointermove', function(e) {
-                            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                            var r = card.getBoundingClientRect();
-                            var x = (e.clientX - r.left) / r.width - .5;
-                            var y = (e.clientY - r.top) / r.height - .5;
-                            if (raf) cancelAnimationFrame(raf);
-                            raf = requestAnimationFrame(function() {
-                                card.style.transform =
-                                    'translateY(-7px) rotateX(' + (-y * 7).toFixed(2) + 'deg) rotateY(' + (x *
-                                        8).toFixed(2) + 'deg) scale(1.018)';
-                            });
-                        }, { passive: true });
-                        card.addEventListener('pointerleave', function() {
-                            card.style.transform = '';
-                        });
-                    });
-                }
-                bindTilt();
-                var grid = document.getElementById('recordsContainer');
-                if (grid) {
-                    new MutationObserver(bindTilt).observe(grid, { childList: true, subtree: false });
-                }
-            });
         })();
     </script>
 
