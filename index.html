@@ -11,9 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           PREMIUM CYBER SPORT + CRYPTO — ОПТИМИЗИРОВАННАЯ ВЕРСИЯ
+           ОПТИМИЗИРОВАННЫЙ СТИЛЬ + GPU-АНИМАЦИИ + КАТЕГОРИИ
            ============================================================ */
-
         * {
             margin: 0;
             padding: 0;
@@ -24,11 +23,8 @@
 
         :root {
             --bg-deep: #04060a;
-            --bg-surface: #080b14;
             --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
             --bg-input: rgba(255, 255, 255, 0.05);
-            --border-glow: rgba(0, 255, 255, 0.15);
             --border-subtle: rgba(255, 255, 255, 0.06);
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.78);
@@ -38,18 +34,12 @@
             --gold: #fbbf24;
             --pink: #ec4899;
             --neon-green: #4ade80;
-            --cyan-dim: rgba(0, 240, 255, 0.08);
-            --purple-dim: rgba(139, 92, 246, 0.08);
-            --gold-dim: rgba(251, 191, 36, 0.08);
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
-            --radius-card: 28px;
-            --radius-sm: 16px;
-            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            --radius-card: 24px;
+            --radius-sm: 14px;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--bg-deep);
@@ -60,20 +50,20 @@
             overflow-x: hidden;
             padding: 0;
             background-image:
-                radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.03) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
             background-attachment: fixed;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Упрощённая сетка — без анимации */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.008) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.006) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.006) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: 0;
@@ -82,199 +72,179 @@
         .app {
             max-width: 1120px;
             width: 100%;
-            padding: 18px clamp(14px, 3vw, 30px) 100px;
+            padding: 16px clamp(12px, 2.5vw, 28px) 90px;
             position: relative;
             z-index: 1;
         }
 
-        /* ---------- SCROLLBAR ---------- */
-        ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 10px; }
+
+        /* ---------- ANIMATIONS (GPU) ---------- */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.05); }
+            50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.15); }
         }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--cyan), var(--purple));
-            border-radius: 10px;
+        .card, .exercise-card, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card {
+            animation: fade-in 0.4s ease both;
+            will-change: transform, opacity;
         }
+        .card:nth-child(2) { animation-delay: 0.08s; }
+        .exercise-card:nth-child(n+4) { animation-delay: 0.04s; }
+        .card.active-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .btn { transition: transform 0.15s ease, box-shadow 0.15s ease; will-change: transform; }
 
         /* ---------- HEADER ---------- */
         .header {
             position: sticky;
             top: 0;
             z-index: 70;
-            margin: 0 0 24px;
-            padding: 14px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 28px;
-            background: rgba(8, 12, 19, 0.85);
-            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            margin: 0 0 20px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            background: rgba(8, 12, 19, 0.88);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            will-change: transform;
         }
-
         .header::before {
             content: '';
             position: absolute;
             inset: -1px;
             border-radius: inherit;
-            background: linear-gradient(120deg, rgba(255, 61, 0, 0.3), transparent 24%, rgba(0, 231, 255, 0.3) 51%, transparent 76%, rgba(185, 255, 0, 0.2));
+            background: linear-gradient(120deg, rgba(255, 61, 0, 0.15), transparent 24%, rgba(0, 231, 255, 0.15) 51%, transparent 76%, rgba(185, 255, 0, 0.1));
             opacity: 0.3;
             z-index: -1;
         }
-
-        /* Убираем анимированный ::after и ::before на h1 */
         .header h1 {
-            font: 900 clamp(1.2rem, 3.8vw, 3.8rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
+            font: 900 clamp(1.1rem, 3.2vw, 3.4rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
             text-transform: uppercase;
-            letter-spacing: -0.045em;
+            letter-spacing: -0.04em;
             background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255, 61, 0, 0.15));
+            filter: drop-shadow(0 0 16px rgba(255, 61, 0, 0.1));
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-
         .header h1 .sub {
-            font-size: 0.35em;
+            font-size: 0.3em;
             font-weight: 300;
-            letter-spacing: 0.15em;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.12em;
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.25);
             background: none;
             text-transform: uppercase;
         }
-
         .header h1 .hash-badge {
-            font-size: 0.2em;
+            font-size: 0.18em;
             font-weight: 800;
             -webkit-text-fill-color: var(--neon-green);
-            background: none;
-            background-color: rgba(74, 222, 128, 0.1);
-            padding: 0.1em 0.5em;
+            background: rgba(74, 222, 128, 0.08);
+            padding: 0.08em 0.5em;
             border-radius: 40px;
-            border: 1px solid rgba(74, 222, 128, 0.15);
-            letter-spacing: 0.05em;
+            border: 1px solid rgba(74, 222, 128, 0.12);
+            letter-spacing: 0.04em;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
-
         .header-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             flex-shrink: 0;
             background: var(--bg-card);
         }
-
-        .header-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
+        .header-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .header-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
             flex-shrink: 0;
         }
-
         .header .version {
-            border: 1px solid rgba(0, 231, 255, 0.2);
-            background: rgba(0, 231, 255, 0.06);
+            border: 1px solid rgba(0, 231, 255, 0.15);
+            background: rgba(0, 231, 255, 0.05);
             color: #b9f8ff;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 999px;
-            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-
         .header .version .dot {
             display: inline-block;
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
             background: var(--neon-green);
             animation: pulse-dot 2s ease-in-out infinite;
         }
-
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            50% { opacity: 0.2; }
         }
-
-        .btn-reset,
-        .burger-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .btn-reset, .burger-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: #fff;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transition: transform 0.15s ease;
             cursor: pointer;
         }
-
         .btn-reset {
-            border-color: rgba(255, 49, 92, 0.3);
+            border-color: rgba(255, 49, 92, 0.2);
             color: #ffdce5;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 40px;
             font-weight: 700;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: rgba(255, 49, 92, 0.08);
+            letter-spacing: 0.4px;
+            background: rgba(255, 49, 92, 0.06);
         }
-
-        .btn-reset:active {
-            transform: scale(0.94);
-        }
-
+        .btn-reset:active { transform: scale(0.92); }
         .burger-btn {
-            border-radius: 14px;
-            width: 40px;
-            height: 40px;
+            border-radius: 12px;
+            width: 36px;
+            height: 36px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            padding: 10px;
+            gap: 3.5px;
+            padding: 8px;
             position: relative;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
         }
-
-        .burger-btn:active {
-            transform: scale(0.92);
-        }
-
+        .burger-btn:active { transform: scale(0.9); }
         .burger-btn span {
             display: block;
-            width: 18px;
+            width: 16px;
             height: 2px;
             background: var(--text-primary);
             border-radius: 4px;
-            transition: var(--transition);
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
-
         .burger-btn.active span:nth-child(1) {
             transform: rotate(45deg) translate(4px, 4px);
             background: var(--cyan);
@@ -295,73 +265,60 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 999;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            transition: opacity 0.25s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
-
-        .menu-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        .menu-overlay.open { opacity: 1; pointer-events: auto; }
         .side-menu {
             position: fixed;
             top: 0;
-            left: -360px;
-            width: 340px;
-            max-width: 84%;
+            left: -340px;
+            width: 320px;
+            max-width: 82%;
             height: 100%;
-            background: rgba(10, 11, 22, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 11, 22, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-right: 1px solid var(--border-subtle);
             z-index: 1000;
-            transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-            padding: 80px 20px 30px;
+            transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 70px 18px 30px;
             overflow-y: auto;
-            box-shadow: 20px 0 80px rgba(0, 0, 0, 0.6);
+            box-shadow: 16px 0 60px rgba(0, 0, 0, 0.5);
         }
-
-        .side-menu.open {
-            left: 0;
-        }
-
+        .side-menu.open { left: 0; }
         .side-menu .menu-title {
-            margin-top: 8px;
-            color: rgba(0, 231, 255, 0.7);
-            border-bottom: 1px solid rgba(0, 231, 255, 0.12);
-            font: 900 0.65rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.2em;
-            padding-bottom: 14px;
-            margin-bottom: 20px;
+            color: rgba(0, 231, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 231, 255, 0.08);
+            font: 700 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.15em;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
             text-transform: uppercase;
         }
-
         .side-menu .menu-item {
             position: relative;
-            margin-bottom: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             background: rgba(255, 255, 255, 0.02);
             color: #d7e2ee;
-            font-weight: 700;
-            overflow: hidden;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            border-radius: 14px;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
             width: 100%;
             text-align: left;
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.85rem;
+            transition: background 0.15s ease, transform 0.15s ease;
+            font-size: 0.8rem;
         }
-
         .side-menu .menu-item::before {
             content: '';
             position: absolute;
@@ -369,522 +326,470 @@
             width: 3px;
             background: linear-gradient(180deg, var(--cyan), var(--purple));
             opacity: 0;
-            transition: 0.2s ease;
+            transition: opacity 0.15s ease;
         }
-
         .side-menu .menu-item:hover,
         .side-menu .menu-item.active {
-            transform: translateX(3px);
-            border-color: rgba(0, 231, 255, 0.2);
-            background: rgba(255, 61, 0, 0.08);
+            background: rgba(255, 61, 0, 0.06);
             color: #fff;
+            transform: translateX(2px);
         }
-
         .side-menu .menu-item:hover::before,
-        .side-menu .menu-item.active::before {
-            opacity: 1;
-        }
-
+        .side-menu .menu-item.active::before { opacity: 1; }
         .side-menu .menu-item .icon {
-            font-size: 1.1rem;
-            width: 24px;
+            font-size: 1rem;
+            width: 22px;
             text-align: center;
-            opacity: 0.6;
+            opacity: 0.5;
             flex-shrink: 0;
         }
-
-        .side-menu .menu-item.active .icon {
-            opacity: 1;
-        }
-
+        .side-menu .menu-item.active .icon { opacity: 1; }
         .side-menu .menu-item .badge {
             margin-left: auto;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             color: #05070b;
-            font-size: 0.45rem;
+            font-size: 0.4rem;
             font-weight: 800;
-            padding: 1px 10px;
+            padding: 1px 8px;
             border-radius: 40px;
-            min-width: 18px;
+            min-width: 16px;
             text-align: center;
         }
 
         /* ---------- PAGES ---------- */
-        .page {
-            display: none;
-        }
-
+        .page { display: none; }
         .page.active {
             display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: 14px;
             align-items: start;
-            animation: fadeSlide 0.3s ease;
         }
-
         #page-records.active {
-            grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
         }
         #page-progress.active {
-            grid-template-columns: minmax(300px, 0.8fr) minmax(300px, 1.2fr);
-        }
-
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+            grid-template-columns: minmax(280px, 0.8fr) minmax(280px, 1.2fr);
         }
 
         /* ---------- CARDS ---------- */
         .card {
             position: relative;
             overflow: hidden;
-            padding: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            background: rgba(7, 11, 18, 0.8);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            background: rgba(7, 11, 18, 0.82);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            will-change: transform;
         }
-
         .card::before {
             content: '';
             position: absolute;
             inset: -1px;
             z-index: -1;
             border-radius: inherit;
-            background: linear-gradient(135deg, rgba(255, 61, 0, 0.25), transparent 30%, rgba(0, 231, 255, 0.2) 60%, transparent 80%, rgba(185, 255, 0, 0.15));
-            opacity: 0.2;
+            background: linear-gradient(135deg, rgba(255, 61, 0, 0.15), transparent 30%, rgba(0, 231, 255, 0.12) 60%, transparent 80%);
+            opacity: 0.15;
             pointer-events: none;
         }
-
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 231, 255, 0.15);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 231, 255, 0.04);
-        }
-
+        .card:active { transform: scale(0.995); }
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
-
         .card-header h2 {
-            font: 900 clamp(0.95rem, 2vw, 1.5rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            font: 800 clamp(0.85rem, 1.8vw, 1.3rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
             text-transform: uppercase;
-            letter-spacing: -0.025em;
+            letter-spacing: -0.02em;
             color: #fff;
-            text-shadow: 0 0 18px rgba(0, 231, 255, 0.08);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-
         .card-header .badge {
-            border: 1px solid rgba(0, 231, 255, 0.15);
-            background: rgba(0, 231, 255, 0.05);
+            border: 1px solid rgba(0, 231, 255, 0.1);
+            background: rgba(0, 231, 255, 0.04);
             color: #bdf9ff;
-            font: 700 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.06em;
+            font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            padding: 3px 14px;
+            padding: 2px 12px;
             border-radius: 40px;
             flex-shrink: 0;
         }
-
         .chain-stamp {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 2px 10px;
+            gap: 3px;
+            padding: 1px 8px;
             border-radius: 40px;
-            background: rgba(74, 222, 128, 0.05);
-            border: 1px solid rgba(74, 222, 128, 0.1);
-            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            background: rgba(74, 222, 128, 0.04);
+            border: 1px solid rgba(74, 222, 128, 0.08);
+            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             color: var(--neon-green);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
         }
-
         .verified-badge {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 2px 10px;
+            gap: 3px;
+            padding: 1px 8px;
             border-radius: 40px;
-            background: rgba(0, 231, 255, 0.05);
-            border: 1px solid rgba(0, 231, 255, 0.12);
-            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            background: rgba(0, 231, 255, 0.04);
+            border: 1px solid rgba(0, 231, 255, 0.08);
+            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             color: var(--cyan);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
+        }
+
+        /* ---------- CATEGORY TABS ---------- */
+        .category-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 4px 0 12px 0;
+            margin-bottom: 4px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            flex-wrap: nowrap;
+        }
+        .category-tabs::-webkit-scrollbar { display: none; }
+        .category-tab {
+            flex-shrink: 0;
+            padding: 6px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .category-tab:active { transform: scale(0.94); }
+        .category-tab.active {
+            background: rgba(0, 231, 255, 0.08);
+            border-color: rgba(0, 231, 255, 0.2);
+            color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 231, 255, 0.04);
+        }
+        .category-tab .count {
+            display: inline-block;
+            margin-left: 4px;
+            padding: 0 6px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            font-size: 0.45rem;
+            color: var(--text-muted);
+        }
+        .category-tab.active .count {
+            background: rgba(0, 231, 255, 0.08);
+            color: var(--cyan);
         }
 
         /* ---------- EXERCISE GRID ---------- */
         .exercise-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin-bottom: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 10px;
         }
-
         .exercise-card {
             position: relative;
-            min-height: 110px;
+            min-height: 96px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: flex-start;
             text-align: left;
-            padding: 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(10, 15, 24, 0.7);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 15, 24, 0.6);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: transform 0.2s ease, border-color 0.2s, box-shadow 0.2s;
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
             cursor: pointer;
+            will-change: transform;
         }
-
         .exercise-card::before {
             content: '⛓️ BLOCK';
             position: absolute;
-            top: 8px;
-            left: 8px;
-            padding: 2px 8px;
+            top: 6px;
+            left: 6px;
+            padding: 1px 6px;
             border-radius: 999px;
-            background: rgba(74, 222, 128, 0.06);
-            border: 1px solid rgba(74, 222, 128, 0.1);
+            background: rgba(74, 222, 128, 0.04);
+            border: 1px solid rgba(74, 222, 128, 0.06);
             color: var(--neon-green);
-            font: 700 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.06em;
+            font: 600 0.3rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            letter-spacing: 0.04em;
             z-index: 1;
         }
-
         .exercise-card .ex-name {
             position: relative;
             z-index: 1;
             width: 100%;
-            margin-top: 24px;
-            font: 700 0.6rem/1.1 Inter, system-ui, sans-serif;
+            margin-top: 18px;
+            font: 600 0.5rem/1.1 Inter, system-ui, sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.02em;
             color: #dfe8f3;
         }
-
         .exercise-card .ex-weight {
             position: relative;
             z-index: 1;
-            margin-top: 4px;
-            font: 900 clamp(1.4rem, 3.2vw, 2.4rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.04em;
+            margin-top: 3px;
+            font: 900 clamp(1.2rem, 2.8vw, 2rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.03em;
             color: #fff;
-            text-shadow: 0 0 16px rgba(255, 61, 0, 0.2), 0 0 20px rgba(0, 231, 255, 0.1);
+            text-shadow: 0 0 12px rgba(255, 61, 0, 0.15);
         }
-
         .exercise-card .ex-unit {
             position: relative;
             z-index: 1;
-            color: rgba(206, 219, 233, 0.6);
-            font: 700 0.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: rgba(206, 219, 233, 0.5);
+            font: 600 0.4rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.03em;
         }
-
         .exercise-card .ex-bodyweight {
             position: relative;
             z-index: 1;
-            margin-top: 4px;
-            padding: 2px 8px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.04);
+            margin-top: 3px;
+            padding: 1px 6px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             color: #dffcff;
             border-radius: 20px;
-            font: 700 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             display: inline-block;
         }
-
         .exercise-card .hash-id {
             position: relative;
             z-index: 1;
-            margin-top: 4px;
-            font: 400 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: rgba(255, 255, 255, 0.15);
-            letter-spacing: 0.03em;
+            margin-top: 3px;
+            font: 400 0.3rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.02em;
         }
-
-        .exercise-card:active {
-            transform: scale(0.96);
-        }
-
-        .exercise-card:hover {
-            border-color: rgba(0, 231, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
+        .exercise-card:active { transform: scale(0.95); }
+        .exercise-card.hidden { display: none; }
 
         /* ---------- FORMS ---------- */
         .input-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 8px;
             align-items: center;
         }
-
         .input-row input,
         .input-row select {
             flex: 1;
-            min-width: 60px;
-            min-height: 40px;
+            min-width: 50px;
+            min-height: 36px;
             background: rgba(3, 7, 14, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 8px 12px;
             color: #f7fbff;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             outline: none;
-            transition: var(--transition);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
             font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
-
         .input-row select {
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 14px center;
-            padding-right: 38px;
+            background-position: right 12px center;
+            padding-right: 32px;
         }
-
         .input-row input:focus,
         .input-row select:focus {
-            border-color: rgba(0, 231, 255, 0.4);
-            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.06);
+            border-color: rgba(0, 231, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(0, 231, 255, 0.04);
         }
-
-        .input-row input::placeholder {
-            color: rgba(200, 210, 223, 0.35);
-        }
-
+        .input-row input::placeholder { color: rgba(200, 210, 223, 0.3); }
         .exercise-select-wrapper {
             position: relative;
             flex: 1;
-            min-width: 80px;
+            min-width: 70px;
         }
-
-        .exercise-select-wrapper select {
-            width: 100%;
-        }
+        .exercise-select-wrapper select { width: 100%; }
 
         /* ---------- BUTTONS ---------- */
         .btn {
-            position: relative;
-            overflow: hidden;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%);
             color: #080b10;
-            font: 800 0.7rem/1 Inter, system-ui, sans-serif;
-            letter-spacing: 0.03em;
+            font: 700 0.6rem/1 Inter, system-ui, sans-serif;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
-            box-shadow: 0 12px 30px rgba(255, 61, 0, 0.2);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            padding: 10px 18px;
+            box-shadow: 0 6px 20px rgba(255, 61, 0, 0.15);
+            transition: transform 0.12s ease, box-shadow 0.15s ease;
+            padding: 8px 14px;
             cursor: pointer;
             touch-action: manipulation;
             white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            will-change: transform;
         }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 16px 36px rgba(255, 61, 0, 0.25);
-        }
-
+        .btn:active { transform: scale(0.94); }
         .btn-outline {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             color: #e7f8ff;
-            border-color: rgba(0, 231, 255, 0.15);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: rgba(0, 231, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-
         .btn-success {
             background: linear-gradient(135deg, #54ff8f, #b9ff00);
             color: #07100a;
-            box-shadow: 0 12px 30px rgba(84, 255, 143, 0.15);
+            box-shadow: 0 6px 20px rgba(84, 255, 143, 0.12);
         }
-
         .btn-danger {
             background: linear-gradient(135deg, #ff315c, #ff3d00);
             color: #fff;
-            box-shadow: 0 12px 30px rgba(255, 49, 92, 0.15);
+            box-shadow: 0 6px 20px rgba(255, 49, 92, 0.12);
         }
-
-        .btn-block {
-            width: 100%;
-            justify-content: center;
-        }
-
+        .btn-block { width: 100%; justify-content: center; }
         .btn-row {
             display: flex;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 6px;
+            margin-top: 8px;
             flex-wrap: wrap;
         }
-
-        .btn-row .btn {
-            flex: 1;
-            min-width: 70px;
-            text-align: center;
-        }
+        .btn-row .btn { flex: 1; min-width: 60px; text-align: center; }
 
         /* ---------- STATS ---------- */
         .stats-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
-
         .stat-box {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 18px;
-            padding: 14px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
+            padding: 12px 8px;
             text-align: center;
-            transition: var(--transition);
         }
-
-        .stat-box:hover {
-            border-color: rgba(0, 231, 255, 0.1);
-        }
-
         .stat-box label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             text-transform: uppercase;
-            color: rgba(207, 220, 234, 0.5);
-            letter-spacing: 0.06em;
-            font-weight: 700;
+            color: rgba(207, 220, 234, 0.4);
+            letter-spacing: 0.05em;
+            font-weight: 600;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
             position: relative;
             z-index: 1;
         }
-
         .stat-box .value {
-            font: 900 clamp(1.6rem, 4vw, 3rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.04em;
+            font: 800 clamp(1.4rem, 3.5vw, 2.6rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
+            letter-spacing: -0.03em;
             color: #fff;
-            text-shadow: 0 0 20px rgba(0, 231, 255, 0.12);
+            text-shadow: 0 0 16px rgba(0, 231, 255, 0.08);
             position: relative;
             z-index: 1;
-            margin-top: 2px;
+            margin-top: 1px;
         }
-
         .stat-box .unit {
-            color: rgba(185, 255, 0, 0.6);
-            font-weight: 800;
-            font-size: 0.55rem;
+            color: rgba(185, 255, 0, 0.5);
+            font-weight: 700;
+            font-size: 0.5rem;
             position: relative;
             z-index: 1;
         }
 
         /* ---------- SETS ---------- */
         .set-item {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            padding: 10px 14px;
-            margin-bottom: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 8px 12px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.2s ease;
+            transition: transform 0.12s ease, border-color 0.12s ease;
         }
-
-        .set-item:hover {
-            transform: translateX(4px);
-            border-color: rgba(255, 61, 0, 0.15);
-        }
-
+        .set-item:active { transform: scale(0.98); }
         .set-item .set-info {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .set-item .set-weight {
-            font-weight: 900;
+            font-weight: 800;
             color: #ff8a00;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
-
         .set-item .set-reps {
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
         }
-
         .set-item .set-delete {
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            padding: 0 4px;
-            transition: var(--transition);
+            padding: 0 3px;
+            transition: color 0.15s ease;
         }
-
-        .set-item .set-delete:active {
-            color: #ef4444;
-            transform: scale(1.1);
-        }
-
+        .set-item .set-delete:active { color: #ef4444; }
         .set-summary {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
-            margin-top: 10px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .set-summary .stat {
-            font-size: 0.55rem;
-            color: rgba(207, 220, 234, 0.5);
+            font-size: 0.5rem;
+            color: rgba(207, 220, 234, 0.4);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-weight: 600;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .set-summary .stat .num {
-            font-size: 1.2rem;
-            font-weight: 900;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--text-primary);
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -892,246 +797,232 @@
 
         /* ---------- CHALLENGES ---------- */
         .challenge-card {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            padding: 14px 16px;
-            margin-bottom: 8px;
-            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            transition: border-color 0.15s ease;
             position: relative;
             overflow: hidden;
         }
-
         .challenge-card::before {
             content: '';
             position: absolute;
             inset: 0 auto 0 0;
-            width: 4px;
+            width: 3px;
             background: linear-gradient(180deg, var(--cyan), var(--purple));
-            opacity: 0.6;
+            opacity: 0.4;
         }
-
         .challenge-card.active {
-            border-color: rgba(255, 61, 0, 0.2);
-            background: rgba(255, 61, 0, 0.04);
+            border-color: rgba(255, 61, 0, 0.12);
+            background: rgba(255, 61, 0, 0.03);
         }
-
         .challenge-card.completed {
-            border-color: rgba(84, 255, 143, 0.25);
+            border-color: rgba(84, 255, 143, 0.15);
             opacity: 0.7;
         }
-
         .challenge-card .ch-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
         }
-
         .challenge-card .ch-name {
-            font-weight: 800;
+            font-weight: 700;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 0.02em;
-            font-size: 0.85rem;
+            letter-spacing: 0.01em;
+            font-size: 0.75rem;
         }
-
         .challenge-card .ch-reward {
             background: linear-gradient(135deg, var(--gold), var(--pink));
             color: #0a0a12;
-            padding: 1px 12px;
+            padding: 1px 10px;
             border-radius: 40px;
-            font-size: 0.55rem;
-            font-weight: 800;
+            font-size: 0.5rem;
+            font-weight: 700;
             text-transform: uppercase;
         }
-
         .challenge-card .ch-desc {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #cdd7e4;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
-
         .challenge-card .ch-progress {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.06);
+            height: 4px;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 4px;
             overflow: hidden;
         }
-
         .challenge-card .ch-progress-bar {
             height: 100%;
             border-radius: 4px;
-            transition: width 0.6s ease;
+            transition: width 0.4s ease;
             background: linear-gradient(90deg, var(--cyan), var(--purple));
         }
-
         .challenge-card .ch-progress-text {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
             text-align: right;
             font-weight: 600;
         }
 
         /* ---------- AI ---------- */
         .ai-program {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 14px 16px;
-            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 6px;
             border-left: 3px solid var(--cyan);
         }
-
         .ai-program .day {
-            font-weight: 900;
+            font-weight: 800;
             color: var(--cyan);
-            font-size: 0.8rem;
-            letter-spacing: 0.4px;
-            margin-bottom: 3px;
+            font-size: 0.7rem;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
             text-transform: uppercase;
         }
-
         .ai-program .exercise {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            padding: 2px 0;
+            padding: 1px 0;
             font-weight: 500;
         }
-
         .ai-program .exercise strong {
             color: var(--text-primary);
             font-weight: 700;
         }
 
         .forecast-card {
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
-            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
+            padding: 14px;
             text-align: center;
         }
-
         .forecast-card .target {
-            font-size: 2.2rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--cyan), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
             font-family: 'Impact', 'Arial Black', Inter, sans-serif;
         }
-
         .forecast-card .date {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .forecast-card .confidence {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 600;
         }
-
+        .forecast-card .bw-note {
+            font-size: 0.5rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 4px;
+        }
         .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.06);
+            height: 6px;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 4px;
             overflow: hidden;
-            margin-top: 8px;
+            margin-top: 6px;
         }
-
         .progress-bar .fill {
             height: 100%;
             background: linear-gradient(90deg, var(--cyan), var(--purple));
             border-radius: 4px;
-            transition: width 0.6s ease;
+            transition: width 0.4s ease;
         }
 
         .chart-container {
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
-            padding: 10px;
-            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
+            padding: 8px;
+            margin-top: 8px;
         }
-
         .chart-container canvas {
             width: 100% !important;
             height: auto !important;
-            max-height: 140px;
+            max-height: 120px;
         }
 
         .ai-bubble {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
             border-left: 3px solid var(--cyan);
         }
-
         .ai-bubble .label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 3px;
-            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+            font-weight: 600;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .ai-bubble p {
             color: #cdd7e4;
             line-height: 1.5;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
         }
 
         .ai-message {
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
-            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
+            padding: 12px 16px;
             color: var(--text-primary);
-            min-height: 44px;
-            margin-top: 10px;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            min-height: 40px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            line-height: 1.5;
             font-weight: 500;
         }
 
         .ai-actions {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 8px;
         }
-
         .ai-actions .btn {
             flex: 1;
-            min-width: 65px;
+            min-width: 60px;
             text-align: center;
-            font-size: 0.6rem;
-            padding: 10px 14px;
+            font-size: 0.55rem;
+            padding: 8px 12px;
         }
 
         .empty-state {
             color: var(--text-muted);
             text-align: center;
-            padding: 20px 0;
-            font-size: 0.8rem;
+            padding: 16px 0;
+            font-size: 0.75rem;
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
@@ -1139,27 +1030,26 @@
         /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
-            top: 20px;
+            top: 16px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            background: rgba(7, 11, 18, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 231, 255, 0.15);
-            padding: 12px 24px;
-            border-radius: 14px;
+            background: rgba(7, 11, 18, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 231, 255, 0.1);
+            padding: 10px 22px;
+            border-radius: 12px;
             color: #f7fbff;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             z-index: 2000;
             opacity: 0;
-            transition: all 0.4s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
             pointer-events: none;
             max-width: 90%;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            font-weight: 700;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            font-weight: 600;
         }
-
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
@@ -1167,27 +1057,26 @@
 
         /* ---------- WORKOUT TIMER ---------- */
         .workout-timer {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 8px 12px;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-top: 8px;
+            margin-top: 6px;
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             font-weight: 500;
         }
-
         .workout-timer .label {
-            font-weight: 700;
+            font-weight: 600;
             color: var(--cyan);
             text-transform: uppercase;
-            font-size: 0.6rem;
-            letter-spacing: 0.4px;
+            font-size: 0.55rem;
+            letter-spacing: 0.3px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
 
@@ -1197,131 +1086,116 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.9);
-            background: rgba(9, 13, 20, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 231, 107, 0.3);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-            border-radius: 24px;
-            padding: 30px 34px;
+            background: rgba(9, 13, 20, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 231, 107, 0.2);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 26px 30px;
             text-align: center;
             z-index: 3000;
             opacity: 0;
             pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             max-width: 90%;
-            width: 360px;
+            width: 340px;
         }
-
         .achievement-toast.show {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
             pointer-events: auto;
         }
-
         .achievement-toast .big-icon {
-            font-size: 3rem;
+            font-size: 2.6rem;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
-
         .achievement-toast .title {
-            font-size: 1.2rem;
-            font-weight: 900;
+            font-size: 1.1rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--gold), var(--pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
-
         .achievement-toast .sub {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             font-weight: 500;
         }
-
-        .achievement-toast .btn {
-            margin-top: 0;
-        }
+        .achievement-toast .btn { margin-top: 0; }
 
         /* ---------- CALC ---------- */
         .calc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
-
         .calc-input-group {
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 2px;
         }
-
         .calc-input-group label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: var(--text-muted);
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .calc-input-group input,
         .calc-input-group select {
-            min-height: 40px;
+            min-height: 36px;
             background: rgba(3, 7, 14, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 8px 12px;
             color: #f7fbff;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             outline: none;
-            transition: var(--transition);
+            transition: border-color 0.15s ease;
             width: 100%;
             font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
-
         .calc-input-group input:focus,
         .calc-input-group select:focus {
-            border-color: rgba(0, 231, 255, 0.4);
-            box-shadow: 0 0 0 3px rgba(0, 231, 255, 0.06);
+            border-color: rgba(0, 231, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(0, 231, 255, 0.04);
         }
-
         .calc-result {
-            margin-top: 12px;
-            border: 2px solid rgba(0, 231, 255, 0.2);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 16px;
-            padding: 16px;
+            margin-top: 10px;
+            border: 2px solid rgba(0, 231, 255, 0.12);
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
+            padding: 14px;
             text-align: center;
         }
-
         .calc-result .label {
-            font-size: 0.5rem;
-            color: rgba(207, 220, 234, 0.5);
+            font-size: 0.45rem;
+            color: rgba(207, 220, 234, 0.4);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-weight: 600;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-
         .calc-result .value {
-            font-size: 2rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
             font-family: 'Impact', 'Arial Black', Inter, sans-serif;
         }
-
         .calc-result .sub {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 500;
         }
 
@@ -1332,96 +1206,78 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 4000;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-
-        .reset-modal.show {
-            display: flex;
-        }
-
+        .reset-modal.show { display: flex; }
         .reset-modal-content {
-            background: rgba(9, 13, 20, 0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 231, 107, 0.2);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-            border-radius: 24px;
-            padding: 30px;
-            max-width: 380px;
+            background: rgba(9, 13, 20, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 231, 107, 0.12);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 26px;
+            max-width: 360px;
             width: 100%;
             text-align: center;
         }
-
         .reset-modal-content h2 {
-            font: 900 1.4rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
+            font: 800 1.2rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
             text-transform: uppercase;
             color: #ff315c;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
-
         .reset-modal-content p {
             color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 18px;
+            font-size: 0.8rem;
+            margin-bottom: 16px;
             line-height: 1.5;
             font-weight: 500;
         }
-
         .reset-modal-content .btn-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
-
-        .reset-modal-content .btn-row .btn {
-            flex: 1;
-        }
-
+        .reset-modal-content .btn-row .btn { flex: 1; }
         .reset-modal-content .btn-row .btn-outline {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-secondary);
             box-shadow: none;
         }
 
         /* ---------- WEEK LIST ---------- */
         .week-list {
-            max-height: 220px;
+            max-height: 180px;
             overflow-y: auto;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            padding: 4px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 12px;
+            padding: 3px;
         }
-
         .week-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.8rem;
-            border-radius: 10px;
-            background: transparent;
+            padding: 6px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            font-size: 0.75rem;
+            border-radius: 8px;
         }
-
-        .week-item:last-child {
-            border: none;
-        }
-
+        .week-item:last-child { border: none; }
         .week-item .date {
-            color: rgba(207, 220, 234, 0.5);
+            color: rgba(207, 220, 234, 0.4);
             font-weight: 500;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
-
         .week-item .data {
             font-weight: 600;
             color: var(--text-secondary);
@@ -1430,143 +1286,67 @@
         /* ---------- DECORATIVE BANNER ---------- */
         .deco-banner {
             width: 100%;
-            height: 72px;
-            border-radius: 16px;
+            height: 60px;
+            border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 12px;
             position: relative;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
         }
-
         .deco-banner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-
         .deco-banner .overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.2));
+            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.15));
             pointer-events: none;
         }
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 760px) {
-            .app {
-                padding: 10px 10px 80px;
-            }
-            .header {
-                border-radius: 20px;
-                padding: 12px 14px;
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-            .header h1 {
-                font-size: 1.3rem;
-            }
-            .header .version .dot {
-                display: none;
-            }
+            .app { padding: 8px 8px 70px; }
+            .header { border-radius: 18px; padding: 10px 12px; flex-wrap: wrap; gap: 4px; }
+            .header h1 { font-size: 1.1rem; }
+            .header .version .dot { display: none; }
             .page.active,
             #page-records.active,
-            #page-progress.active {
-                grid-template-columns: 1fr !important;
-                gap: 12px !important;
+            #page-progress.active { grid-template-columns: 1fr !important; gap: 10px !important; }
+            .card { border-radius: 18px; padding: 12px; }
+            .exercise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+            .exercise-card { min-height: 82px; padding: 8px; }
+            .exercise-card .ex-name { font-size: 0.45rem; margin-top: 14px; }
+            .exercise-card .ex-weight { font-size: 1.2rem; }
+            .input-row input, .input-row select {
+                min-width: 60px; padding: 6px 10px; font-size: 0.7rem; min-height: 32px;
             }
-            .card {
-                border-radius: 20px;
-                padding: 14px;
-            }
-            .exercise-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 8px;
-            }
-            .exercise-card {
-                min-height: 95px;
-                padding: 10px;
-            }
-            .exercise-card .ex-name {
-                font-size: 0.5rem;
-                margin-top: 18px;
-            }
-            .exercise-card .ex-weight {
-                font-size: 1.5rem;
-            }
-            .input-row input,
-            .input-row select {
-                min-width: 70px;
-                padding: 8px 12px;
-                font-size: 0.75rem;
-                min-height: 36px;
-            }
-            .btn {
-                padding: 8px 14px;
-                font-size: 0.6rem;
-            }
-            .stat-box .value {
-                font-size: 1.5rem;
-            }
-            .side-menu {
-                width: 280px;
-                padding: 70px 16px 20px;
-            }
-            .side-menu .menu-item {
-                font-size: 0.8rem;
-                padding: 10px 14px;
-            }
-            .header .version {
-                font-size: 0.4rem;
-                padding: 3px 8px;
-            }
-            .deco-banner {
-                height: 50px;
-            }
-            .header-logo {
-                width: 32px;
-                height: 32px;
-            }
-            .burger-btn {
-                width: 34px;
-                height: 34px;
-                padding: 8px;
-            }
-            .burger-btn span {
-                width: 16px;
-                height: 2px;
-            }
+            .btn { padding: 6px 12px; font-size: 0.55rem; }
+            .stat-box .value { font-size: 1.3rem; }
+            .side-menu { width: 260px; padding: 60px 14px 20px; }
+            .side-menu .menu-item { font-size: 0.75rem; padding: 8px 12px; }
+            .header .version { font-size: 0.4rem; padding: 2px 8px; }
+            .deco-banner { height: 44px; }
+            .header-logo { width: 30px; height: 30px; }
+            .burger-btn { width: 30px; height: 30px; padding: 6px; }
+            .burger-btn span { width: 14px; height: 2px; }
+            .category-tabs { gap: 4px; padding: 2px 0 8px 0; }
+            .category-tab { font-size: 0.5rem; padding: 4px 10px; }
         }
-
         @media (max-width: 380px) {
-            .exercise-grid {
-                grid-template-columns: 1fr;
-            }
-            .header .version {
-                display: none;
-            }
-            .header h1 {
-                font-size: 1.1rem;
-            }
-            .header h1 .sub {
-                display: none;
-            }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .header .version { display: none; }
+            .header h1 { font-size: 0.95rem; }
+            .header h1 .sub { display: none; }
         }
-
         @media (min-width: 768px) {
-            .exercise-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
+            .exercise-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
         }
-
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
-                transition: none !important;
-            }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
         }
     </style>
 </head>
@@ -1625,7 +1405,7 @@
                 <h1>ATHLETE <span class="sub">elite</span> <span class="hash-badge">⛓️ #PRIME</span></h1>
             </div>
             <div class="header-actions">
-                <span class="version"><span class="dot"></span> v5.4</span>
+                <span class="version"><span class="dot"></span> v5.5</span>
                 <button class="btn-reset" onclick="openResetModal()">🗑️</button>
                 <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
                     <span></span><span></span><span></span>
@@ -1644,8 +1424,21 @@
             <div class="card">
                 <div class="card-header">
                     <h2>🏆 Рекорды <span class="verified-badge">✅ verified</span></h2>
-                    <span class="badge">все упражнения</span>
+                    <span class="badge" id="recordCountBadge">0 упражнений</span>
                 </div>
+
+                <!-- CATEGORY TABS -->
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="category-tab active" data-category="all">🏋️ Все <span class="count" id="tabCountAll">0</span></button>
+                    <button class="category-tab" data-category="legs">🦵 Ноги <span class="count" id="tabCountLegs">0</span></button>
+                    <button class="category-tab" data-category="chest">💪 Грудь <span class="count" id="tabCountChest">0</span></button>
+                    <button class="category-tab" data-category="back">🔙 Спина <span class="count" id="tabCountBack">0</span></button>
+                    <button class="category-tab" data-category="shoulders">🏋️ Плечи <span class="count" id="tabCountShoulders">0</span></button>
+                    <button class="category-tab" data-category="arms">💪 Руки <span class="count" id="tabCountArms">0</span></button>
+                    <button class="category-tab" data-category="core">🏋️ Кор <span class="count" id="tabCountCore">0</span></button>
+                    <button class="category-tab" data-category="functional">🏃 Функц. <span class="count" id="tabCountFunctional">0</span></button>
+                </div>
+
                 <div class="exercise-grid" id="recordsContainer"></div>
                 <div class="input-row">
                     <div class="exercise-select-wrapper"><select id="recordExSelect"></select></div>
@@ -1772,14 +1565,14 @@
                     <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
                     <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
                 </div>
-                <div class="calc-input-group" style="margin-top:10px;"><label>Формула</label>
+                <div class="calc-input-group" style="margin-top:8px;"><label>Формула</label>
                     <select id="calcFormula">
                         <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
                         <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
                         <option value="oconnor">О'Коннор</option>
                     </select>
                 </div>
-                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">🧮 Рассчитать</button>
+                <button class="btn btn-block" id="calcBtn" style="margin-top:8px;">🧮 Рассчитать</button>
                 <div class="calc-result" id="calcResult">
                     <div class="label">Ваш 1ПМ</div>
                     <div class="value" id="calcResultValue">—</div>
@@ -1838,8 +1631,8 @@
             window.resetAll = function() {
                 localStorage.clear();
                 closeResetModal();
-                showToast('🗑️ Все данные удалены!', 2000);
-                setTimeout(() => location.reload(), 600);
+                showToast('🗑️ Все данные удалены!', 1500);
+                setTimeout(() => location.reload(), 400);
             };
 
             window.closeAchievementToast = function() {
@@ -1848,7 +1641,7 @@
 
             let toastTimer = null;
 
-            function showToast(text, duration = 2000) {
+            function showToast(text, duration = 1800) {
                 const el = document.getElementById('toast');
                 el.textContent = text;
                 el.classList.add('show');
@@ -1861,7 +1654,7 @@
                 document.getElementById('achToastTitle').textContent = title;
                 document.getElementById('achToastDesc').textContent = desc;
                 document.getElementById('achievementToast').classList.add('show');
-                if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
+                if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
             }
 
             // ============================================================
@@ -1873,6 +1666,7 @@
             const STORAGE_SETS_WEEKLY = 'athlete_sets_weekly_v5';
             const STORAGE_CHALLENGES = 'athlete_challenges_v5';
             const STORAGE_LAST_DATE = 'athlete_last_date_v5';
+            const STORAGE_CATEGORY = 'athlete_category_v5';
 
             let records = {};
             let progressData = [];
@@ -1881,6 +1675,7 @@
             let challenges = [];
             let exerciseList = [];
             let lastDate = '';
+            let currentCategory = localStorage.getItem(STORAGE_CATEGORY) || 'all';
 
             const defaultExercises = [
                 'жим ногами', 'присед', 'выпады с гантелями', 'румынская тяга',
@@ -1904,7 +1699,49 @@
                 'жим Арнольда', 'разведение гантелей лёжа'
             ];
 
+            // Категории упражнений
+            const exerciseCategories = {
+                legs: ['жим ногами', 'присед', 'выпады с гантелями', 'румынская тяга',
+                    'болгарский сплит-присед', 'сгибание ног лёжа', 'разгибание ног сидя',
+                    'становая тяга', 'присед со штангой', 'жим платформы ногами',
+                    'выпады назад', 'приседания с прыжком', 'становая тяга на прямых ногах'
+                ],
+                chest: ['жим от груди', 'жим гантелей лёжа', 'разводка гантелей',
+                    'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
+                    'отжимания с хлопком', 'жим гантелей лёжа'
+                ],
+                back: ['тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
+                    'гиперэкстензия', 'шраги с гантелями', 'подтягивания', 'тяга к поясу',
+                    'подтягивания обратным хватом', 'тяга штанги к подбородку'
+                ],
+                shoulders: ['жим стоя', 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
+                    'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда'
+                ],
+                arms: ['подъём на бицепс', 'французский жим', 'молотковые сгибания',
+                    'концентрационные сгибания', 'жим из-за головы для трицепса',
+                    'подъём штанги на бицепс', 'французский жим лёжа', 'отжимания на брусьях'
+                ],
+                core: ['планка', 'скручивания', 'обратные скручивания', 'боковая планка'],
+                functional: ['запрыгивания на тумбу', 'берпи', 'махи гантелями', 'ягодичный мост',
+                    'подъём на носки стоя', 'жим платформы ногами'
+                ]
+            };
+
+            // Функция определения категории упражнения
+            function getExerciseCategory(ex) {
+                for (let [cat, exercises] of Object.entries(exerciseCategories)) {
+                    if (exercises.includes(ex)) return cat;
+                }
+                return 'other';
+            }
+
             const bodyweightExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания', 'обратные скручивания', 'боковая планка', 'запрыгивания на тумбу', 'отжимания с хлопком', 'подтягивания обратным хватом', 'приседания с прыжком'];
+
+            function getUnitForExercise(ex) {
+                if (ex === 'планка') return 'сек';
+                if (bodyweightExercises.includes(ex)) return 'повторов';
+                return 'кг';
+            }
 
             const CHALLENGE_POOL = [
                 { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
@@ -2023,6 +1860,8 @@
 
             function saveLastDate() { localStorage.setItem(STORAGE_LAST_DATE, lastDate); }
 
+            function saveCategory() { localStorage.setItem(STORAGE_CATEGORY, currentCategory); }
+
             function checkNewDay() {
                 const today = new Date().toISOString().slice(0, 10);
                 if (lastDate !== today) {
@@ -2049,7 +1888,9 @@
                     exerciseList.forEach(ex => {
                         const opt = document.createElement('option');
                         opt.value = ex;
-                        opt.textContent = ex + (bodyweightExercises.includes(ex) ? ' (вес тела)' : '');
+                        const unit = getUnitForExercise(ex);
+                        opt.textContent = ex + (unit === 'сек' ? ' (сек)' : unit === 'повторов' ? ' (вес тела)' :
+                            '');
                         select.appendChild(opt);
                     });
                     if (currentVal && exerciseList.includes(currentVal)) select.value = currentVal;
@@ -2057,30 +1898,67 @@
             }
 
             // ============================================================
-            // 4. RENDER RECORDS
+            // 4. CATEGORY TABS
+            // ============================================================
+            function getCategoryCounts() {
+                const counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
+                for (let ex of Object.keys(records)) {
+                    if (records[ex].weight > 0) {
+                        counts.all++;
+                        const cat = getExerciseCategory(ex);
+                        if (counts.hasOwnProperty(cat)) counts[cat]++;
+                    }
+                }
+                return counts;
+            }
+
+            function renderCategoryTabs() {
+                const counts = getCategoryCounts();
+                const tabIds = ['all', 'legs', 'chest', 'back', 'shoulders', 'arms', 'core', 'functional'];
+                for (let id of tabIds) {
+                    const el = document.getElementById('tabCount' + id.charAt(0).toUpperCase() + id.slice(1));
+                    if (el) el.textContent = counts[id] || 0;
+                }
+                document.getElementById('recordCountBadge').textContent = counts.all + ' упражнений';
+
+                // Highlight active
+                document.querySelectorAll('.category-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.category === currentCategory);
+                });
+            }
+
+            // ============================================================
+            // 5. RENDER RECORDS (with category filter)
             // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
                 container.innerHTML = '';
                 const sorted = Object.keys(records).sort();
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+
+                let visibleCount = 0;
                 for (let ex of sorted) {
                     const entry = records[ex];
                     const w = entry.weight || 0;
                     const d = entry.date || '—';
                     const isBW = bodyweightExercises.includes(ex);
-                    const hash = generateHash(ex + w + d).slice(0, 6);
+                    const unit = getUnitForExercise(ex);
+                    const cat = getExerciseCategory(ex);
+                    const hash = generateHash(ex + w + d).slice(0, 5);
+
+                    // Filter by category
+                    if (currentCategory !== 'all' && cat !== currentCategory) continue;
+
                     const div = document.createElement('div');
                     div.className = 'exercise-card';
                     div.innerHTML = `
                         <div class="ex-name">${ex}</div>
                         <div class="ex-weight">${w}</div>
-                        <div class="ex-unit">${isBW ? 'повторов' : 'кг'} · ${d}</div>
+                        <div class="ex-unit">${unit} · ${d}</div>
                         ${isBW && currentWeight ? `<div class="ex-bodyweight">⚖️ ${currentWeight} кг</div>` : ''}
                         <div class="hash-id">⛓️ #${hash}</div>
                     `;
                     div.addEventListener('click', function() {
-                        const unit = isBW ? 'повторов' : 'кг';
                         const val = prompt(`Новый результат для "${ex}" (${unit}):`, w);
                         if (val !== null) {
                             const num = parseFloat(val);
@@ -2091,16 +1969,23 @@
                                 updateChart();
                                 updateChallenges();
                                 updateBlockHash();
-                                showToast(`✅ ${ex}: ${num} ${unit} ⛓️`);
-                            } else showToast('❌ Введи корректное число', 1600);
+                                renderCategoryTabs();
+                                showToast(`✅ ${ex}: ${num} ${unit}`);
+                            } else showToast('❌ Введи корректное число', 1400);
                         }
                     });
                     container.appendChild(div);
+                    visibleCount++;
                 }
+
+                if (visibleCount === 0) {
+                    container.innerHTML = '<div class="empty-state">Нет рекордов в этой категории</div>';
+                }
+                renderCategoryTabs();
             }
 
             // ============================================================
-            // 5. RENDER SETS
+            // 6. RENDER SETS
             // ============================================================
             function renderTodaySets() {
                 const container = document.getElementById('todaySetsContainer');
@@ -2121,11 +2006,11 @@
                     div.className = 'set-item';
                     div.innerHTML = `
                         <div class="set-info">
-                            <span style="font-weight:600;font-size:0.8rem;color:var(--text-secondary);">${set.exercise}</span>
+                            <span style="font-weight:600;font-size:0.75rem;color:var(--text-secondary);">${set.exercise}</span>
                             <span class="set-weight">${set.weight} кг</span>
                             <span class="set-reps">× ${set.reps} повт.</span>
-                            <span style="font-size:0.6rem;color:var(--text-muted);">${set.time || ''}</span>
-                            <span class="chain-stamp" style="font-size:0.35rem;">⛓️ #${(set.id+'').slice(-4)}</span>
+                            <span style="font-size:0.55rem;color:var(--text-muted);">${set.time || ''}</span>
+                            <span class="chain-stamp" style="font-size:0.3rem;">⛓️ #${(set.id+'').slice(-4)}</span>
                         </div>
                         <button class="set-delete" data-id="${set.id}">✕</button>
                     `;
@@ -2161,7 +2046,7 @@
             function finishWorkout() {
                 const today = new Date().toISOString().slice(0, 10);
                 const todaySets = sets.filter(s => s.date === today);
-                if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1400); return; }
+                if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1200); return; }
                 if (!weeklySets[today]) weeklySets[today] = [];
                 weeklySets[today] = [...todaySets];
                 saveWeeklySets();
@@ -2170,7 +2055,7 @@
                 renderTodaySets();
                 updateChallenges();
                 updateBlockHash();
-                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов`, 1800);
+                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов`, 1600);
             }
 
             function addSet() {
@@ -2178,7 +2063,7 @@
                 const weight = parseFloat(document.getElementById('setWeight').value);
                 const reps = parseInt(document.getElementById('setReps').value);
                 if (!ex || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-                    showToast('❌ Выбери упражнение, введи вес и повторения', 1800);
+                    showToast('❌ Выбери упражнение, введи вес и повторения', 1600);
                     return;
                 }
                 const today = new Date().toISOString().slice(0, 10);
@@ -2195,7 +2080,7 @@
             }
 
             // ============================================================
-            // 6. PROGRESS
+            // 7. PROGRESS
             // ============================================================
             function renderProgress() {
                 const wDisplay = document.getElementById('currentWeightDisplay');
@@ -2226,7 +2111,7 @@
                 const weight = parseFloat(document.getElementById('weightInput').value);
                 const height = parseFloat(document.getElementById('heightInput').value);
                 if (isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
-                    showToast('❌ Введи вес и рост (числа > 0)', 1800);
+                    showToast('❌ Введи вес и рост (числа > 0)', 1600);
                     return;
                 }
                 const today = new Date().toISOString().slice(0, 10);
@@ -2245,95 +2130,102 @@
             }
 
             // ============================================================
-            // 7. CHART (оптимизированный)
+            // 8. CHART
             // ============================================================
-            let chartTimer = null;
+            let chartRAF = null;
 
             function updateChart() {
-                const canvas = document.getElementById('progressChart');
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                const rect = canvas.parentElement.getBoundingClientRect();
-                const dpr = window.devicePixelRatio || 1;
-                const w = rect.width - 20;
-                const h = 140;
-                canvas.width = w * dpr;
-                canvas.height = h * dpr;
-                canvas.style.width = w + 'px';
-                canvas.style.height = h + 'px';
-                ctx.scale(dpr, dpr);
-
-                const textColor = 'rgba(255,255,255,0.4)';
-                const gridColor = 'rgba(0,231,255,0.08)';
-                const accentColor = '#00f0ff';
-
-                const data = progressData.slice().reverse();
-                if (data.length < 2) {
-                    ctx.fillStyle = textColor;
-                    ctx.font = '12px system-ui';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Добавь больше данных', w / 2, h / 2);
-                    return;
+                if (chartRAF) {
+                    cancelAnimationFrame(chartRAF);
+                    chartRAF = null;
                 }
+                chartRAF = requestAnimationFrame(function() {
+                    const canvas = document.getElementById('progressChart');
+                    if (!canvas) return;
+                    const ctx = canvas.getContext('2d');
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    const dpr = window.devicePixelRatio || 1;
+                    const w = Math.floor(rect.width - 16);
+                    const h = 110;
+                    canvas.width = w * dpr;
+                    canvas.height = h * dpr;
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+                    ctx.scale(dpr, dpr);
 
-                const padding = { top: 10, bottom: 16, left: 24, right: 6 };
-                const chartW = w - padding.left - padding.right;
-                const chartH = h - padding.top - padding.bottom;
+                    const textColor = 'rgba(255,255,255,0.3)';
+                    const gridColor = 'rgba(0,231,255,0.06)';
+                    const accentColor = '#00f0ff';
 
-                const weights = data.map(d => d.weight);
-                const minWeight = Math.max(0, Math.min(...weights) - 2);
-                const maxWeight = Math.max(...weights) + 2;
+                    const data = progressData.slice().reverse();
+                    if (data.length < 2) {
+                        ctx.fillStyle = textColor;
+                        ctx.font = '11px system-ui';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Добавь больше данных', w / 2, h / 2);
+                        return;
+                    }
 
-                ctx.strokeStyle = gridColor;
-                ctx.lineWidth = 0.5;
-                for (let i = 0; i <= 3; i++) {
-                    const y = padding.top + (chartH / 3) * i;
-                    ctx.beginPath();
-                    ctx.moveTo(padding.left, y);
-                    ctx.lineTo(w - padding.right, y);
-                    ctx.stroke();
-                    const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
-                    ctx.fillStyle = textColor;
-                    ctx.font = '7px system-ui';
-                    ctx.textAlign = 'right';
-                    ctx.fillText(val.toFixed(0), padding.left - 3, y + 2);
-                }
+                    const padding = { top: 8, bottom: 14, left: 20, right: 4 };
+                    const chartW = w - padding.left - padding.right;
+                    const chartH = h - padding.top - padding.bottom;
 
-                ctx.beginPath();
-                ctx.strokeStyle = accentColor;
-                ctx.lineWidth = 2;
-                ctx.lineJoin = 'round';
-                ctx.lineCap = 'round';
+                    const weights = data.map(d => d.weight);
+                    const minWeight = Math.max(0, Math.min(...weights) - 1.5);
+                    const maxWeight = Math.max(...weights) + 1.5;
 
-                for (let i = 0; i < data.length; i++) {
-                    const x = padding.left + (i / (data.length - 1)) * chartW;
-                    const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
-                    if (i === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                for (let i = 0; i < data.length; i++) {
-                    const x = padding.left + (i / (data.length - 1)) * chartW;
-                    const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
-                    ctx.beginPath();
-                    ctx.arc(x, y, 3, 0, Math.PI * 2);
-                    ctx.fillStyle = accentColor;
-                    ctx.fill();
-                    ctx.strokeStyle = '#05070b';
-                    ctx.lineWidth = 1.2;
-                    ctx.stroke();
-                    if (i % 2 === 0 || i === data.length - 1) {
+                    ctx.strokeStyle = gridColor;
+                    ctx.lineWidth = 0.5;
+                    for (let i = 0; i <= 3; i++) {
+                        const y = padding.top + (chartH / 3) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(padding.left, y);
+                        ctx.lineTo(w - padding.right, y);
+                        ctx.stroke();
+                        const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
                         ctx.fillStyle = textColor;
                         ctx.font = '6px system-ui';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(data[i].date.slice(5), x, h - 2);
+                        ctx.textAlign = 'right';
+                        ctx.fillText(val.toFixed(0), padding.left - 2, y + 2);
                     }
-                }
+
+                    ctx.beginPath();
+                    ctx.strokeStyle = accentColor;
+                    ctx.lineWidth = 2;
+                    ctx.lineJoin = 'round';
+                    ctx.lineCap = 'round';
+
+                    for (let i = 0; i < data.length; i++) {
+                        const x = padding.left + (i / (data.length - 1)) * chartW;
+                        const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+
+                    for (let i = 0; i < data.length; i++) {
+                        const x = padding.left + (i / (data.length - 1)) * chartW;
+                        const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 3, 0, Math.PI * 2);
+                        ctx.fillStyle = accentColor;
+                        ctx.fill();
+                        ctx.strokeStyle = '#05070b';
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                        if (i % 2 === 0 || i === data.length - 1) {
+                            ctx.fillStyle = textColor;
+                            ctx.font = '5px system-ui';
+                            ctx.textAlign = 'center';
+                            ctx.fillText(data[i].date.slice(5), x, h - 2);
+                        }
+                    }
+                    chartRAF = null;
+                });
             }
 
             // ============================================================
-            // 8. FORECAST
+            // 9. FORECAST with BODY WEIGHT
             // ============================================================
             function renderForecast() {
                 const container = document.getElementById('forecastContainer');
@@ -2341,17 +2233,20 @@
                 if (saved) {
                     try {
                         const data = JSON.parse(saved);
+                        const bwNote = data.bodyWeight ? `⚖️ Вес тела: ${data.bodyWeight} кг` :
+                            '⚖️ Вес тела не учтён (нет данных)';
                         container.innerHTML = `
                             <div class="forecast-card">
-                                <div style="font-size:0.75rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
+                                <div style="font-size:0.7rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
                                 <div class="target">${data.target} ${data.unit || 'кг'}</div>
                                 <div class="date">Прогноз: ${data.forecastDate}</div>
                                 <div class="confidence">${data.confidence}</div>
                                 <div class="progress-bar"><div class="fill" style="width:${data.progress}%"></div></div>
-                                <div style="font-size:0.65rem;color:var(--text-muted);margin-top:3px;">
+                                <div style="font-size:0.6rem;color:var(--text-muted);margin-top:2px;">
                                     Текущий: ${data.current} ${data.unit || 'кг'} · ${data.progress}% до цели
                                 </div>
-                                ${data.weeksToGoal ? `<div style="font-size:0.65rem;color:var(--gold);margin-top:3px;">📊 ${data.weeksToGoal}</div>` : ''}
+                                ${data.weeksToGoal ? `<div style="font-size:0.6rem;color:var(--gold);margin-top:2px;">📊 ${data.weeksToGoal}</div>` : ''}
+                                <div class="bw-note">${bwNote}</div>
                             </div>
                         `;
                         return;
@@ -2364,25 +2259,44 @@
                 const ex = document.getElementById('forecastExSelect').value;
                 const target = parseFloat(document.getElementById('forecastTarget').value);
                 if (!ex || isNaN(target) || target <= 0) {
-                    showToast('❌ Выбери упражнение и введи цель', 1800);
+                    showToast('❌ Выбери упражнение и введи цель', 1600);
                     return;
                 }
                 const current = records[ex] ? records[ex].weight : 0;
-                if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 1800); return; }
-                if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 1800); return; }
+                if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 1600); return; }
+                if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 1600); return; }
 
+                const unit = getUnitForExercise(ex);
                 const isBW = bodyweightExercises.includes(ex);
-                const unit = isBW ? 'повторов' : 'кг';
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+
                 const diff = target - current;
                 const exSets = sets.filter(s => s.exercise === ex);
-                let avgProgress = isBW ? 2 : 2.5;
+
+                // Базовый темп прогрессии с учётом веса тела
+                let avgProgress = (unit === 'сек') ? 5 : (unit === 'повторов') ? 2 : 2.5;
+
+                // Корректировка для упражнений с весом тела
+                if (isBW) {
+                    if (currentWeight >= 90) avgProgress *= 0.7; // тяжелым тяжелее прогрессировать
+                    else if (currentWeight <= 65) avgProgress *= 1.3; // легким легче
+                } else {
+                    // Для упражнений с отягощениями учитываем относительную силу
+                    const relativeStrength = current / currentWeight;
+                    if (relativeStrength > 1.5) avgProgress *= 1.1;
+                    else if (relativeStrength < 0.8) avgProgress *= 0.9;
+                }
+
+                // Если есть исторические данные - используем их
                 if (exSets.length > 3) {
                     const sorted = exSets.sort((a, b) => new Date(a.date) - new Date(b.date));
                     const first = sorted[0];
                     const last = sorted[sorted.length - 1];
                     const weeks = Math.max(1, (new Date(last.date) - new Date(first.date)) / (7 * 24 * 60 * 60 * 1000));
                     const wDiff = last.weight - first.weight;
-                    avgProgress = Math.max(0.5, wDiff / weeks);
+                    const historicalAvg = Math.max(0.3, wDiff / weeks);
+                    // Смешиваем исторический и базовый темп (70/30)
+                    avgProgress = historicalAvg * 0.7 + avgProgress * 0.3;
                 }
 
                 const weeksNeeded = Math.ceil(diff / avgProgress);
@@ -2399,15 +2313,25 @@
                     weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; } else { confidence = 'Низкая (требуется больше данных) 📉';
                     weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
 
-                const data = { exercise: ex, target, current, unit, forecastDate: dateStr, confidence, progress,
-                    weeksToGoal };
+                const data = {
+                    exercise: ex,
+                    target,
+                    current,
+                    unit,
+                    forecastDate: dateStr,
+                    confidence,
+                    progress,
+                    weeksToGoal,
+                    bodyWeight: currentWeight,
+                    usedAvgProgress: Math.round(avgProgress * 10) / 10
+                };
                 localStorage.setItem('last_forecast', JSON.stringify(data));
                 renderForecast();
-                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr}`);
+                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr} (вес ${currentWeight} кг учтён)`);
             }
 
             // ============================================================
-            // 9. CHALLENGES
+            // 10. CHALLENGES
             // ============================================================
             function getWeekStart() {
                 const now = new Date();
@@ -2449,7 +2373,7 @@
                 saveChallenges();
                 renderChallenges();
                 updateChallengeBadge();
-                showToast('🎯 Новые челленджи на эту неделю!', 2000);
+                showToast('🎯 Новые челленджи на эту неделю!', 1800);
             }
 
             function updateChallenges() {
@@ -2594,7 +2518,7 @@
                     if (ch.completed && !ch.notified) {
                         ch.notified = true;
                         showAchievementToast('🎯', 'Челлендж завершён!', `${ch.name} — ${ch.reward}`);
-                        showToast(`🏆 ${ch.name} — ${ch.reward}`, 2500);
+                        showToast(`🏆 ${ch.name} — ${ch.reward}`, 2200);
                     }
                 }
                 saveChallenges();
@@ -2617,7 +2541,7 @@
                         <div class="ch-desc">${ch.desc}</div>
                         <div class="ch-progress"><div class="ch-progress-bar" style="width:${progress}%;background:${color};"></div></div>
                         <div class="ch-progress-text">${Math.round(progress)}% (${ch.progress}/${ch.target})</div>
-                        ${ch.completed ? '<div style="font-size:0.65rem;color:#54ff8f;margin-top:3px;">✅ Завершено!</div>' : ''}
+                        ${ch.completed ? '<div style="font-size:0.6rem;color:#54ff8f;margin-top:2px;">✅ Завершено!</div>' : ''}
                     `;
                     container.appendChild(div);
                 }
@@ -2635,7 +2559,7 @@
             }
 
             // ============================================================
-            // 10. REPORTS
+            // 11. REPORTS
             // ============================================================
             function renderReport() {
                 const container = document.getElementById('reportContainer');
@@ -2660,93 +2584,84 @@
                 const bwCount = bodyweightExercises.filter(ex => records[ex] && records[ex].weight > 0).length;
 
                 container.innerHTML = `
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
                         <div class="stat-box"><label>Подходов</label><div class="value">${totalSets}</div><div class="unit">за неделю</div></div>
                         <div class="stat-box"><label>Тоннаж</label><div class="value">${totalVolume}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Ср. вес</label><div class="value">${avgWeight.toFixed(1)}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Рекордов</label><div class="value">${recordsCount}</div><div class="unit">всего</div></div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);">
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
                             <span style="color:var(--text-muted);">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${bestEx}: ${maxRecord} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
                             <span style="color:var(--text-muted);">💪 Упражнений с весом тела</span>
                             <span style="font-weight:700;">${bwCount}/${bodyweightExercises.length}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
                             <span style="color:var(--text-muted);">📊 Изменение тоннажа</span>
                             <span style="font-weight:700;color:${volChange >= 0 ? '#54ff8f' : '#ff315c'};">${volChange >= 0 ? '↑' : '↓'} ${Math.abs(volChange).toFixed(0)}%</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
                             <span style="color:var(--text-muted);">🎯 Челленджи</span>
                             <span style="font-weight:700;">${challenges.filter(c => c.week === weekStart && c.completed).length}/${challenges.filter(c => c.week === weekStart).length}</span>
                         </div>
                     </div>
-                    <div style="margin-top:8px;text-align:center;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.4px;">📅 Отчёт за неделю ${weekStart}</div>
+                    <div style="margin-top:6px;text-align:center;font-size:0.5rem;color:var(--text-muted);letter-spacing:0.3px;">📅 Отчёт за неделю ${weekStart}</div>
                 `;
             }
 
             // ============================================================
-            // 11. AI TRAINER
+            // 12. AI TRAINER
             // ============================================================
             function getFitnessLevel() {
-                const recordsWeight = Object.values(records).filter(r => r.weight > 0);
-                const maxWeight = recordsWeight.length > 0 ? Math.max(...recordsWeight.map(r => r.weight)) : 0;
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
+                const bmi = currentWeight / ((currentHeight / 100) ** 2);
+                let bodyType = 'среднее';
+                if (bmi < 18.5) bodyType = 'лёгкое';
+                else if (bmi >= 25) bodyType = 'тяжёлое';
 
-                let strengthScore = 0;
-                const legEx = ['жим ногами', 'присед', 'становая тяга', 'присед со штангой'];
-                const chestEx = ['жим от груди', 'жим гантелей лёжа', 'жим в наклоне'];
-                const backEx = ['тяга штанги в наклоне', 'подтягивания', 'тяга верхнего блока'];
-                const shoulderEx = ['жим стоя', 'разводка гантелей в стороны', 'жим гантелей сидя'];
-
-                for (let ex of legEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
-                            200) strengthScore += 20;
-                        else if (w >= 150) strengthScore += 15;
-                        else if (w >= 100) strengthScore += 10;
-                        else if (w >= 60) strengthScore += 5; } }
-                for (let ex of chestEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
-                            120) strengthScore += 15;
-                        else if (w >= 80) strengthScore += 10;
-                        else if (w >= 50) strengthScore += 5; } }
-                for (let ex of backEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
-                            100) strengthScore += 12;
-                        else if (w >= 60) strengthScore += 8;
-                        else if (w >= 30) strengthScore += 4; } }
-                for (let ex of shoulderEx) { if (records[ex] && records[ex].weight > 0) { const w = records[ex].weight; if (w >=
-                            80) strengthScore += 10;
-                        else if (w >= 50) strengthScore += 6;
-                        else if (w >= 30) strengthScore += 3; } }
-
-                let enduranceScore = 0;
-                const bwEx = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания'];
-                for (let ex of bwEx) {
+                const strengthExercises = ['жим от груди', 'присед со штангой', 'становая тяга'];
+                let strengthScores = {};
+                for (let ex of strengthExercises) {
                     if (records[ex] && records[ex].weight > 0) {
-                        const w = records[ex].weight;
-                        if (ex === 'отжимания от пола' && w >= 50) enduranceScore += 15;
-                        else if (ex === 'отжимания от пола' && w >= 30) enduranceScore += 10;
-                        else if (ex === 'отжимания от пола' && w >= 15) enduranceScore += 5;
-                        else if (ex === 'подтягивания' && w >= 15) enduranceScore += 20;
-                        else if (ex === 'подтягивания' && w >= 8) enduranceScore += 12;
-                        else if (ex === 'подтягивания' && w >= 3) enduranceScore += 5;
-                        else if (ex === 'берпи' && w >= 30) enduranceScore += 15;
-                        else if (ex === 'берпи' && w >= 15) enduranceScore += 8;
-                        else if (ex === 'берпи' && w >= 5) enduranceScore += 3;
-                        else if (ex === 'планка' && w >= 120) enduranceScore += 10;
-                        else if (ex === 'скручивания' && w >= 50) enduranceScore += 8;
+                        strengthScores[ex] = records[ex].weight / currentWeight;
                     }
                 }
+                const avgStrength = Object.values(strengthScores).length > 0 ?
+                    Object.values(strengthScores).reduce((a, b) => a + b, 0) / Object.values(strengthScores).length :
+                    0;
 
-                const allWeeklySets = getAllWeeklySets();
-                const totalSets = allWeeklySets.length;
-                let volumeScore = 0;
-                if (totalSets >= 50) volumeScore = 25;
-                else if (totalSets >= 35) volumeScore = 18;
-                else if (totalSets >= 20) volumeScore = 10;
-                else if (totalSets >= 10) volumeScore = 5;
+                const enduranceExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка'];
+                let enduranceScores = {};
+                for (let ex of enduranceExercises) {
+                    if (records[ex] && records[ex].weight > 0) {
+                        let val = records[ex].weight;
+                        if (ex === 'планка') {
+                            enduranceScores[ex] = Math.min(1, val / 120);
+                        } else {
+                            let target = 50;
+                            if (ex === 'подтягивания') target = 15;
+                            else if (ex === 'берпи') target = 30;
+                            enduranceScores[ex] = Math.min(1, val / target);
+                        }
+                    }
+                }
+                const avgEndurance = Object.values(enduranceScores).length > 0 ?
+                    Object.values(enduranceScores).reduce((a, b) => a + b, 0) / Object.values(enduranceScores).length :
+                    0;
 
-                const totalScore = Math.min(100, strengthScore + enduranceScore + volumeScore);
+                let athleteType = 'сбалансированный';
+                if (avgStrength > 1.2 && avgEndurance < 0.4) athleteType = 'силовой';
+                else if (avgEndurance > 0.7 && avgStrength < 0.8) athleteType = 'выносливый';
+                else if (avgStrength > 1.0 && avgEndurance > 0.6) athleteType = 'элитный';
+                else if (avgStrength < 0.5 && avgEndurance < 0.3) athleteType = 'новичок';
+
+                const totalScore = Math.min(100, (avgStrength * 40 + avgEndurance * 40 + (Object.keys(records).filter(k =>
+                    records[k].weight > 0).length / 57) * 20));
+
                 let level = 'Начинающий 🏃';
                 if (totalScore >= 85) level = 'Элитный 💎';
                 else if (totalScore >= 70) level = 'Продвинутый 🔥';
@@ -2754,127 +2669,145 @@
                 else if (totalScore >= 30) level = 'Начинающий 🏃';
 
                 let focus = 'сбалансированная';
-                if (strengthScore > enduranceScore * 1.5 && strengthScore > volumeScore * 1.5) focus = 'сила 🏋️';
-                else if (enduranceScore > strengthScore * 1.5 && enduranceScore > volumeScore * 1.5) focus =
-                'выносливость 🏃';
-                else if (volumeScore > strengthScore * 1.3 && volumeScore > enduranceScore * 1.3) focus = 'объём 📊';
+                if (athleteType === 'силовой') focus = 'сила 🏋️';
+                else if (athleteType === 'выносливый') focus = 'выносливость 🏃';
+                else if (athleteType === 'элитный') focus = 'максимальная производительность 🔥';
 
                 let weakPoints = [];
-                if (strengthScore < 20) weakPoints.push('💪 сила');
-                if (enduranceScore < 15) weakPoints.push('🏃 выносливость');
-                if (volumeScore < 10) weakPoints.push('📊 объём');
-                const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0);
-                if (exWithRecords.length < 10) weakPoints.push('🎯 разнообразие');
+                if (avgStrength < 0.8) weakPoints.push('💪 сила');
+                if (avgEndurance < 0.4) weakPoints.push('🏃 выносливость');
+                if (Object.keys(records).filter(k => records[k].weight > 0).length < 10) weakPoints.push('🎯 разнообразие');
+                if (bodyType === 'тяжёлое' && avgEndurance < 0.5) weakPoints.push('⚖️ лишний вес (выносливость)');
+                if (bodyType === 'лёгкое' && avgStrength < 0.7) weakPoints.push('⚖️ недостаток массы (сила)');
 
                 return {
                     level,
-                    totalScore,
-                    strengthScore,
-                    enduranceScore,
-                    volumeScore,
+                    totalScore: Math.round(totalScore),
+                    strengthScore: Math.round(avgStrength * 100),
+                    enduranceScore: Math.round(avgEndurance * 100),
                     focus,
-                    maxWeight,
-                    totalSets,
+                    maxWeight: Math.max(...Object.values(records).map(r => r.weight), 0),
+                    totalSets: getAllWeeklySets().length,
                     weakPoints,
-                    exWithRecordsCount: exWithRecords.length
+                    exWithRecordsCount: Object.keys(records).filter(k => records[k].weight > 0).length,
+                    bodyType,
+                    currentWeight,
+                    athleteType,
+                    avgStrength,
+                    avgEndurance
                 };
             }
 
             function generateAIProgram() {
                 const msg = document.getElementById('aiMessage');
                 const analysis = getFitnessLevel();
-                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const { athleteType, bodyType, currentWeight, avgStrength, avgEndurance } = analysis;
 
-                let days = ['Понедельник', 'Среда', 'Пятница'];
+                let days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
                 let exercises = [];
+                let focus = '';
 
-                if (analysis.focus.includes('сила')) {
+                if (athleteType === 'силовой') {
+                    focus = 'Силовая тренировка (нейромышечная адаптация)';
                     exercises = [
-                        ['Присед со штангой', '5×5', '85% от 1ПМ'],
-                        ['Жим от груди', '5×5', '85% от 1ПМ'],
-                        ['Становая тяга', '3×5', '85% от 1ПМ'],
-                        ['Подтягивания', '3×макс', 'вес тела'],
+                        ['Присед со штангой', '5×5', '85-90% от 1ПМ'],
+                        ['Жим от груди', '5×5', '85-90% от 1ПМ'],
+                        ['Становая тяга', '3×5', '85-90% от 1ПМ'],
+                        ['Тяга штанги в наклоне', '4×6', '80% от 1ПМ'],
                         ['Жим стоя', '4×6', '80% от 1ПМ']
                     ];
-                } else if (analysis.focus.includes('выносливость')) {
+                } else if (athleteType === 'выносливый') {
+                    focus = 'Функциональная выносливость + работа с весом тела';
                     exercises = [
                         ['Отжимания от пола', '4×15-20', 'вес тела'],
                         ['Подтягивания', '4×8-12', 'вес тела'],
                         ['Присед', '4×12-15', '70% от 1ПМ'],
-                        ['Планка', '4×45-60с', 'вес тела'],
+                        ['Планка', '4×45-60с', 'статика'],
                         ['Берпи', '4×10-15', 'вес тела']
                     ];
-                } else {
+                } else if (athleteType === 'элитный') {
+                    focus = 'Комбинированная: сила + выносливость (периодизация)';
                     exercises = [
-                        ['Жим от груди', '4×8-10', '80% от 1ПМ'],
-                        ['Присед', '4×8-10', '80% от 1ПМ'],
-                        ['Тяга штанги в наклоне', '4×8-10', '80% от 1ПМ'],
-                        ['Жим гантелей сидя', '3×10-12', '75% от 1ПМ'],
-                        ['Подъём на бицепс', '3×10-12', '70% от 1ПМ']
+                        ['Присед со штангой', '4×8', '75-80% от 1ПМ'],
+                        ['Жим от груди', '4×8', '75-80% от 1ПМ'],
+                        ['Становая тяга', '4×6', '80% от 1ПМ'],
+                        ['Подтягивания', '3×макс', 'вес тела'],
+                        ['Отжимания с хлопком', '3×10-15', 'взрывные']
+                    ];
+                } else {
+                    focus = 'Базовая гипертрофия + освоение техники';
+                    exercises = [
+                        ['Жим от груди', '3×8-10', '70% от 1ПМ'],
+                        ['Присед', '3×8-10', '70% от 1ПМ'],
+                        ['Тяга верхнего блока', '3×10-12', '60% от 1ПМ'],
+                        ['Жим гантелей сидя', '3×10-12', '60% от 1ПМ'],
+                        ['Планка', '3×30-45с', 'статика']
                     ];
                 }
 
-                let bwExercises = [];
-                if (records['отжимания от пола'] && records['отжимания от пола'].weight > 0) {
-                    bwExercises.push(['Отжимания', '3×макс', `${records['отжимания от пола'].weight} повт.`]);
-                }
-                if (records['подтягивания'] && records['подтягивания'].weight > 0) {
-                    bwExercises.push(['Подтягивания', '3×макс', `${records['подтягивания'].weight} повт.`]);
-                }
-                if (records['берпи'] && records['берпи'].weight > 0) {
-                    bwExercises.push(['Берпи', '3×макс', `${records['берпи'].weight} повт.`]);
+                if (bodyType === 'тяжёлое') {
+                    if (!exercises.some(e => e[0] === 'Отжимания от пола')) {
+                        exercises.splice(1, 0, ['Отжимания от пола', '3×10-15', 'вес тела']);
+                    }
+                    if (!exercises.some(e => e[0] === 'Планка')) {
+                        exercises.push(['Планка', '3×30-45с', 'статика']);
+                    }
+                    exercises = exercises.map(e => {
+                        if (e[0] === 'Присед со штангой' || e[0] === 'Присед') {
+                            return ['Жим ногами', e[1], e[2]];
+                        }
+                        return e;
+                    });
+                } else if (bodyType === 'лёгкое') {
+                    if (!exercises.some(e => e[0] === 'Становая тяга')) {
+                        exercises.push(['Становая тяга', '3×8', '75% от 1ПМ']);
+                    }
+                    if (!exercises.some(e => e[0] === 'Жим от груди')) {
+                        exercises.splice(0, 0, ['Жим от груди', '4×8-10', '75% от 1ПМ']);
+                    }
                 }
 
-                let intensity = '';
-                if (analysis.level.includes('Элитный')) intensity = '🔴 Высокая, 5-6 дней/неделю';
-                else if (analysis.level.includes('Продвинутый')) intensity = '🟡 Средняя-высокая, 4-5 дней/неделю';
-                else if (analysis.level.includes('Средний')) intensity = '🟢 Средняя, 3-4 дня/неделю';
-                else intensity = '🟢 Лёгкая-средняя, 3 дня/неделю';
+                let progressionAdvice = '';
+                if (avgStrength < 0.6) progressionAdvice = 'Сосредоточься на технике, увеличивай вес на 2-3 кг каждую неделю.';
+                else if (avgStrength < 1.0) progressionAdvice = 'Добавляй по 2-5 кг в базовых упражнениях раз в 1-2 недели.';
+                else progressionAdvice = 'Используй микро-прогрессию (0.5-1 кг) и периодизацию нагрузок.';
 
-                let weakAdvice = '';
-                if (analysis.weakPoints.length > 0) {
-                    weakAdvice = '🎯 Слабые места: ' + analysis.weakPoints.join(', ');
-                }
-
+                const weekDays = days.slice(0, 4);
                 msg.innerHTML = `
-                    <div style="margin-bottom:8px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+                    <div style="margin-bottom:6px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;">
                             <span style="font-weight:800;color:var(--cyan);">🤖 Уровень: ${analysis.level}</span>
-                            <span style="font-weight:800;color:var(--cyan);">📊 Оценка: ${analysis.totalScore}/100</span>
+                            <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
                         </div>
-                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:3px;font-weight:500;">
-                            <span>💪 Сила: ${analysis.strengthScore} · 🏃 Выносливость: ${analysis.enduranceScore} · 📊 Объём: ${analysis.volumeScore}</span>
+                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                            <span>💪 Сила: ${analysis.strengthScore} · 🏃 Выносливость: ${analysis.enduranceScore}</span>
                         </div>
-                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
-                            <span>⚖️ Вес тела: ${currentWeight} кг · 🔥 ${intensity}</span>
+                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
+                            <span>⚖️ Вес: ${currentWeight} кг · 🧬 Тип: ${analysis.athleteType}</span>
                         </div>
-                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
-                            <span>🎯 Фокус: ${analysis.focus}</span>
+                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
+                            <span>🎯 Фокус: ${focus}</span>
                         </div>
-                        ${weakAdvice ? `<div style="font-size:0.7rem;color:var(--gold);margin-top:2px;font-weight:600;">${weakAdvice}</div>` : ''}
-                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
-                            <span>📋 Всего упражнений с рекордами: ${analysis.exWithRecordsCount}/${exerciseList.length}</span>
+                        ${analysis.weakPoints.length > 0 ? `<div style="font-size:0.65rem;color:var(--gold);margin-top:1px;font-weight:600;">🎯 Работай над: ${analysis.weakPoints.join(', ')}</div>` : ''}
+                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
+                            <span>📋 Всего упражнений: ${analysis.exWithRecordsCount}/${exerciseList.length}</span>
                         </div>
                     </div>
-                    <div style="font-size:0.6rem;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;">📋 Программа на неделю</div>
-                    ${days.map((day, i) => `
+                    <div style="font-size:0.55rem;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">📋 Программа на неделю (4 дня)</div>
+                    ${weekDays.map((day, i) => `
                         <div class="ai-program">
                             <div class="day">${day}</div>
                             ${exercises.map(ex => `
                                 <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
                             `).join('')}
-                            ${bwExercises.length > 0 && i === 0 ? bwExercises.map(ex => `
-                                <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
-                            `).join('') : ''}
-                            <div class="exercise" style="color:var(--text-muted);font-size:0.65rem;margin-top:3px;">💡 Разминка 10 мин, заминка 5 мин</div>
+                            <div class="exercise" style="color:var(--text-muted);font-size:0.6rem;margin-top:2px;">💡 Разминка 10 мин, заминка 5 мин</div>
                         </div>
                     `).join('')}
-                    <div style="font-size:0.65rem;color:var(--text-muted);margin-top:5px;font-weight:500;">
-                        💡 Увеличивай вес на 2-5 кг каждую неделю. Отдыхай 1-2 дня между тренировками.
-                        ${analysis.weakPoints.length > 0 ? `🎯 Работай над: ${analysis.weakPoints.join(', ')}` : ''}
+                    <div style="font-size:0.6rem;color:var(--text-muted);margin-top:4px;font-weight:500;">
+                        💡 ${progressionAdvice}
                     </div>
                 `;
-                showToast('📋 Программа сгенерирована!', 1800);
+                showToast('📋 Программа сгенерирована!', 1600);
             }
 
             function getAIAdvice() {
@@ -2890,16 +2823,21 @@
                 const bestEx = Object.keys(records).filter(k => records[k].weight === maxWeight)[0] || 'упражнение';
                 const totalSets = getAllWeeklySets().length;
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
-                const ratio = maxWeight > 0 && currentWeight > 0 ? (maxWeight / currentWeight) : 0;
 
-                let advice = `🏅 Лучший рекорд: ${bestEx} — ${maxWeight} кг. `;
+                let advice = `🏅 Лучший рекорд: ${bestEx} — ${maxWeight} ${getUnitForExercise(bestEx)}. `;
                 advice += `📊 Подходов за неделю: ${totalSets}. `;
                 advice += `⚖️ Вес тела: ${currentWeight} кг. `;
                 advice += `📈 Уровень: ${analysis.level}. `;
 
-                if (ratio > 2.5) advice += '🔥 Отличное соотношение силы к весу!';
-                else if (ratio > 1.8) advice += '💪 Хорошее соотношение силы и веса.';
-                else advice += '📈 Работай над силой относительно веса тела.';
+                if (analysis.athleteType === 'силовой') {
+                    advice += '💪 Ты явно силовой атлет. Добавь больше упражнений на выносливость (отжимания, берпи, планка) для баланса.';
+                } else if (analysis.athleteType === 'выносливый') {
+                    advice += '🏃 Отличная выносливость! Поработай над силой: добавь базовые упражнения с отягощениями (жим, присед, становая).';
+                } else if (analysis.athleteType === 'элитный') {
+                    advice += '🔥 Ты на вершине! Поддерживай форму с помощью периодизации и микро-прогрессии.';
+                } else {
+                    advice += '📈 Начни с освоения техники базовых упражнений. Увеличивай нагрузку постепенно.';
+                }
 
                 if (analysis.weakPoints.length > 0) {
                     advice += ' 🎯 Слабые места: ' + analysis.weakPoints.join(', ');
@@ -2912,7 +2850,7 @@
                 }
 
                 msg.innerHTML = `💡 ${advice}`;
-                showToast('🤖 Совет готов!', 1400);
+                showToast('🤖 Совет готов!', 1200);
             }
 
             function analyzeFitness() {
@@ -2922,83 +2860,85 @@
                 const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0);
 
                 let strengthLabel = '🔴 Низкий';
-                if (analysis.strengthScore >= 40) strengthLabel = '🟢 Отличный!';
-                else if (analysis.strengthScore >= 25) strengthLabel = '🟡 Хороший';
-                else if (analysis.strengthScore >= 12) strengthLabel = '🟠 Средний';
+                if (analysis.strengthScore >= 70) strengthLabel = '🟢 Отличный!';
+                else if (analysis.strengthScore >= 45) strengthLabel = '🟡 Хороший';
+                else if (analysis.strengthScore >= 20) strengthLabel = '🟠 Средний';
 
                 let enduranceLabel = '🔴 Низкий';
-                if (analysis.enduranceScore >= 30) enduranceLabel = '🟢 Отличный!';
-                else if (analysis.enduranceScore >= 18) enduranceLabel = '🟡 Хороший';
-                else if (analysis.enduranceScore >= 8) enduranceLabel = '🟠 Средний';
+                if (analysis.enduranceScore >= 70) enduranceLabel = '🟢 Отличный!';
+                else if (analysis.enduranceScore >= 45) enduranceLabel = '🟡 Хороший';
+                else if (analysis.enduranceScore >= 20) enduranceLabel = '🟠 Средний';
 
                 let recs = [];
-                if (analysis.strengthScore < 25) recs.push('💪 Добавь базовые: присед, жим, становая');
-                if (analysis.enduranceScore < 18) recs.push('🏃 Добавь отжимания, подтягивания, берпи');
-                if (analysis.totalSets < 20) recs.push('📊 Делай 20-30 подходов в неделю');
-                if (exWithRecords.length < 10) recs.push('🎯 Попробуй новые упражнения из списка 57');
+                if (analysis.strengthScore < 45) recs.push('💪 Добавь базовые: присед, жим, становая с прогрессией веса.');
+                if (analysis.enduranceScore < 45) recs.push('🏃 Добавь отжимания, подтягивания, берпи, планку.');
+                if (analysis.totalSets < 20) recs.push('📊 Делай 20-30 подходов в неделю для роста.');
+                if (exWithRecords.length < 10) recs.push('🎯 Попробуй новые упражнения из списка 57 для разнообразия.');
+                if (analysis.bodyType === 'тяжёлое' && analysis.enduranceScore < 40)
+                    recs.push('⚖️ Работай над выносливостью для улучшения композиции тела.');
+                if (analysis.bodyType === 'лёгкое' && analysis.strengthScore < 40)
+                    recs.push('⚖️ Набирай массу с помощью базовых упражнений и профицита калорий.');
                 if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
 
                 msg.innerHTML = `
-                    <div style="margin-bottom:8px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
+                    <div style="margin-bottom:6px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;">
                             <span style="font-weight:800;color:var(--cyan);">📊 Уровень: ${analysis.level}</span>
                             <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
                         </div>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
-                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">💪 Сила</div>
-                            <div style="font-size:1.2rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
-                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:6px;">
+                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">💪 Сила</div>
+                            <div style="font-size:1.1rem;font-weight:800;color:var(--cyan);">${analysis.strengthScore}</div>
+                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
-                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🏃 Выносливость</div>
-                            <div style="font-size:1.2rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
-                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">🏃 Выносливость</div>
+                            <div style="font-size:1.1rem;font-weight:800;color:var(--purple);">${analysis.enduranceScore}</div>
+                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06);">
-                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">📊 Объём</div>
-                            <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">${analysis.volumeScore}</div>
-                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${analysis.totalSets} подходов</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">⚖️ Телосложение</div>
+                            <div style="font-size:1.1rem;font-weight:800;color:var(--gold);">${analysis.bodyType}</div>
+                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${analysis.currentWeight} кг</div>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);margin-bottom:6px;">
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-bottom:4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;">
                             <span style="color:var(--text-muted);font-weight:500;">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${analysis.maxWeight} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
-                            <span style="color:var(--text-muted);font-weight:500;">⚖️ Вес тела</span>
-                            <span style="font-weight:700;">${currentWeight} кг</span>
+                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
+                            <span style="color:var(--text-muted);font-weight:500;">🎯 Тип атлета</span>
+                            <span style="font-weight:700;">${analysis.athleteType}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
-                            <span style="color:var(--text-muted);font-weight:500;">🎯 Упражнений с рекордами</span>
+                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
+                            <span style="color:var(--text-muted);font-weight:500;">📋 Упражнений с рекордами</span>
                             <span style="font-weight:700;">${exWithRecords.length}/${exerciseList.length}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:3px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
                             <span style="color:var(--text-muted);font-weight:500;">🎯 Фокус</span>
                             <span style="font-weight:700;">${analysis.focus}</span>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border-left:3px solid var(--gold);">
-                        <div style="font-weight:800;font-size:0.8rem;color:var(--gold);">📋 Рекомендации</div>
-                        ${recs.map(r => `<div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
-                        <div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• 🎯 Цель: запиши рекорды в 10+ упражнениях</div>
+                    <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border-left:3px solid var(--gold);">
+                        <div style="font-weight:700;font-size:0.75rem;color:var(--gold);">📋 Рекомендации</div>
+                        ${recs.map(r => `<div style="font-size:0.65rem;color:var(--text-secondary);padding:1px 0;font-weight:500;">• ${r}</div>`).join('')}
                     </div>
-                    <div style="font-size:0.45rem;color:var(--text-muted);margin-top:6px;text-align:center;letter-spacing:0.4px;font-weight:600;">📊 Анализ на основе 57 упражнений</div>
                 `;
-                showToast('📊 Анализ завершён!', 1400);
+                showToast('📊 Анализ завершён!', 1200);
             }
 
             // ============================================================
-            // 12. CALCULATOR
+            // 13. CALCULATOR
             // ============================================================
             function calc1RM() {
                 const weight = parseFloat(document.getElementById('calcWeight').value);
                 const reps = parseInt(document.getElementById('calcReps').value);
                 const formula = document.getElementById('calcFormula').value;
                 if (isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-                    showToast('❌ Введи корректные данные', 1800);
+                    showToast('❌ Введи корректные данные', 1600);
                     return;
                 }
                 let rm = 0,
@@ -3034,7 +2974,7 @@
             }
 
             // ============================================================
-            // 13. NAVIGATION
+            // 14. NAVIGATION
             // ============================================================
             window.navigateTo = function(pageId) {
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -3048,10 +2988,10 @@
 
                 closeMenu();
 
-                if (navigator.vibrate) navigator.vibrate(6);
+                if (navigator.vibrate) navigator.vibrate(4);
 
                 if (pageId === 'progress') { renderProgress();
-                    setTimeout(updateChart, 80); }
+                    updateChart(); }
                 if (pageId === 'forecast') renderForecast();
                 if (pageId === 'reports') renderReport();
                 if (pageId === 'challenges') renderChallenges();
@@ -3061,12 +3001,12 @@
                 if (pageId === 'ai') {
                     const analysis = getFitnessLevel();
                     document.getElementById('aiStatus').textContent =
-                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Объём: ${analysis.volumeScore}`;
+                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Тип: ${analysis.athleteType}`;
                 }
             };
 
             // ============================================================
-            // 14. BLOCKCHAIN HASH
+            // 15. BLOCKCHAIN HASH
             // ============================================================
             function generateHash(str) {
                 let hash = 0;
@@ -3093,22 +3033,35 @@
             }
 
             // ============================================================
-            // 15. INIT
+            // 16. INIT
             // ============================================================
             function init() {
                 loadData();
                 updateExerciseSelects();
+
+                // Category tabs click handler
+                document.querySelectorAll('.category-tab').forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        currentCategory = this.dataset.category;
+                        saveCategory();
+                        renderRecords();
+                        // Update active state
+                        document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+
                 renderRecords();
                 renderTodaySets();
                 renderProgress();
                 renderChallenges();
                 renderForecast();
                 renderReport();
-                // отложенный рендер графика
-                setTimeout(updateChart, 100);
+                updateChart();
                 updateChallengeBadge();
                 updateTodayInfo();
                 updateBlockHash();
+                renderCategoryTabs();
 
                 const weekStart = getWeekStart();
                 if (!challenges.some(c => c.week === weekStart)) generateChallenges();
@@ -3121,7 +3074,7 @@
                     const name = document.getElementById('recordExSelect').value;
                     const weight = parseFloat(document.getElementById('recordExWeight').value);
                     if (!name || isNaN(weight) || weight <= 0) {
-                        showToast('❌ Выбери упражнение и введи вес', 1800);
+                        showToast('❌ Выбери упражнение и введи вес', 1600);
                         return;
                     }
                     records[name] = { weight, date: new Date().toISOString().slice(0, 10) };
@@ -3129,8 +3082,9 @@
                     renderRecords();
                     updateChallenges();
                     updateBlockHash();
+                    renderCategoryTabs();
                     document.getElementById('recordExWeight').value = '';
-                    showToast(`✅ ${name}: ${weight} ${bodyweightExercises.includes(name) ? 'повторов' : 'кг'}`);
+                    showToast(`✅ ${name}: ${weight} ${getUnitForExercise(name)}`);
                 });
 
                 document.getElementById('addSetBtn').addEventListener('click', addSet);
@@ -3158,24 +3112,22 @@
                 document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter')
                     calc1RM(); });
 
-                // Таймер проверки дня
                 setInterval(checkNewDay, 60000);
 
-                // Оптимизированный resize с throttle
                 let resizeTimer;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(() => {
                         updateChart();
-                    }, 200);
+                    }, 150);
                 });
 
                 const analysis = getFitnessLevel();
                 document.getElementById('aiStatus').textContent =
-                    `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Объём: ${analysis.volumeScore}`;
+                    `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Тип: ${analysis.athleteType}`;
 
-                setTimeout(calc1RM, 200);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — оптимизированная версия');
+                setTimeout(calc1RM, 150);
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.5 с категориями и учётом веса');
             }
 
             document.addEventListener('DOMContentLoaded', init);
