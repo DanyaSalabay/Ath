@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           ОПТИМИЗИРОВАННЫЙ СТИЛЬ + GPU-АНИМАЦИИ + КАТЕГОРИИ
+           КРУПНЫЙ ТЕЛЕФОННЫЙ ДИЗАЙН + ГРАФИКИ УПРАЖНЕНИЙ
            ============================================================ */
         * {
             margin: 0;
@@ -23,12 +23,12 @@
 
         :root {
             --bg-deep: #04060a;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-input: rgba(255, 255, 255, 0.05);
-            --border-subtle: rgba(255, 255, 255, 0.06);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-input: rgba(255, 255, 255, 0.07);
+            --border-subtle: rgba(255, 255, 255, 0.08);
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.78);
-            --text-muted: rgba(255, 255, 255, 0.35);
+            --text-secondary: rgba(255, 255, 255, 0.82);
+            --text-muted: rgba(255, 255, 255, 0.45);
             --cyan: #00f0ff;
             --purple: #8b5cf6;
             --gold: #fbbf24;
@@ -36,1314 +36,414 @@
             --neon-green: #4ade80;
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
             --radius-card: 24px;
-            --radius-sm: 14px;
+            --radius-sm: 16px;
+            --font-base: 18px;
+            --spacing-base: 20px;
+            --btn-height: 56px;
+            --input-height: 52px;
+            --card-padding: 24px;
         }
 
-        html { scroll-behavior: smooth; }
-
+        html { scroll-behavior: smooth; font-size: var(--font-base); }
         body {
-            background: var(--bg-deep);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            overflow-x: hidden;
-            padding: 0;
-            background-image:
-                radial-gradient(ellipse at 20% 30%, rgba(0, 240, 255, 0.03) 0%, transparent 55%),
-                radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
-            background-attachment: fixed;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background: var(--bg-deep); color: var(--text-primary); min-height: 100vh; display: flex;
+            justify-content: center; overflow-x: hidden; padding: 0;
+            background-image: radial-gradient(ellipse at 20% 30%, rgba(0,240,255,0.04) 0%, transparent 55%),
+                              radial-gradient(ellipse at 80% 70%, rgba(139,92,246,0.04) 0%, transparent 50%);
+            background-attachment: fixed; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            font-size: var(--font-base);
         }
-
         body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.006) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.006) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
+            content: ''; position: fixed; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.006) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.006) 1px, transparent 1px);
+            background-size: 40px 40px; pointer-events: none; z-index: 0;
         }
+        .app { max-width: 560px; width: 100%; padding: var(--spacing-base) var(--spacing-base) 100px; position: relative; z-index: 1; }
 
-        .app {
-            max-width: 1120px;
-            width: 100%;
-            padding: 16px clamp(12px, 2.5vw, 28px) 90px;
-            position: relative;
-            z-index: 1;
-        }
-
-        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.25); border-radius: 10px; }
 
-        /* ---------- ANIMATIONS (GPU) ---------- */
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.05); }
-            50% { box-shadow: 0 0 40px rgba(0, 240, 255, 0.15); }
-        }
+        /* ---------- ANIMATIONS ---------- */
+        @keyframes fade-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         .card, .exercise-card, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card {
-            animation: fade-in 0.4s ease both;
-            will-change: transform, opacity;
+            animation: fade-in 0.4s ease both; will-change: transform, opacity;
         }
         .card:nth-child(2) { animation-delay: 0.08s; }
-        .exercise-card:nth-child(n+4) { animation-delay: 0.04s; }
-        .card.active-glow { animation: pulse-glow 3s ease-in-out infinite; }
         .btn { transition: transform 0.15s ease, box-shadow 0.15s ease; will-change: transform; }
 
         /* ---------- HEADER ---------- */
         .header {
-            position: sticky;
-            top: 0;
-            z-index: 70;
-            margin: 0 0 20px;
-            padding: 12px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            background: rgba(8, 12, 19, 0.88);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            will-change: transform;
+            position: sticky; top: 0; z-index: 70; margin: 0 0 var(--spacing-base); padding: 16px var(--spacing-base);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-card);
+            background: rgba(8,12,19,0.88); box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: space-between; will-change: transform;
         }
         .header::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            background: linear-gradient(120deg, rgba(255, 61, 0, 0.15), transparent 24%, rgba(0, 231, 255, 0.15) 51%, transparent 76%, rgba(185, 255, 0, 0.1));
-            opacity: 0.3;
-            z-index: -1;
+            content: ''; position: absolute; inset: -1px; border-radius: inherit;
+            background: linear-gradient(120deg, rgba(255,61,0,0.15), transparent 24%, rgba(0,231,255,0.15) 51%, transparent 76%, rgba(185,255,0,0.1));
+            opacity: 0.3; z-index: -1;
         }
         .header h1 {
-            font: 900 clamp(1.1rem, 3.2vw, 3.4rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.04em;
+            font: 900 clamp(1.6rem, 5vw, 3.6rem)/0.85 'Impact','Arial Black',Inter,sans-serif;
+            text-transform: uppercase; letter-spacing: -0.03em;
             background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 16px rgba(255, 61, 0, 0.1));
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 16px rgba(255,61,0,0.1));
+            display: flex; align-items: center; gap: 6px;
         }
-        .header h1 .sub {
-            font-size: 0.3em;
-            font-weight: 300;
-            letter-spacing: 0.12em;
-            -webkit-text-fill-color: rgba(255, 255, 255, 0.25);
-            background: none;
-            text-transform: uppercase;
-        }
-        .header h1 .hash-badge {
-            font-size: 0.18em;
-            font-weight: 800;
-            -webkit-text-fill-color: var(--neon-green);
-            background: rgba(74, 222, 128, 0.08);
-            padding: 0.08em 0.5em;
-            border-radius: 40px;
-            border: 1px solid rgba(74, 222, 128, 0.12);
-            letter-spacing: 0.04em;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .header-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            flex-shrink: 0;
-            background: var(--bg-card);
-        }
+        .header h1 .sub { font-size: 0.35em; font-weight: 300; letter-spacing: 0.12em; -webkit-text-fill-color: rgba(255,255,255,0.2); background: none; text-transform: uppercase; }
+        .header h1 .hash-badge { font-size: 0.2em; font-weight: 800; -webkit-text-fill-color: var(--neon-green); background: rgba(74,222,128,0.08); padding: 0.08em 0.6em; border-radius: 40px; border: 1px solid rgba(74,222,128,0.12); letter-spacing: 0.04em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo { width: 48px; height: 48px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; background: var(--bg-card); }
         .header-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .header-actions {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        .header .version {
-            border: 1px solid rgba(0, 231, 255, 0.15);
-            background: rgba(0, 231, 255, 0.05);
-            color: #b9f8ff;
-            padding: 3px 10px;
-            border-radius: 999px;
-            font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .header .version .dot {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: var(--neon-green);
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
-        }
-        .btn-reset, .burger-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            transition: transform 0.15s ease;
-            cursor: pointer;
-        }
-        .btn-reset {
-            border-color: rgba(255, 49, 92, 0.2);
-            color: #ffdce5;
-            padding: 3px 10px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.45rem;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            background: rgba(255, 49, 92, 0.06);
-        }
+        .header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+        .header .version { border: 1px solid rgba(0,231,255,0.15); background: rgba(0,231,255,0.05); color: #b9f8ff; padding: 6px 14px; border-radius: 999px; font: 600 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: flex; align-items: center; gap: 6px; }
+        .header .version .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--neon-green); animation: pulse-dot 2s ease-in-out infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+        .btn-reset, .burger-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.15s ease; cursor: pointer; }
+        .btn-reset { border-color: rgba(255,49,92,0.2); color: #ffdce5; padding: 6px 14px; border-radius: 40px; font-weight: 700; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.4px; background: rgba(255,49,92,0.06); }
         .btn-reset:active { transform: scale(0.92); }
-        .burger-btn {
-            border-radius: 12px;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3.5px;
-            padding: 8px;
-            position: relative;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.04);
-        }
+        .burger-btn { border-radius: 14px; width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4.5px; padding: 10px; position: relative; z-index: 1000; background: rgba(255,255,255,0.05); }
         .burger-btn:active { transform: scale(0.9); }
-        .burger-btn span {
-            display: block;
-            width: 16px;
-            height: 2px;
-            background: var(--text-primary);
-            border-radius: 4px;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .burger-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
-            background: var(--cyan);
-        }
-        .burger-btn.active span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        .burger-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -4px);
-            background: var(--purple);
-        }
+        .burger-btn span { display: block; width: 22px; height: 2.5px; background: var(--text-primary); border-radius: 4px; transition: transform 0.2s ease, opacity 0.2s ease; }
+        .burger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); background: var(--cyan); }
+        .burger-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .burger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); background: var(--purple); }
 
         /* ---------- MENU ---------- */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
+        .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
         .menu-overlay.open { opacity: 1; pointer-events: auto; }
         .side-menu {
-            position: fixed;
-            top: 0;
-            left: -340px;
-            width: 320px;
-            max-width: 82%;
-            height: 100%;
-            background: rgba(10, 11, 22, 0.97);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-right: 1px solid var(--border-subtle);
-            z-index: 1000;
-            transition: left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            padding: 70px 18px 30px;
-            overflow-y: auto;
-            box-shadow: 16px 0 60px rgba(0, 0, 0, 0.5);
+            position: fixed; top: 0; left: -380px; width: 360px; max-width: 85%; height: 100%;
+            background: rgba(10,11,22,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border-subtle); z-index: 1000;
+            transition: left 0.3s cubic-bezier(0.22,1,0.36,1);
+            padding: 90px 24px 30px; overflow-y: auto; box-shadow: 16px 0 60px rgba(0,0,0,0.5);
         }
         .side-menu.open { left: 0; }
-        .side-menu .menu-title {
-            color: rgba(0, 231, 255, 0.6);
-            border-bottom: 1px solid rgba(0, 231, 255, 0.08);
-            font: 700 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.15em;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-        }
+        .side-menu .menu-title { color: rgba(0,231,255,0.6); border-bottom: 1px solid rgba(0,231,255,0.08); font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.15em; padding-bottom: 14px; margin-bottom: 18px; text-transform: uppercase; }
         .side-menu .menu-item {
-            position: relative;
-            margin-bottom: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            color: #d7e2ee;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            transition: background 0.15s ease, transform 0.15s ease;
-            font-size: 0.8rem;
+            position: relative; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02);
+            color: #d7e2ee; font-weight: 600; display: flex; align-items: center; gap: 14px; padding: 16px 20px;
+            border-radius: 16px; width: 100%; text-align: left; cursor: pointer;
+            transition: background 0.15s ease, transform 0.15s ease; font-size: 1.05rem;
         }
-        .side-menu .menu-item::before {
-            content: '';
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--cyan), var(--purple));
-            opacity: 0;
-            transition: opacity 0.15s ease;
-        }
-        .side-menu .menu-item:hover,
-        .side-menu .menu-item.active {
-            background: rgba(255, 61, 0, 0.06);
-            color: #fff;
-            transform: translateX(2px);
-        }
-        .side-menu .menu-item:hover::before,
-        .side-menu .menu-item.active::before { opacity: 1; }
-        .side-menu .menu-item .icon {
-            font-size: 1rem;
-            width: 22px;
-            text-align: center;
-            opacity: 0.5;
-            flex-shrink: 0;
-        }
+        .side-menu .menu-item::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0; transition: opacity 0.15s ease; }
+        .side-menu .menu-item:hover, .side-menu .menu-item.active { background: rgba(255,61,0,0.06); color: #fff; transform: translateX(3px); }
+        .side-menu .menu-item:hover::before, .side-menu .menu-item.active::before { opacity: 1; }
+        .side-menu .menu-item .icon { font-size: 1.3rem; width: 28px; text-align: center; opacity: 0.5; flex-shrink: 0; }
         .side-menu .menu-item.active .icon { opacity: 1; }
-        .side-menu .menu-item .badge {
-            margin-left: auto;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            color: #05070b;
-            font-size: 0.4rem;
-            font-weight: 800;
-            padding: 1px 8px;
-            border-radius: 40px;
-            min-width: 16px;
-            text-align: center;
-        }
+        .side-menu .menu-item .badge { margin-left: auto; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #05070b; font-size: 0.55rem; font-weight: 800; padding: 2px 12px; border-radius: 40px; min-width: 20px; text-align: center; }
 
         /* ---------- PAGES ---------- */
         .page { display: none; }
-        .page.active {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-            gap: 14px;
-            align-items: start;
-        }
-        #page-records.active {
-            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-        }
-        #page-progress.active {
-            grid-template-columns: minmax(280px, 0.8fr) minmax(280px, 1.2fr);
-        }
+        .page.active { display: grid !important; grid-template-columns: 1fr; gap: var(--spacing-base); align-items: start; }
 
         /* ---------- CARDS ---------- */
         .card {
-            position: relative;
-            overflow: hidden;
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            background: rgba(7, 11, 18, 0.82);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            will-change: transform;
+            position: relative; overflow: hidden; padding: var(--card-padding);
+            border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-card);
+            background: rgba(7,11,18,0.82); box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, border-color 0.2s ease; will-change: transform;
         }
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            z-index: -1;
-            border-radius: inherit;
-            background: linear-gradient(135deg, rgba(255, 61, 0, 0.15), transparent 30%, rgba(0, 231, 255, 0.12) 60%, transparent 80%);
-            opacity: 0.15;
-            pointer-events: none;
-        }
+        .card::before { content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: linear-gradient(135deg, rgba(255,61,0,0.15), transparent 30%, rgba(0,231,255,0.12) 60%, transparent 80%); opacity: 0.15; pointer-events: none; }
         .card:active { transform: scale(0.995); }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-        .card-header h2 {
-            font: 800 clamp(0.85rem, 1.8vw, 1.3rem)/0.95 'Impact', 'Arial Black', Inter, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .card-header .badge {
-            border: 1px solid rgba(0, 231, 255, 0.1);
-            background: rgba(0, 231, 255, 0.04);
-            color: #bdf9ff;
-            font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            padding: 2px 12px;
-            border-radius: 40px;
-            flex-shrink: 0;
-        }
-        .chain-stamp {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            padding: 1px 8px;
-            border-radius: 40px;
-            background: rgba(74, 222, 128, 0.04);
-            border: 1px solid rgba(74, 222, 128, 0.08);
-            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: var(--neon-green);
-            letter-spacing: 0.03em;
-            text-transform: uppercase;
-        }
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            padding: 1px 8px;
-            border-radius: 40px;
-            background: rgba(0, 231, 255, 0.04);
-            border: 1px solid rgba(0, 231, 255, 0.08);
-            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: var(--cyan);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); flex-wrap: wrap; gap: 8px; }
+        .card-header h2 { font: 800 clamp(1.2rem,2.5vw,1.6rem)/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; letter-spacing: -0.02em; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .card-header .badge { border: 1px solid rgba(0,231,255,0.1); background: rgba(0,231,255,0.04); color: #bdf9ff; font: 600 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 16px; border-radius: 40px; flex-shrink: 0; }
+        .chain-stamp { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.08); font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--neon-green); letter-spacing: 0.04em; text-transform: uppercase; }
+        .verified-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; background: rgba(0,231,255,0.04); border: 1px solid rgba(0,231,255,0.08); font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; }
 
         /* ---------- CATEGORY TABS ---------- */
-        .category-tabs {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding: 4px 0 12px 0;
-            margin-bottom: 4px;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            flex-wrap: nowrap;
-        }
+        .category-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0 14px 0; margin-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
         .category-tabs::-webkit-scrollbar { display: none; }
-        .category-tab {
-            flex-shrink: 0;
-            padding: 6px 14px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-muted);
-            font-size: 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            user-select: none;
-        }
+        .category-tab { flex-shrink: 0; padding: 10px 18px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: var(--text-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; user-select: none; }
         .category-tab:active { transform: scale(0.94); }
-        .category-tab.active {
-            background: rgba(0, 231, 255, 0.08);
-            border-color: rgba(0, 231, 255, 0.2);
-            color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0, 231, 255, 0.04);
-        }
-        .category-tab .count {
-            display: inline-block;
-            margin-left: 4px;
-            padding: 0 6px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.04);
-            font-size: 0.45rem;
-            color: var(--text-muted);
-        }
-        .category-tab.active .count {
-            background: rgba(0, 231, 255, 0.08);
-            color: var(--cyan);
-        }
+        .category-tab.active { background: rgba(0,231,255,0.08); border-color: rgba(0,231,255,0.2); color: var(--cyan); box-shadow: 0 0 20px rgba(0,231,255,0.04); }
+        .category-tab .count { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 20px; background: rgba(255,255,255,0.04); font-size: 0.55rem; color: var(--text-muted); }
+        .category-tab.active .count { background: rgba(0,231,255,0.08); color: var(--cyan); }
 
         /* ---------- EXERCISE GRID ---------- */
-        .exercise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 8px;
-            margin-bottom: 10px;
-        }
+        .exercise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
         .exercise-card {
-            position: relative;
-            min-height: 96px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-start;
-            text-align: left;
-            padding: 10px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(10, 15, 24, 0.6);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-            cursor: pointer;
-            will-change: transform;
+            position: relative; min-height: 130px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+            text-align: left; padding: 14px 12px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(10,15,24,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.2); overflow: hidden;
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; cursor: pointer; will-change: transform;
         }
-        .exercise-card::before {
-            content: '⛓️ BLOCK';
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            padding: 1px 6px;
-            border-radius: 999px;
-            background: rgba(74, 222, 128, 0.04);
-            border: 1px solid rgba(74, 222, 128, 0.06);
-            color: var(--neon-green);
-            font: 600 0.3rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            letter-spacing: 0.04em;
-            z-index: 1;
-        }
-        .exercise-card .ex-name {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            margin-top: 18px;
-            font: 600 0.5rem/1.1 Inter, system-ui, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
-            color: #dfe8f3;
-        }
-        .exercise-card .ex-weight {
-            position: relative;
-            z-index: 1;
-            margin-top: 3px;
-            font: 900 clamp(1.2rem, 2.8vw, 2rem)/0.85 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.03em;
-            color: #fff;
-            text-shadow: 0 0 12px rgba(255, 61, 0, 0.15);
-        }
-        .exercise-card .ex-unit {
-            position: relative;
-            z-index: 1;
-            color: rgba(206, 219, 233, 0.5);
-            font: 600 0.4rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-        .exercise-card .ex-bodyweight {
-            position: relative;
-            z-index: 1;
-            margin-top: 3px;
-            padding: 1px 6px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.03);
-            color: #dffcff;
-            border-radius: 20px;
-            font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            display: inline-block;
-        }
-        .exercise-card .hash-id {
-            position: relative;
-            z-index: 1;
-            margin-top: 3px;
-            font: 400 0.3rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            color: rgba(255, 255, 255, 0.1);
-            letter-spacing: 0.02em;
-        }
+        .exercise-card::before { content: '⛓️ BLOCK'; position: absolute; top: 8px; left: 8px; padding: 2px 10px; border-radius: 999px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.06); color: var(--neon-green); font: 600 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.04em; z-index: 1; }
+        .exercise-card .ex-name { position: relative; z-index: 1; width: 100%; margin-top: 22px; font: 700 0.7rem/1.2 Inter, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.03em; color: #dfe8f3; }
+        .exercise-card .ex-weight { position: relative; z-index: 1; margin-top: 4px; font: 900 clamp(1.6rem,4vw,2.6rem)/0.85 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: #fff; text-shadow: 0 0 16px rgba(255,61,0,0.15); }
+        .exercise-card .ex-unit { position: relative; z-index: 1; color: rgba(206,219,233,0.5); font: 600 0.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+        .exercise-card .ex-bodyweight { position: relative; z-index: 1; margin-top: 4px; padding: 2px 10px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.03); color: #dffcff; border-radius: 20px; font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: inline-block; }
+        .exercise-card .hash-id { position: relative; z-index: 1; margin-top: 4px; font: 400 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: rgba(255,255,255,0.1); letter-spacing: 0.03em; }
         .exercise-card:active { transform: scale(0.95); }
         .exercise-card.hidden { display: none; }
 
         /* ---------- FORMS ---------- */
-        .input-row {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-            align-items: center;
-        }
-        .input-row input,
-        .input-row select {
-            flex: 1;
-            min-width: 50px;
-            min-height: 36px;
-            background: rgba(3, 7, 14, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 8px 12px;
-            color: #f7fbff;
-            font-size: 0.75rem;
-            outline: none;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
-            font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-        }
-        .input-row select {
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 32px;
-        }
-        .input-row input:focus,
-        .input-row select:focus {
-            border-color: rgba(0, 231, 255, 0.3);
-            box-shadow: 0 0 0 2px rgba(0, 231, 255, 0.04);
-        }
-        .input-row input::placeholder { color: rgba(200, 210, 223, 0.3); }
-        .exercise-select-wrapper {
-            position: relative;
-            flex: 1;
-            min-width: 70px;
-        }
+        .input-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+        .input-row input, .input-row select { flex: 1; min-width: 70px; min-height: var(--input-height); background: rgba(3,7,14,0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 12px 16px; color: #f7fbff; font-size: 1rem; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; font-weight: 500; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+        .input-row select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+        .input-row input:focus, .input-row select:focus { border-color: rgba(0,231,255,0.3); box-shadow: 0 0 0 3px rgba(0,231,255,0.04); }
+        .input-row input::placeholder { color: rgba(200,210,223,0.3); }
+        .exercise-select-wrapper { position: relative; flex: 1; min-width: 80px; }
         .exercise-select-wrapper select { width: 100%; }
 
         /* ---------- BUTTONS ---------- */
-        .btn {
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%);
-            color: #080b10;
-            font: 700 0.6rem/1 Inter, system-ui, sans-serif;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            box-shadow: 0 6px 20px rgba(255, 61, 0, 0.15);
-            transition: transform 0.12s ease, box-shadow 0.15s ease;
-            padding: 8px 14px;
-            cursor: pointer;
-            touch-action: manipulation;
-            white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            will-change: transform;
-        }
+        .btn { border: none; border-radius: var(--radius-sm); background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%); color: #080b10; font: 800 0.85rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; box-shadow: 0 6px 20px rgba(255,61,0,0.15); transition: transform 0.12s ease, box-shadow 0.15s ease; padding: 14px 22px; min-height: var(--btn-height); cursor: pointer; touch-action: manipulation; white-space: nowrap; border: 1px solid rgba(255,255,255,0.06); will-change: transform; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
         .btn:active { transform: scale(0.94); }
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.03);
-            color: #e7f8ff;
-            border-color: rgba(0, 231, 255, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .btn-success {
-            background: linear-gradient(135deg, #54ff8f, #b9ff00);
-            color: #07100a;
-            box-shadow: 0 6px 20px rgba(84, 255, 143, 0.12);
-        }
-        .btn-danger {
-            background: linear-gradient(135deg, #ff315c, #ff3d00);
-            color: #fff;
-            box-shadow: 0 6px 20px rgba(255, 49, 92, 0.12);
-        }
+        .btn-outline { background: rgba(255,255,255,0.03); color: #e7f8ff; border-color: rgba(0,231,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .btn-success { background: linear-gradient(135deg, #54ff8f, #b9ff00); color: #07100a; box-shadow: 0 6px 20px rgba(84,255,143,0.12); }
+        .btn-danger { background: linear-gradient(135deg, #ff315c, #ff3d00); color: #fff; box-shadow: 0 6px 20px rgba(255,49,92,0.12); }
         .btn-block { width: 100%; justify-content: center; }
-        .btn-row {
-            display: flex;
-            gap: 6px;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-        .btn-row .btn { flex: 1; min-width: 60px; text-align: center; }
+        .btn-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+        .btn-row .btn { flex: 1; min-width: 80px; text-align: center; }
 
         /* ---------- STATS ---------- */
-        .stats-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-        .stat-box {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 14px;
-            padding: 12px 8px;
-            text-align: center;
-        }
-        .stat-box label {
-            font-size: 0.45rem;
-            text-transform: uppercase;
-            color: rgba(207, 220, 234, 0.4);
-            letter-spacing: 0.05em;
-            font-weight: 600;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-box .value {
-            font: 800 clamp(1.4rem, 3.5vw, 2.6rem)/0.9 'Impact', 'Arial Black', Inter, sans-serif;
-            letter-spacing: -0.03em;
-            color: #fff;
-            text-shadow: 0 0 16px rgba(0, 231, 255, 0.08);
-            position: relative;
-            z-index: 1;
-            margin-top: 1px;
-        }
-        .stat-box .unit {
-            color: rgba(185, 255, 0, 0.5);
-            font-weight: 700;
-            font-size: 0.5rem;
-            position: relative;
-            z-index: 1;
-        }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .stat-box { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 24px rgba(0,0,0,0.15); border-radius: 18px; padding: 18px 12px; text-align: center; }
+        .stat-box label { font-size: 0.6rem; text-transform: uppercase; color: rgba(207,220,234,0.4); letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; position: relative; z-index: 1; }
+        .stat-box .value { font: 900 clamp(2rem,5vw,3.2rem)/0.9 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: #fff; text-shadow: 0 0 20px rgba(0,231,255,0.08); position: relative; z-index: 1; margin-top: 2px; }
+        .stat-box .unit { color: rgba(185,255,0,0.5); font-weight: 700; font-size: 0.6rem; position: relative; z-index: 1; }
 
         /* ---------- SETS ---------- */
-        .set-item {
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 8px 12px;
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.12s ease, border-color 0.12s ease;
-        }
+        .set-item { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 14px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.12s ease, border-color 0.12s ease; }
         .set-item:active { transform: scale(0.98); }
-        .set-item .set-info {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .set-item .set-weight {
-            font-weight: 800;
-            color: #ff8a00;
-            font-size: 0.85rem;
-        }
-        .set-item .set-reps {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .set-item .set-delete {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            cursor: pointer;
-            padding: 0 3px;
-            transition: color 0.15s ease;
-        }
+        .set-item .set-info { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .set-item .set-info span:first-child { font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); }
+        .set-item .set-weight { font-weight: 800; color: #ff8a00; font-size: 1.05rem; }
+        .set-item .set-reps { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
+        .set-item .set-delete { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; padding: 0 6px; transition: color 0.15s ease; }
         .set-item .set-delete:active { color: #ef4444; }
-        .set-summary {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 6px;
-            margin-top: 8px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-        .set-summary .stat {
-            font-size: 0.5rem;
-            color: rgba(207, 220, 234, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .set-summary .stat .num {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 1px;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .set-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
+        .set-summary .stat { font-size: 0.6rem; color: rgba(207,220,234,0.4); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .set-summary .stat .num { font-size: 1.4rem; font-weight: 900; color: var(--text-primary); display: block; margin-bottom: 2px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* ---------- CHALLENGES ---------- */
-        .challenge-card {
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 12px 14px;
-            margin-bottom: 6px;
-            transition: border-color 0.15s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .challenge-card::before {
-            content: '';
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--cyan), var(--purple));
-            opacity: 0.4;
-        }
-        .challenge-card.active {
-            border-color: rgba(255, 61, 0, 0.12);
-            background: rgba(255, 61, 0, 0.03);
-        }
-        .challenge-card.completed {
-            border-color: rgba(84, 255, 143, 0.15);
-            opacity: 0.7;
-        }
-        .challenge-card .ch-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3px;
-            flex-wrap: wrap;
-            gap: 3px;
-        }
-        .challenge-card .ch-name {
-            font-weight: 700;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-            font-size: 0.75rem;
-        }
-        .challenge-card .ch-reward {
-            background: linear-gradient(135deg, var(--gold), var(--pink));
-            color: #0a0a12;
-            padding: 1px 10px;
-            border-radius: 40px;
-            font-size: 0.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .challenge-card .ch-desc {
-            font-size: 0.65rem;
-            color: #cdd7e4;
-            margin-bottom: 5px;
-        }
-        .challenge-card .ch-progress {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .challenge-card .ch-progress-bar {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.4s ease;
-            background: linear-gradient(90deg, var(--cyan), var(--purple));
-        }
-        .challenge-card .ch-progress-text {
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            text-align: right;
-            font-weight: 600;
-        }
+        .challenge-card { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 16px 18px; margin-bottom: 10px; transition: border-color 0.15s ease; position: relative; overflow: hidden; }
+        .challenge-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0.4; }
+        .challenge-card.active { border-color: rgba(255,61,0,0.12); background: rgba(255,61,0,0.03); }
+        .challenge-card.completed { border-color: rgba(84,255,143,0.15); opacity: 0.7; }
+        .challenge-card .ch-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px; }
+        .challenge-card .ch-name { font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.01em; font-size: 0.9rem; }
+        .challenge-card .ch-reward { background: linear-gradient(135deg, var(--gold), var(--pink)); color: #0a0a12; padding: 2px 14px; border-radius: 40px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; }
+        .challenge-card .ch-desc { font-size: 0.8rem; color: #cdd7e4; margin-bottom: 8px; }
+        .challenge-card .ch-progress { height: 6px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; }
+        .challenge-card .ch-progress-bar { height: 100%; border-radius: 4px; transition: width 0.4s ease; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+        .challenge-card .ch-progress-text { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; text-align: right; font-weight: 600; }
 
         /* ---------- AI ---------- */
-        .ai-program {
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            padding: 12px 14px;
-            margin-bottom: 6px;
-            border-left: 3px solid var(--cyan);
-        }
-        .ai-program .day {
-            font-weight: 800;
-            color: var(--cyan);
-            font-size: 0.7rem;
-            letter-spacing: 0.3px;
-            margin-bottom: 2px;
-            text-transform: uppercase;
-        }
-        .ai-program .exercise {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            padding: 1px 0;
-            font-weight: 500;
-        }
-        .ai-program .exercise strong {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
+        .ai-program { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; padding: 16px 18px; margin-bottom: 10px; border-left: 4px solid var(--cyan); }
+        .ai-program .day { font-weight: 900; color: var(--cyan); font-size: 0.9rem; letter-spacing: 0.3px; margin-bottom: 4px; text-transform: uppercase; }
+        .ai-program .exercise { font-size: 0.85rem; color: var(--text-secondary); padding: 2px 0; font-weight: 500; }
+        .ai-program .exercise strong { color: var(--text-primary); font-weight: 700; }
 
-        .forecast-card {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-        }
-        .forecast-card .target {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--cyan), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.3px;
-            font-family: 'Impact', 'Arial Black', Inter, sans-serif;
-        }
-        .forecast-card .date {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 500;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .forecast-card .confidence {
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 600;
-        }
-        .forecast-card .bw-note {
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 4px;
-        }
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-        .progress-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--cyan), var(--purple));
-            border-radius: 4px;
-            transition: width 0.4s ease;
-        }
+        .forecast-card { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 20px; text-align: center; }
+        .forecast-card .target { font-size: 2.4rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
+        .forecast-card .date { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .forecast-card .confidence { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
+        .forecast-card .bw-note { font-size: 0.6rem; color: var(--text-muted); margin-top: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 6px; }
+        .progress-bar { height: 8px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+        .progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--purple)); border-radius: 4px; transition: width 0.4s ease; }
 
-        .chart-container {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 14px;
-            padding: 8px;
-            margin-top: 8px;
-        }
-        .chart-container canvas {
-            width: 100% !important;
-            height: auto !important;
-            max-height: 120px;
-        }
+        .chart-container { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 10px; margin-top: 10px; }
+        .chart-container canvas { width: 100% !important; height: auto !important; max-height: 140px; }
 
-        .ai-bubble {
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--cyan);
-        }
-        .ai-bubble .label {
-            font-size: 0.45rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
-            font-weight: 600;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .ai-bubble p {
-            color: #cdd7e4;
-            line-height: 1.5;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+        .ai-bubble { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; padding: 16px 20px; margin-bottom: 14px; border-left: 4px solid var(--cyan); }
+        .ai-bubble .label { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .ai-bubble p { color: #cdd7e4; line-height: 1.6; font-size: 0.95rem; font-weight: 500; }
 
-        .ai-message {
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 14px;
-            padding: 12px 16px;
-            color: var(--text-primary);
-            min-height: 40px;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            font-weight: 500;
-        }
+        .ai-message { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 16px 20px; color: var(--text-primary); min-height: 50px; margin-top: 12px; font-size: 0.9rem; line-height: 1.7; font-weight: 500; }
 
-        .ai-actions {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        .ai-actions .btn {
-            flex: 1;
-            min-width: 60px;
-            text-align: center;
-            font-size: 0.55rem;
-            padding: 8px 12px;
-        }
+        .ai-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+        .ai-actions .btn { flex: 1; min-width: 80px; text-align: center; font-size: 0.7rem; padding: 14px 18px; }
 
-        .empty-state {
-            color: var(--text-muted);
-            text-align: center;
-            padding: 16px 0;
-            font-size: 0.75rem;
-            font-weight: 500;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
+        .empty-state { color: var(--text-muted); text-align: center; padding: 20px 0; font-size: 0.85rem; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
         /* ---------- TOAST ---------- */
-        .toast {
-            position: fixed;
-            top: 16px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            background: rgba(7, 11, 18, 0.94);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 231, 255, 0.1);
-            padding: 10px 22px;
-            border-radius: 12px;
-            color: #f7fbff;
-            font-size: 0.75rem;
-            z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            max-width: 90%;
-            text-align: center;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-            font-weight: 600;
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px); background: rgba(7,11,18,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0,231,255,0.1); padding: 14px 26px; border-radius: 14px; color: #f7fbff; font-size: 0.85rem; z-index: 2000; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; max-width: 90%; text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.4); font-weight: 600; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* ---------- WORKOUT TIMER ---------- */
-        .workout-timer {
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            padding: 8px 12px;
-            text-align: center;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            margin-top: 6px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            font-weight: 500;
-        }
-        .workout-timer .label {
-            font-weight: 600;
-            color: var(--cyan);
-            text-transform: uppercase;
-            font-size: 0.55rem;
-            letter-spacing: 0.3px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
+        .workout-timer { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 14px; padding: 12px 16px; text-align: center; font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-weight: 500; }
+        .workout-timer .label { font-weight: 700; color: var(--cyan); text-transform: uppercase; font-size: 0.6rem; letter-spacing: 0.3px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
         /* ---------- ACHIEVEMENT TOAST ---------- */
-        .achievement-toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            background: rgba(9, 13, 20, 0.97);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 231, 107, 0.2);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: 26px 30px;
-            text-align: center;
-            z-index: 3000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-            max-width: 90%;
-            width: 340px;
-        }
-        .achievement-toast.show {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-        }
-        .achievement-toast .big-icon {
-            font-size: 2.6rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .achievement-toast .title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--gold), var(--pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 3px;
-        }
-        .achievement-toast .sub {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
+        .achievement-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: rgba(9,13,20,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,231,107,0.2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 30px 34px; text-align: center; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1); max-width: 90%; width: 360px; }
+        .achievement-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+        .achievement-toast .big-icon { font-size: 3rem; display: block; margin-bottom: 6px; }
+        .achievement-toast .title { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+        .achievement-toast .sub { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 14px; font-weight: 500; }
         .achievement-toast .btn { margin-top: 0; }
 
         /* ---------- CALC ---------- */
-        .calc-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-        .calc-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        .calc-input-group label {
-            font-size: 0.45rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .calc-input-group input,
-        .calc-input-group select {
-            min-height: 36px;
-            background: rgba(3, 7, 14, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 8px 12px;
-            color: #f7fbff;
-            font-size: 0.8rem;
-            outline: none;
-            transition: border-color 0.15s ease;
-            width: 100%;
-            font-weight: 500;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-        }
-        .calc-input-group input:focus,
-        .calc-input-group select:focus {
-            border-color: rgba(0, 231, 255, 0.3);
-            box-shadow: 0 0 0 2px rgba(0, 231, 255, 0.04);
-        }
-        .calc-result {
-            margin-top: 10px;
-            border: 2px solid rgba(0, 231, 255, 0.12);
-            background: rgba(255, 255, 255, 0.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-        }
-        .calc-result .label {
-            font-size: 0.45rem;
-            color: rgba(207, 220, 234, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        }
-        .calc-result .value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.3px;
-            font-family: 'Impact', 'Arial Black', Inter, sans-serif;
-        }
-        .calc-result .sub {
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 500;
-        }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .calc-input-group { display: flex; flex-direction: column; gap: 4px; }
+        .calc-input-group label { font-size: 0.55rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .calc-input-group input, .calc-input-group select { min-height: 48px; background: rgba(3,7,14,0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px 16px; color: #f7fbff; font-size: 1rem; outline: none; transition: border-color 0.15s ease; width: 100%; font-weight: 500; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+        .calc-input-group input:focus, .calc-input-group select:focus { border-color: rgba(0,231,255,0.3); box-shadow: 0 0 0 3px rgba(0,231,255,0.04); }
+        .calc-result { margin-top: 14px; border: 2px solid rgba(0,231,255,0.12); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 18px; text-align: center; }
+        .calc-result .label { font-size: 0.55rem; color: rgba(207,220,234,0.4); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .calc-result .value { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
+        .calc-result .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
 
         /* ---------- RESET MODAL ---------- */
-        .reset-modal {
+        .reset-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .reset-modal.show { display: flex; }
+        .reset-modal-content { background: rgba(9,13,20,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,231,107,0.12); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 30px; max-width: 380px; width: 100%; text-align: center; }
+        .reset-modal-content h2 { font: 900 1.4rem/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; color: #ff315c; margin-bottom: 6px; }
+        .reset-modal-content p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 18px; line-height: 1.5; font-weight: 500; }
+        .reset-modal-content .btn-row { display: flex; gap: 10px; }
+        .reset-modal-content .btn-row .btn { flex: 1; }
+        .reset-modal-content .btn-row .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); box-shadow: none; }
+
+        /* ---------- WEEK LIST ---------- */
+        .week-list { max-height: 200px; overflow-y: auto; margin-top: 10px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.01); border-radius: 14px; padding: 4px; }
+        .week-item { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.85rem; border-radius: 10px; }
+        .week-item:last-child { border: none; }
+        .week-item .date { color: rgba(207,220,234,0.4); font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.75rem; }
+        .week-item .data { font-weight: 600; color: var(--text-secondary); }
+
+        /* ---------- DECORATIVE BANNER ---------- */
+        .deco-banner { width: 100%; height: 70px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.04); margin-bottom: 14px; position: relative; background: rgba(255,255,255,0.01); }
+        .deco-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .deco-banner .overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.15)); pointer-events: none; }
+
+        /* ============================================================
+           ГРАФИК УПРАЖНЕНИЯ — МОДАЛЬНОЕ ОКНО
+           ============================================================ */
+        .exercise-chart-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 4000;
+            inset: 0;
+            z-index: 5000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             display: none;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            animation: fade-in 0.3s ease;
         }
-        .reset-modal.show { display: flex; }
-        .reset-modal-content {
-            background: rgba(9, 13, 20, 0.97);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 231, 107, 0.12);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: 26px;
-            max-width: 360px;
+        .exercise-chart-modal.show { display: flex; }
+        .exercise-chart-modal .modal-content {
+            background: rgba(10, 14, 24, 0.97);
+            border-radius: var(--radius-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            padding: var(--card-padding);
+            max-width: 560px;
             width: 100%;
-            text-align: center;
-        }
-        .reset-modal-content h2 {
-            font: 800 1.2rem/0.95 'Impact', 'Arial Black', Inter, sans-serif;
-            text-transform: uppercase;
-            color: #ff315c;
-            margin-bottom: 4px;
-        }
-        .reset-modal-content p {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            margin-bottom: 16px;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-        .reset-modal-content .btn-row {
-            display: flex;
-            gap: 8px;
-        }
-        .reset-modal-content .btn-row .btn { flex: 1; }
-        .reset-modal-content .btn-row .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-secondary);
-            box-shadow: none;
-        }
-
-        /* ---------- WEEK LIST ---------- */
-        .week-list {
-            max-height: 180px;
+            max-height: 90vh;
             overflow-y: auto;
-            margin-top: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: 12px;
-            padding: 3px;
         }
-        .week-item {
+        .exercise-chart-modal .modal-header {
             display: flex;
             justify-content: space-between;
-            padding: 6px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            font-size: 0.75rem;
-            border-radius: 8px;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .week-item:last-child { border: none; }
-        .week-item .date {
-            color: rgba(207, 220, 234, 0.4);
-            font-weight: 500;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            font-size: 0.65rem;
+        .exercise-chart-modal .modal-header h3 {
+            font: 900 1.2rem/1.1 'Impact','Arial Black',Inter,sans-serif;
+            text-transform: uppercase;
+            color: #fff;
         }
-        .week-item .data {
-            font-weight: 600;
-            color: var(--text-secondary);
+        .exercise-chart-modal .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0 6px;
+            transition: color 0.15s ease;
         }
-
-        /* ---------- DECORATIVE BANNER ---------- */
-        .deco-banner {
-            width: 100%;
-            height: 60px;
-            border-radius: 14px;
-            overflow: hidden;
+        .exercise-chart-modal .close-btn:active { color: #fff; }
+        .exercise-chart-modal .modal-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .exercise-chart-modal .modal-stats .ms-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 12px;
-            position: relative;
-            background: rgba(255, 255, 255, 0.01);
         }
-        .deco-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .exercise-chart-modal .modal-stats .ms-item .ms-label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
-        .deco-banner .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 60%, rgba(0, 0, 0, 0.15));
-            pointer-events: none;
+        .exercise-chart-modal .modal-stats .ms-item .ms-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-top: 2px;
+        }
+        .exercise-chart-modal .modal-stats .ms-item .ms-value.gold { color: var(--gold); }
+        .exercise-chart-modal .modal-stats .ms-item .ms-value.cyan { color: var(--cyan); }
+        .exercise-chart-modal .modal-stats .ms-item .ms-value.green { color: var(--neon-green); }
+        .exercise-chart-modal canvas {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 220px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .exercise-chart-modal .no-data {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.85rem;
         }
 
         /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 760px) {
-            .app { padding: 8px 8px 70px; }
-            .header { border-radius: 18px; padding: 10px 12px; flex-wrap: wrap; gap: 4px; }
-            .header h1 { font-size: 1.1rem; }
+        @media (max-width: 480px) {
+            .app { padding: 14px 14px 90px; }
+            .header { padding: 12px 16px; flex-wrap: wrap; gap: 6px; border-radius: 20px; }
+            .header h1 { font-size: 1.4rem; }
             .header .version .dot { display: none; }
-            .page.active,
-            #page-records.active,
-            #page-progress.active { grid-template-columns: 1fr !important; gap: 10px !important; }
-            .card { border-radius: 18px; padding: 12px; }
-            .exercise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-            .exercise-card { min-height: 82px; padding: 8px; }
-            .exercise-card .ex-name { font-size: 0.45rem; margin-top: 14px; }
-            .exercise-card .ex-weight { font-size: 1.2rem; }
-            .input-row input, .input-row select {
-                min-width: 60px; padding: 6px 10px; font-size: 0.7rem; min-height: 32px;
-            }
-            .btn { padding: 6px 12px; font-size: 0.55rem; }
-            .stat-box .value { font-size: 1.3rem; }
-            .side-menu { width: 260px; padding: 60px 14px 20px; }
-            .side-menu .menu-item { font-size: 0.75rem; padding: 8px 12px; }
-            .header .version { font-size: 0.4rem; padding: 2px 8px; }
-            .deco-banner { height: 44px; }
-            .header-logo { width: 30px; height: 30px; }
-            .burger-btn { width: 30px; height: 30px; padding: 6px; }
-            .burger-btn span { width: 14px; height: 2px; }
-            .category-tabs { gap: 4px; padding: 2px 0 8px 0; }
-            .category-tab { font-size: 0.5rem; padding: 4px 10px; }
+            .card { padding: 18px; border-radius: 20px; }
+            .exercise-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .exercise-card { min-height: 110px; padding: 12px; }
+            .exercise-card .ex-name { font-size: 0.6rem; margin-top: 18px; }
+            .exercise-card .ex-weight { font-size: 1.4rem; }
+            .input-row input, .input-row select { min-width: 60px; padding: 10px 14px; font-size: 0.9rem; min-height: 44px; }
+            .btn { padding: 12px 18px; font-size: 0.75rem; min-height: 48px; }
+            .stat-box .value { font-size: 1.8rem; }
+            .side-menu { width: 300px; padding: 80px 18px 20px; }
+            .side-menu .menu-item { font-size: 0.9rem; padding: 14px 16px; }
+            .header .version { font-size: 0.45rem; padding: 4px 10px; }
+            .deco-banner { height: 50px; }
+            .header-logo { width: 40px; height: 40px; }
+            .burger-btn { width: 42px; height: 42px; padding: 8px; }
+            .burger-btn span { width: 18px; height: 2px; }
+            .category-tabs { gap: 6px; padding: 4px 0 10px 0; }
+            .category-tab { font-size: 0.6rem; padding: 8px 14px; }
+            .card-header h2 { font-size: 1rem; }
+            .exercise-chart-modal .modal-content { padding: 16px; }
+            .exercise-chart-modal .modal-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+            .exercise-chart-modal .modal-stats .ms-item .ms-value { font-size: 1rem; }
         }
         @media (max-width: 380px) {
             .exercise-grid { grid-template-columns: 1fr; }
             .header .version { display: none; }
-            .header h1 { font-size: 0.95rem; }
+            .header h1 { font-size: 1.2rem; }
             .header h1 .sub { display: none; }
         }
-        @media (min-width: 768px) {
-            .exercise-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+        @media (min-width: 600px) {
+            .exercise-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -1405,7 +505,7 @@
                 <h1>ATHLETE <span class="sub">elite</span> <span class="hash-badge">⛓️ #PRIME</span></h1>
             </div>
             <div class="header-actions">
-                <span class="version"><span class="dot"></span> v5.5</span>
+                <span class="version"><span class="dot"></span> v5.7</span>
                 <button class="btn-reset" onclick="openResetModal()">🗑️</button>
                 <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
                     <span></span><span></span><span></span>
@@ -1565,14 +665,14 @@
                     <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
                     <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
                 </div>
-                <div class="calc-input-group" style="margin-top:8px;"><label>Формула</label>
+                <div class="calc-input-group" style="margin-top:10px;"><label>Формула</label>
                     <select id="calcFormula">
                         <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
                         <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
                         <option value="oconnor">О'Коннор</option>
                     </select>
                 </div>
-                <button class="btn btn-block" id="calcBtn" style="margin-top:8px;">🧮 Рассчитать</button>
+                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">🧮 Рассчитать</button>
                 <div class="calc-result" id="calcResult">
                     <div class="label">Ваш 1ПМ</div>
                     <div class="value" id="calcResultValue">—</div>
@@ -1593,6 +693,25 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- ============================================================
+    ГРАФИК УПРАЖНЕНИЯ — МОДАЛЬНОЕ ОКНО
+    ============================================================ -->
+    <div class="exercise-chart-modal" id="exerciseChartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="chartModalTitle">Упражнение</h3>
+                <button class="close-btn" onclick="closeExerciseChart()">✕</button>
+            </div>
+            <div class="modal-stats" id="chartModalStats">
+                <div class="ms-item"><div class="ms-label">Рекорд</div><div class="ms-value gold" id="chartRecord">—</div></div>
+                <div class="ms-item"><div class="ms-label">Подходов</div><div class="ms-value cyan" id="chartSetsCount">0</div></div>
+                <div class="ms-item"><div class="ms-label">Прогресс</div><div class="ms-value green" id="chartProgress">—</div></div>
+            </div>
+            <canvas id="exerciseChart"></canvas>
+            <div id="chartNoData" class="no-data" style="display:none;">Нет данных для графика. Добавь подходы в этом упражнении.</div>
+        </div>
     </div>
 
     <script>
@@ -1639,26 +758,197 @@
                 document.getElementById('achievementToast').classList.remove('show');
             };
 
-            let toastTimer = null;
+            // ============================================================
+            // 2. ГРАФИК УПРАЖНЕНИЯ
+            // ============================================================
+            let chartModalOpen = false;
+            let exerciseChartInstance = null;
 
-            function showToast(text, duration = 1800) {
-                const el = document.getElementById('toast');
-                el.textContent = text;
-                el.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => el.classList.remove('show'), duration);
-            }
+            window.openExerciseChart = function(exerciseName) {
+                const modal = document.getElementById('exerciseChartModal');
+                modal.classList.add('show');
+                chartModalOpen = true;
+                document.getElementById('chartModalTitle').textContent = exerciseName;
+                renderExerciseChart(exerciseName);
+            };
 
-            function showAchievementToast(icon, title, desc) {
-                document.getElementById('achToastIcon').textContent = icon;
-                document.getElementById('achToastTitle').textContent = title;
-                document.getElementById('achToastDesc').textContent = desc;
-                document.getElementById('achievementToast').classList.add('show');
-                if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
+            window.closeExerciseChart = function() {
+                document.getElementById('exerciseChartModal').classList.remove('show');
+                chartModalOpen = false;
+                if (exerciseChartInstance) {
+                    exerciseChartInstance.destroy();
+                    exerciseChartInstance = null;
+                }
+            };
+
+            function renderExerciseChart(exerciseName) {
+                const canvas = document.getElementById('exerciseChart');
+                const ctx = canvas.getContext('2d');
+
+                // Собираем все подходы по этому упражнению из sets и weeklySets
+                let allSets = [...sets];
+                for (let date in weeklySets) {
+                    allSets = allSets.concat(weeklySets[date]);
+                }
+                const exSets = allSets.filter(s => s.exercise === exerciseName);
+
+                // Обновляем статистику
+                const record = records[exerciseName] ? records[exerciseName].weight : 0;
+                const unit = getUnitForExercise(exerciseName);
+                document.getElementById('chartRecord').textContent = record + ' ' + unit;
+                document.getElementById('chartSetsCount').textContent = exSets.length;
+
+                // Прогресс: берём первые 3 и последние 3 подхода
+                if (exSets.length >= 3) {
+                    const sorted = exSets.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    const first = sorted.slice(0, 3);
+                    const last = sorted.slice(-3);
+                    const firstAvg = first.reduce((s, set) => s + set.weight * set.reps, 0) / first.length;
+                    const lastAvg = last.reduce((s, set) => s + set.weight * set.reps, 0) / last.length;
+                    const diff = lastAvg - firstAvg;
+                    const pct = firstAvg > 0 ? (diff / firstAvg * 100) : 0;
+                    document.getElementById('chartProgress').textContent = (pct > 0 ? '+' : '') + pct.toFixed(0) + '%';
+                } else {
+                    document.getElementById('chartProgress').textContent = '—';
+                }
+
+                if (exSets.length < 2) {
+                    document.getElementById('chartNoData').style.display = 'block';
+                    canvas.style.display = 'none';
+                    return;
+                }
+                document.getElementById('chartNoData').style.display = 'none';
+                canvas.style.display = 'block';
+
+                // Группируем по дате и усредняем (берём средний 1ПМ за день)
+                const dateMap = {};
+                for (let set of exSets) {
+                    const date = set.date;
+                    if (!dateMap[date]) dateMap[date] = { total: 0, count: 0 };
+                    // Расчётный 1ПМ по формуле Бжицки
+                    const oneRM = set.weight * (36 / (37 - Math.min(set.reps, 36)));
+                    dateMap[date].total += oneRM;
+                    dateMap[date].count++;
+                }
+
+                const sortedDates = Object.keys(dateMap).sort();
+                const data = sortedDates.map(date => ({
+                    date: date,
+                    value: dateMap[date].total / dateMap[date].count
+                }));
+
+                // Рисуем график
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                const w = Math.floor(rect.width - 20);
+                const h = 200;
+
+                canvas.width = w * dpr;
+                canvas.height = h * dpr;
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                ctx.scale(dpr, dpr);
+
+                const textColor = 'rgba(255,255,255,0.4)';
+                const gridColor = 'rgba(0,231,255,0.06)';
+                const accentColor = '#00f0ff';
+                const fillGrad = ctx.createLinearGradient(0, 0, 0, h);
+                fillGrad.addColorStop(0, 'rgba(0, 240, 255, 0.15)');
+                fillGrad.addColorStop(1, 'rgba(0, 240, 255, 0.01)');
+
+                const padding = { top: 12, bottom: 20, left: 36, right: 8 };
+                const chartW = w - padding.left - padding.right;
+                const chartH = h - padding.top - padding.bottom;
+
+                const values = data.map(d => d.value);
+                const minVal = Math.max(0, Math.min(...values) - (Math.max(...values) - Math.min(...values)) * 0.1);
+                const maxVal = Math.max(...values) + (Math.max(...values) - Math.min(...values)) * 0.1;
+
+                // Сетка
+                ctx.strokeStyle = gridColor;
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= 4; i++) {
+                    const y = padding.top + (chartH / 4) * i;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(w - padding.right, y);
+                    ctx.stroke();
+                    const val = maxVal - ((maxVal - minVal) / 4) * i;
+                    ctx.fillStyle = textColor;
+                    ctx.font = '8px system-ui';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(val.toFixed(0), padding.left - 4, y + 3);
+                }
+
+                // Линия
+                ctx.beginPath();
+                ctx.strokeStyle = accentColor;
+                ctx.lineWidth = 2.5;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+
+                const points = [];
+                for (let i = 0; i < data.length; i++) {
+                    const x = padding.left + (i / (data.length - 1)) * chartW;
+                    const y = padding.top + chartH - ((data[i].value - minVal) / (maxVal - minVal)) * chartH;
+                    points.push({ x, y });
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Заливка
+                if (points.length > 1) {
+                    const lastX = points[points.length - 1].x;
+                    ctx.lineTo(lastX, padding.top + chartH);
+                    ctx.lineTo(points[0].x, padding.top + chartH);
+                    ctx.closePath();
+                    ctx.fillStyle = fillGrad;
+                    ctx.fill();
+                }
+
+                // Точки
+                for (let i = 0; i < points.length; i++) {
+                    const p = points[i];
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+                    ctx.fillStyle = accentColor;
+                    ctx.fill();
+                    ctx.strokeStyle = '#05070b';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    // Подписи дат
+                    if (i % 2 === 0 || i === points.length - 1) {
+                        ctx.fillStyle = textColor;
+                        ctx.font = '7px system-ui';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(data[i].date.slice(5), p.x, h - 2);
+                    }
+                }
+
+                // Линия рекорда
+                if (record > 0) {
+                    const yRecord = padding.top + chartH - ((record - minVal) / (maxVal - minVal)) * chartH;
+                    if (yRecord >= padding.top && yRecord <= padding.top + chartH) {
+                        ctx.setLineDash([4, 4]);
+                        ctx.strokeStyle = 'rgba(251, 191, 36, 0.3)';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.moveTo(padding.left, yRecord);
+                        ctx.lineTo(w - padding.right, yRecord);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = 'rgba(251, 191, 36, 0.6)';
+                        ctx.font = '7px system-ui';
+                        ctx.textAlign = 'left';
+                        ctx.fillText('🏆 ' + record + unit, w - padding.right - 40, yRecord - 4);
+                    }
+                }
             }
 
             // ============================================================
-            // 2. ДАННЫЕ
+            // 3. ДАННЫЕ
             // ============================================================
             const STORAGE_RECORDS = 'athlete_records_v5';
             const STORAGE_PROGRESS = 'athlete_progress_v5';
@@ -1699,7 +989,6 @@
                 'жим Арнольда', 'разведение гантелей лёжа'
             ];
 
-            // Категории упражнений
             const exerciseCategories = {
                 legs: ['жим ногами', 'присед', 'выпады с гантелями', 'румынская тяга',
                     'болгарский сплит-присед', 'сгибание ног лёжа', 'разгибание ног сидя',
@@ -1708,14 +997,15 @@
                 ],
                 chest: ['жим от груди', 'жим гантелей лёжа', 'разводка гантелей',
                     'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
-                    'отжимания с хлопком', 'жим гантелей лёжа'
+                    'отжимания с хлопком'
                 ],
                 back: ['тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
                     'гиперэкстензия', 'шраги с гантелями', 'подтягивания', 'тяга к поясу',
-                    'подтягивания обратным хватом', 'тяга штанги к подбородку'
+                    'подтягивания обратным хватом'
                 ],
                 shoulders: ['жим стоя', 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
-                    'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда'
+                    'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда',
+                    'тяга штанги к подбородку'
                 ],
                 arms: ['подъём на бицепс', 'французский жим', 'молотковые сгибания',
                     'концентрационные сгибания', 'жим из-за головы для трицепса',
@@ -1723,11 +1013,10 @@
                 ],
                 core: ['планка', 'скручивания', 'обратные скручивания', 'боковая планка'],
                 functional: ['запрыгивания на тумбу', 'берпи', 'махи гантелями', 'ягодичный мост',
-                    'подъём на носки стоя', 'жим платформы ногами'
+                    'подъём на носки стоя'
                 ]
             };
 
-            // Функция определения категории упражнения
             function getExerciseCategory(ex) {
                 for (let [cat, exercises] of Object.entries(exerciseCategories)) {
                     if (exercises.includes(ex)) return cat;
@@ -1735,7 +1024,10 @@
                 return 'other';
             }
 
-            const bodyweightExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания', 'обратные скручивания', 'боковая планка', 'запрыгивания на тумбу', 'отжимания с хлопком', 'подтягивания обратным хватом', 'приседания с прыжком'];
+            const bodyweightExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка', 'скручивания',
+                'обратные скручивания', 'боковая планка', 'запрыгивания на тумбу', 'отжимания с хлопком',
+                'подтягивания обратным хватом', 'приседания с прыжком'
+            ];
 
             function getUnitForExercise(ex) {
                 if (ex === 'планка') return 'сек';
@@ -1743,83 +1035,34 @@
                 return 'кг';
             }
 
-            const CHALLENGE_POOL = [
-                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
-                    reward: '⭐ +50' },
-                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
-                    reward: '⭐ +55' },
-                { name: '💪 Мощный прорыв', desc: 'Добавь 10 кг к любому рекорду', type: 'add_weight', target: 10,
-                    reward: '⭐ +70' },
-                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2,
-                    reward: '⭐ +45' },
-                { name: '💪 Три рекорда', desc: 'Обнови рекорды в 3 упражнениях', type: 'two_records', target: 3,
-                    reward: '⭐ +60' },
-                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20,
-                    reward: '⭐ +30' },
-                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25,
-                    reward: '⭐ +40' },
-                { name: '🔥 Железный человек', desc: 'Сделай 30 подходов за неделю', type: 'total_sets', target: 30,
-                    reward: '⭐ +50' },
-                { name: '🔥 Стальной характер', desc: 'Сделай 35 подходов за неделю', type: 'total_sets', target: 35,
-                    reward: '⭐ +60' },
-                { name: '🔥 Титановый объём', desc: 'Сделай 40 подходов за неделю', type: 'total_sets', target: 40,
-                    reward: '⭐ +70' },
-                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000,
-                    reward: '⭐ +40' },
-                { name: '🏋️ Тоннаж-гигант', desc: 'Набери 2500 кг тоннажа', type: 'total_volume', target: 2500,
-                    reward: '⭐ +50' },
-                { name: '🏋️ Тоннаж-монстр', desc: 'Набери 3000 кг тоннажа', type: 'total_volume', target: 3000,
-                    reward: '⭐ +60' },
-                { name: '📈 Прогресс-день', desc: 'Запиши текущий вес и рост', type: 'progress_entry', target: 1,
-                    reward: '⭐ +20' },
-                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3,
-                    reward: '⭐ +60' },
-                { name: '🎯 Разносторонний', desc: 'Рекорды в 5 разных упражнениях', type: 'three_exercises', target: 5,
-                    reward: '⭐ +70' },
-                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10,
-                    reward: '⭐ +40' },
-                { name: '🔥 Огненный подход', desc: '15 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 15,
-                    reward: '⭐ +50' },
-                { name: '⚡ Быстрый старт', desc: 'Сделай 5 подходов в первый день недели', type: 'first_day_sets',
-                    target: 5, reward: '⭐ +25' },
-                { name: '🎯 Постоянство', desc: 'Сделай подходы в 4 разных упражнениях', type: 'four_exercises',
-                    target: 4, reward: '⭐ +40' },
-                { name: '💪 Разнообразие', desc: 'Сделай подходы в 5 разных упражнениях', type: 'five_exercises',
-                    target: 5, reward: '⭐ +50' },
-                { name: '🏆 Золотая неделя', desc: 'Выполни все 5 челленджей', type: 'golden_week', target: 1,
-                    reward: '⭐ +150' },
-                { name: '🎯 Клуб 100', desc: 'Сделай 100 повторений за неделю', type: 'total_reps', target: 100,
-                    reward: '⭐ +45' },
-                { name: '💪 Ультиматум', desc: 'Добавь 20 кг к рекорду за месяц', type: 'monthly_goal', target: 20,
-                    reward: '⭐ +120' },
-                { name: '🔥 Два подхода в день', desc: 'Тренируйся 5 дней подряд', type: 'streak_days', target: 5,
-                    reward: '⭐ +45' },
-                { name: '🔥 Неделя силы', desc: 'Сделай подходы во все 7 дней', type: 'streak_days', target: 7,
-                    reward: '⭐ +65' },
-                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50,
-                    exercise: 'отжимания от пола', reward: '⭐ +40' },
-                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps',
-                    target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
-                { name: '💪 Берпи-машина', desc: 'Сделай 20 берпи за подход', type: 'bodyweight_reps', target: 20,
-                    exercise: 'берпи', reward: '⭐ +50' },
-                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100,
-                    exercise: 'отжимания от пола', reward: '⭐ +35' },
-                { name: '💪 Вис на турнике', desc: 'Сделай 30 подтягиваний за неделю', type: 'bodyweight_total', target: 30,
-                    exercise: 'подтягивания', reward: '⭐ +40' },
-                { name: '🏋️ Тяжёлая пятница', desc: 'Сделай 10 подходов в пятницу', type: 'friday_sets', target: 10,
-                    reward: '⭐ +35' },
-                { name: '💪 Мощный понедельник', desc: 'Сделай 8 подходов в понедельник', type: 'monday_sets', target: 8,
-                    reward: '⭐ +30' },
-                { name: '🔥 Огненная среда', desc: 'Сделай 12 подходов в среду', type: 'wednesday_sets', target: 12,
-                    reward: '⭐ +35' },
-                { name: '🎯 Идеальная техника', desc: 'Сделай 10 подходов с идеальной техникой', type: 'perfect_form',
-                    target: 10, reward: '⭐ +35' },
-                { name: '💪 Увеличение веса', desc: 'Увеличь средний вес в подходах на 5 кг', type: 'avg_weight_increase',
-                    target: 5, reward: '⭐ +45' },
-            ];
+            // ============================================================
+            // 4. ФУНКЦИЯ ОПРЕДЕЛЕНИЯ ТЕЛОСЛОЖЕНИЯ
+            // ============================================================
+            function getBodyType(weight, height) {
+                if (!weight || !height) return { type: 'неизвестно', bmi: 0, desc: 'Нет данных о весе и росте' };
+                const heightM = height / 100;
+                const bmi = weight / (heightM * heightM);
+                let type = '',
+                    desc = '',
+                    emoji = '';
+                if (bmi < 18.5) { type = 'худощавое';
+                    emoji = '🧘';
+                    desc = 'Тонкокостное телосложение, низкий процент жира.'; } else if (bmi < 19.5) { type = 'стройное';
+                    emoji = '🧘‍♂️';
+                    desc = 'Подтянутое, почти худощавое. Хорошая база для развития.'; } else if (bmi < 22.5) { type = 'среднее';
+                    emoji = '💪';
+                    desc = 'Сбалансированное телосложение.'; } else if (bmi < 25.5) { type = 'плотное';
+                    emoji = '🏋️';
+                    desc = 'Крепкое телосложение. Есть мышечная масса.'; } else if (bmi < 28.5) { type = 'крупное';
+                    emoji = '🦍';
+                    desc = 'Массивное телосложение. Есть избыточный вес.'; } else { type = 'избыточное';
+                    emoji = '⚖️';
+                    desc = 'Значительный избыточный вес.'; }
+                return { type, bmi, desc, emoji };
+            }
 
             // ============================================================
-            // 3. LOAD DATA
+            // 5. LOAD DATA
             // ============================================================
             function loadData() {
                 exerciseList = [...defaultExercises];
@@ -1898,7 +1141,7 @@
             }
 
             // ============================================================
-            // 4. CATEGORY TABS
+            // 6. CATEGORY TABS
             // ============================================================
             function getCategoryCounts() {
                 const counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
@@ -1921,14 +1164,13 @@
                 }
                 document.getElementById('recordCountBadge').textContent = counts.all + ' упражнений';
 
-                // Highlight active
                 document.querySelectorAll('.category-tab').forEach(tab => {
                     tab.classList.toggle('active', tab.dataset.category === currentCategory);
                 });
             }
 
             // ============================================================
-            // 5. RENDER RECORDS (with category filter)
+            // 7. RENDER RECORDS (с открытием графика по клику)
             // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
@@ -1946,7 +1188,6 @@
                     const cat = getExerciseCategory(ex);
                     const hash = generateHash(ex + w + d).slice(0, 5);
 
-                    // Filter by category
                     if (currentCategory !== 'all' && cat !== currentCategory) continue;
 
                     const div = document.createElement('div');
@@ -1958,21 +1199,9 @@
                         ${isBW && currentWeight ? `<div class="ex-bodyweight">⚖️ ${currentWeight} кг</div>` : ''}
                         <div class="hash-id">⛓️ #${hash}</div>
                     `;
+                    // Клик для открытия графика
                     div.addEventListener('click', function() {
-                        const val = prompt(`Новый результат для "${ex}" (${unit}):`, w);
-                        if (val !== null) {
-                            const num = parseFloat(val);
-                            if (!isNaN(num) && num > 0) {
-                                records[ex] = { weight: num, date: new Date().toISOString().slice(0, 10) };
-                                saveRecords();
-                                renderRecords();
-                                updateChart();
-                                updateChallenges();
-                                updateBlockHash();
-                                renderCategoryTabs();
-                                showToast(`✅ ${ex}: ${num} ${unit}`);
-                            } else showToast('❌ Введи корректное число', 1400);
-                        }
+                        openExerciseChart(ex);
                     });
                     container.appendChild(div);
                     visibleCount++;
@@ -1985,7 +1214,7 @@
             }
 
             // ============================================================
-            // 6. RENDER SETS
+            // 8. RENDER SETS
             // ============================================================
             function renderTodaySets() {
                 const container = document.getElementById('todaySetsContainer');
@@ -2006,11 +1235,11 @@
                     div.className = 'set-item';
                     div.innerHTML = `
                         <div class="set-info">
-                            <span style="font-weight:600;font-size:0.75rem;color:var(--text-secondary);">${set.exercise}</span>
+                            <span>${set.exercise}</span>
                             <span class="set-weight">${set.weight} кг</span>
                             <span class="set-reps">× ${set.reps} повт.</span>
-                            <span style="font-size:0.55rem;color:var(--text-muted);">${set.time || ''}</span>
-                            <span class="chain-stamp" style="font-size:0.3rem;">⛓️ #${(set.id+'').slice(-4)}</span>
+                            <span style="font-size:0.6rem;color:var(--text-muted);">${set.time || ''}</span>
+                            <span class="chain-stamp" style="font-size:0.35rem;">⛓️ #${(set.id+'').slice(-4)}</span>
                         </div>
                         <button class="set-delete" data-id="${set.id}">✕</button>
                     `;
@@ -2080,7 +1309,7 @@
             }
 
             // ============================================================
-            // 7. PROGRESS
+            // 9. PROGRESS
             // ============================================================
             function renderProgress() {
                 const wDisplay = document.getElementById('currentWeightDisplay');
@@ -2130,7 +1359,7 @@
             }
 
             // ============================================================
-            // 8. CHART
+            // 10. CHART (вес тела)
             // ============================================================
             let chartRAF = null;
 
@@ -2146,7 +1375,7 @@
                     const rect = canvas.parentElement.getBoundingClientRect();
                     const dpr = window.devicePixelRatio || 1;
                     const w = Math.floor(rect.width - 16);
-                    const h = 110;
+                    const h = 120;
                     canvas.width = w * dpr;
                     canvas.height = h * dpr;
                     canvas.style.width = w + 'px';
@@ -2160,7 +1389,7 @@
                     const data = progressData.slice().reverse();
                     if (data.length < 2) {
                         ctx.fillStyle = textColor;
-                        ctx.font = '11px system-ui';
+                        ctx.font = '12px system-ui';
                         ctx.textAlign = 'center';
                         ctx.fillText('Добавь больше данных', w / 2, h / 2);
                         return;
@@ -2184,14 +1413,14 @@
                         ctx.stroke();
                         const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
                         ctx.fillStyle = textColor;
-                        ctx.font = '6px system-ui';
+                        ctx.font = '7px system-ui';
                         ctx.textAlign = 'right';
                         ctx.fillText(val.toFixed(0), padding.left - 2, y + 2);
                     }
 
                     ctx.beginPath();
                     ctx.strokeStyle = accentColor;
-                    ctx.lineWidth = 2;
+                    ctx.lineWidth = 2.5;
                     ctx.lineJoin = 'round';
                     ctx.lineCap = 'round';
 
@@ -2207,15 +1436,15 @@
                         const x = padding.left + (i / (data.length - 1)) * chartW;
                         const y = padding.top + chartH - ((data[i].weight - minWeight) / (maxWeight - minWeight)) * chartH;
                         ctx.beginPath();
-                        ctx.arc(x, y, 3, 0, Math.PI * 2);
+                        ctx.arc(x, y, 4, 0, Math.PI * 2);
                         ctx.fillStyle = accentColor;
                         ctx.fill();
                         ctx.strokeStyle = '#05070b';
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 1.2;
                         ctx.stroke();
                         if (i % 2 === 0 || i === data.length - 1) {
                             ctx.fillStyle = textColor;
-                            ctx.font = '5px system-ui';
+                            ctx.font = '6px system-ui';
                             ctx.textAlign = 'center';
                             ctx.fillText(data[i].date.slice(5), x, h - 2);
                         }
@@ -2225,7 +1454,7 @@
             }
 
             // ============================================================
-            // 9. FORECAST with BODY WEIGHT
+            // 11. FORECAST
             // ============================================================
             function renderForecast() {
                 const container = document.getElementById('forecastContainer');
@@ -2233,20 +1462,18 @@
                 if (saved) {
                     try {
                         const data = JSON.parse(saved);
-                        const bwNote = data.bodyWeight ? `⚖️ Вес тела: ${data.bodyWeight} кг` :
-                            '⚖️ Вес тела не учтён (нет данных)';
                         container.innerHTML = `
                             <div class="forecast-card">
-                                <div style="font-size:0.7rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
+                                <div style="font-size:0.75rem;color:var(--text-muted);">🎯 ${data.exercise}</div>
                                 <div class="target">${data.target} ${data.unit || 'кг'}</div>
                                 <div class="date">Прогноз: ${data.forecastDate}</div>
                                 <div class="confidence">${data.confidence}</div>
                                 <div class="progress-bar"><div class="fill" style="width:${data.progress}%"></div></div>
-                                <div style="font-size:0.6rem;color:var(--text-muted);margin-top:2px;">
+                                <div style="font-size:0.65rem;color:var(--text-muted);margin-top:3px;">
                                     Текущий: ${data.current} ${data.unit || 'кг'} · ${data.progress}% до цели
                                 </div>
-                                ${data.weeksToGoal ? `<div style="font-size:0.6rem;color:var(--gold);margin-top:2px;">📊 ${data.weeksToGoal}</div>` : ''}
-                                <div class="bw-note">${bwNote}</div>
+                                ${data.weeksToGoal ? `<div style="font-size:0.65rem;color:var(--gold);margin-top:3px;">📊 ${data.weeksToGoal}</div>` : ''}
+                                <div class="bw-note">⚖️ Вес: ${data.bodyWeight || '—'} кг · темп: ${data.usedAvgProgress || '—'}/нед</div>
                             </div>
                         `;
                         return;
@@ -2273,21 +1500,17 @@
                 const diff = target - current;
                 const exSets = sets.filter(s => s.exercise === ex);
 
-                // Базовый темп прогрессии с учётом веса тела
                 let avgProgress = (unit === 'сек') ? 5 : (unit === 'повторов') ? 2 : 2.5;
 
-                // Корректировка для упражнений с весом тела
                 if (isBW) {
-                    if (currentWeight >= 90) avgProgress *= 0.7; // тяжелым тяжелее прогрессировать
-                    else if (currentWeight <= 65) avgProgress *= 1.3; // легким легче
+                    if (currentWeight >= 90) avgProgress *= 0.7;
+                    else if (currentWeight <= 65) avgProgress *= 1.3;
                 } else {
-                    // Для упражнений с отягощениями учитываем относительную силу
                     const relativeStrength = current / currentWeight;
                     if (relativeStrength > 1.5) avgProgress *= 1.1;
                     else if (relativeStrength < 0.8) avgProgress *= 0.9;
                 }
 
-                // Если есть исторические данные - используем их
                 if (exSets.length > 3) {
                     const sorted = exSets.sort((a, b) => new Date(a.date) - new Date(b.date));
                     const first = sorted[0];
@@ -2295,7 +1518,6 @@
                     const weeks = Math.max(1, (new Date(last.date) - new Date(first.date)) / (7 * 24 * 60 * 60 * 1000));
                     const wDiff = last.weight - first.weight;
                     const historicalAvg = Math.max(0.3, wDiff / weeks);
-                    // Смешиваем исторический и базовый темп (70/30)
                     avgProgress = historicalAvg * 0.7 + avgProgress * 0.3;
                 }
 
@@ -2327,11 +1549,11 @@
                 };
                 localStorage.setItem('last_forecast', JSON.stringify(data));
                 renderForecast();
-                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr} (вес ${currentWeight} кг учтён)`);
+                showToast(`🔮 Прогноз: ${target} ${unit} к ${dateStr}`);
             }
 
             // ============================================================
-            // 10. CHALLENGES
+            // 12. CHALLENGES (сокращённо)
             // ============================================================
             function getWeekStart() {
                 const now = new Date();
@@ -2350,6 +1572,31 @@
                 if (today >= weekStart) allSets = allSets.concat(sets.filter(s => s.date === today));
                 return allSets;
             }
+
+            const CHALLENGE_POOL = [
+                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
+                    reward: '⭐ +50' },
+                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
+                    reward: '⭐ +55' },
+                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2,
+                    reward: '⭐ +45' },
+                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20,
+                    reward: '⭐ +30' },
+                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25,
+                    reward: '⭐ +40' },
+                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000,
+                    reward: '⭐ +40' },
+                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3,
+                    reward: '⭐ +60' },
+                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10,
+                    reward: '⭐ +40' },
+                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50,
+                    exercise: 'отжимания от пола', reward: '⭐ +40' },
+                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps',
+                    target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
+                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100,
+                    exercise: 'отжимания от пола', reward: '⭐ +35' },
+            ];
 
             function generateChallenges() {
                 const weekStart = getWeekStart();
@@ -2416,9 +1663,6 @@
                         case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0);
                             progress = Math.min(ch.target, vol);
                             if (vol >= ch.target) isCompleted = true; break; }
-                        case 'streak_days': { const days = new Set(allWeeklySets.map(s => s.date));
-                            progress = Math.min(ch.target, days.size);
-                            if (days.size >= ch.target) isCompleted = true; break; }
                         case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch
                                     .exercise].weight || 0;
                                 progress = Math.min(ch.target, cur);
@@ -2427,27 +1671,6 @@
                                     .exercise === ch.exercise).reduce((s, set) => s + set.reps, 0);
                                 progress = Math.min(ch.target, total);
                                 if (total >= ch.target) isCompleted = true; } break; }
-                        case 'friday_sets': { const friday = new Date();
-                            friday.setDate(friday.getDate() + (5 - friday.getDay()));
-                            const fStr = friday.toISOString().slice(0, 10);
-                            const cnt = allWeeklySets.filter(s => s.date === fStr).length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'monday_sets': { const monday = new Date();
-                            monday.setDate(monday.getDate() + (1 - monday.getDay()));
-                            const mStr = monday.toISOString().slice(0, 10);
-                            const cnt = allWeeklySets.filter(s => s.date === mStr).length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'wednesday_sets': { const wed = new Date();
-                            wed.setDate(wed.getDate() + (3 - wed.getDay()));
-                            const wStr = wed.toISOString().slice(0, 10);
-                            const cnt = allWeeklySets.filter(s => s.date === wStr).length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'progress_entry': { const cnt = progressData.filter(p => p.date >= weekStart).length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
                         case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k]
                                 .weight > 0);
                             progress = Math.min(ch.target, exWithRecords.length);
@@ -2456,51 +1679,6 @@
                                     .exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 +
                                         0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch
                                     .target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'first_day_sets': { const monday = new Date(weekStart);
-                            const mStr = monday.toISOString().slice(0, 10);
-                            const cnt = allWeeklySets.filter(s => s.date === mStr).length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'perfect_form': { const cnt = allWeeklySets.length;
-                            progress = Math.min(ch.target, cnt);
-                            if (cnt >= ch.target) isCompleted = true; break; }
-                        case 'avg_weight_increase': {
-                            const prevWeek = new Date(weekStart);
-                            prevWeek.setDate(prevWeek.getDate() - 7);
-                            const prevStr = prevWeek.toISOString().slice(0, 10);
-                            let prevSets = [];
-                            for (let date in weeklySets) { if (date >= prevStr && date < weekStart) prevSets =
-                                    prevSets.concat(weeklySets[date]); }
-                            const curAvg = allWeeklySets.length > 0 ? allWeeklySets.reduce((s, set) => s + set.weight,
-                                0) / allWeeklySets.length : 0;
-                            const prevAvg = prevSets.length > 0 ? prevSets.reduce((s, set) => s + set.weight, 0) /
-                                prevSets.length : 0;
-                            const diff = curAvg - prevAvg;
-                            progress = Math.min(ch.target, diff);
-                            if (diff >= ch.target) isCompleted = true;
-                            break;
-                        }
-                        case 'four_exercises': { const exs = new Set(allWeeklySets.map(s => s.exercise));
-                            progress = Math.min(ch.target, exs.size);
-                            if (exs.size >= ch.target) isCompleted = true; break; }
-                        case 'five_exercises': { const exs = new Set(allWeeklySets.map(s => s.exercise));
-                            progress = Math.min(ch.target, exs.size);
-                            if (exs.size >= ch.target) isCompleted = true; break; }
-                        case 'golden_week': { const allDone = weekChallenges.every(c => c.completed || c.id === ch.id);
-                            progress = allDone ? 1 : 0;
-                            if (allDone) isCompleted = true; break; }
-                        case 'total_reps': { const reps = allWeeklySets.reduce((s, set) => s + set.reps, 0);
-                            progress = Math.min(ch.target, reps);
-                            if (reps >= ch.target) isCompleted = true; break; }
-                        case 'monthly_goal': { const monthAgo = new Date();
-                            monthAgo.setDate(monthAgo.getDate() - 30);
-                            const mStr = monthAgo.toISOString().slice(0, 10);
-                            const curMax = Math.max(...Object.values(records).map(r => r.weight));
-                            const oldMax = Math.max(...Object.values(records).filter(r => r.date < mStr).map(r => r
-                            .weight));
-                            const diff = curMax - (oldMax || 0);
-                            progress = Math.min(ch.target, diff);
-                            if (diff >= ch.target) isCompleted = true; break; }
                         default: { progress = 0;
                             isCompleted = false; }
                     }
@@ -2559,7 +1737,7 @@
             }
 
             // ============================================================
-            // 11. REPORTS
+            // 13. REPORTS
             // ============================================================
             function renderReport() {
                 const container = document.getElementById('reportContainer');
@@ -2584,44 +1762,41 @@
                 const bwCount = bodyweightExercises.filter(ex => records[ex] && records[ex].weight > 0).length;
 
                 container.innerHTML = `
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
                         <div class="stat-box"><label>Подходов</label><div class="value">${totalSets}</div><div class="unit">за неделю</div></div>
                         <div class="stat-box"><label>Тоннаж</label><div class="value">${totalVolume}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Ср. вес</label><div class="value">${avgWeight.toFixed(1)}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Рекордов</label><div class="value">${recordsCount}</div><div class="unit">всего</div></div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);">
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
                             <span style="color:var(--text-muted);">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${bestEx}: ${maxRecord} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">💪 Упражнений с весом тела</span>
                             <span style="font-weight:700;">${bwCount}/${bodyweightExercises.length}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">📊 Изменение тоннажа</span>
                             <span style="font-weight:700;color:${volChange >= 0 ? '#54ff8f' : '#ff315c'};">${volChange >= 0 ? '↑' : '↓'} ${Math.abs(volChange).toFixed(0)}%</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-top:3px;">
                             <span style="color:var(--text-muted);">🎯 Челленджи</span>
                             <span style="font-weight:700;">${challenges.filter(c => c.week === weekStart && c.completed).length}/${challenges.filter(c => c.week === weekStart).length}</span>
                         </div>
                     </div>
-                    <div style="margin-top:6px;text-align:center;font-size:0.5rem;color:var(--text-muted);letter-spacing:0.3px;">📅 Отчёт за неделю ${weekStart}</div>
+                    <div style="margin-top:8px;text-align:center;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.4px;">📅 Отчёт за неделю ${weekStart}</div>
                 `;
             }
 
             // ============================================================
-            // 12. AI TRAINER
+            // 14. AI ТРЕНЕР (сокращённо, но с учётом телосложения)
             // ============================================================
             function getFitnessLevel() {
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
                 const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
-                const bmi = currentWeight / ((currentHeight / 100) ** 2);
-                let bodyType = 'среднее';
-                if (bmi < 18.5) bodyType = 'лёгкое';
-                else if (bmi >= 25) bodyType = 'тяжёлое';
+                const bodyInfo = getBodyType(currentWeight, currentHeight);
 
                 const strengthExercises = ['жим от груди', 'присед со штангой', 'становая тяга'];
                 let strengthScores = {};
@@ -2677,8 +1852,12 @@
                 if (avgStrength < 0.8) weakPoints.push('💪 сила');
                 if (avgEndurance < 0.4) weakPoints.push('🏃 выносливость');
                 if (Object.keys(records).filter(k => records[k].weight > 0).length < 10) weakPoints.push('🎯 разнообразие');
-                if (bodyType === 'тяжёлое' && avgEndurance < 0.5) weakPoints.push('⚖️ лишний вес (выносливость)');
-                if (bodyType === 'лёгкое' && avgStrength < 0.7) weakPoints.push('⚖️ недостаток массы (сила)');
+
+                if (bodyInfo.type === 'худощавое' || bodyInfo.type === 'стройное') {
+                    if (avgStrength < 1.0) weakPoints.push('⚖️ набор мышечной массы');
+                } else if (bodyInfo.type === 'крупное' || bodyInfo.type === 'избыточное') {
+                    if (avgEndurance < 0.5) weakPoints.push('⚖️ снижение веса (выносливость)');
+                }
 
                 return {
                     level,
@@ -2690,7 +1869,10 @@
                     totalSets: getAllWeeklySets().length,
                     weakPoints,
                     exWithRecordsCount: Object.keys(records).filter(k => records[k].weight > 0).length,
-                    bodyType,
+                    bodyType: bodyInfo.type,
+                    bodyEmoji: bodyInfo.emoji,
+                    bodyDesc: bodyInfo.desc,
+                    bodyBMI: bodyInfo.bmi,
                     currentWeight,
                     athleteType,
                     avgStrength,
@@ -2706,6 +1888,15 @@
                 let days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
                 let exercises = [];
                 let focus = '';
+
+                let bodyGoal = '';
+                if (bodyType === 'худощавое' || bodyType === 'стройное') {
+                    bodyGoal = '🎯 Цель: набор мышечной массы. Нужен профицит калорий (+200-300 ккал/день).';
+                } else if (bodyType === 'крупное' || bodyType === 'избыточное') {
+                    bodyGoal = '🎯 Цель: улучшение композиции тела. Нужен дефицит калорий (-200-300 ккал/день) и кардио.';
+                } else {
+                    bodyGoal = '🎯 Цель: поддержание формы и прогресс в силовых показателях.';
+                }
 
                 if (athleteType === 'силовой') {
                     focus = 'Силовая тренировка (нейромышечная адаптация)';
@@ -2745,12 +1936,13 @@
                     ];
                 }
 
-                if (bodyType === 'тяжёлое') {
-                    if (!exercises.some(e => e[0] === 'Отжимания от пола')) {
-                        exercises.splice(1, 0, ['Отжимания от пола', '3×10-15', 'вес тела']);
+                if (bodyType === 'худощавое' || bodyType === 'стройное') {
+                    if (!exercises.some(e => e[0] === 'Становая тяга')) {
+                        exercises.push(['Становая тяга', '3×8', '75% от 1ПМ']);
                     }
-                    if (!exercises.some(e => e[0] === 'Планка')) {
-                        exercises.push(['Планка', '3×30-45с', 'статика']);
+                } else if (bodyType === 'крупное' || bodyType === 'избыточное') {
+                    if (!exercises.some(e => e[0] === 'Берпи')) {
+                        exercises.push(['Берпи', '3×12-15', 'вес тела']);
                     }
                     exercises = exercises.map(e => {
                         if (e[0] === 'Присед со штангой' || e[0] === 'Присед') {
@@ -2758,13 +1950,6 @@
                         }
                         return e;
                     });
-                } else if (bodyType === 'лёгкое') {
-                    if (!exercises.some(e => e[0] === 'Становая тяга')) {
-                        exercises.push(['Становая тяга', '3×8', '75% от 1ПМ']);
-                    }
-                    if (!exercises.some(e => e[0] === 'Жим от груди')) {
-                        exercises.splice(0, 0, ['Жим от груди', '4×8-10', '75% от 1ПМ']);
-                    }
                 }
 
                 let progressionAdvice = '';
@@ -2772,39 +1957,57 @@
                 else if (avgStrength < 1.0) progressionAdvice = 'Добавляй по 2-5 кг в базовых упражнениях раз в 1-2 недели.';
                 else progressionAdvice = 'Используй микро-прогрессию (0.5-1 кг) и периодизацию нагрузок.';
 
+                let nutritionAdvice = '';
+                if (bodyType === 'худощавое' || bodyType === 'стройное') {
+                    nutritionAdvice =
+                        '🍽️ Рекомендация: увеличь потребление белка (2-2.2 г/кг веса) и углеводов. Ешь 4-5 раз в день.';
+                } else if (bodyType === 'крупное' || bodyType === 'избыточное') {
+                    nutritionAdvice =
+                        '🍽️ Рекомендация: высокобелковая диета (2-2.5 г/кг), умеренные углеводы, здоровые жиры. Пей больше воды.';
+                } else {
+                    nutritionAdvice =
+                        '🍽️ Рекомендация: сбалансированное питание с достаточным количеством белка (1.8-2 г/кг веса).';
+                }
+
                 const weekDays = days.slice(0, 4);
                 msg.innerHTML = `
-                    <div style="margin-bottom:6px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;">
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
                             <span style="font-weight:800;color:var(--cyan);">🤖 Уровень: ${analysis.level}</span>
                             <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
                         </div>
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:3px;font-weight:500;">
                             <span>💪 Сила: ${analysis.strengthScore} · 🏃 Выносливость: ${analysis.enduranceScore}</span>
                         </div>
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
                             <span>⚖️ Вес: ${currentWeight} кг · 🧬 Тип: ${analysis.athleteType}</span>
                         </div>
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
+                            <span>${analysis.bodyEmoji} Телосложение: ${analysis.bodyType} (BMI: ${analysis.bodyBMI.toFixed(1)})</span>
+                        </div>
+                        <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:2px;font-weight:500;">
                             <span>🎯 Фокус: ${focus}</span>
                         </div>
-                        ${analysis.weakPoints.length > 0 ? `<div style="font-size:0.65rem;color:var(--gold);margin-top:1px;font-weight:600;">🎯 Работай над: ${analysis.weakPoints.join(', ')}</div>` : ''}
-                        <div style="font-size:0.65rem;color:var(--text-secondary);margin-top:1px;font-weight:500;">
-                            <span>📋 Всего упражнений: ${analysis.exWithRecordsCount}/${exerciseList.length}</span>
+                        <div style="font-size:0.7rem;color:var(--gold);margin-top:2px;font-weight:600;">
+                            ${bodyGoal}
                         </div>
+                        ${analysis.weakPoints.length > 0 ? `<div style="font-size:0.7rem;color:var(--pink);margin-top:2px;font-weight:600;">⚠️ Работай над: ${analysis.weakPoints.join(', ')}</div>` : ''}
                     </div>
-                    <div style="font-size:0.55rem;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">📋 Программа на неделю (4 дня)</div>
+                    <div style="font-size:0.55rem;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">📋 Программа на неделю (4 дня)</div>
                     ${weekDays.map((day, i) => `
                         <div class="ai-program">
                             <div class="day">${day}</div>
                             ${exercises.map(ex => `
                                 <div class="exercise"><strong>${ex[0]}</strong> — ${ex[1]}, ${ex[2]}</div>
                             `).join('')}
-                            <div class="exercise" style="color:var(--text-muted);font-size:0.6rem;margin-top:2px;">💡 Разминка 10 мин, заминка 5 мин</div>
+                            <div class="exercise" style="color:var(--text-muted);font-size:0.6rem;margin-top:3px;">💡 Разминка 10 мин, заминка 5 мин</div>
                         </div>
                     `).join('')}
-                    <div style="font-size:0.6rem;color:var(--text-muted);margin-top:4px;font-weight:500;">
+                    <div style="font-size:0.6rem;color:var(--text-muted);margin-top:6px;font-weight:500;">
                         💡 ${progressionAdvice}
+                    </div>
+                    <div style="font-size:0.6rem;color:var(--gold);margin-top:4px;font-weight:500;border-top:1px solid rgba(255,255,255,0.04);padding-top:6px;">
+                        ${nutritionAdvice}
                     </div>
                 `;
                 showToast('📋 Программа сгенерирована!', 1600);
@@ -2828,25 +2031,18 @@
                 advice += `📊 Подходов за неделю: ${totalSets}. `;
                 advice += `⚖️ Вес тела: ${currentWeight} кг. `;
                 advice += `📈 Уровень: ${analysis.level}. `;
+                advice += `🧬 Телосложение: ${analysis.bodyType} (${analysis.bodyEmoji}). `;
 
-                if (analysis.athleteType === 'силовой') {
-                    advice += '💪 Ты явно силовой атлет. Добавь больше упражнений на выносливость (отжимания, берпи, планка) для баланса.';
-                } else if (analysis.athleteType === 'выносливый') {
-                    advice += '🏃 Отличная выносливость! Поработай над силой: добавь базовые упражнения с отягощениями (жим, присед, становая).';
-                } else if (analysis.athleteType === 'элитный') {
-                    advice += '🔥 Ты на вершине! Поддерживай форму с помощью периодизации и микро-прогрессии.';
-                } else {
-                    advice += '📈 Начни с освоения техники базовых упражнений. Увеличивай нагрузку постепенно.';
+                if (analysis.bodyType === 'худощавое' || analysis.bodyType === 'стройное') {
+                    advice +=
+                        '🧘 Ты относишься к эктоморфному типу — трудно набираешь массу. Сосредоточься на базовых упражнениях с отягощениями и увеличь калорийность рациона. ';
+                } else if (analysis.bodyType === 'крупное' || analysis.bodyType === 'избыточное') {
+                    advice +=
+                        '⚖️ Твоя основная цель — улучшить композицию тела. Добавь кардио 2-3 раза в неделю и работай над выносливостью. ';
                 }
 
                 if (analysis.weakPoints.length > 0) {
                     advice += ' 🎯 Слабые места: ' + analysis.weakPoints.join(', ');
-                }
-
-                const hasPushups = records['отжимания от пола'] && records['отжимания от пола'].weight > 0;
-                const hasPullups = records['подтягивания'] && records['подтягивания'].weight > 0;
-                if (!hasPushups || !hasPullups) {
-                    advice += ' 💪 Добавь отжимания и подтягивания для функциональной формы!';
                 }
 
                 msg.innerHTML = `💡 ${advice}`;
@@ -2874,64 +2070,65 @@
                 if (analysis.enduranceScore < 45) recs.push('🏃 Добавь отжимания, подтягивания, берпи, планку.');
                 if (analysis.totalSets < 20) recs.push('📊 Делай 20-30 подходов в неделю для роста.');
                 if (exWithRecords.length < 10) recs.push('🎯 Попробуй новые упражнения из списка 57 для разнообразия.');
-                if (analysis.bodyType === 'тяжёлое' && analysis.enduranceScore < 40)
-                    recs.push('⚖️ Работай над выносливостью для улучшения композиции тела.');
-                if (analysis.bodyType === 'лёгкое' && analysis.strengthScore < 40)
-                    recs.push('⚖️ Набирай массу с помощью базовых упражнений и профицита калорий.');
+
+                if (analysis.bodyType === 'худощавое' || analysis.bodyType === 'стройное') {
+                    recs.push(
+                        '🍽️ Набор массы: профицит калорий +200-300 ккал, белок 2-2.2 г/кг, базовые упражнения 3-4 раза в неделю.');
+                } else if (analysis.bodyType === 'крупное' || analysis.bodyType === 'избыточное') {
+                    recs.push(
+                        '⚖️ Снижение веса: дефицит калорий -200-300 ккал, белок 2-2.5 г/кг, кардио 2-3 раза в неделю.');
+                }
+
                 if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
 
                 msg.innerHTML = `
-                    <div style="margin-bottom:6px;">
-                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;">
+                    <div style="margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;">
                             <span style="font-weight:800;color:var(--cyan);">📊 Уровень: ${analysis.level}</span>
                             <span style="font-weight:800;color:var(--cyan);">📊 Рейтинг: ${analysis.totalScore}/100</span>
                         </div>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:6px;">
-                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
-                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">💪 Сила</div>
-                            <div style="font-size:1.1rem;font-weight:800;color:var(--cyan);">${analysis.strengthScore}</div>
-                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;">
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">💪 Сила</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
-                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">🏃 Выносливость</div>
-                            <div style="font-size:1.1rem;font-weight:800;color:var(--purple);">${analysis.enduranceScore}</div>
-                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🏃 Выносливость</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:6px;border-radius:10px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
-                            <div style="font-size:0.4rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;">⚖️ Телосложение</div>
-                            <div style="font-size:1.1rem;font-weight:800;color:var(--gold);">${analysis.bodyType}</div>
-                            <div style="font-size:0.4rem;color:var(--text-secondary);font-weight:600;">${analysis.currentWeight} кг</div>
+                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                            <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🧬 Тело</div>
+                            <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">${analysis.bodyEmoji}</div>
+                            <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${analysis.bodyType}</div>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-bottom:4px;">
-                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;">
+                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);margin-bottom:6px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
                             <span style="color:var(--text-muted);font-weight:500;">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${analysis.maxWeight} кг</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
                             <span style="color:var(--text-muted);font-weight:500;">🎯 Тип атлета</span>
                             <span style="font-weight:700;">${analysis.athleteType}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
-                            <span style="color:var(--text-muted);font-weight:500;">📋 Упражнений с рекордами</span>
-                            <span style="font-weight:700;">${exWithRecords.length}/${exerciseList.length}</span>
-                        </div>
-                        <div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;">
-                            <span style="color:var(--text-muted);font-weight:500;">🎯 Фокус</span>
-                            <span style="font-weight:700;">${analysis.focus}</span>
+                        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-top:2px;">
+                            <span style="color:var(--text-muted);font-weight:500;">⚖️ BMI</span>
+                            <span style="font-weight:700;">${analysis.bodyBMI.toFixed(1)} (${analysis.bodyType})</span>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:10px;border-left:3px solid var(--gold);">
-                        <div style="font-weight:700;font-size:0.75rem;color:var(--gold);">📋 Рекомендации</div>
-                        ${recs.map(r => `<div style="font-size:0.65rem;color:var(--text-secondary);padding:1px 0;font-weight:500;">• ${r}</div>`).join('')}
+                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border-left:3px solid var(--gold);">
+                        <div style="font-weight:700;font-size:0.8rem;color:var(--gold);">📋 Рекомендации</div>
+                        ${recs.map(r => `<div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
                     </div>
                 `;
                 showToast('📊 Анализ завершён!', 1200);
             }
 
             // ============================================================
-            // 13. CALCULATOR
+            // 15. CALCULATOR
             // ============================================================
             function calc1RM() {
                 const weight = parseFloat(document.getElementById('calcWeight').value);
@@ -2974,7 +2171,7 @@
             }
 
             // ============================================================
-            // 14. NAVIGATION
+            // 16. NAVIGATION
             // ============================================================
             window.navigateTo = function(pageId) {
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -3001,12 +2198,12 @@
                 if (pageId === 'ai') {
                     const analysis = getFitnessLevel();
                     document.getElementById('aiStatus').textContent =
-                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Тип: ${analysis.athleteType}`;
+                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
                 }
             };
 
             // ============================================================
-            // 15. BLOCKCHAIN HASH
+            // 17. BLOCKCHAIN HASH
             // ============================================================
             function generateHash(str) {
                 let hash = 0;
@@ -3033,19 +2230,39 @@
             }
 
             // ============================================================
-            // 16. INIT
+            // 18. TOAST
+            // ============================================================
+            let toastTimer = null;
+
+            function showToast(text, duration = 1800) {
+                const el = document.getElementById('toast');
+                el.textContent = text;
+                el.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => el.classList.remove('show'), duration);
+            }
+
+            function showAchievementToast(icon, title, desc) {
+                document.getElementById('achToastIcon').textContent = icon;
+                document.getElementById('achToastTitle').textContent = title;
+                document.getElementById('achToastDesc').textContent = desc;
+                document.getElementById('achievementToast').classList.add('show');
+                if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
+            }
+
+            // ============================================================
+            // 19. INIT
             // ============================================================
             function init() {
                 loadData();
                 updateExerciseSelects();
 
-                // Category tabs click handler
+                // Category tabs
                 document.querySelectorAll('.category-tab').forEach(tab => {
                     tab.addEventListener('click', function() {
                         currentCategory = this.dataset.category;
                         saveCategory();
                         renderRecords();
-                        // Update active state
                         document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
                         this.classList.add('active');
                     });
@@ -3124,10 +2341,10 @@
 
                 const analysis = getFitnessLevel();
                 document.getElementById('aiStatus').textContent =
-                    `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | Тип: ${analysis.athleteType}`;
+                    `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
 
                 setTimeout(calc1RM, 150);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.5 с категориями и учётом веса');
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.7 с графиками упражнений');
             }
 
             document.addEventListener('DOMContentLoaded', init);
