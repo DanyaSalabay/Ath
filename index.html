@@ -60,7 +60,6 @@
             background-size: 40px 40px; pointer-events: none; z-index: 0;
         }
 
-        /* ===== ШИРИНА ПРИЛОЖЕНИЯ ===== */
         .app {
             max-width: 1440px;
             width: 100%;
@@ -74,7 +73,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.25); border-radius: 10px; }
 
-        /* ---------- ANIMATIONS ---------- */
         @keyframes fade-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
         .card, .exercise-card, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card {
             animation: fade-in 0.4s ease both; will-change: transform, opacity;
@@ -104,7 +102,6 @@
             display: flex; align-items: center; gap: 6px;
         }
         .header h1 .sub { font-size: 0.35em; font-weight: 300; letter-spacing: 0.12em; -webkit-text-fill-color: rgba(255,255,255,0.2); background: none; text-transform: uppercase; }
-        .header h1 .hash-badge { font-size: 0.2em; font-weight: 800; -webkit-text-fill-color: var(--neon-green); background: rgba(74,222,128,0.08); padding: 0.08em 0.6em; border-radius: 40px; border: 1px solid rgba(74,222,128,0.12); letter-spacing: 0.04em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
         .header-left { display: flex; align-items: center; gap: 12px; }
         .header-logo { width: 48px; height: 48px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; background: var(--bg-card); }
         .header-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -418,190 +415,118 @@
         }
 
         /* ============================================================
-           АДАПТИВНОСТЬ ДЛЯ ДЕСКТОПА (шире 768px)
+           СПРАВОЧНИК
+           ============================================================ */
+        .guide-section {
+            margin-bottom: 16px;
+        }
+        .guide-section h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            padding-bottom: 6px;
+        }
+        .guide-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.75rem;
+            gap: 8px;
+        }
+        .guide-item .guide-ex {
+            color: var(--text-secondary);
+            font-weight: 500;
+            flex: 1;
+        }
+        .guide-item .guide-rule {
+            color: var(--gold);
+            font-weight: 600;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .guide-item .guide-rule.single-arm {
+            color: var(--pink);
+        }
+        .guide-item .guide-rule.bw {
+            color: var(--neon-green);
+        }
+
+        /* ============================================================
+           АДАПТИВНОСТЬ ДЛЯ ДЕСКТОПА
            ============================================================ */
         @media (min-width: 768px) {
-            .app {
-                padding: 28px 40px 100px;
-            }
-            #page-records.active {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
-            #page-progress.active {
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-            }
+            .app { padding: 28px 40px 100px; }
+            #page-records.active { grid-template-columns: 1fr 1fr; gap: 24px; }
+            #page-progress.active { grid-template-columns: 1fr 1fr; gap: 24px; }
             #page-challenges.active,
             #page-ai.active,
             #page-forecast.active,
-            #page-reports.active {
+            #page-reports.active,
+            #page-guide.active {
                 grid-template-columns: 1fr;
                 max-width: 800px;
                 margin: 0 auto;
             }
-            .exercise-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
-            }
-            .exercise-card {
-                min-height: 120px;
-                padding: 12px 10px;
-            }
-            .exercise-card .ex-name {
-                font-size: 0.65rem;
-                margin-top: 18px;
-            }
-            .exercise-card .ex-weight {
-                font-size: clamp(1.4rem, 2.5vw, 2rem);
-            }
-            .btn {
-                padding: 12px 20px;
-                min-height: 48px;
-                font-size: 0.75rem;
-            }
-            .input-row input,
-            .input-row select {
-                min-height: 44px;
-                font-size: 0.9rem;
-                padding: 10px 14px;
-            }
-            .header h1 {
-                font-size: 2.8rem;
-            }
-            .header-logo {
-                width: 56px;
-                height: 56px;
-            }
-            .card {
-                padding: 20px;
-            }
-            .card-header h2 {
-                font-size: 1.4rem;
-            }
-            .stat-box .value {
-                font-size: 2.6rem;
-            }
-            .exercise-chart-modal .modal-content {
-                max-width: 720px;
-            }
+            .exercise-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+            .exercise-card { min-height: 120px; padding: 12px 10px; }
+            .exercise-card .ex-name { font-size: 0.65rem; margin-top: 18px; }
+            .exercise-card .ex-weight { font-size: clamp(1.4rem, 2.5vw, 2rem); }
+            .btn { padding: 12px 20px; min-height: 48px; font-size: 0.75rem; }
+            .input-row input, .input-row select { min-height: 44px; font-size: 0.9rem; padding: 10px 14px; }
+            .header h1 { font-size: 2.8rem; }
+            .header-logo { width: 56px; height: 56px; }
+            .card { padding: 20px; }
+            .card-header h2 { font-size: 1.4rem; }
+            .stat-box .value { font-size: 2.6rem; }
+            .exercise-chart-modal .modal-content { max-width: 720px; }
         }
 
         @media (min-width: 1200px) {
-            .exercise-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-            #page-records.active {
-                grid-template-columns: 1.4fr 1fr;
-            }
-            .app {
-                padding: 32px 60px 100px;
-            }
+            .exercise-grid { grid-template-columns: repeat(5, 1fr); }
+            #page-records.active { grid-template-columns: 1.4fr 1fr; }
+            .app { padding: 32px 60px 100px; }
         }
 
         @media (max-width: 767px) {
-            .exercise-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            #page-records.active {
-                grid-template-columns: 1fr;
-            }
-            #page-progress.active {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            .header-logo {
-                width: 40px;
-                height: 40px;
-            }
-            .burger-btn {
-                width: 42px;
-                height: 42px;
-            }
-            .card {
-                padding: 16px;
-            }
-            .input-row input,
-            .input-row select {
-                min-height: 48px;
-                font-size: 0.9rem;
-            }
-            .btn {
-                min-height: 48px;
-                font-size: 0.75rem;
-                padding: 12px 16px;
-            }
-            .stat-box .value {
-                font-size: 1.8rem;
-            }
+            .exercise-grid { grid-template-columns: repeat(2, 1fr); }
+            #page-records.active { grid-template-columns: 1fr; }
+            #page-progress.active { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.6rem; }
+            .header-logo { width: 40px; height: 40px; }
+            .burger-btn { width: 42px; height: 42px; }
+            .card { padding: 16px; }
+            .input-row input, .input-row select { min-height: 48px; font-size: 0.9rem; }
+            .btn { min-height: 48px; font-size: 0.75rem; padding: 12px 16px; }
+            .stat-box .value { font-size: 1.8rem; }
         }
 
         @media (max-width: 480px) {
-            .exercise-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .exercise-card {
-                min-height: 100px;
-                padding: 10px;
-            }
-            .exercise-card .ex-name {
-                font-size: 0.55rem;
-                margin-top: 14px;
-            }
-            .exercise-card .ex-weight {
-                font-size: 1.3rem;
-            }
-            .header h1 {
-                font-size: 1.3rem;
-            }
-            .header .version {
-                display: none;
-            }
-            .category-tab {
-                font-size: 0.55rem;
-                padding: 6px 12px;
-            }
-            .card-header h2 {
-                font-size: 1rem;
-            }
-            .input-row input,
-            .input-row select {
-                min-width: 50px;
-                padding: 8px 10px;
-                font-size: 0.8rem;
-                min-height: 40px;
-            }
-            .btn {
-                padding: 8px 14px;
-                font-size: 0.65rem;
-                min-height: 40px;
-            }
-            .stat-box .value {
-                font-size: 1.5rem;
-            }
-            .side-menu {
-                width: 280px;
-                padding: 70px 16px 20px;
-            }
-            .side-menu .menu-item {
-                font-size: 0.85rem;
-                padding: 12px 14px;
-            }
+            .exercise-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .exercise-card { min-height: 100px; padding: 10px; }
+            .exercise-card .ex-name { font-size: 0.55rem; margin-top: 14px; }
+            .exercise-card .ex-weight { font-size: 1.3rem; }
+            .header h1 { font-size: 1.3rem; }
+            .header .version { display: none; }
+            .category-tab { font-size: 0.55rem; padding: 6px 12px; }
+            .card-header h2 { font-size: 1rem; }
+            .input-row input, .input-row select { min-width: 50px; padding: 8px 10px; font-size: 0.8rem; min-height: 40px; }
+            .btn { padding: 8px 14px; font-size: 0.65rem; min-height: 40px; }
+            .stat-box .value { font-size: 1.5rem; }
+            .side-menu { width: 280px; padding: 70px 16px 20px; }
+            .side-menu .menu-item { font-size: 0.85rem; padding: 12px 14px; }
+            .guide-item { font-size: 0.65rem; flex-wrap: wrap; }
+            .guide-item .guide-rule { text-align: left; width: 100%; }
         }
 
         @media (max-width: 380px) {
-            .exercise-grid {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 1.1rem;
-            }
-            .header h1 .sub {
-                display: none;
-            }
+            .exercise-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.1rem; }
+            .header h1 .sub { display: none; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -649,6 +574,9 @@
         </button>
         <button class="menu-item" data-page="calc" onclick="navigateTo('calc')">
             <span class="icon">📐</span> Калькулятор 1ПМ
+        </button>
+        <button class="menu-item" data-page="guide" onclick="navigateTo('guide')">
+            <span class="icon">📖</span> Справочник
         </button>
     </div>
 
@@ -717,8 +645,8 @@
                     <div class="exercise-select-wrapper">
                         <select id="setExSelect"></select>
                     </div>
-                    <input type="number" id="setWeight" placeholder="Вес (кг)" step="0.5">
-                    <input type="number" id="setReps" placeholder="Повторы" min="1" max="50">
+                    <input type="number" id="setWeight" placeholder="Вес" step="0.5">
+                    <input type="number" id="setReps" placeholder="Повторы" min="1" max="999">
                     <button class="btn" id="addSetBtn">➕</button>
                 </div>
                 <div id="setSummary" class="set-summary" style="display:none;"></div>
@@ -839,6 +767,60 @@
                     <div class="label">Ваш 1ПМ</div>
                     <div class="value" id="calcResultValue">—</div>
                     <div class="sub" id="calcResultSub">введите вес и повторения</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE: GUIDE (Справочник) -->
+        <div id="page-guide" class="page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>📖 Справочник</h2>
+                    <span class="badge">как записывать</span>
+                </div>
+                <div class="guide-section">
+                    <h3>🏋️ С отягощениями (кг) — общий вес снаряда</h3>
+                    <div class="guide-item"><span class="guide-ex">жим от груди, присед со штангой, становая тяга</span><span class="guide-rule">общий вес штанги</span></div>
+                    <div class="guide-item"><span class="guide-ex">жим гантелей лёжа, жим гантелей сидя</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                    <div class="guide-item"><span class="guide-ex">подъём гантелей на бицепс, молотковые сгибания</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                    <div class="guide-item"><span class="guide-ex">жим из-за головы для трицепса, французский жим</span><span class="guide-rule">общий вес штанги/гантели</span></div>
+                    <div class="guide-item"><span class="guide-ex">разводка гантелей в стороны / в наклоне</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                    <div class="guide-item"><span class="guide-ex">выпады с гантелями</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>💪 На одну руку — записывай отдельный подход на каждую</h3>
+                    <div class="guide-item"><span class="guide-ex">тяга гантели в наклоне</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
+                    <div class="guide-item"><span class="guide-ex">концентрационные сгибания</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>🏃 С весом тела (повторы) — вес не вводится</h3>
+                    <div class="guide-item"><span class="guide-ex">отжимания от пола</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">подтягивания</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">берпи</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">отжимания на брусьях (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">присед (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">скручивания</span><span class="guide-rule bw">только повторения</span></div>
+                    <div class="guide-item"><span class="guide-ex">запрыгивания на тумбу</span><span class="guide-rule bw">только повторения</span></div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>⏱️ На время — секунды</h3>
+                    <div class="guide-item"><span class="guide-ex">планка</span><span class="guide-rule">секунды</span></div>
+                </div>
+
+                <div style="margin-top:12px; padding:12px; background:rgba(255,255,255,0.02); border-radius:12px; border:1px solid rgba(255,255,255,0.04);">
+                    <div style="font-size:0.7rem; color:var(--text-muted);">
+                        💡 <strong style="color:var(--gold);">Важно:</strong> Для упражнений с гантелями (на две руки) всегда указывай <strong>общий вес двух гантелей</strong>. 
+                        Например: 2 гантели по 10 кг → записывай <strong>20 кг</strong>.
+                    </div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                        💡 Для упражнений на <strong>одну руку</strong> (тяга гантели) — записывай вес одной гантели и делай <strong>отдельный подход</strong> на каждую руку.
+                    </div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
+                        💡 Для упражнений с <strong>весом тела</strong> — поле "Вес" можно оставить пустым или поставить 0, указывай только количество повторений.
+                    </div>
                 </div>
             </div>
         </div>
@@ -1120,21 +1102,28 @@
             // НОВЫЙ ОПТИМИЗИРОВАННЫЙ СПИСОК УПРАЖНЕНИЙ
             // ============================================================
             const defaultExercises = [
+                // Ноги
                 'жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                 'болгарский сплит-присед', 'разгибание ног сидя',
                 'становая тяга', 'присед со штангой', 'жим платформы ногами',
+                // Грудь
                 'жим от груди', 'жим гантелей лёжа',
                 'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
                 'отжимания с хлопком',
+                // Спина
                 'тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
                 'гиперэкстензия', 'шраги с гантелями', 'подтягивания',
                 'подтягивания обратным хватом',
+                // Плечи
                 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
                 'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда',
                 'тяга штанги к подбородку',
+                // Руки
                 'подъём гантелей на бицепс', 'французский жим', 'молотковые сгибания',
                 'жим из-за головы для трицепса', 'отжимания на брусьях (с весом тела)',
+                // Кор
                 'планка', 'скручивания',
+                // Функциональные
                 'запрыгивания на тумбу', 'берпи', 'ягодичный мост',
                 'подъём на носки стоя'
             ];
@@ -1165,6 +1154,7 @@
                 ]
             };
 
+            // Упражнения с весом тела
             const bodyweightExercises = [
                 'присед (с весом тела)',
                 'отжимания от пола',
@@ -1176,6 +1166,11 @@
                 'скручивания',
                 'запрыгивания на тумбу',
                 'берпи'
+            ];
+
+            // Упражнения на одну руку (отдельный подход на каждую)
+            const singleArmExercises = [
+                'тяга гантели в наклоне'
             ];
 
             function getExerciseCategory(ex) {
@@ -1191,90 +1186,71 @@
                 return 'кг';
             }
 
+            function isBodyweightExercise(ex) {
+                return bodyweightExercises.includes(ex);
+            }
+
+            function isSingleArmExercise(ex) {
+                return singleArmExercises.includes(ex);
+            }
+
+            // ============================================================
+            // 4. ФУНКЦИЯ ОПРЕДЕЛЕНИЯ ТЕЛОСЛОЖЕНИЯ
+            // ============================================================
             function getBodyType(weight, height) {
                 if (!weight || !height) return { type: 'неизвестно', bmi: 0, desc: 'Нет данных о весе и росте' };
                 const heightM = height / 100;
                 const bmi = weight / (heightM * heightM);
-                let type = '',
-                    desc = '',
-                    emoji = '';
-                if (bmi < 18.5) { type = 'худощавое';
-                    emoji = '🧘';
-                    desc = 'Тонкокостное телосложение, низкий процент жира.'; } else if (bmi < 19.5) { type = 'стройное';
-                    emoji = '🧘‍♂️';
-                    desc = 'Подтянутое, почти худощавое. Хорошая база для развития.'; } else if (bmi < 22.5) { type = 'среднее';
-                    emoji = '💪';
-                    desc = 'Сбалансированное телосложение.'; } else if (bmi < 25.5) { type = 'плотное';
-                    emoji = '🏋️';
-                    desc = 'Крепкое телосложение. Есть мышечная масса.'; } else if (bmi < 28.5) { type = 'крупное';
-                    emoji = '🦍';
-                    desc = 'Массивное телосложение. Есть избыточный вес.'; } else { type = 'избыточное';
-                    emoji = '⚖️';
-                    desc = 'Значительный избыточный вес.'; }
+                let type = '', desc = '', emoji = '';
+                if (bmi < 18.5) { type = 'худощавое'; emoji = '🧘'; desc = 'Тонкокостное телосложение, низкий процент жира.'; }
+                else if (bmi < 19.5) { type = 'стройное'; emoji = '🧘‍♂️'; desc = 'Подтянутое, почти худощавое.'; }
+                else if (bmi < 22.5) { type = 'среднее'; emoji = '💪'; desc = 'Сбалансированное телосложение.'; }
+                else if (bmi < 25.5) { type = 'плотное'; emoji = '🏋️'; desc = 'Крепкое телосложение. Есть мышечная масса.'; }
+                else if (bmi < 28.5) { type = 'крупное'; emoji = '🦍'; desc = 'Массивное телосложение. Есть избыточный вес.'; }
+                else { type = 'избыточное'; emoji = '⚖️'; desc = 'Значительный избыточный вес.'; }
                 return { type, bmi, desc, emoji };
             }
 
             // ============================================================
-            // 4. LOAD DATA
+            // 5. LOAD DATA
             // ============================================================
             function loadData() {
                 exerciseList = [...defaultExercises];
                 localStorage.setItem('athlete_exercises_v5', JSON.stringify(exerciseList));
 
-                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records =
-                    {}; }
-                exerciseList.forEach(ex => { if (!(ex in records)) records[ex] = { weight: 0, date: new Date()
-                        .toISOString().slice(0, 10) }; });
+                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records = {}; }
+                exerciseList.forEach(ex => { if (!(ex in records)) records[ex] = { weight: 0, date: new Date().toISOString().slice(0, 10) }; });
 
-                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) {
-                    progressData = []; }
-                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10);
-                    progressData.push({ date: today, weight: 75, height: 175 }); }
+                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) { progressData = []; }
+                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10); progressData.push({ date: today, weight: 75, height: 175 }); }
                 progressData.sort((a, b) => a.date < b.date ? 1 : -1);
 
                 try { const s = localStorage.getItem(STORAGE_SETS); if (s) sets = JSON.parse(s); } catch (e) { sets = []; }
-                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) {
-                    weeklySets = {}; }
+                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) { weeklySets = {}; }
                 try { const d = localStorage.getItem(STORAGE_LAST_DATE); if (d) lastDate = d; } catch (e) { lastDate = ''; }
-                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) {
-                    challenges = []; }
+                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) { challenges = []; }
 
                 checkNewDay();
                 updateBlockHash();
             }
 
             function saveRecords() { localStorage.setItem(STORAGE_RECORDS, JSON.stringify(records)); }
-
             function saveProgress() { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(progressData)); }
-
-            function saveSets() { localStorage.setItem(STORAGE_SETS, JSON.stringify(sets));
-                saveWeeklySets(); }
-
+            function saveSets() { localStorage.setItem(STORAGE_SETS, JSON.stringify(sets)); saveWeeklySets(); }
             function saveWeeklySets() { localStorage.setItem(STORAGE_SETS_WEEKLY, JSON.stringify(weeklySets)); }
-
             function saveChallenges() { localStorage.setItem(STORAGE_CHALLENGES, JSON.stringify(challenges)); }
-
             function saveLastDate() { localStorage.setItem(STORAGE_LAST_DATE, lastDate); }
-
             function saveCategory() { localStorage.setItem(STORAGE_CATEGORY, currentCategory); }
 
-            // ============================================================
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ checkNewDay — СУММИРУЕТ, а не перезаписывает
-            // ============================================================
             function checkNewDay() {
                 const today = new Date().toISOString().slice(0, 10);
                 if (lastDate !== today) {
                     const todaySets = sets.filter(s => s.date === today);
-
-                    // Если есть подходы за сегодня и есть предыдущий день — суммируем
                     if (todaySets.length > 0) {
                         if (!weeklySets[lastDate || today]) weeklySets[lastDate || today] = [];
-                        // ✅ СУММИРУЕМ, а не перезаписываем
                         weeklySets[lastDate || today] = [...weeklySets[lastDate || today], ...todaySets];
                         saveWeeklySets();
                     }
-
-                    // Оставляем только сегодняшние подходы в sets (для отображения)
                     sets = sets.filter(s => s.date === today);
                     saveSets();
                     lastDate = today;
@@ -1283,9 +1259,6 @@
                 updateTodayInfo();
             }
 
-            // ============================================================
-            // 5. ГРУППИРОВКА УПРАЖНЕНИЙ В SELECT (optgroup)
-            // ============================================================
             function updateExerciseSelects() {
                 const selectIds = ['recordExSelect', 'setExSelect', 'forecastExSelect'];
                 const categoryNames = {
@@ -1324,8 +1297,14 @@
                             const opt = document.createElement('option');
                             opt.value = ex;
                             const unit = getUnitForExercise(ex);
-                            opt.textContent = ex + (unit === 'сек' ? ' (сек)' : unit === 'повторов' ? ' (вес тела)' :
-                                '');
+                            let hint = '';
+                            if (isBodyweightExercise(ex)) hint = ' (повторы)';
+                            else if (ex === 'планка') hint = ' (сек)';
+                            else if (isSingleArmExercise(ex)) hint = ' (1 рука)';
+                            else if (ex.includes('гантелей') || ex === 'разводка гантелей в стороны' || ex === 'разводка гантелей в наклоне') {
+                                hint = ' (общий вес)';
+                            }
+                            opt.textContent = ex + hint;
                             optgroup.appendChild(opt);
                         }
                         select.appendChild(optgroup);
@@ -1365,7 +1344,7 @@
             }
 
             // ============================================================
-            // 7. RENDER RECORDS (с открытием графика по клику)
+            // 7. RENDER RECORDS
             // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
@@ -1427,11 +1406,14 @@
                 for (let set of reversed) {
                     const div = document.createElement('div');
                     div.className = 'set-item';
+                    const isBW = isBodyweightExercise(set.exercise);
+                    const unit = getUnitForExercise(set.exercise);
+                    const weightDisplay = isBW ? '' : set.weight + ' кг ';
                     div.innerHTML = `
                         <div class="set-info">
                             <span>${set.exercise}</span>
-                            <span class="set-weight">${set.weight} кг</span>
-                            <span class="set-reps">× ${set.reps} повт.</span>
+                            ${!isBW ? `<span class="set-weight">${set.weight} кг</span>` : ''}
+                            <span class="set-reps">× ${set.reps} ${unit}</span>
                             <span style="font-size:0.6rem;color:var(--text-muted);">${set.time || ''}</span>
                             <span class="chain-stamp" style="font-size:0.35rem;">⛓️ #${(set.id+'').slice(-4)}</span>
                         </div>
@@ -1466,21 +1448,15 @@
                 document.getElementById('todaySetsCount').textContent = sets.filter(s => s.date === today).length;
             }
 
-            // ============================================================
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ finishWorkout — СУММИРУЕТ, а не перезаписывает
-            // ============================================================
             function finishWorkout() {
                 const today = new Date().toISOString().slice(0, 10);
                 const todaySets = sets.filter(s => s.date === today);
                 if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1200); return; }
 
                 if (!weeklySets[today]) weeklySets[today] = [];
-
-                // ✅ СУММИРУЕМ, а не перезаписываем
                 weeklySets[today] = [...weeklySets[today], ...todaySets];
                 saveWeeklySets();
 
-                // Очищаем сегодняшние подходы из основного списка
                 sets = sets.filter(s => s.date !== today);
                 saveSets();
 
@@ -1492,12 +1468,32 @@
 
             function addSet() {
                 const ex = document.getElementById('setExSelect').value;
-                const weight = parseFloat(document.getElementById('setWeight').value);
+                let weight = parseFloat(document.getElementById('setWeight').value);
                 const reps = parseInt(document.getElementById('setReps').value);
-                if (!ex || isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-                    showToast('❌ Выбери упражнение, введи вес и повторения', 1600);
+
+                if (!ex) {
+                    showToast('❌ Выбери упражнение', 1600);
                     return;
                 }
+
+                const isBW = isBodyweightExercise(ex);
+                const unit = getUnitForExercise(ex);
+
+                // Для упражнений с весом тела — вес не обязателен
+                if (!isBW && (isNaN(weight) || weight <= 0)) {
+                    showToast('❌ Введи вес для этого упражнения', 1600);
+                    return;
+                }
+
+                if (isBW) {
+                    weight = 0; // авто-заполняем 0 для веса тела
+                }
+
+                if (isNaN(reps) || reps < 1) {
+                    showToast('❌ Введи количество повторений', 1600);
+                    return;
+                }
+
                 const today = new Date().toISOString().slice(0, 10);
                 const now = new Date();
                 const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
@@ -1508,7 +1504,12 @@
                 updateBlockHash();
                 document.getElementById('setWeight').value = '';
                 document.getElementById('setReps').value = '';
-                showToast(`✅ ${ex}: ${weight} кг × ${reps} повт.`);
+
+                if (isBW) {
+                    showToast(`✅ ${ex}: ${reps} ${unit}`);
+                } else {
+                    showToast(`✅ ${ex}: ${weight} кг × ${reps} ${unit}`);
+                }
             }
 
             // ============================================================
@@ -1548,8 +1549,8 @@
                 }
                 const today = new Date().toISOString().slice(0, 10);
                 const idx = progressData.findIndex(item => item.date === today);
-                if (idx !== -1) { progressData[idx].weight = weight;
-                    progressData[idx].height = height; } else { progressData.unshift({ date: today, weight, height }); }
+                if (idx !== -1) { progressData[idx].weight = weight; progressData[idx].height = height; }
+                else { progressData.unshift({ date: today, weight, height }); }
                 progressData.sort((a, b) => a.date < b.date ? 1 : -1);
                 saveProgress();
                 renderProgress();
@@ -1732,11 +1733,9 @@
 
                 let confidence = 'Низкая';
                 let weeksToGoal = '';
-                if (weeksNeeded < 4) { confidence = 'Высокая 🔥';
-                    weeksToGoal = `🎯 Достигнешь через ${weeksNeeded} недели!`; } else if (weeksNeeded < 8) { confidence =
-                        'Средняя 📈';
-                    weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; } else { confidence = 'Низкая (требуется больше данных) 📉';
-                    weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
+                if (weeksNeeded < 4) { confidence = 'Высокая 🔥'; weeksToGoal = `🎯 Достигнешь через ${weeksNeeded} недели!`; }
+                else if (weeksNeeded < 8) { confidence = 'Средняя 📈'; weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; }
+                else { confidence = 'Низкая (требуется больше данных) 📉'; weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
 
                 const data = {
                     exercise: ex,
@@ -1777,28 +1776,17 @@
             }
 
             const CHALLENGE_POOL = [
-                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
-                    reward: '⭐ +50' },
-                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
-                    reward: '⭐ +55' },
-                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2,
-                    reward: '⭐ +45' },
-                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20,
-                    reward: '⭐ +30' },
-                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25,
-                    reward: '⭐ +40' },
-                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000,
-                    reward: '⭐ +40' },
-                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3,
-                    reward: '⭐ +60' },
-                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10,
-                    reward: '⭐ +40' },
-                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50,
-                    exercise: 'отжимания от пола', reward: '⭐ +40' },
-                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps',
-                    target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
-                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100,
-                    exercise: 'отжимания от пола', reward: '⭐ +35' },
+                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5, reward: '⭐ +50' },
+                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7, reward: '⭐ +55' },
+                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2, reward: '⭐ +45' },
+                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20, reward: '⭐ +30' },
+                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25, reward: '⭐ +40' },
+                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000, reward: '⭐ +40' },
+                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3, reward: '⭐ +60' },
+                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10, reward: '⭐ +40' },
+                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50, exercise: 'отжимания от пола', reward: '⭐ +40' },
+                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps', target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
+                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100, exercise: 'отжимания от пола', reward: '⭐ +35' },
             ];
 
             function generateChallenges() {
@@ -1834,60 +1822,33 @@
                 const allWeeklySets = getAllWeeklySets();
                 for (let ch of weekChallenges) {
                     if (ch.completed) continue;
-                    let progress = 0,
-                        isCompleted = false;
+                    let progress = 0, isCompleted = false;
                     switch (ch.type) {
                         case 'add_weight': {
                             const currentMax = Math.max(...Object.values(records).map(r => r.weight));
                             const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
-                                try { const p = JSON.parse(prev);
-                                    const diff = currentMax - Math.max(...Object.values(p).map(r => r.weight));
-                                    progress = Math.min(ch.target, diff);
-                                    if (diff >= ch.target) isCompleted = true; } catch (e) {}
+                                try { const p = JSON.parse(prev); const diff = currentMax - Math.max(...Object.values(p).map(r => r.weight)); progress = Math.min(ch.target, diff); if (diff >= ch.target) isCompleted = true; } catch (e) {}
                             }
                             break;
                         }
                         case 'two_records': {
                             const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
-                                try { const p = JSON.parse(prev);
-                                    let count = 0;
-                                    for (let ex of Object.keys(records)) { if (records[ex].weight > (p[ex]?.weight || 0))
-                                            count++; }
-                                    progress = Math.min(ch.target, count);
-                                    if (count >= ch.target) isCompleted = true; } catch (e) {}
+                                try { const p = JSON.parse(prev); let count = 0; for (let ex of Object.keys(records)) { if (records[ex].weight > (p[ex]?.weight || 0)) count++; } progress = Math.min(ch.target, count); if (count >= ch.target) isCompleted = true; } catch (e) {}
                             }
                             break;
                         }
-                        case 'total_sets': { const count = allWeeklySets.length;
-                            progress = Math.min(ch.target, count);
-                            if (count >= ch.target) isCompleted = true; break; }
-                        case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0);
-                            progress = Math.min(ch.target, vol);
-                            if (vol >= ch.target) isCompleted = true; break; }
-                        case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch
-                                    .exercise].weight || 0;
-                                progress = Math.min(ch.target, cur);
-                                if (cur >= ch.target) isCompleted = true; } break; }
-                        case 'bodyweight_total': { if (ch.exercise) { const total = allWeeklySets.filter(s => s
-                                    .exercise === ch.exercise).reduce((s, set) => s + set.reps, 0);
-                                progress = Math.min(ch.target, total);
-                                if (total >= ch.target) isCompleted = true; } break; }
-                        case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k]
-                                .weight > 0);
-                            progress = Math.min(ch.target, exWithRecords.length);
-                            if (exWithRecords.length >= ch.target) isCompleted = true; break; }
-                        case 'heavy_sets': { let cnt = 0; for (let set of allWeeklySets) { const record = records[set
-                                    .exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 +
-                                        0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch
-                                    .target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
-                        default: { progress = 0;
-                            isCompleted = false; }
+                        case 'total_sets': { const count = allWeeklySets.length; progress = Math.min(ch.target, count); if (count >= ch.target) isCompleted = true; break; }
+                        case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0); progress = Math.min(ch.target, vol); if (vol >= ch.target) isCompleted = true; break; }
+                        case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch.exercise].weight || 0; progress = Math.min(ch.target, cur); if (cur >= ch.target) isCompleted = true; } break; }
+                        case 'bodyweight_total': { if (ch.exercise) { const total = allWeeklySets.filter(s => s.exercise === ch.exercise).reduce((s, set) => s + set.reps, 0); progress = Math.min(ch.target, total); if (total >= ch.target) isCompleted = true; } break; }
+                        case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0); progress = Math.min(ch.target, exWithRecords.length); if (exWithRecords.length >= ch.target) isCompleted = true; break; }
+                        case 'heavy_sets': { let cnt = 0; for (let set of allWeeklySets) { const record = records[set.exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 + 0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch.target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
+                        default: { progress = 0; isCompleted = false; }
                     }
                     ch.progress = progress;
-                    if (isCompleted && !ch.completed) { ch.completed = true;
-                        ch.notified = false; }
+                    if (isCompleted && !ch.completed) { ch.completed = true; ch.notified = false; }
                 }
 
                 localStorage.setItem('prev_week_records', JSON.stringify(records));
@@ -1909,8 +1870,7 @@
                 const container = document.getElementById('challengesContainer');
                 const weekStart = getWeekStart();
                 const weekChallenges = challenges.filter(c => c.week === weekStart);
-                if (weekChallenges.length === 0) { container.innerHTML =
-                    '<div class="empty-state">Нет активных челленджей</div>'; return; }
+                if (weekChallenges.length === 0) { container.innerHTML = '<div class="empty-state">Нет активных челленджей</div>'; return; }
                 container.innerHTML = '';
                 for (let ch of weekChallenges) {
                     const div = document.createElement('div');
@@ -1954,8 +1914,7 @@
                 lastWeek.setDate(lastWeek.getDate() - 7);
                 const lastStart = lastWeek.toISOString().slice(0, 10);
                 let lastSets = [];
-                for (let date in weeklySets) { if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(
-                        weeklySets[date]); }
+                for (let date in weeklySets) { if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(weeklySets[date]); }
                 const lastVol = lastSets.reduce((s, set) => s + set.weight * set.reps, 0);
                 const volChange = lastVol > 0 ? ((totalVolume - lastVol) / lastVol * 100) : 0;
 
@@ -1994,55 +1953,95 @@
             }
 
             // ============================================================
-            // 14. AI ТРЕНЕР
+            // 14. AI ТРЕНЕР — ИСПРАВЛЕННЫЙ РАСЧЁТ СИЛЫ
             // ============================================================
             function getFitnessLevel() {
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
                 const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
                 const bodyInfo = getBodyType(currentWeight, currentHeight);
 
-                const strengthExercises = ['жим от груди', 'присед со штангой', 'становая тяга'];
+                // ============================================================
+                // 1. СИЛА — все упражнения с отягощениями (кг)
+                // ============================================================
+                const strengthExercises = [
+                    // Ноги
+                    'жим ногами', 'присед со штангой', 'становая тяга', 'румынская тяга',
+                    'выпады с гантелями', 'болгарский сплит-присед', 'разгибание ног сидя',
+                    // Грудь
+                    'жим от груди', 'жим гантелей лёжа', 'жим в наклоне',
+                    // Спина
+                    'тяга штанги в наклоне', 'тяга гантели в наклоне', 'шраги с гантелями',
+                    // Плечи
+                    'жим гантелей сидя', 'жим Арнольда', 'разводка гантелей в стороны',
+                    'разводка гантелей в наклоне', 'подъём гантелей перед собой',
+                    // Руки
+                    'подъём гантелей на бицепс', 'молотковые сгибания',
+                    'французский жим', 'жим из-за головы для трицепса'
+                ];
+
                 let strengthScores = {};
+                let strengthCount = 0;
+                let totalStrengthRatio = 0;
+
                 for (let ex of strengthExercises) {
                     if (records[ex] && records[ex].weight > 0) {
-                        strengthScores[ex] = records[ex].weight / currentWeight;
+                        const ratio = records[ex].weight / currentWeight;
+                        strengthScores[ex] = ratio;
+                        totalStrengthRatio += ratio;
+                        strengthCount++;
                     }
                 }
-                const avgStrength = Object.values(strengthScores).length > 0 ?
-                    Object.values(strengthScores).reduce((a, b) => a + b, 0) / Object.values(strengthScores).length :
-                    0;
 
-                const enduranceExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка',
-                    'отжимания на брусьях (с весом тела)', 'присед (с весом тела)'
+                const avgStrength = strengthCount > 0 ? totalStrengthRatio / strengthCount : 0;
+
+                // ============================================================
+                // 2. ВЫНОСЛИВОСТЬ — упражнения с весом тела (повторы/сек)
+                // ============================================================
+                const enduranceExercises = [
+                    { name: 'отжимания от пола', target: 50 },
+                    { name: 'подтягивания', target: 15 },
+                    { name: 'подтягивания обратным хватом', target: 15 },
+                    { name: 'берпи', target: 30 },
+                    { name: 'планка', target: 120, isSeconds: true },
+                    { name: 'отжимания на брусьях (с весом тела)', target: 20 },
+                    { name: 'присед (с весом тела)', target: 60 },
+                    { name: 'скручивания', target: 50 },
+                    { name: 'запрыгивания на тумбу', target: 20 }
                 ];
+
                 let enduranceScores = {};
+                let enduranceCount = 0;
+                let totalEnduranceRatio = 0;
+
                 for (let ex of enduranceExercises) {
-                    if (records[ex] && records[ex].weight > 0) {
-                        let val = records[ex].weight;
-                        if (ex === 'планка') {
-                            enduranceScores[ex] = Math.min(1, val / 120);
-                        } else {
-                            let target = 50;
-                            if (ex === 'подтягивания' || ex === 'подтягивания обратным хватом') target = 15;
-                            else if (ex === 'берпи') target = 30;
-                            else if (ex === 'отжимания на брусьях (с весом тела)') target = 20;
-                            else if (ex === 'присед (с весом тела)') target = 60;
-                            enduranceScores[ex] = Math.min(1, val / target);
-                        }
+                    if (records[ex.name] && records[ex.name].weight > 0) {
+                        const val = records[ex.name].weight;
+                        const ratio = Math.min(1, val / ex.target);
+                        enduranceScores[ex.name] = ratio;
+                        totalEnduranceRatio += ratio;
+                        enduranceCount++;
                     }
                 }
-                const avgEndurance = Object.values(enduranceScores).length > 0 ?
-                    Object.values(enduranceScores).reduce((a, b) => a + b, 0) / Object.values(enduranceScores).length :
-                    0;
 
+                const avgEndurance = enduranceCount > 0 ? totalEnduranceRatio / enduranceCount : 0;
+
+                // ============================================================
+                // 3. ОПРЕДЕЛЕНИЕ ТИПА АТЛЕТА
+                // ============================================================
                 let athleteType = 'сбалансированный';
                 if (avgStrength > 1.2 && avgEndurance < 0.4) athleteType = 'силовой';
                 else if (avgEndurance > 0.7 && avgStrength < 0.8) athleteType = 'выносливый';
                 else if (avgStrength > 1.0 && avgEndurance > 0.6) athleteType = 'элитный';
                 else if (avgStrength < 0.5 && avgEndurance < 0.3) athleteType = 'новичок';
 
-                const totalScore = Math.min(100, (avgStrength * 40 + avgEndurance * 40 + (Object.keys(records).filter(k =>
-                    records[k].weight > 0).length / exerciseList.length) * 20));
+                // ============================================================
+                // 4. ОБЩИЙ РЕЙТИНГ
+                // ============================================================
+                const totalScore = Math.min(100,
+                    (avgStrength * 40) +
+                    (avgEndurance * 40) +
+                    (Object.keys(records).filter(k => records[k].weight > 0).length / exerciseList.length * 20)
+                );
 
                 let level = 'Начинающий 🏃';
                 if (totalScore >= 85) level = 'Элитный 💎';
@@ -2055,6 +2054,9 @@
                 else if (athleteType === 'выносливый') focus = 'выносливость 🏃';
                 else if (athleteType === 'элитный') focus = 'максимальная производительность 🔥';
 
+                // ============================================================
+                // 5. СЛАБЫЕ МЕСТА
+                // ============================================================
                 let weakPoints = [];
                 if (avgStrength < 0.8) weakPoints.push('💪 сила');
                 if (avgEndurance < 0.4) weakPoints.push('🏃 выносливость');
@@ -2166,14 +2168,11 @@
 
                 let nutritionAdvice = '';
                 if (bodyType === 'худощавое' || bodyType === 'стройное') {
-                    nutritionAdvice =
-                        '🍽️ Рекомендация: увеличь потребление белка (2-2.2 г/кг веса) и углеводов. Ешь 4-5 раз в день.';
+                    nutritionAdvice = '🍽️ Рекомендация: увеличь потребление белка (2-2.2 г/кг веса) и углеводов. Ешь 4-5 раз в день.';
                 } else if (bodyType === 'крупное' || bodyType === 'избыточное') {
-                    nutritionAdvice =
-                        '🍽️ Рекомендация: высокобелковая диета (2-2.5 г/кг), умеренные углеводы, здоровые жиры. Пей больше воды.';
+                    nutritionAdvice = '🍽️ Рекомендация: высокобелковая диета (2-2.5 г/кг), умеренные углеводы, здоровые жиры. Пей больше воды.';
                 } else {
-                    nutritionAdvice =
-                        '🍽️ Рекомендация: сбалансированное питание с достаточным количеством белка (1.8-2 г/кг веса).';
+                    nutritionAdvice = '🍽️ Рекомендация: сбалансированное питание с достаточным количеством белка (1.8-2 г/кг веса).';
                 }
 
                 const weekDays = days.slice(0, 4);
@@ -2241,11 +2240,9 @@
                 advice += `🧬 Телосложение: ${analysis.bodyType} (${analysis.bodyEmoji}). `;
 
                 if (analysis.bodyType === 'худощавое' || analysis.bodyType === 'стройное') {
-                    advice +=
-                        '🧘 Ты относишься к эктоморфному типу — трудно набираешь массу. Сосредоточься на базовых упражнениях с отягощениями и увеличь калорийность рациона. ';
+                    advice += '🧘 Ты относишься к эктоморфному типу — трудно набираешь массу. Сосредоточься на базовых упражнениях с отягощениями и увеличь калорийность рациона. ';
                 } else if (analysis.bodyType === 'крупное' || analysis.bodyType === 'избыточное') {
-                    advice +=
-                        '⚖️ Твоя основная цель — улучшить композицию тела. Добавь кардио 2-3 раза в неделю и работай над выносливостью. ';
+                    advice += '⚖️ Твоя основная цель — улучшить композицию тела. Добавь кардио 2-3 раза в неделю и работай над выносливостью. ';
                 }
 
                 if (analysis.weakPoints.length > 0) {
@@ -2279,11 +2276,9 @@
                 if (exWithRecords.length < 8) recs.push('🎯 Попробуй новые упражнения из списка для разнообразия.');
 
                 if (analysis.bodyType === 'худощавое' || analysis.bodyType === 'стройное') {
-                    recs.push(
-                        '🍽️ Набор массы: профицит калорий +200-300 ккал, белок 2-2.2 г/кг, базовые упражнения 3-4 раза в неделю.');
+                    recs.push('🍽️ Набор массы: профицит калорий +200-300 ккал, белок 2-2.2 г/кг, базовые упражнения 3-4 раза в неделю.');
                 } else if (analysis.bodyType === 'крупное' || analysis.bodyType === 'избыточное') {
-                    recs.push(
-                        '⚖️ Снижение веса: дефицит калорий -200-300 ккал, белок 2-2.5 г/кг, кардио 2-3 раза в неделю.');
+                    recs.push('⚖️ Снижение веса: дефицит калорий -200-300 ккал, белок 2-2.5 г/кг, кардио 2-3 раза в неделю.');
                 }
 
                 if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
@@ -2345,32 +2340,14 @@
                     showToast('❌ Введи корректные данные', 1600);
                     return;
                 }
-                let rm = 0,
-                    name = '';
+                let rm = 0, name = '';
                 switch (formula) {
-                    case 'brzycki':
-                        rm = weight * (36 / (37 - Math.min(reps, 36)));
-                        name = 'Бжицки';
-                        break;
-                    case 'epley':
-                        rm = weight * (1 + reps / 30);
-                        name = 'Эпли';
-                        break;
-                    case 'lombardi':
-                        rm = weight * Math.pow(reps, 0.10);
-                        name = 'Ломбарди';
-                        break;
-                    case 'mayhew':
-                        rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps)));
-                        name = 'Мэйхью';
-                        break;
-                    case 'oconnor':
-                        rm = weight * (1 + reps / 40);
-                        name = 'О\'Коннор';
-                        break;
-                    default:
-                        rm = weight * (1 + reps / 30);
-                        name = 'Эпли';
+                    case 'brzycki': rm = weight * (36 / (37 - Math.min(reps, 36))); name = 'Бжицки'; break;
+                    case 'epley': rm = weight * (1 + reps / 30); name = 'Эпли'; break;
+                    case 'lombardi': rm = weight * Math.pow(reps, 0.10); name = 'Ломбарди'; break;
+                    case 'mayhew': rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps))); name = 'Мэйхью'; break;
+                    case 'oconnor': rm = weight * (1 + reps / 40); name = 'О\'Коннор'; break;
+                    default: rm = weight * (1 + reps / 30); name = 'Эпли';
                 }
                 document.getElementById('calcResultValue').textContent = rm.toFixed(1) + ' кг';
                 document.getElementById('calcResultSub').textContent =
@@ -2394,14 +2371,12 @@
 
                 if (navigator.vibrate) navigator.vibrate(4);
 
-                if (pageId === 'progress') { renderProgress();
-                    updateChart(); }
+                if (pageId === 'progress') { renderProgress(); updateChart(); }
                 if (pageId === 'forecast') renderForecast();
                 if (pageId === 'reports') renderReport();
                 if (pageId === 'challenges') renderChallenges();
                 if (pageId === 'calc') calc1RM();
-                if (pageId === 'records') { renderRecords();
-                    renderTodaySets(); }
+                if (pageId === 'records') { renderRecords(); renderTodaySets(); }
                 if (pageId === 'ai') {
                     const analysis = getFitnessLevel();
                     document.getElementById('aiStatus').textContent =
@@ -2518,29 +2493,21 @@
                 document.getElementById('aiAnalyzeBtn').addEventListener('click', analyzeFitness);
                 document.getElementById('calcBtn').addEventListener('click', calc1RM);
 
-                document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
-                        document.getElementById('addRecordBtn').click(); });
+                document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('addRecordBtn').click(); });
                 document.getElementById('setWeight').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
                 document.getElementById('setReps').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
-                document.getElementById('weightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
-                        addProgress(); });
-                document.getElementById('heightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
-                        addProgress(); });
-                document.getElementById('forecastTarget').addEventListener('keypress', e => { if (e.key === 'Enter')
-                        generateForecast(); });
-                document.getElementById('calcWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
-                        calc1RM(); });
-                document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter')
-                    calc1RM(); });
+                document.getElementById('weightInput').addEventListener('keypress', e => { if (e.key === 'Enter') addProgress(); });
+                document.getElementById('heightInput').addEventListener('keypress', e => { if (e.key === 'Enter') addProgress(); });
+                document.getElementById('forecastTarget').addEventListener('keypress', e => { if (e.key === 'Enter') generateForecast(); });
+                document.getElementById('calcWeight').addEventListener('keypress', e => { if (e.key === 'Enter') calc1RM(); });
+                document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter') calc1RM(); });
 
                 setInterval(checkNewDay, 60000);
 
                 let resizeTimer;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(() => {
-                        updateChart();
-                    }, 150);
+                    resizeTimer = setTimeout(() => { updateChart(); }, 150);
                 });
 
                 const analysis = getFitnessLevel();
@@ -2548,7 +2515,7 @@
                     `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
 
                 setTimeout(calc1RM, 150);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.8 (Исправлено суммирование подходов)');
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.9 (Справочник + исправленная сила)');
             }
 
             document.addEventListener('DOMContentLoaded', init);
