@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#05070b">
+    <meta name="theme-color" content="#05070b" id="themeColor">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>ATHLETE // CRYPTO SPORT OS</title>
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           УНИВЕРСАЛЬНЫЙ ДИЗАЙН — ДЕСКТОП + МОБИЛЬНЫЙ
+           ВСЕ СТИЛИ (полная версия с нижней навигацией) + ТЕМЫ
            ============================================================ */
         * {
             margin: 0;
@@ -21,6 +21,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* ===== ТЁМНАЯ ТЕМА (по умолчанию) ===== */
         :root {
             --bg-deep: #04060a;
             --bg-card: rgba(255, 255, 255, 0.04);
@@ -35,6 +36,17 @@
             --pink: #ec4899;
             --neon-green: #4ade80;
             --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --btn-gradient: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%);
+            --btn-shadow: 0 6px 20px rgba(255,61,0,0.15);
+            --card-bg: rgba(7,11,18,0.82);
+            --nav-bg: rgba(8,12,19,0.92);
+            --badge-bg: rgba(0,231,255,0.04);
+            --badge-border: rgba(0,231,255,0.1);
+            --badge-color: #bdf9ff;
+            --gradient-start: #fff;
+            --gradient-mid: #dffbff;
+            --gradient-end: #00e7ff;
+            --text-shadow: 0 0 16px rgba(255,61,0,0.1);
             --radius-card: 24px;
             --radius-sm: 16px;
             --font-base: 18px;
@@ -42,16 +54,47 @@
             --btn-height: 56px;
             --input-height: 52px;
             --card-padding: 24px;
+            --nav-height: 72px;
+        }
+
+        /* ===== СВЕТЛАЯ ТЕМА ===== */
+        [data-theme="light"] {
+            --bg-deep: #f0f2f5;
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --bg-input: rgba(0, 0, 0, 0.04);
+            --border-subtle: rgba(0, 0, 0, 0.1);
+            --text-primary: #1a1a2e;
+            --text-secondary: rgba(0, 0, 0, 0.82);
+            --text-muted: rgba(0, 0, 0, 0.5);
+            --cyan: #0066cc;
+            --purple: #6d28d9;
+            --gold: #d97706;
+            --pink: #db2777;
+            --neon-green: #059669;
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --btn-gradient: linear-gradient(135deg, #0066cc 0%, #4f46e5 60%, #7c3aed 100%);
+            --btn-shadow: 0 6px 20px rgba(0,102,204,0.15);
+            --card-bg: rgba(255,255,255,0.88);
+            --nav-bg: rgba(255,255,255,0.92);
+            --badge-bg: rgba(0,102,204,0.04);
+            --badge-border: rgba(0,102,204,0.1);
+            --badge-color: #0066cc;
+            --gradient-start: #1a1a2e;
+            --gradient-mid: #0066cc;
+            --gradient-end: #4f46e5;
+            --text-shadow: 0 0 16px rgba(0,102,204,0.1);
         }
 
         html { scroll-behavior: smooth; font-size: var(--font-base); }
         body {
             background: var(--bg-deep); color: var(--text-primary); min-height: 100vh; display: flex;
-            justify-content: center; overflow-x: hidden; padding: 0;
+            justify-content: center; overflow: hidden; padding: 0;
             background-image: radial-gradient(ellipse at 20% 30%, rgba(0,240,255,0.04) 0%, transparent 55%),
                               radial-gradient(ellipse at 80% 70%, rgba(139,92,246,0.04) 0%, transparent 50%);
             background-attachment: fixed; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             font-size: var(--font-base);
+            position: fixed;
+            inset: 0;
         }
         body::before {
             content: ''; position: fixed; inset: 0;
@@ -59,274 +102,382 @@
                               linear-gradient(90deg, rgba(255,255,255,0.006) 1px, transparent 1px);
             background-size: 40px 40px; pointer-events: none; z-index: 0;
         }
+        [data-theme="light"] body {
+            background-image: radial-gradient(ellipse at 20% 30%, rgba(0,102,204,0.04) 0%, transparent 55%),
+                              radial-gradient(ellipse at 80% 70%, rgba(109,40,217,0.04) 0%, transparent 50%);
+        }
+        [data-theme="light"] body::before {
+            background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+        }
 
         .app {
-            max-width: 1440px;
+            max-width: 560px;
             width: 100%;
-            padding: var(--spacing-base) var(--spacing-base) 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             position: relative;
             z-index: 1;
             margin: 0 auto;
+            overflow: hidden;
         }
 
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.25); border-radius: 10px; }
-
-        /* ---------- ANIMATIONS ---------- */
-        @keyframes fade-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        .card, .exercise-card, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card {
-            animation: fade-in 0.4s ease both; will-change: transform, opacity;
-        }
-        .card:nth-child(2) { animation-delay: 0.08s; }
-        .btn { transition: transform 0.15s ease, box-shadow 0.15s ease; will-change: transform; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.2); border-radius: 10px; }
+        [data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,102,204,0.2); }
 
         /* ---------- HEADER ---------- */
         .header {
-            position: sticky; top: 0; z-index: 70; margin: 0 0 var(--spacing-base); padding: 16px var(--spacing-base);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-card);
-            background: rgba(8,12,19,0.88); box-shadow: 0 16px 50px rgba(0,0,0,0.4);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            display: flex; align-items: center; justify-content: space-between; will-change: transform;
-        }
-        .header::before {
-            content: ''; position: absolute; inset: -1px; border-radius: inherit;
-            background: linear-gradient(120deg, rgba(255,61,0,0.15), transparent 24%, rgba(0,231,255,0.15) 51%, transparent 76%, rgba(185,255,0,0.1));
-            opacity: 0.3; z-index: -1;
+            flex-shrink: 0;
+            z-index: 70;
+            margin: 0 0 8px; padding: 12px var(--spacing-base);
+            border-bottom: 1px solid var(--border-subtle);
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: space-between;
+            will-change: transform;
         }
         .header h1 {
-            font: 900 clamp(1.6rem, 5vw, 3.6rem)/0.85 'Impact','Arial Black',Inter,sans-serif;
+            font: 900 clamp(1.3rem, 4vw, 2.8rem)/0.85 'Impact','Arial Black',Inter,sans-serif;
             text-transform: uppercase; letter-spacing: -0.03em;
-            background: linear-gradient(92deg, #fff 0%, #dffbff 23%, #ff8a00 50%, #ff3d00 66%, #00e7ff 100%);
+            background: linear-gradient(92deg, var(--gradient-start) 0%, var(--gradient-mid) 23%, #ff8a00 50%, #ff3d00 66%, var(--gradient-end) 100%);
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 16px rgba(255,61,0,0.1));
+            filter: drop-shadow(var(--text-shadow));
             display: flex; align-items: center; gap: 6px;
         }
-        .header h1 .sub { font-size: 0.35em; font-weight: 300; letter-spacing: 0.12em; -webkit-text-fill-color: rgba(255,255,255,0.2); background: none; text-transform: uppercase; }
-        .header-left { display: flex; align-items: center; gap: 12px; }
-        .header-logo { width: 48px; height: 48px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; background: var(--bg-card); }
+        .header h1 .sub { font-size: 0.3em; font-weight: 300; letter-spacing: 0.12em; -webkit-text-fill-color: var(--text-muted); background: none; text-transform: uppercase; }
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .header-logo { width: 40px; height: 40px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle); flex-shrink: 0; background: var(--bg-card); }
         .header-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-        .header .version { border: 1px solid rgba(0,231,255,0.15); background: rgba(0,231,255,0.05); color: #b9f8ff; padding: 6px 14px; border-radius: 999px; font: 600 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: flex; align-items: center; gap: 6px; }
-        .header .version .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--neon-green); animation: pulse-dot 2s ease-in-out infinite; }
+        .header-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+        .header .version { border: 1px solid var(--badge-border); background: var(--badge-bg); color: var(--badge-color); padding: 4px 12px; border-radius: 999px; font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: flex; align-items: center; gap: 4px; }
+        .header .version .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--neon-green); animation: pulse-dot 2s ease-in-out infinite; }
         @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
-        .btn-reset, .burger-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.15s ease; cursor: pointer; }
-        .btn-reset { border-color: rgba(255,49,92,0.2); color: #ffdce5; padding: 6px 14px; border-radius: 40px; font-weight: 700; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.4px; background: rgba(255,49,92,0.06); }
+
+        /* ---------- КНОПКА ТЕМЫ ---------- */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 40px;
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+        .theme-toggle:active { transform: scale(0.92); }
+        .theme-toggle .icon { font-size: 0.85rem; line-height: 1; }
+
+        .btn-reset {
+            background: rgba(255,49,92,0.1);
+            border: 1px solid rgba(255,49,92,0.15);
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
         .btn-reset:active { transform: scale(0.92); }
-        .burger-btn { border-radius: 14px; width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4.5px; padding: 10px; position: relative; z-index: 1000; background: rgba(255,255,255,0.05); }
-        .burger-btn:active { transform: scale(0.9); }
-        .burger-btn span { display: block; width: 22px; height: 2.5px; background: var(--text-primary); border-radius: 4px; transition: transform 0.2s ease, opacity 0.2s ease; }
-        .burger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); background: var(--cyan); }
-        .burger-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .burger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); background: var(--purple); }
 
-        /* ---------- MENU ---------- */
-        .menu-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-        .menu-overlay.open { opacity: 1; pointer-events: auto; }
-        .side-menu {
-            position: fixed; top: 0; left: -380px; width: 360px; max-width: 85%; height: 100%;
-            background: rgba(10,11,22,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border-right: 1px solid var(--border-subtle); z-index: 1000;
-            transition: left 0.3s cubic-bezier(0.22,1,0.36,1);
-            padding: 90px 24px 30px; overflow-y: auto; box-shadow: 16px 0 60px rgba(0,0,0,0.5);
+        /* ---------- PAGES CONTAINER ---------- */
+        .pages-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            touch-action: pan-y;
         }
-        .side-menu.open { left: 0; }
-        .side-menu .menu-title { color: rgba(0,231,255,0.6); border-bottom: 1px solid rgba(0,231,255,0.08); font: 700 0.7rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.15em; padding-bottom: 14px; margin-bottom: 18px; text-transform: uppercase; }
-        .side-menu .menu-item {
-            position: relative; margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02);
-            color: #d7e2ee; font-weight: 600; display: flex; align-items: center; gap: 14px; padding: 16px 20px;
-            border-radius: 16px; width: 100%; text-align: left; cursor: pointer;
-            transition: background 0.15s ease, transform 0.15s ease; font-size: 1.05rem;
-        }
-        .side-menu .menu-item::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0; transition: opacity 0.15s ease; }
-        .side-menu .menu-item:hover, .side-menu .menu-item.active { background: rgba(255,61,0,0.06); color: #fff; transform: translateX(3px); }
-        .side-menu .menu-item:hover::before, .side-menu .menu-item.active::before { opacity: 1; }
-        .side-menu .menu-item .icon { font-size: 1.3rem; width: 28px; text-align: center; opacity: 0.5; flex-shrink: 0; }
-        .side-menu .menu-item.active .icon { opacity: 1; }
-        .side-menu .menu-item .badge { margin-left: auto; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #05070b; font-size: 0.55rem; font-weight: 800; padding: 2px 12px; border-radius: 40px; min-width: 20px; text-align: center; }
 
-        /* ---------- PAGES ---------- */
-        .page { display: none; }
-        .page.active { display: grid !important; grid-template-columns: 1fr; gap: var(--spacing-base); align-items: start; }
+        .pages-wrapper {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        .page {
+            flex: 0 0 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 var(--spacing-base) calc(var(--nav-height) + 16px) var(--spacing-base);
+            will-change: transform;
+            -webkit-overflow-scrolling: touch;
+        }
+        .page::-webkit-scrollbar { width: 3px; }
+        .page::-webkit-scrollbar-track { background: transparent; }
+        .page::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.15); border-radius: 10px; }
+        [data-theme="light"] .page::-webkit-scrollbar-thumb { background: rgba(0,102,204,0.15); }
+
+        /* ---------- BOTTOM NAV ---------- */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: stretch;
+            justify-content: space-around;
+            z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom, 0);
+            will-change: transform;
+            overflow-x: auto;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            padding: 4px 12px;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-width: 50px;
+        }
+
+        .nav-item .nav-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-item .nav-label {
+            font-size: 0.4rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-item.active {
+            color: var(--cyan);
+        }
+        .nav-item.active .nav-icon { transform: scale(1.1); }
+        .nav-item.active .nav-label { opacity: 1; }
+
+        .nav-item .nav-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #fff;
+            font-size: 0.4rem;
+            font-weight: 800;
+            padding: 1px 8px;
+            border-radius: 40px;
+            min-width: 16px;
+            text-align: center;
+            display: none;
+        }
+        .nav-item .nav-badge.show { display: block; }
+        .nav-item:active { transform: scale(0.92); }
 
         /* ---------- CARDS ---------- */
         .card {
             position: relative; overflow: hidden; padding: var(--card-padding);
-            border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-card);
-            background: rgba(7,11,18,0.82); box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            border: 1px solid var(--border-subtle); border-radius: var(--radius-card);
+            background: var(--card-bg); box-shadow: var(--shadow-card);
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            transition: transform 0.2s ease, border-color 0.2s ease; will-change: transform;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.4s ease, box-shadow 0.4s ease;
+            will-change: transform;
+            margin-bottom: 14px;
         }
         .card::before { content: ''; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: linear-gradient(135deg, rgba(255,61,0,0.15), transparent 30%, rgba(0,231,255,0.12) 60%, transparent 80%); opacity: 0.15; pointer-events: none; }
+        [data-theme="light"] .card::before { background: linear-gradient(135deg, rgba(0,102,204,0.1), transparent 30%, rgba(109,40,217,0.08) 60%, transparent 80%); }
         .card:active { transform: scale(0.995); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); flex-wrap: wrap; gap: 8px; }
-        .card-header h2 { font: 800 clamp(1.2rem,2.5vw,1.6rem)/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; letter-spacing: -0.02em; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .card-header .badge { border: 1px solid rgba(0,231,255,0.1); background: rgba(0,231,255,0.04); color: #bdf9ff; font: 600 0.6rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 16px; border-radius: 40px; flex-shrink: 0; }
-        .chain-stamp { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.08); font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--neon-green); letter-spacing: 0.04em; text-transform: uppercase; }
-        .verified-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 12px; border-radius: 40px; background: rgba(0,231,255,0.04); border: 1px solid rgba(0,231,255,0.08); font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 6px; }
+        .card-header h2 { font: 800 clamp(1rem, 2vw, 1.4rem)/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
+        .card-header .badge { border: 1px solid var(--badge-border); background: var(--badge-bg); color: var(--badge-color); font: 600 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 14px; border-radius: 40px; flex-shrink: 0; }
+        .chain-stamp { display: inline-flex; align-items: center; gap: 3px; padding: 1px 10px; border-radius: 40px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.08); font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--neon-green); letter-spacing: 0.04em; text-transform: uppercase; }
+        .verified-badge { display: inline-flex; align-items: center; gap: 3px; padding: 1px 10px; border-radius: 40px; background: rgba(0,231,255,0.04); border: 1px solid rgba(0,231,255,0.08); font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; }
 
         /* ---------- CATEGORY TABS ---------- */
-        .category-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0 14px 0; margin-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+        .category-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 12px 0; margin-bottom: 4px; scrollbar-width: none; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
         .category-tabs::-webkit-scrollbar { display: none; }
-        .category-tab { flex-shrink: 0; padding: 10px 18px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); color: var(--text-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; user-select: none; }
+        .category-tab { flex-shrink: 0; padding: 8px 16px; border-radius: 40px; border: 1px solid var(--border-subtle); background: var(--bg-input); color: var(--text-muted); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; user-select: none; }
         .category-tab:active { transform: scale(0.94); }
-        .category-tab.active { background: rgba(0,231,255,0.08); border-color: rgba(0,231,255,0.2); color: var(--cyan); box-shadow: 0 0 20px rgba(0,231,255,0.04); }
-        .category-tab .count { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 20px; background: rgba(255,255,255,0.04); font-size: 0.55rem; color: var(--text-muted); }
+        .category-tab.active { background: var(--badge-bg); border-color: var(--badge-border); color: var(--cyan); box-shadow: 0 0 20px rgba(0,231,255,0.04); }
+        .category-tab .count { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 20px; background: rgba(255,255,255,0.04); font-size: 0.5rem; color: var(--text-muted); }
         .category-tab.active .count { background: rgba(0,231,255,0.08); color: var(--cyan); }
 
         /* ---------- EXERCISE GRID ---------- */
-        .exercise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
+        .exercise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
         .exercise-card {
-            position: relative; min-height: 130px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
-            text-align: left; padding: 14px 12px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.05);
-            background: rgba(10,15,24,0.6); box-shadow: 0 4px 16px rgba(0,0,0,0.2); overflow: hidden;
+            position: relative; min-height: 110px; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+            text-align: left; padding: 12px 10px; border-radius: 16px; border: 1px solid var(--border-subtle);
+            background: var(--bg-input); box-shadow: 0 4px 16px rgba(0,0,0,0.2); overflow: hidden;
             transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; cursor: pointer; will-change: transform;
         }
-        .exercise-card::before { content: '⛓️ BLOCK'; position: absolute; top: 8px; left: 8px; padding: 2px 10px; border-radius: 999px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.06); color: var(--neon-green); font: 600 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.04em; z-index: 1; }
-        .exercise-card .ex-name { position: relative; z-index: 1; width: 100%; margin-top: 22px; font: 700 0.7rem/1.2 Inter, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.03em; color: #dfe8f3; }
-        .exercise-card .ex-weight { position: relative; z-index: 1; margin-top: 4px; font: 900 clamp(1.6rem,4vw,2.6rem)/0.85 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: #fff; text-shadow: 0 0 16px rgba(255,61,0,0.15); }
-        .exercise-card .ex-unit { position: relative; z-index: 1; color: rgba(206,219,233,0.5); font: 600 0.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.04em; }
-        .exercise-card .ex-bodyweight { position: relative; z-index: 1; margin-top: 4px; padding: 2px 10px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.03); color: #dffcff; border-radius: 20px; font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: inline-block; }
-        .exercise-card .hash-id { position: relative; z-index: 1; margin-top: 4px; font: 400 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: rgba(255,255,255,0.1); letter-spacing: 0.03em; }
+        .exercise-card::before { content: '⛓️ BLOCK'; position: absolute; top: 6px; left: 6px; padding: 1px 8px; border-radius: 999px; background: rgba(74,222,128,0.04); border: 1px solid rgba(74,222,128,0.06); color: var(--neon-green); font: 600 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.04em; z-index: 1; }
+        .exercise-card .ex-name { position: relative; z-index: 1; width: 100%; margin-top: 18px; font: 600 0.6rem/1.1 Inter, system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary); }
+        .exercise-card .ex-weight { position: relative; z-index: 1; margin-top: 3px; font: 900 clamp(1.4rem, 3.5vw, 2.2rem)/0.85 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: var(--text-primary); text-shadow: 0 0 12px rgba(255,61,0,0.15); }
+        .exercise-card .ex-unit { position: relative; z-index: 1; color: var(--text-muted); font: 600 0.45rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+        .exercise-card .ex-bodyweight { position: relative; z-index: 1; margin-top: 3px; padding: 1px 8px; border: 1px solid var(--border-subtle); background: var(--bg-card); color: var(--text-muted); border-radius: 20px; font: 600 0.4rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; display: inline-block; }
+        .exercise-card .hash-id { position: relative; z-index: 1; margin-top: 3px; font: 400 0.35rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text-muted); opacity: 0.4; letter-spacing: 0.03em; }
         .exercise-card:active { transform: scale(0.95); }
         .exercise-card.hidden { display: none; }
 
         /* ---------- FORMS ---------- */
-        .input-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
-        .input-row input, .input-row select { flex: 1; min-width: 70px; min-height: var(--input-height); background: rgba(3,7,14,0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 12px 16px; color: #f7fbff; font-size: 1rem; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; font-weight: 500; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
-        .input-row select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
-        .input-row input:focus, .input-row select:focus { border-color: rgba(0,231,255,0.3); box-shadow: 0 0 0 3px rgba(0,231,255,0.04); }
-        .input-row input::placeholder { color: rgba(200,210,223,0.3); }
-        .exercise-select-wrapper { position: relative; flex: 1; min-width: 80px; }
+        .input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+        .input-row input, .input-row select { flex: 1; min-width: 60px; min-height: 44px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 10px 14px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease; font-weight: 500; }
+        .input-row select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+        .input-row input:focus, .input-row select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,231,255,0.04); }
+        .input-row input::placeholder { color: var(--text-muted); }
+        .exercise-select-wrapper { position: relative; flex: 1; min-width: 70px; }
         .exercise-select-wrapper select { width: 100%; }
 
         /* ---------- BUTTONS ---------- */
-        .btn { border: none; border-radius: var(--radius-sm); background: linear-gradient(135deg, #ff3d00 0%, #ff8a00 60%, #ffe76b 100%); color: #080b10; font: 800 0.85rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; box-shadow: 0 6px 20px rgba(255,61,0,0.15); transition: transform 0.12s ease, box-shadow 0.15s ease; padding: 14px 22px; min-height: var(--btn-height); cursor: pointer; touch-action: manipulation; white-space: nowrap; border: 1px solid rgba(255,255,255,0.06); will-change: transform; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn { border: none; border-radius: 14px; background: var(--btn-gradient); color: #fff; font: 700 0.7rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; box-shadow: var(--btn-shadow); transition: transform 0.12s ease, box-shadow 0.15s ease; padding: 12px 18px; min-height: 48px; cursor: pointer; touch-action: manipulation; white-space: nowrap; border: 1px solid var(--border-subtle); will-change: transform; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
         .btn:active { transform: scale(0.94); }
-        .btn-outline { background: rgba(255,255,255,0.03); color: #e7f8ff; border-color: rgba(0,231,255,0.1); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .btn-outline { background: transparent; color: var(--text-secondary); border-color: var(--border-subtle); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .btn-success { background: linear-gradient(135deg, #54ff8f, #b9ff00); color: #07100a; box-shadow: 0 6px 20px rgba(84,255,143,0.12); }
         .btn-danger { background: linear-gradient(135deg, #ff315c, #ff3d00); color: #fff; box-shadow: 0 6px 20px rgba(255,49,92,0.12); }
         .btn-block { width: 100%; justify-content: center; }
-        .btn-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-        .btn-row .btn { flex: 1; min-width: 80px; text-align: center; }
+        .btn-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .btn-row .btn { flex: 1; min-width: 70px; text-align: center; }
 
         /* ---------- STATS ---------- */
-        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-        .stat-box { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 24px rgba(0,0,0,0.15); border-radius: 18px; padding: 18px 12px; text-align: center; }
-        .stat-box label { font-size: 0.6rem; text-transform: uppercase; color: rgba(207,220,234,0.4); letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; position: relative; z-index: 1; }
-        .stat-box .value { font: 900 clamp(2rem,5vw,3.2rem)/0.9 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: #fff; text-shadow: 0 0 20px rgba(0,231,255,0.08); position: relative; z-index: 1; margin-top: 2px; }
-        .stat-box .unit { color: rgba(185,255,0,0.5); font-weight: 700; font-size: 0.6rem; position: relative; z-index: 1; }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .stat-box { position: relative; overflow: hidden; border: 1px solid var(--border-subtle); background: var(--bg-input); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 14px 10px; text-align: center; }
+        .stat-box label { font-size: 0.55rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; position: relative; z-index: 1; }
+        .stat-box .value { font: 900 clamp(1.6rem, 4.5vw, 2.8rem)/0.9 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: var(--text-primary); text-shadow: 0 0 16px rgba(0,231,255,0.08); position: relative; z-index: 1; margin-top: 2px; }
+        .stat-box .unit { color: var(--neon-green); font-weight: 700; font-size: 0.55rem; position: relative; z-index: 1; }
 
         /* ---------- SETS ---------- */
-        .set-item { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 14px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.12s ease, border-color 0.12s ease; }
+        .set-item { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 12px 14px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; transition: transform 0.12s ease, border-color 0.12s ease; }
         .set-item:active { transform: scale(0.98); }
-        .set-item .set-info { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-        .set-item .set-info span:first-child { font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); }
-        .set-item .set-weight { font-weight: 800; color: #ff8a00; font-size: 1.05rem; }
-        .set-item .set-reps { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
-        .set-item .set-delete { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; padding: 0 6px; transition: color 0.15s ease; }
+        .set-item .set-info { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .set-item .set-info span:first-child { font-weight: 600; font-size: 0.8rem; color: var(--text-secondary); }
+        .set-item .set-weight { font-weight: 800; color: var(--gold); font-size: 0.95rem; }
+        .set-item .set-reps { color: var(--text-secondary); font-size: 0.8rem; font-weight: 500; }
+        .set-item .set-delete { background: none; border: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 0 4px; transition: color 0.15s ease; }
         .set-item .set-delete:active { color: #ef4444; }
-        .set-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; padding: 14px; background: rgba(255,255,255,0.02); border-radius: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.04); }
-        .set-summary .stat { font-size: 0.6rem; color: rgba(207,220,234,0.4); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-        .set-summary .stat .num { font-size: 1.4rem; font-weight: 900; color: var(--text-primary); display: block; margin-bottom: 2px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .set-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; padding: 12px; background: var(--bg-input); border-radius: 14px; text-align: center; border: 1px solid var(--border-subtle); }
+        .set-summary .stat { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .set-summary .stat .num { font-size: 1.2rem; font-weight: 900; color: var(--text-primary); display: block; margin-bottom: 2px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* ---------- CHALLENGES ---------- */
-        .challenge-card { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 16px 18px; margin-bottom: 10px; transition: border-color 0.15s ease; position: relative; overflow: hidden; }
-        .challenge-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0.4; }
-        .challenge-card.active { border-color: rgba(255,61,0,0.12); background: rgba(255,61,0,0.03); }
-        .challenge-card.completed { border-color: rgba(84,255,143,0.15); opacity: 0.7; }
+        .challenge-card { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 14px 16px; margin-bottom: 8px; transition: border-color 0.15s ease; position: relative; overflow: hidden; }
+        .challenge-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0.4; }
+        .challenge-card.active { border-color: var(--cyan); background: var(--badge-bg); }
+        .challenge-card.completed { border-color: var(--neon-green); opacity: 0.7; }
         .challenge-card .ch-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px; }
-        .challenge-card .ch-name { font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 0.01em; font-size: 0.9rem; }
-        .challenge-card .ch-reward { background: linear-gradient(135deg, var(--gold), var(--pink)); color: #0a0a12; padding: 2px 14px; border-radius: 40px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; }
-        .challenge-card .ch-desc { font-size: 0.8rem; color: #cdd7e4; margin-bottom: 8px; }
-        .challenge-card .ch-progress { height: 6px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; }
+        .challenge-card .ch-name { font-weight: 800; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.01em; font-size: 0.8rem; }
+        .challenge-card .ch-reward { background: linear-gradient(135deg, var(--gold), var(--pink)); color: #fff; padding: 1px 12px; border-radius: 40px; font-size: 0.55rem; font-weight: 800; text-transform: uppercase; }
+        .challenge-card .ch-desc { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 6px; }
+        .challenge-card .ch-progress { height: 5px; background: var(--bg-input); border-radius: 4px; overflow: hidden; }
         .challenge-card .ch-progress-bar { height: 100%; border-radius: 4px; transition: width 0.4s ease; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
-        .challenge-card .ch-progress-text { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; text-align: right; font-weight: 600; }
+        .challenge-card .ch-progress-text { font-size: 0.55rem; color: var(--text-muted); margin-top: 3px; text-align: right; font-weight: 600; }
 
         /* ---------- AI ---------- */
-        .ai-program { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; padding: 16px 18px; margin-bottom: 10px; border-left: 4px solid var(--cyan); }
-        .ai-program .day { font-weight: 900; color: var(--cyan); font-size: 0.9rem; letter-spacing: 0.3px; margin-bottom: 4px; text-transform: uppercase; }
-        .ai-program .exercise { font-size: 0.85rem; color: var(--text-secondary); padding: 2px 0; font-weight: 500; }
+        .ai-program { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; padding: 14px 16px; margin-bottom: 8px; border-left: 3px solid var(--cyan); }
+        .ai-program .day { font-weight: 900; color: var(--cyan); font-size: 0.8rem; letter-spacing: 0.3px; margin-bottom: 3px; text-transform: uppercase; }
+        .ai-program .exercise { font-size: 0.75rem; color: var(--text-secondary); padding: 2px 0; font-weight: 500; }
         .ai-program .exercise strong { color: var(--text-primary); font-weight: 700; }
 
-        .forecast-card { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 20px; text-align: center; }
-        .forecast-card .target { font-size: 2.4rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
-        .forecast-card .date { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-        .forecast-card .confidence { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
-        .forecast-card .bw-note { font-size: 0.6rem; color: var(--text-muted); margin-top: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 6px; }
-        .progress-bar { height: 8px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+        .forecast-card { border: 1px solid var(--border-subtle); background: var(--bg-input); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 18px; text-align: center; }
+        .forecast-card .target { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
+        .forecast-card .date { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .forecast-card .confidence { font-size: 0.6rem; color: var(--text-muted); margin-top: 3px; font-weight: 600; }
+        .forecast-card .bw-note { font-size: 0.55rem; color: var(--text-muted); margin-top: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; border-top: 1px solid var(--border-subtle); padding-top: 4px; }
+        .progress-bar { height: 6px; background: var(--bg-input); border-radius: 4px; overflow: hidden; margin-top: 6px; }
         .progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--purple)); border-radius: 4px; transition: width 0.4s ease; }
 
-        .chart-container { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 10px; margin-top: 10px; }
-        .chart-container canvas { width: 100% !important; height: auto !important; max-height: 140px; }
+        .chart-container { border: 1px solid var(--border-subtle); background: var(--bg-input); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 14px; padding: 8px; margin-top: 8px; }
+        .chart-container canvas { width: 100% !important; height: auto !important; max-height: 120px; }
 
-        .ai-bubble { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 16px; padding: 16px 20px; margin-bottom: 14px; border-left: 4px solid var(--cyan); }
-        .ai-bubble .label { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-        .ai-bubble p { color: #cdd7e4; line-height: 1.6; font-size: 0.95rem; font-weight: 500; }
+        .ai-bubble { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border-left: 3px solid var(--cyan); }
+        .ai-bubble .label { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .ai-bubble p { color: var(--text-secondary); line-height: 1.5; font-size: 0.85rem; font-weight: 500; }
 
-        .ai-message { border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 16px 20px; color: var(--text-primary); min-height: 50px; margin-top: 12px; font-size: 0.9rem; line-height: 1.7; font-weight: 500; }
+        .ai-message { border: 1px solid var(--border-subtle); background: var(--bg-input); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 14px; padding: 14px 16px; color: var(--text-primary); min-height: 44px; margin-top: 10px; font-size: 0.85rem; line-height: 1.6; font-weight: 500; }
 
-        .ai-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-        .ai-actions .btn { flex: 1; min-width: 80px; text-align: center; font-size: 0.7rem; padding: 14px 18px; }
+        .ai-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .ai-actions .btn { flex: 1; min-width: 70px; text-align: center; font-size: 0.6rem; padding: 12px 16px; min-height: 44px; }
 
-        .empty-state { color: var(--text-muted); text-align: center; padding: 20px 0; font-size: 0.85rem; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .empty-state { color: var(--text-muted); text-align: center; padding: 16px 0; font-size: 0.8rem; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
         /* ---------- TOAST ---------- */
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px); background: rgba(7,11,18,0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0,231,255,0.1); padding: 14px 26px; border-radius: 14px; color: #f7fbff; font-size: 0.85rem; z-index: 2000; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; max-width: 90%; text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.4); font-weight: 600; }
+        .toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--nav-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-subtle); padding: 12px 24px; border-radius: 14px; color: var(--text-primary); font-size: 0.8rem; z-index: 9999; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; max-width: 90%; text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.4); font-weight: 600; }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* ---------- WORKOUT TIMER ---------- */
-        .workout-timer { border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.02); border-radius: 14px; padding: 12px 16px; text-align: center; font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-weight: 500; }
-        .workout-timer .label { font-weight: 700; color: var(--cyan); text-transform: uppercase; font-size: 0.6rem; letter-spacing: 0.3px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .workout-timer { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; padding: 10px 14px; text-align: center; font-size: 0.7rem; color: var(--text-secondary); margin-top: 8px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; font-weight: 500; }
+        .workout-timer .label { font-weight: 700; color: var(--cyan); text-transform: uppercase; font-size: 0.55rem; letter-spacing: 0.3px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
         /* ---------- ACHIEVEMENT TOAST ---------- */
-        .achievement-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: rgba(9,13,20,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,231,107,0.2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 30px 34px; text-align: center; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1); max-width: 90%; width: 360px; }
+        .achievement-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 26px 30px; text-align: center; z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1); max-width: 90%; width: 340px; }
         .achievement-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
-        .achievement-toast .big-icon { font-size: 3rem; display: block; margin-bottom: 6px; }
-        .achievement-toast .title { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
-        .achievement-toast .sub { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 14px; font-weight: 500; }
+        .achievement-toast .big-icon { font-size: 2.6rem; display: block; margin-bottom: 4px; }
+        .achievement-toast .title { font-size: 1.1rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+        .achievement-toast .sub { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500; }
         .achievement-toast .btn { margin-top: 0; }
 
         /* ---------- CALC ---------- */
-        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .calc-input-group { display: flex; flex-direction: column; gap: 4px; }
-        .calc-input-group label { font-size: 0.55rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-        .calc-input-group input, .calc-input-group select { min-height: 48px; background: rgba(3,7,14,0.7); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px 16px; color: #f7fbff; font-size: 1rem; outline: none; transition: border-color 0.15s ease; width: 100%; font-weight: 500; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
-        .calc-input-group input:focus, .calc-input-group select:focus { border-color: rgba(0,231,255,0.3); box-shadow: 0 0 0 3px rgba(0,231,255,0.04); }
-        .calc-result { margin-top: 14px; border: 2px solid rgba(0,231,255,0.12); background: rgba(255,255,255,0.02); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 18px; text-align: center; }
-        .calc-result .label { font-size: 0.55rem; color: rgba(207,220,234,0.4); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-        .calc-result .value { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
-        .calc-result .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .calc-input-group { display: flex; flex-direction: column; gap: 3px; }
+        .calc-input-group label { font-size: 0.5rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .calc-input-group input, .calc-input-group select { min-height: 44px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 10px 14px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border-color 0.15s ease; width: 100%; font-weight: 500; }
+        .calc-input-group input:focus, .calc-input-group select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,231,255,0.04); }
+        .calc-result { margin-top: 12px; border: 2px solid var(--cyan); background: var(--bg-input); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-radius: 16px; padding: 16px; text-align: center; }
+        .calc-result .label { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+        .calc-result .value { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.3px; font-family: 'Impact','Arial Black',Inter,sans-serif; }
+        .calc-result .sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
 
         /* ---------- RESET MODAL ---------- */
-        .reset-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .reset-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9997; display: none; align-items: center; justify-content: center; padding: 20px; }
         .reset-modal.show { display: flex; }
-        .reset-modal-content { background: rgba(9,13,20,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,231,107,0.12); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 30px; max-width: 380px; width: 100%; text-align: center; }
-        .reset-modal-content h2 { font: 900 1.4rem/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; color: #ff315c; margin-bottom: 6px; }
-        .reset-modal-content p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 18px; line-height: 1.5; font-weight: 500; }
-        .reset-modal-content .btn-row { display: flex; gap: 10px; }
+        .reset-modal-content { background: var(--nav-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-subtle); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-radius: 20px; padding: 26px; max-width: 360px; width: 100%; text-align: center; }
+        .reset-modal-content h2 { font: 900 1.2rem/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; color: #ff315c; margin-bottom: 4px; }
+        .reset-modal-content p { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px; line-height: 1.5; font-weight: 500; }
+        .reset-modal-content .btn-row { display: flex; gap: 8px; }
         .reset-modal-content .btn-row .btn { flex: 1; }
-        .reset-modal-content .btn-row .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.08); color: var(--text-secondary); box-shadow: none; }
+        .reset-modal-content .btn-row .btn-outline { background: transparent; border: 1px solid var(--border-subtle); color: var(--text-secondary); box-shadow: none; }
 
         /* ---------- WEEK LIST ---------- */
-        .week-list { max-height: 200px; overflow-y: auto; margin-top: 10px; border: 1px solid rgba(255,255,255,0.04); background: rgba(255,255,255,0.01); border-radius: 14px; padding: 4px; }
-        .week-item { display: flex; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.85rem; border-radius: 10px; }
+        .week-list { max-height: 180px; overflow-y: auto; margin-top: 8px; border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; padding: 3px; }
+        .week-item { display: flex; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid var(--border-subtle); font-size: 0.75rem; border-radius: 8px; }
         .week-item:last-child { border: none; }
-        .week-item .date { color: rgba(207,220,234,0.4); font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.75rem; }
+        .week-item .date { color: var(--text-muted); font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.65rem; }
         .week-item .data { font-weight: 600; color: var(--text-secondary); }
 
         /* ---------- DECORATIVE BANNER ---------- */
-        .deco-banner { width: 100%; height: 70px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.04); margin-bottom: 14px; position: relative; background: rgba(255,255,255,0.01); }
+        .deco-banner { width: 100%; height: 60px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 12px; position: relative; background: var(--bg-input); }
         .deco-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .deco-banner .overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.15)); pointer-events: none; }
 
-        /* ============================================================
-           ГРАФИК УПРАЖНЕНИЯ — МОДАЛЬНОЕ ОКНО
-           ============================================================ */
+        /* ---------- GRAPH MODAL ---------- */
         .exercise-chart-modal {
             position: fixed;
             inset: 0;
-            z-index: 5000;
+            z-index: 9996;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -338,9 +489,9 @@
         }
         .exercise-chart-modal.show { display: flex; }
         .exercise-chart-modal .modal-content {
-            background: rgba(10, 14, 24, 0.97);
+            background: var(--nav-bg);
             border-radius: var(--radius-card);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
             padding: var(--card-padding);
             max-width: 560px;
@@ -352,40 +503,40 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-subtle);
         }
         .exercise-chart-modal .modal-header h3 {
-            font: 900 1.2rem/1.1 'Impact','Arial Black',Inter,sans-serif;
+            font: 900 1.1rem/1.1 'Impact','Arial Black',Inter,sans-serif;
             text-transform: uppercase;
-            color: #fff;
+            color: var(--text-primary);
         }
         .exercise-chart-modal .close-btn {
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            padding: 0 6px;
+            padding: 0 4px;
             transition: color 0.15s ease;
         }
-        .exercise-chart-modal .close-btn:active { color: #fff; }
+        .exercise-chart-modal .close-btn:active { color: var(--text-primary); }
         .exercise-chart-modal .modal-stats {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 14px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         .exercise-chart-modal .modal-stats .ms-item {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--bg-input);
             border-radius: 12px;
-            padding: 10px;
+            padding: 8px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
         }
         .exercise-chart-modal .modal-stats .ms-item .ms-label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             text-transform: uppercase;
             color: var(--text-muted);
             font-weight: 600;
@@ -393,9 +544,9 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         }
         .exercise-chart-modal .modal-stats .ms-item .ms-value {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-primary);
             margin-top: 2px;
         }
         .exercise-chart-modal .modal-stats .ms-item .ms-value.gold { color: var(--gold); }
@@ -404,40 +555,38 @@
         .exercise-chart-modal canvas {
             width: 100% !important;
             height: auto !important;
-            max-height: 220px;
+            max-height: 200px;
             border-radius: 12px;
-            background: rgba(0, 0, 0, 0.2);
+            background: var(--bg-input);
         }
         .exercise-chart-modal .no-data {
             color: var(--text-muted);
             text-align: center;
-            padding: 30px 0;
-            font-size: 0.85rem;
+            padding: 20px 0;
+            font-size: 0.8rem;
         }
 
-        /* ============================================================
-           СПРАВОЧНИК
-           ============================================================ */
+        /* ---------- GUIDE ---------- */
         .guide-section {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .guide-section h3 {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--cyan);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 4px;
         }
         .guide-item {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-            font-size: 0.75rem;
-            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.7rem;
+            gap: 6px;
         }
         .guide-item .guide-ex {
             color: var(--text-secondary);
@@ -457,81 +606,68 @@
             color: var(--neon-green);
         }
 
-        /* ============================================================
-           АДАПТИВНОСТЬ ДЛЯ ДЕСКТОПА
-           ============================================================ */
-        @media (min-width: 768px) {
-            .app { padding: 28px 40px 100px; }
-            #page-records.active { grid-template-columns: 1fr 1fr; gap: 24px; }
-            #page-progress.active { grid-template-columns: 1fr 1fr; gap: 24px; }
-            #page-challenges.active,
-            #page-ai.active,
-            #page-forecast.active,
-            #page-reports.active,
-            #page-guide.active {
-                grid-template-columns: 1fr;
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            .exercise-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
-            .exercise-card { min-height: 120px; padding: 12px 10px; }
-            .exercise-card .ex-name { font-size: 0.65rem; margin-top: 18px; }
-            .exercise-card .ex-weight { font-size: clamp(1.4rem, 2.5vw, 2rem); }
-            .btn { padding: 12px 20px; min-height: 48px; font-size: 0.75rem; }
-            .input-row input, .input-row select { min-height: 44px; font-size: 0.9rem; padding: 10px 14px; }
-            .header h1 { font-size: 2.8rem; }
-            .header-logo { width: 56px; height: 56px; }
-            .card { padding: 20px; }
-            .card-header h2 { font-size: 1.4rem; }
-            .stat-box .value { font-size: 2.6rem; }
-            .exercise-chart-modal .modal-content { max-width: 720px; }
+        /* ---------- ANIMATIONS ---------- */
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card, .exercise-card, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card {
+            animation: fade-in 0.3s ease both;
+            will-change: transform, opacity;
+        }
+        .card:nth-child(2) { animation-delay: 0.06s; }
+        .exercise-card:nth-child(n+4) { animation-delay: 0.03s; }
+
+        /* ---------- ПЛАВНАЯ СМЕНА ТЕМЫ ---------- */
+        body, .header, .bottom-nav, .card, .card-header .badge, .stat-box, .set-item, .challenge-card, .ai-program, .forecast-card, .ai-bubble, .ai-message, .workout-timer, .input-row input, .input-row select, .calc-input-group input, .calc-input-group select, .calc-result, .reset-modal-content, .exercise-chart-modal .modal-content {
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
         }
 
-        @media (min-width: 1200px) {
-            .exercise-grid { grid-template-columns: repeat(5, 1fr); }
-            #page-records.active { grid-template-columns: 1.4fr 1fr; }
-            .app { padding: 32px 60px 100px; }
-        }
-
-        @media (max-width: 767px) {
-            .exercise-grid { grid-template-columns: repeat(2, 1fr); }
-            #page-records.active { grid-template-columns: 1fr; }
-            #page-progress.active { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.6rem; }
-            .header-logo { width: 40px; height: 40px; }
-            .burger-btn { width: 42px; height: 42px; }
-            .card { padding: 16px; }
-            .input-row input, .input-row select { min-height: 48px; font-size: 0.9rem; }
-            .btn { min-height: 48px; font-size: 0.75rem; padding: 12px 16px; }
-            .stat-box .value { font-size: 1.8rem; }
-        }
-
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
-            .exercise-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .app { max-width: 100%; }
+            .header { padding: 10px 14px; }
+            .header h1 { font-size: 1.2rem; }
+            .header .version { display: none; }
+            .card { padding: 16px; border-radius: 18px; }
+            .exercise-grid { gap: 8px; }
             .exercise-card { min-height: 100px; padding: 10px; }
             .exercise-card .ex-name { font-size: 0.55rem; margin-top: 14px; }
             .exercise-card .ex-weight { font-size: 1.3rem; }
-            .header h1 { font-size: 1.3rem; }
-            .header .version { display: none; }
-            .category-tab { font-size: 0.55rem; padding: 6px 12px; }
-            .card-header h2 { font-size: 1rem; }
-            .input-row input, .input-row select { min-width: 50px; padding: 8px 10px; font-size: 0.8rem; min-height: 40px; }
-            .btn { padding: 8px 14px; font-size: 0.65rem; min-height: 40px; }
+            .page { padding: 0 12px calc(var(--nav-height) + 12px) 12px; }
+            .input-row input, .input-row select { min-width: 50px; padding: 8px 12px; font-size: 0.8rem; min-height: 40px; }
+            .btn { padding: 10px 14px; font-size: 0.65rem; min-height: 44px; }
             .stat-box .value { font-size: 1.5rem; }
-            .side-menu { width: 280px; padding: 70px 16px 20px; }
-            .side-menu .menu-item { font-size: 0.85rem; padding: 12px 14px; }
-            .guide-item { font-size: 0.65rem; flex-wrap: wrap; }
+            .category-tab { font-size: 0.55rem; padding: 6px 12px; }
+            .bottom-nav { height: 64px; }
+            .nav-item .nav-icon { font-size: 1.1rem; }
+            .nav-item .nav-label { font-size: 0.4rem; }
+            .theme-toggle { font-size: 0.6rem; padding: 3px 10px; }
+            .theme-toggle .icon { font-size: 0.75rem; }
+            .guide-item { font-size: 0.6rem; flex-wrap: wrap; }
             .guide-item .guide-rule { text-align: left; width: 100%; }
         }
 
         @media (max-width: 380px) {
             .exercise-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.1rem; }
+            .header h1 { font-size: 1rem; }
             .header h1 .sub { display: none; }
+        }
+
+        @media (min-width: 600px) {
+            .app { max-width: 600px; }
+            .exercise-grid { grid-template-columns: repeat(3, 1fr); }
+            .bottom-nav { justify-content: center; }
+            .nav-item { min-width: 60px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+
+        /* Убираем старые меню */
+        .menu-overlay, .side-menu, .burger-btn {
+            display: none !important;
         }
     </style>
 </head>
@@ -548,39 +684,6 @@
         <button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
     </div>
 
-    <!-- MENU OVERLAY -->
-    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-
-    <!-- SIDE MENU -->
-    <div class="side-menu" id="sideMenu">
-        <div class="menu-title">📋 Навигация</div>
-        <button class="menu-item active" data-page="records" onclick="navigateTo('records')">
-            <span class="icon">🏋️</span> Тренировки
-        </button>
-        <button class="menu-item" data-page="progress" onclick="navigateTo('progress')">
-            <span class="icon">📊</span> Вес/рост
-        </button>
-        <button class="menu-item" data-page="forecast" onclick="navigateTo('forecast')">
-            <span class="icon">📈</span> Прогноз
-        </button>
-        <button class="menu-item" data-page="challenges" onclick="navigateTo('challenges')">
-            <span class="icon">🎯</span> Челленджи
-            <span class="badge" id="menuChallengeBadge" style="display:none;">0</span>
-        </button>
-        <button class="menu-item" data-page="reports" onclick="navigateTo('reports')">
-            <span class="icon">📊</span> Отчёты
-        </button>
-        <button class="menu-item" data-page="ai" onclick="navigateTo('ai')">
-            <span class="icon">🤖</span> AI тренер
-        </button>
-        <button class="menu-item" data-page="calc" onclick="navigateTo('calc')">
-            <span class="icon">📐</span> Калькулятор 1ПМ
-        </button>
-        <button class="menu-item" data-page="guide" onclick="navigateTo('guide')">
-            <span class="icon">📖</span> Справочник
-        </button>
-    </div>
-
     <!-- APP -->
     <div class="app">
 
@@ -593,237 +696,275 @@
                 <h1>ATHLETE <span class="sub">elite</span></h1>
             </div>
             <div class="header-actions">
-                <button class="btn-reset" onclick="openResetModal()">🗑️</button>
-                <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
-                    <span></span><span></span><span></span>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                    <span class="icon" id="themeIcon">🌙</span>
+                    <span id="themeLabel">Тёмная</span>
                 </button>
+                <button class="btn-reset" onclick="openResetModal()">🗑️</button>
+                
             </div>
         </div>
 
-        <!-- DECORATIVE BANNER -->
-        <div class="deco-banner">
-            <img src="https://yt3.googleusercontent.com/MOeAfdnITKALY0U8vMFxiZsKnFR2XB36JAg_lSqnDqeijmpmzE1zzzrihon333Kh6ZhlBnZC=s900-c-k-c0x00ffffff-no-rj" alt="fitness banner" loading="lazy" decoding="async">
-            <div class="overlay"></div>
-        </div>
+        <!-- PAGES CONTAINER -->
+        <div class="pages-container" id="pagesContainer">
+            <div class="pages-wrapper" id="pagesWrapper">
 
-        <!-- PAGE: RECORDS -->
-        <div id="page-records" class="page active">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🏆 Рекорды</h2>
-                    <span class="badge" id="recordCountBadge">0 упражнений</span>
-                </div>
+                <!-- PAGE: RECORDS -->
+                <div class="page" data-page="records">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🏆 Рекорды</h2>
+                            <span class="badge" id="recordCountBadge">0 упражнений</span>
+                        </div>
 
-                <!-- CATEGORY TABS -->
-                <div class="category-tabs" id="categoryTabs">
-                    <button class="category-tab active" data-category="all">🏋️ Все <span class="count" id="tabCountAll">0</span></button>
-                    <button class="category-tab" data-category="legs">🦵 Ноги <span class="count" id="tabCountLegs">0</span></button>
-                    <button class="category-tab" data-category="chest">💪 Грудь <span class="count" id="tabCountChest">0</span></button>
-                    <button class="category-tab" data-category="back">🔙 Спина <span class="count" id="tabCountBack">0</span></button>
-                    <button class="category-tab" data-category="shoulders">🏋️ Плечи <span class="count" id="tabCountShoulders">0</span></button>
-                    <button class="category-tab" data-category="arms">💪 Руки <span class="count" id="tabCountArms">0</span></button>
-                    <button class="category-tab" data-category="core">🏋️ Кор <span class="count" id="tabCountCore">0</span></button>
-                    <button class="category-tab" data-category="functional">🏃 Функц. <span class="count" id="tabCountFunctional">0</span></button>
-                </div>
+                        <div class="category-tabs" id="categoryTabs">
+                            <button class="category-tab active" data-category="all">🏋️ Все <span class="count" id="tabCountAll">0</span></button>
+                            <button class="category-tab" data-category="legs">🦵 Ноги <span class="count" id="tabCountLegs">0</span></button>
+                            <button class="category-tab" data-category="chest">💪 Грудь <span class="count" id="tabCountChest">0</span></button>
+                            <button class="category-tab" data-category="back">🔙 Спина <span class="count" id="tabCountBack">0</span></button>
+                            <button class="category-tab" data-category="shoulders">🏋️ Плечи <span class="count" id="tabCountShoulders">0</span></button>
+                            <button class="category-tab" data-category="arms">💪 Руки <span class="count" id="tabCountArms">0</span></button>
+                            <button class="category-tab" data-category="core">🏋️ Кор <span class="count" id="tabCountCore">0</span></button>
+                            <button class="category-tab" data-category="functional">🏃 Функц. <span class="count" id="tabCountFunctional">0</span></button>
+                        </div>
 
-                <div class="exercise-grid" id="recordsContainer"></div>
-                <div class="input-row">
-                    <div class="exercise-select-wrapper">
-                        <select id="recordExSelect"></select>
+                        <div class="exercise-grid" id="recordsContainer"></div>
+                        <div class="input-row">
+                            <div class="exercise-select-wrapper">
+                                <select id="recordExSelect"></select>
+                            </div>
+                            <input type="number" id="recordExWeight" placeholder="Вес/повторы" step="0.5">
+                            <button class="btn" id="addRecordBtn">➕</button>
+                        </div>
                     </div>
-                    <input type="number" id="recordExWeight" placeholder="Вес/повторы" step="0.5">
-                    <button class="btn" id="addRecordBtn">➕</button>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>📋 Рабочие подходы</h2>
-                    <span class="badge" id="setsCount">0 подходов</span>
-                </div>
-                <div id="todaySetsContainer"><div class="empty-state">Нет записей за сегодня</div></div>
-                <div class="input-row">
-                    <div class="exercise-select-wrapper">
-                        <select id="setExSelect"></select>
-                    </div>
-                    <input type="number" id="setWeight" placeholder="Вес" step="0.5">
-                    <input type="number" id="setReps" placeholder="Повторы" min="1" max="999">
-                    <button class="btn" id="addSetBtn">➕</button>
-                </div>
-                <div id="setSummary" class="set-summary" style="display:none;"></div>
-                <div class="btn-row"><button class="btn btn-success" id="finishWorkoutBtn">Завершить</button></div>
-                <div class="workout-timer">
-                    <span><span class="label">📅</span> <span id="todayDate">—</span></span>
-                    <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAGE: PROGRESS -->
-        <div id="page-progress" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📊 Вес и рост</h2>
-                    <span class="badge">еженедельно</span>
-                </div>
-                <div class="stats-row">
-                    <div class="stat-box"><label>Вес</label><div class="value" id="currentWeightDisplay">—</div><div class="unit">кг</div></div>
-                    <div class="stat-box"><label>Рост</label><div class="value" id="currentHeightDisplay">—</div><div class="unit">см</div></div>
-                </div>
-                <div class="input-row">
-                    <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
-                    <input type="number" id="heightInput" placeholder="Рост (см)" step="0.5">
-                    <button class="btn" id="addProgressBtn">📝</button>
-                </div>
-                <div class="week-list" id="progressWeekList"></div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h2>📈 График веса</h2>
-                    <span class="badge">динамика</span>
-                </div>
-                <div class="chart-container"><canvas id="progressChart"></canvas></div>
-            </div>
-        </div>
-
-        <!-- PAGE: FORECAST -->
-        <div id="page-forecast" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📈 Прогноз прогресса</h2>
-                    <span class="badge">AI прогноз</span>
-                </div>
-                <div id="forecastContainer"><div class="empty-state">Выбери упражнение и цель</div></div>
-                <div class="input-row">
-                    <div class="exercise-select-wrapper">
-                        <select id="forecastExSelect"></select>
-                    </div>
-                    <input type="number" id="forecastTarget" placeholder="Цель (кг/повторы)" step="0.5">
-                    <button class="btn" id="forecastBtn">🔮</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAGE: CHALLENGES -->
-        <div id="page-challenges" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🎯 Челленджи</h2>
-                    <span class="badge" id="challengeBadge">0 активных</span>
-                </div>
-                <div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
-            </div>
-        </div>
-
-        <!-- PAGE: REPORTS -->
-        <div id="page-reports" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📊 Отчёты</h2>
-                    <span class="badge">неделя</span>
-                </div>
-                <div id="reportContainer"><div class="empty-state">Данные появятся после тренировок</div></div>
-            </div>
-        </div>
-
-        <!-- PAGE: AI -->
-        <div id="page-ai" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>🤖 AI-тренер</h2>
-                </div>
-                <div class="ai-bubble">
-                    <div class="label">📊 анализ боеспособности</div>
-                    <p id="aiStatus">Анализирую все данные...</p>
-                </div>
-                <div class="ai-actions">
-                    <button class="btn" id="aiProgramBtn">📋 Программа</button>
-                    <button class="btn btn-outline" id="aiAdviceBtn">💡 Совет</button>
-                    <button class="btn btn-outline" id="aiAnalyzeBtn">📊 Анализ</button>
-                </div>
-                <div class="ai-message" id="aiMessage">Нажми «Анализ» или «Программа»</div>
-            </div>
-        </div>
-
-        <!-- PAGE: CALC -->
-        <div id="page-calc" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📐 Калькулятор 1ПМ</h2>
-                    <span class="badge">одноповторный максимум</span>
-                </div>
-                <div class="calc-grid">
-                    <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
-                    <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
-                </div>
-                <div class="calc-input-group" style="margin-top:10px;"><label>Формула</label>
-                    <select id="calcFormula">
-                        <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
-                        <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
-                        <option value="oconnor">О'Коннор</option>
-                    </select>
-                </div>
-                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">Рассчитать</button>
-                <div class="calc-result" id="calcResult">
-                    <div class="label">Ваш 1ПМ</div>
-                    <div class="value" id="calcResultValue">—</div>
-                    <div class="sub" id="calcResultSub">введите вес и повторения</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAGE: GUIDE (Справочник) -->
-        <div id="page-guide" class="page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>📖 Справочник</h2>
-                    <span class="badge">как записывать</span>
-                </div>
-                <div class="guide-section">
-                    <h3>🏋️ С отягощениями (кг) — общий вес снаряда</h3>
-                    <div class="guide-item"><span class="guide-ex">жим от груди, присед со штангой, становая тяга</span><span class="guide-rule">общий вес штанги</span></div>
-                    <div class="guide-item"><span class="guide-ex">жим гантелей лёжа, жим гантелей сидя</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                    <div class="guide-item"><span class="guide-ex">подъём гантелей на бицепс, молотковые сгибания</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                    <div class="guide-item"><span class="guide-ex">жим из-за головы для трицепса, французский жим</span><span class="guide-rule">общий вес штанги/гантели</span></div>
-                    <div class="guide-item"><span class="guide-ex">разводка гантелей в стороны / в наклоне</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                    <div class="guide-item"><span class="guide-ex">выпады с гантелями</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>💪 На одну руку — записывай отдельный подход на каждую</h3>
-                    <div class="guide-item"><span class="guide-ex">тяга гантели в наклоне</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
-                    <div class="guide-item"><span class="guide-ex">концентрационные сгибания</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>🏃 С весом тела (повторы) — вес не вводится</h3>
-                    <div class="guide-item"><span class="guide-ex">отжимания от пола</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">подтягивания</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">берпи</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">отжимания на брусьях (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">присед (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">скручивания</span><span class="guide-rule bw">только повторения</span></div>
-                    <div class="guide-item"><span class="guide-ex">запрыгивания на тумбу</span><span class="guide-rule bw">только повторения</span></div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>⏱️ На время — секунды</h3>
-                    <div class="guide-item"><span class="guide-ex">планка</span><span class="guide-rule">секунды</span></div>
-                </div>
-
-                <div style="margin-top:12px; padding:12px; background:rgba(255,255,255,0.02); border-radius:12px; border:1px solid rgba(255,255,255,0.04);">
-                    <div style="font-size:0.7rem; color:var(--text-muted);">
-                        💡 <strong style="color:var(--gold);">Важно:</strong> Для упражнений с гантелями (на две руки) всегда указывай <strong>общий вес двух гантелей</strong>. 
-                        Например: 2 гантели по 10 кг → записывай <strong>20 кг</strong>.
-                    </div>
-                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
-                        💡 Для упражнений на <strong>одну руку</strong> (тяга гантели) — записывай вес одной гантели и делай <strong>отдельный подход</strong> на каждую руку.
-                    </div>
-                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">
-                        💡 Для упражнений с <strong>весом тела</strong> — поле "Вес" можно оставить пустым или поставить 0, указывай только количество повторений.
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📋 Рабочие подходы</h2>
+                            <span class="badge" id="setsCount">0 подходов</span>
+                        </div>
+                        <div id="todaySetsContainer"><div class="empty-state">Нет записей за сегодня</div></div>
+                        <div class="input-row">
+                            <div class="exercise-select-wrapper">
+                                <select id="setExSelect"></select>
+                            </div>
+                            <input type="number" id="setWeight" placeholder="Вес" step="0.5">
+                            <input type="number" id="setReps" placeholder="Повторы" min="1" max="999">
+                            <button class="btn" id="addSetBtn">➕</button>
+                        </div>
+                        <div id="setSummary" class="set-summary" style="display:none;"></div>
+                        <div class="btn-row"><button class="btn btn-success" id="finishWorkoutBtn">Завершить</button></div>
+                        <div class="workout-timer">
+                            <span><span class="label">📅</span> <span id="todayDate">—</span></span>
+                            <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- PAGE: PROGRESS -->
+                <div class="page" data-page="progress">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📊 Вес и рост</h2>
+                            <span class="badge">еженедельно</span>
+                        </div>
+                        <div class="stats-row">
+                            <div class="stat-box"><label>Вес</label><div class="value" id="currentWeightDisplay">—</div><div class="unit">кг</div></div>
+                            <div class="stat-box"><label>Рост</label><div class="value" id="currentHeightDisplay">—</div><div class="unit">см</div></div>
+                        </div>
+                        <div class="input-row">
+                            <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
+                            <input type="number" id="heightInput" placeholder="Рост (см)" step="0.5">
+                            <button class="btn" id="addProgressBtn">📝</button>
+                        </div>
+                        <div class="week-list" id="progressWeekList"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📈 График веса</h2>
+                            <span class="badge">динамика</span>
+                        </div>
+                        <div class="chart-container"><canvas id="progressChart"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- PAGE: FORECAST -->
+                <div class="page" data-page="forecast">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📈 Прогноз прогресса</h2>
+                            <span class="badge">AI прогноз</span>
+                        </div>
+                        <div id="forecastContainer"><div class="empty-state">Выбери упражнение и цель</div></div>
+                        <div class="input-row">
+                            <div class="exercise-select-wrapper">
+                                <select id="forecastExSelect"></select>
+                            </div>
+                            <input type="number" id="forecastTarget" placeholder="Цель (кг/повторы)" step="0.5">
+                            <button class="btn" id="forecastBtn">🔮</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE: AI -->
+                <div class="page" data-page="ai">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🤖 AI-тренер</h2>
+                        </div>
+                        <div class="ai-bubble">
+                            <div class="label">📊 анализ боеспособности</div>
+                            <p id="aiStatus">Анализирую все данные...</p>
+                        </div>
+                        <div class="ai-actions">
+                            <button class="btn" id="aiProgramBtn">📋 Программа</button>
+                            <button class="btn btn-outline" id="aiAdviceBtn">💡 Совет</button>
+                            <button class="btn btn-outline" id="aiAnalyzeBtn">📊 Анализ</button>
+                        </div>
+                        <div class="ai-message" id="aiMessage">Нажми «Анализ» или «Программа»</div>
+                    </div>
+                </div>
+
+                <!-- PAGE: GUIDE -->
+                <div class="page" data-page="guide">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📖 Справочник</h2>
+                            <span class="badge">как записывать</span>
+                        </div>
+                        <div class="guide-section">
+                            <h3>🏋️ С отягощениями (кг) — общий вес снаряда</h3>
+                            <div class="guide-item"><span class="guide-ex">жим от груди, присед со штангой, становая тяга</span><span class="guide-rule">общий вес штанги</span></div>
+                            <div class="guide-item"><span class="guide-ex">жим гантелей лёжа, жим гантелей сидя</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                            <div class="guide-item"><span class="guide-ex">подъём гантелей на бицепс, молотковые сгибания</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                            <div class="guide-item"><span class="guide-ex">жим из-за головы для трицепса, французский жим</span><span class="guide-rule">общий вес штанги/гантели</span></div>
+                            <div class="guide-item"><span class="guide-ex">разводка гантелей в стороны / в наклоне</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                            <div class="guide-item"><span class="guide-ex">выпады с гантелями</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+                        </div>
+
+                        <div class="guide-section">
+                            <h3>💪 На одну руку — записывай отдельный подход на каждую</h3>
+                            <div class="guide-item"><span class="guide-ex">тяга гантели в наклоне</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
+                        </div>
+
+                        <div class="guide-section">
+                            <h3>🏃 С весом тела (повторы) — вес не вводится</h3>
+                            <div class="guide-item"><span class="guide-ex">отжимания от пола</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">подтягивания</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">берпи</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">отжимания на брусьях (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">присед (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">скручивания</span><span class="guide-rule bw">только повторения</span></div>
+                            <div class="guide-item"><span class="guide-ex">запрыгивания на тумбу</span><span class="guide-rule bw">только повторения</span></div>
+                        </div>
+
+                        <div class="guide-section">
+                            <h3>⏱️ На время — секунды</h3>
+                            <div class="guide-item"><span class="guide-ex">планка</span><span class="guide-rule">секунды</span></div>
+                        </div>
+
+                        <div style="margin-top:10px; padding:10px; background:var(--bg-input); border-radius:12px; border:1px solid var(--border-subtle);">
+                            <div style="font-size:0.65rem; color:var(--text-muted);">
+                                💡 <strong style="color:var(--gold);">Важно:</strong> Для упражнений с гантелями (на две руки) всегда указывай <strong>общий вес двух гантелей</strong>. 
+                                Например: 2 гантели по 10 кг → записывай <strong>20 кг</strong>.
+                            </div>
+                            <div style="font-size:0.65rem; color:var(--text-muted); margin-top:3px;">
+                                💡 Для упражнений на <strong>одну руку</strong> (тяга гантели) — записывай вес одной гантели и делай <strong>отдельный подход</strong> на каждую руку.
+                            </div>
+                            <div style="font-size:0.65rem; color:var(--text-muted); margin-top:3px;">
+                                💡 Для упражнений с <strong>весом тела</strong> — поле "Вес" можно оставить пустым или поставить 0, указывай только количество повторений.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE: CHALLENGES -->
+                <div class="page" data-page="challenges">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🎯 Челленджи</h2>
+                            <span class="badge" id="challengeBadge">0 активных</span>
+                        </div>
+                        <div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
+                    </div>
+                </div>
+
+                <!-- PAGE: REPORTS -->
+                <div class="page" data-page="reports">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📊 Отчёты</h2>
+                            <span class="badge">неделя</span>
+                        </div>
+                        <div id="reportContainer"><div class="empty-state">Данные появятся после тренировок</div></div>
+                    </div>
+                </div>
+
+                <!-- PAGE: CALC -->
+                <div class="page" data-page="calc">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>📐 Калькулятор 1ПМ</h2>
+                            <span class="badge">одноповторный максимум</span>
+                        </div>
+                        <div class="calc-grid">
+                            <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
+                            <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
+                        </div>
+                        <div class="calc-input-group" style="margin-top:10px;"><label>Формула</label>
+                            <select id="calcFormula">
+                                <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
+                                <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
+                                <option value="oconnor">О'Коннор</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">Рассчитать</button>
+                        <div class="calc-result" id="calcResult">
+                            <div class="label">Ваш 1ПМ</div>
+                            <div class="value" id="calcResultValue">—</div>
+                            <div class="sub" id="calcResultSub">введите вес и повторения</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        </div>
+
+        <!-- BOTTOM NAVIGATION -->
+        <div class="bottom-nav" id="bottomNav">
+            <button class="nav-item active" data-page="records">
+                <span class="nav-icon">🏋️</span>
+                <span class="nav-label">Тренировки</span>
+            </button>
+            <button class="nav-item" data-page="progress">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Вес</span>
+            </button>
+            <button class="nav-item" data-page="forecast">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Прогноз</span>
+            </button>
+            <button class="nav-item" data-page="ai">
+                <span class="nav-icon">🤖</span>
+                <span class="nav-label">AI</span>
+            </button>
+            <button class="nav-item" data-page="guide">
+                <span class="nav-icon">📖</span>
+                <span class="nav-label">Справка</span>
+            </button>
+            <button class="nav-item" data-page="challenges">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-label">Челленджи</span>
+                <span class="nav-badge" id="navChallengeBadge">0</span>
+            </button>
+            <button class="nav-item" data-page="reports">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Отчёты</span>
+            </button>
+            <button class="nav-item" data-page="calc">
+                <span class="nav-icon">📐</span>
+                <span class="nav-label">1ПМ</span>
+            </button>
         </div>
 
         <!-- RESET MODAL -->
@@ -840,9 +981,7 @@
 
     </div>
 
-    <!-- ============================================================
-    ГРАФИК УПРАЖНЕНИЯ — МОДАЛЬНОЕ ОКНО
-    ============================================================ -->
+    <!-- GRAPH MODAL -->
     <div class="exercise-chart-modal" id="exerciseChartModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -864,24 +1003,180 @@
             'use strict';
 
             // ============================================================
-            // 1. БУРГЕР-МЕНЮ
+            // ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
             // ============================================================
-            window.toggleMenu = function() {
-                const menu = document.getElementById('sideMenu');
-                const overlay = document.getElementById('menuOverlay');
-                const burger = document.getElementById('burgerBtn');
-                menu.classList.toggle('open');
-                overlay.classList.toggle('open');
-                burger.classList.toggle('active');
+            window.toggleTheme = function() {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme') || 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('athlete_theme', newTheme);
+
+                const icon = document.getElementById('themeIcon');
+                const label = document.getElementById('themeLabel');
+                if (newTheme === 'dark') {
+                    icon.textContent = '🌙';
+                    label.textContent = 'Тёмная';
+                } else {
+                    icon.textContent = '☀️';
+                    label.textContent = 'Светлая';
+                }
+
+                const meta = document.getElementById('themeColor');
+                if (meta) {
+                    meta.setAttribute('content', newTheme === 'dark' ? '#05070b' : '#f0f2f5');
+                }
             };
 
-            window.closeMenu = function() {
-                const menu = document.getElementById('sideMenu');
-                const overlay = document.getElementById('menuOverlay');
-                const burger = document.getElementById('burgerBtn');
-                menu.classList.remove('open');
-                overlay.classList.remove('open');
-                burger.classList.remove('active');
+            function loadTheme() {
+                const saved = localStorage.getItem('athlete_theme') || 'dark';
+                const html = document.documentElement;
+                html.setAttribute('data-theme', saved);
+
+                const icon = document.getElementById('themeIcon');
+                const label = document.getElementById('themeLabel');
+                if (saved === 'dark') {
+                    icon.textContent = '🌙';
+                    label.textContent = 'Тёмная';
+                } else {
+                    icon.textContent = '☀️';
+                    label.textContent = 'Светлая';
+                }
+
+                const meta = document.getElementById('themeColor');
+                if (meta) {
+                    meta.setAttribute('content', saved === 'dark' ? '#05070b' : '#f0f2f5');
+                }
+            }
+
+            // ============================================================
+            // 1. НАВИГАЦИЯ (нижняя + swipe)
+            // ============================================================
+            const pagesWrapper = document.getElementById('pagesWrapper');
+            const navItems = document.querySelectorAll('.nav-item');
+            const pageMap = {};
+            let currentPage = 'records';
+            let isTransitioning = false;
+
+            document.querySelectorAll('.page').forEach(page => {
+                pageMap[page.dataset.page] = page;
+            });
+
+            function navigateToPage(pageId, animate = true) {
+                if (isTransitioning || currentPage === pageId) return;
+                isTransitioning = true;
+
+                const pages = Object.keys(pageMap);
+                const index = pages.indexOf(pageId);
+                if (index === -1) return;
+
+                const offset = -index * 100;
+                pagesWrapper.style.transition = animate ? 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+                pagesWrapper.style.transform = `translateX(${offset}%)`;
+
+                navItems.forEach(item => {
+                    item.classList.toggle('active', item.dataset.page === pageId);
+                });
+
+                currentPage = pageId;
+
+                // Обновляем контент страницы
+                if (pageId === 'records') { renderRecords();
+                    renderTodaySets(); }
+                if (pageId === 'progress') { renderProgress();
+                    setTimeout(updateChart, 100); }
+                if (pageId === 'forecast') renderForecast();
+                if (pageId === 'reports') renderReport();
+                if (pageId === 'challenges') renderChallenges();
+                if (pageId === 'calc') calc1RM();
+                if (pageId === 'ai') {
+                    const analysis = getFitnessLevel();
+                    document.getElementById('aiStatus').textContent =
+                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
+                }
+                if (pageId === 'guide') {
+                    // просто показываем
+                }
+
+                setTimeout(() => { isTransitioning = false; }, 420);
+            }
+
+            // Клик по навигации
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const pageId = this.dataset.page;
+                    navigateToPage(pageId);
+                    if (navigator.vibrate) navigator.vibrate(4);
+                });
+            });
+
+            // Swipe
+            let touchStartX = 0,
+                touchStartY = 0,
+                isSwiping = false;
+            const container = document.getElementById('pagesContainer');
+
+            container.addEventListener('touchstart', function(e) {
+                if (isTransitioning) return;
+                const touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+                isSwiping = true;
+            }, { passive: true });
+
+            container.addEventListener('touchmove', function(e) {
+                if (!isSwiping || isTransitioning) return;
+                const touch = e.touches[0];
+                const diffX = touch.clientX - touchStartX;
+                const diffY = touch.clientY - touchStartY;
+                if (Math.abs(diffX) < Math.abs(diffY) || Math.abs(diffX) < 30) return;
+                e.preventDefault();
+
+                const pages = Object.keys(pageMap);
+                const currentIndex = pages.indexOf(currentPage);
+                let newIndex = currentIndex;
+
+                if (diffX < -50 && currentIndex < pages.length - 1) {
+                    newIndex = currentIndex + 1;
+                } else if (diffX > 50 && currentIndex > 0) {
+                    newIndex = currentIndex - 1;
+                } else return;
+
+                const newPage = pages[newIndex];
+                if (newPage) {
+                    navigateToPage(newPage);
+                    touchStartX = touch.clientX;
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchend', function() {
+                isSwiping = false;
+            }, { passive: true });
+
+            // ============================================================
+            // 2. TOAST
+            // ============================================================
+            let toastTimer = null;
+
+            function showToast(text, duration = 1800) {
+                const el = document.getElementById('toast');
+                el.textContent = text;
+                el.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => el.classList.remove('show'), duration);
+            }
+
+            function showAchievementToast(icon, title, desc) {
+                document.getElementById('achToastIcon').textContent = icon;
+                document.getElementById('achToastTitle').textContent = title;
+                document.getElementById('achToastDesc').textContent = desc;
+                document.getElementById('achievementToast').classList.add('show');
+                if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
+            }
+
+            window.closeAchievementToast = function() {
+                document.getElementById('achievementToast').classList.remove('show');
             };
 
             window.openResetModal = function() {
@@ -899,12 +1194,8 @@
                 setTimeout(() => location.reload(), 400);
             };
 
-            window.closeAchievementToast = function() {
-                document.getElementById('achievementToast').classList.remove('show');
-            };
-
             // ============================================================
-            // 2. ГРАФИК УПРАЖНЕНИЯ
+            // 3. ГРАФИК УПРАЖНЕНИЯ
             // ============================================================
             let chartModalOpen = false;
             let exerciseChartInstance = null;
@@ -1080,7 +1371,7 @@
             }
 
             // ============================================================
-            // 3. ДАННЫЕ
+            // 4. ДАННЫЕ
             // ============================================================
             const STORAGE_RECORDS = 'athlete_records_v5';
             const STORAGE_PROGRESS = 'athlete_progress_v5';
@@ -1100,31 +1391,24 @@
             let currentCategory = localStorage.getItem(STORAGE_CATEGORY) || 'all';
 
             // ============================================================
-            // НОВЫЙ ОПТИМИЗИРОВАННЫЙ СПИСОК УПРАЖНЕНИЙ
+            // 5. ОПТИМИЗИРОВАННЫЙ СПИСОК УПРАЖНЕНИЙ
             // ============================================================
             const defaultExercises = [
-                // Ноги
                 'жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                 'болгарский сплит-присед', 'разгибание ног сидя',
                 'становая тяга', 'присед со штангой', 'жим платформы ногами',
-                // Грудь
                 'жим от груди', 'жим гантелей лёжа',
                 'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
                 'отжимания с хлопком',
-                // Спина
                 'тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
                 'гиперэкстензия', 'шраги с гантелями', 'подтягивания',
                 'подтягивания обратным хватом',
-                // Плечи
                 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
                 'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда',
                 'тяга штанги к подбородку',
-                // Руки
                 'подъём гантелей на бицепс', 'французский жим', 'молотковые сгибания',
                 'жим из-за головы для трицепса', 'отжимания на брусьях (с весом тела)',
-                // Кор
                 'планка', 'скручивания',
-                // Функциональные
                 'запрыгивания на тумбу', 'берпи', 'ягодичный мост',
                 'подъём на носки стоя'
             ];
@@ -1155,7 +1439,6 @@
                 ]
             };
 
-            // Упражнения с весом тела
             const bodyweightExercises = [
                 'присед (с весом тела)',
                 'отжимания от пола',
@@ -1169,7 +1452,6 @@
                 'берпи'
             ];
 
-            // Упражнения на одну руку (отдельный подход на каждую)
             const singleArmExercises = [
                 'тяга гантели в наклоне'
             ];
@@ -1195,52 +1477,71 @@
                 return singleArmExercises.includes(ex);
             }
 
-            // ============================================================
-            // 4. ФУНКЦИЯ ОПРЕДЕЛЕНИЯ ТЕЛОСЛОЖЕНИЯ
-            // ============================================================
             function getBodyType(weight, height) {
                 if (!weight || !height) return { type: 'неизвестно', bmi: 0, desc: 'Нет данных о весе и росте' };
                 const heightM = height / 100;
                 const bmi = weight / (heightM * heightM);
-                let type = '', desc = '', emoji = '';
-                if (bmi < 18.5) { type = 'худощавое'; emoji = '🧘'; desc = 'Тонкокостное телосложение, низкий процент жира.'; }
-                else if (bmi < 19.5) { type = 'стройное'; emoji = '🧘‍♂️'; desc = 'Подтянутое, почти худощавое.'; }
-                else if (bmi < 22.5) { type = 'среднее'; emoji = '💪'; desc = 'Сбалансированное телосложение.'; }
-                else if (bmi < 25.5) { type = 'плотное'; emoji = '🏋️'; desc = 'Крепкое телосложение. Есть мышечная масса.'; }
-                else if (bmi < 28.5) { type = 'крупное'; emoji = '🦍'; desc = 'Массивное телосложение. Есть избыточный вес.'; }
-                else { type = 'избыточное'; emoji = '⚖️'; desc = 'Значительный избыточный вес.'; }
+                let type = '',
+                    desc = '',
+                    emoji = '';
+                if (bmi < 18.5) { type = 'худощавое';
+                    emoji = '🧘';
+                    desc = 'Тонкокостное телосложение, низкий процент жира.'; } else if (bmi < 19.5) { type = 'стройное';
+                    emoji = '🧘‍♂️';
+                    desc = 'Подтянутое, почти худощавое.'; } else if (bmi < 22.5) { type = 'среднее';
+                    emoji = '💪';
+                    desc = 'Сбалансированное телосложение.'; } else if (bmi < 25.5) { type = 'плотное';
+                    emoji = '🏋️';
+                    desc = 'Крепкое телосложение. Есть мышечная масса.'; } else if (bmi < 28.5) { type = 'крупное';
+                    emoji = '🦍';
+                    desc = 'Массивное телосложение. Есть избыточный вес.'; } else { type = 'избыточное';
+                    emoji = '⚖️';
+                    desc = 'Значительный избыточный вес.'; }
                 return { type, bmi, desc, emoji };
             }
 
             // ============================================================
-            // 5. LOAD DATA
+            // 6. LOAD DATA
             // ============================================================
             function loadData() {
                 exerciseList = [...defaultExercises];
                 localStorage.setItem('athlete_exercises_v5', JSON.stringify(exerciseList));
 
-                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records = {}; }
-                exerciseList.forEach(ex => { if (!(ex in records)) records[ex] = { weight: 0, date: new Date().toISOString().slice(0, 10) }; });
+                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records =
+                    {}; }
+                exerciseList.forEach(ex => { if (!(ex in records)) records[ex] = { weight: 0, date: new Date()
+                        .toISOString().slice(0, 10) }; });
 
-                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) { progressData = []; }
-                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10); progressData.push({ date: today, weight: 75, height: 175 }); }
+                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) {
+                    progressData = []; }
+                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10);
+                    progressData.push({ date: today, weight: 75, height: 175 }); }
                 progressData.sort((a, b) => a.date < b.date ? 1 : -1);
 
                 try { const s = localStorage.getItem(STORAGE_SETS); if (s) sets = JSON.parse(s); } catch (e) { sets = []; }
-                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) { weeklySets = {}; }
+                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) {
+                    weeklySets = {}; }
                 try { const d = localStorage.getItem(STORAGE_LAST_DATE); if (d) lastDate = d; } catch (e) { lastDate = ''; }
-                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) { challenges = []; }
+                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) {
+                    challenges = []; }
 
                 checkNewDay();
                 updateBlockHash();
             }
 
             function saveRecords() { localStorage.setItem(STORAGE_RECORDS, JSON.stringify(records)); }
+
             function saveProgress() { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(progressData)); }
-            function saveSets() { localStorage.setItem(STORAGE_SETS, JSON.stringify(sets)); saveWeeklySets(); }
+
+            function saveSets() { localStorage.setItem(STORAGE_SETS, JSON.stringify(sets));
+                saveWeeklySets(); }
+
             function saveWeeklySets() { localStorage.setItem(STORAGE_SETS_WEEKLY, JSON.stringify(weeklySets)); }
+
             function saveChallenges() { localStorage.setItem(STORAGE_CHALLENGES, JSON.stringify(challenges)); }
+
             function saveLastDate() { localStorage.setItem(STORAGE_LAST_DATE, lastDate); }
+
             function saveCategory() { localStorage.setItem(STORAGE_CATEGORY, currentCategory); }
 
             function checkNewDay() {
@@ -1302,7 +1603,8 @@
                             if (isBodyweightExercise(ex)) hint = ' (повторы)';
                             else if (ex === 'планка') hint = ' (сек)';
                             else if (isSingleArmExercise(ex)) hint = ' (1 рука)';
-                            else if (ex.includes('гантелей') || ex === 'разводка гантелей в стороны' || ex === 'разводка гантелей в наклоне') {
+                            else if (ex.includes('гантелей') || ex === 'разводка гантелей в стороны' || ex ===
+                                'разводка гантелей в наклоне') {
                                 hint = ' (общий вес)';
                             }
                             opt.textContent = ex + hint;
@@ -1316,7 +1618,7 @@
             }
 
             // ============================================================
-            // 6. CATEGORY TABS
+            // 7. CATEGORY TABS & RENDER RECORDS
             // ============================================================
             function getCategoryCounts() {
                 const counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
@@ -1344,9 +1646,6 @@
                 });
             }
 
-            // ============================================================
-            // 7. RENDER RECORDS
-            // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
                 container.innerHTML = '';
@@ -1408,12 +1707,11 @@
                     const div = document.createElement('div');
                     div.className = 'set-item';
                     const isBW = isBodyweightExercise(set.exercise);
-                    const unit = getUnitForExercise(set.exercise);
                     div.innerHTML = `
                         <div class="set-info">
                             <span>${set.exercise}</span>
                             ${!isBW ? `<span class="set-weight">${set.weight} кг</span>` : ''}
-                            <span class="set-reps">× ${set.reps} ${unit}</span>
+                            <span class="set-reps">× ${set.reps} повт.</span>
                             <span style="font-size:0.6rem;color:var(--text-muted);">${set.time || ''}</span>
                             <span class="chain-stamp" style="font-size:0.35rem;">⛓️ #${(set.id+'').slice(-4)}</span>
                         </div>
@@ -1479,15 +1777,12 @@
                 const isBW = isBodyweightExercise(ex);
                 const unit = getUnitForExercise(ex);
 
-                // Для упражнений с весом тела — вес не обязателен
                 if (!isBW && (isNaN(weight) || weight <= 0)) {
                     showToast('❌ Введи вес для этого упражнения', 1600);
                     return;
                 }
 
-                if (isBW) {
-                    weight = 0; // авто-заполняем 0 для веса тела
-                }
+                if (isBW) { weight = 0; }
 
                 if (isNaN(reps) || reps < 1) {
                     showToast('❌ Введи количество повторений', 1600);
@@ -1549,8 +1844,8 @@
                 }
                 const today = new Date().toISOString().slice(0, 10);
                 const idx = progressData.findIndex(item => item.date === today);
-                if (idx !== -1) { progressData[idx].weight = weight; progressData[idx].height = height; }
-                else { progressData.unshift({ date: today, weight, height }); }
+                if (idx !== -1) { progressData[idx].weight = weight;
+                    progressData[idx].height = height; } else { progressData.unshift({ date: today, weight, height }); }
                 progressData.sort((a, b) => a.date < b.date ? 1 : -1);
                 saveProgress();
                 renderProgress();
@@ -1563,7 +1858,7 @@
             }
 
             // ============================================================
-            // 10. CHART (вес тела)
+            // 10. CHART
             // ============================================================
             let chartRAF = null;
 
@@ -1733,9 +2028,11 @@
 
                 let confidence = 'Низкая';
                 let weeksToGoal = '';
-                if (weeksNeeded < 4) { confidence = 'Высокая 🔥'; weeksToGoal = `🎯 Достигнешь через ${weeksNeeded} недели!`; }
-                else if (weeksNeeded < 8) { confidence = 'Средняя 📈'; weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; }
-                else { confidence = 'Низкая (требуется больше данных) 📉'; weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
+                if (weeksNeeded < 4) { confidence = 'Высокая 🔥';
+                    weeksToGoal = `🎯 Достигнешь через ${weeksNeeded} недели!`; } else if (weeksNeeded < 8) { confidence =
+                        'Средняя 📈';
+                    weeksToGoal = `📊 Цель через ${weeksNeeded} недель`; } else { confidence = 'Низкая (требуется больше данных) 📉';
+                    weeksToGoal = `⏳ Потребуется ~${weeksNeeded} недель`; }
 
                 const data = {
                     exercise: ex,
@@ -1776,17 +2073,28 @@
             }
 
             const CHALLENGE_POOL = [
-                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5, reward: '⭐ +50' },
-                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7, reward: '⭐ +55' },
-                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2, reward: '⭐ +45' },
-                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20, reward: '⭐ +30' },
-                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25, reward: '⭐ +40' },
-                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000, reward: '⭐ +40' },
-                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3, reward: '⭐ +60' },
-                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10, reward: '⭐ +40' },
-                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50, exercise: 'отжимания от пола', reward: '⭐ +40' },
-                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps', target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
-                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100, exercise: 'отжимания от пола', reward: '⭐ +35' },
+                { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
+                    reward: '⭐ +50' },
+                { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
+                    reward: '⭐ +55' },
+                { name: '🏋️ Рекордсмен', desc: 'Обнови рекорд в 2 упражнениях', type: 'two_records', target: 2,
+                    reward: '⭐ +45' },
+                { name: '🔥 Железный объём', desc: 'Сделай 20 подходов за неделю', type: 'total_sets', target: 20,
+                    reward: '⭐ +30' },
+                { name: '🔥 Марафон подходов', desc: 'Сделай 25 подходов за неделю', type: 'total_sets', target: 25,
+                    reward: '⭐ +40' },
+                { name: '🏋️ Тоннаж-мастер', desc: 'Набери 2000 кг тоннажа', type: 'total_volume', target: 2000,
+                    reward: '⭐ +40' },
+                { name: '🎯 Снайпер', desc: 'Рекорды в 3 разных упражнениях', type: 'three_exercises', target: 3,
+                    reward: '⭐ +60' },
+                { name: '🔥 Тяжёлый подход', desc: '10 подходов с весом >80% от 1ПМ', type: 'heavy_sets', target: 10,
+                    reward: '⭐ +40' },
+                { name: '💪 Отжимания-мастер', desc: 'Сделай 50 отжиманий за подход', type: 'bodyweight_reps', target: 50,
+                    exercise: 'отжимания от пола', reward: '⭐ +40' },
+                { name: '💪 Подтягивания-эксперт', desc: 'Сделай 10 подтягиваний за подход', type: 'bodyweight_reps',
+                    target: 10, exercise: 'подтягивания', reward: '⭐ +45' },
+                { name: '💪 Стальной торс', desc: 'Сделай 100 отжиманий за неделю', type: 'bodyweight_total', target: 100,
+                    exercise: 'отжимания от пола', reward: '⭐ +35' },
             ];
 
             function generateChallenges() {
@@ -1822,33 +2130,60 @@
                 const allWeeklySets = getAllWeeklySets();
                 for (let ch of weekChallenges) {
                     if (ch.completed) continue;
-                    let progress = 0, isCompleted = false;
+                    let progress = 0,
+                        isCompleted = false;
                     switch (ch.type) {
                         case 'add_weight': {
                             const currentMax = Math.max(...Object.values(records).map(r => r.weight));
                             const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
-                                try { const p = JSON.parse(prev); const diff = currentMax - Math.max(...Object.values(p).map(r => r.weight)); progress = Math.min(ch.target, diff); if (diff >= ch.target) isCompleted = true; } catch (e) {}
+                                try { const p = JSON.parse(prev);
+                                    const diff = currentMax - Math.max(...Object.values(p).map(r => r.weight));
+                                    progress = Math.min(ch.target, diff);
+                                    if (diff >= ch.target) isCompleted = true; } catch (e) {}
                             }
                             break;
                         }
                         case 'two_records': {
                             const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
-                                try { const p = JSON.parse(prev); let count = 0; for (let ex of Object.keys(records)) { if (records[ex].weight > (p[ex]?.weight || 0)) count++; } progress = Math.min(ch.target, count); if (count >= ch.target) isCompleted = true; } catch (e) {}
+                                try { const p = JSON.parse(prev);
+                                    let count = 0;
+                                    for (let ex of Object.keys(records)) { if (records[ex].weight > (p[ex]?.weight || 0))
+                                            count++; }
+                                    progress = Math.min(ch.target, count);
+                                    if (count >= ch.target) isCompleted = true; } catch (e) {}
                             }
                             break;
                         }
-                        case 'total_sets': { const count = allWeeklySets.length; progress = Math.min(ch.target, count); if (count >= ch.target) isCompleted = true; break; }
-                        case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0); progress = Math.min(ch.target, vol); if (vol >= ch.target) isCompleted = true; break; }
-                        case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch.exercise].weight || 0; progress = Math.min(ch.target, cur); if (cur >= ch.target) isCompleted = true; } break; }
-                        case 'bodyweight_total': { if (ch.exercise) { const total = allWeeklySets.filter(s => s.exercise === ch.exercise).reduce((s, set) => s + set.reps, 0); progress = Math.min(ch.target, total); if (total >= ch.target) isCompleted = true; } break; }
-                        case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k].weight > 0); progress = Math.min(ch.target, exWithRecords.length); if (exWithRecords.length >= ch.target) isCompleted = true; break; }
-                        case 'heavy_sets': { let cnt = 0; for (let set of allWeeklySets) { const record = records[set.exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 + 0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch.target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
-                        default: { progress = 0; isCompleted = false; }
+                        case 'total_sets': { const count = allWeeklySets.length;
+                            progress = Math.min(ch.target, count);
+                            if (count >= ch.target) isCompleted = true; break; }
+                        case 'total_volume': { const vol = allWeeklySets.reduce((s, set) => s + set.weight * set.reps, 0);
+                            progress = Math.min(ch.target, vol);
+                            if (vol >= ch.target) isCompleted = true; break; }
+                        case 'bodyweight_reps': { if (ch.exercise && records[ch.exercise]) { const cur = records[ch
+                                    .exercise].weight || 0;
+                                progress = Math.min(ch.target, cur);
+                                if (cur >= ch.target) isCompleted = true; } break; }
+                        case 'bodyweight_total': { if (ch.exercise) { const total = allWeeklySets.filter(s => s
+                                    .exercise === ch.exercise).reduce((s, set) => s + set.reps, 0);
+                                progress = Math.min(ch.target, total);
+                                if (total >= ch.target) isCompleted = true; } break; }
+                        case 'three_exercises': { const exWithRecords = Object.keys(records).filter(k => records[k]
+                                .weight > 0);
+                            progress = Math.min(ch.target, exWithRecords.length);
+                            if (exWithRecords.length >= ch.target) isCompleted = true; break; }
+                        case 'heavy_sets': { let cnt = 0; for (let set of allWeeklySets) { const record = records[set
+                                    .exercise]; if (record && record.weight > 0) { const oneRM = record.weight * (1 +
+                                        0.025 * 10); if (set.weight > oneRM * 0.8) cnt++; } } progress = Math.min(ch
+                                    .target, cnt); if (cnt >= ch.target) isCompleted = true; break; }
+                        default: { progress = 0;
+                            isCompleted = false; }
                     }
                     ch.progress = progress;
-                    if (isCompleted && !ch.completed) { ch.completed = true; ch.notified = false; }
+                    if (isCompleted && !ch.completed) { ch.completed = true;
+                        ch.notified = false; }
                 }
 
                 localStorage.setItem('prev_week_records', JSON.stringify(records));
@@ -1870,13 +2205,14 @@
                 const container = document.getElementById('challengesContainer');
                 const weekStart = getWeekStart();
                 const weekChallenges = challenges.filter(c => c.week === weekStart);
-                if (weekChallenges.length === 0) { container.innerHTML = '<div class="empty-state">Нет активных челленджей</div>'; return; }
+                if (weekChallenges.length === 0) { container.innerHTML =
+                    '<div class="empty-state">Нет активных челленджей</div>'; return; }
                 container.innerHTML = '';
                 for (let ch of weekChallenges) {
                     const div = document.createElement('div');
                     div.className = `challenge-card ${ch.completed ? 'completed' : 'active'}`;
                     const progress = ch.target > 0 ? Math.min(100, (ch.progress / ch.target) * 100) : 0;
-                    const color = ch.completed ? '#54ff8f' : '#ff3d00';
+                    const color = ch.completed ? '#54ff8f' : 'var(--cyan)';
                     div.innerHTML = `
                         <div class="ch-header"><span class="ch-name">${ch.name}</span><span class="ch-reward">${ch.reward}</span></div>
                         <div class="ch-desc">${ch.desc}</div>
@@ -1892,7 +2228,7 @@
                 const weekStart = getWeekStart();
                 const weekChallenges = challenges.filter(c => c.week === weekStart);
                 const active = weekChallenges.filter(c => !c.completed).length;
-                const badge = document.getElementById('menuChallengeBadge');
+                const badge = document.getElementById('navChallengeBadge');
                 badge.style.display = active > 0 ? 'block' : 'none';
                 if (active > 0) badge.textContent = active;
                 document.getElementById('challengeBadge').textContent =
@@ -1914,7 +2250,8 @@
                 lastWeek.setDate(lastWeek.getDate() - 7);
                 const lastStart = lastWeek.toISOString().slice(0, 10);
                 let lastSets = [];
-                for (let date in weeklySets) { if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(weeklySets[date]); }
+                for (let date in weeklySets) { if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(
+                        weeklySets[date]); }
                 const lastVol = lastSets.reduce((s, set) => s + set.weight * set.reps, 0);
                 const volChange = lastVol > 0 ? ((totalVolume - lastVol) / lastVol * 100) : 0;
 
@@ -1930,7 +2267,7 @@
                         <div class="stat-box"><label>Ср. вес</label><div class="value">${avgWeight.toFixed(1)}</div><div class="unit">кг</div></div>
                         <div class="stat-box"><label>Рекордов</label><div class="value">${recordsCount}</div><div class="unit">всего</div></div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);">
+                    <div style="background:var(--bg-input);padding:12px;border-radius:14px;border:1px solid var(--border-subtle);">
                         <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
                             <span style="color:var(--text-muted);">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${bestEx}: ${maxRecord} кг</span>
@@ -1953,40 +2290,30 @@
             }
 
             // ============================================================
-            // 14. AI ТРЕНЕР — ИСПРАВЛЕННАЯ ВЕРСИЯ С ПРИОРИТЕТОМ ЦЕЛИ
+            // 14. AI ТРЕНЕР
             // ============================================================
             function getFitnessLevel() {
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
                 const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
                 const bodyInfo = getBodyType(currentWeight, currentHeight);
 
-                // ============================================================
-                // 1. СИЛА — все упражнения с отягощениями (кг)
-                // ============================================================
                 const strengthExercises = [
-                    // Ноги
                     'жим ногами', 'присед со штангой', 'становая тяга', 'румынская тяга',
                     'выпады с гантелями', 'болгарский сплит-присед', 'разгибание ног сидя',
-                    // Грудь
                     'жим от груди', 'жим гантелей лёжа', 'жим в наклоне',
-                    // Спина
                     'тяга штанги в наклоне', 'тяга гантели в наклоне', 'шраги с гантелями',
-                    // Плечи
                     'жим гантелей сидя', 'жим Арнольда', 'разводка гантелей в стороны',
                     'разводка гантелей в наклоне', 'подъём гантелей перед собой',
-                    // Руки
                     'подъём гантелей на бицепс', 'молотковые сгибания',
                     'французский жим', 'жим из-за головы для трицепса'
                 ];
 
-                let strengthScores = {};
                 let strengthCount = 0;
                 let totalStrengthRatio = 0;
 
                 for (let ex of strengthExercises) {
                     if (records[ex] && records[ex].weight > 0) {
                         const ratio = records[ex].weight / currentWeight;
-                        strengthScores[ex] = ratio;
                         totalStrengthRatio += ratio;
                         strengthCount++;
                     }
@@ -1994,9 +2321,6 @@
 
                 const avgStrength = strengthCount > 0 ? totalStrengthRatio / strengthCount : 0;
 
-                // ============================================================
-                // 2. ВЫНОСЛИВОСТЬ — упражнения с весом тела (повторы/сек)
-                // ============================================================
                 const enduranceExercises = [
                     { name: 'отжимания от пола', target: 50 },
                     { name: 'подтягивания', target: 15 },
@@ -2009,7 +2333,6 @@
                     { name: 'запрыгивания на тумбу', target: 20 }
                 ];
 
-                let enduranceScores = {};
                 let enduranceCount = 0;
                 let totalEnduranceRatio = 0;
 
@@ -2017,7 +2340,6 @@
                     if (records[ex.name] && records[ex.name].weight > 0) {
                         const val = records[ex.name].weight;
                         const ratio = Math.min(1, val / ex.target);
-                        enduranceScores[ex.name] = ratio;
                         totalEnduranceRatio += ratio;
                         enduranceCount++;
                     }
@@ -2025,18 +2347,12 @@
 
                 const avgEndurance = enduranceCount > 0 ? totalEnduranceRatio / enduranceCount : 0;
 
-                // ============================================================
-                // 3. ОПРЕДЕЛЕНИЕ ТИПА АТЛЕТА
-                // ============================================================
                 let athleteType = 'сбалансированный';
                 if (avgStrength > 1.2 && avgEndurance < 0.4) athleteType = 'силовой';
                 else if (avgEndurance > 0.7 && avgStrength < 0.8) athleteType = 'выносливый';
                 else if (avgStrength > 1.0 && avgEndurance > 0.6) athleteType = 'элитный';
                 else if (avgStrength < 0.5 && avgEndurance < 0.3) athleteType = 'новичок';
 
-                // ============================================================
-                // 4. ОБЩИЙ РЕЙТИНГ
-                // ============================================================
                 const totalScore = Math.min(100,
                     (avgStrength * 40) +
                     (avgEndurance * 40) +
@@ -2054,9 +2370,6 @@
                 else if (athleteType === 'выносливый') focus = 'выносливость 🏃';
                 else if (athleteType === 'элитный') focus = 'максимальная производительность 🔥';
 
-                // ============================================================
-                // 5. СЛАБЫЕ МЕСТА
-                // ============================================================
                 let weakPoints = [];
                 if (avgStrength < 0.8) weakPoints.push('💪 сила');
                 if (avgEndurance < 0.4) weakPoints.push('🏃 выносливость');
@@ -2098,9 +2411,6 @@
                 let exercises = [];
                 let focus = '';
 
-                // ============================================================
-                // 1. ОПРЕДЕЛЯЕМ ГЛАВНУЮ ЦЕЛЬ (приоритет у телосложения)
-                // ============================================================
                 let mainGoal = 'поддержание';
                 let bodyGoal = '';
 
@@ -2114,11 +2424,7 @@
                     bodyGoal = '🎯 Цель: поддержание формы и прогресс в силовых показателях.';
                 }
 
-                // ============================================================
-                // 2. ВЫБИРАЕМ ПРОГРАММУ В ЗАВИСИМОСТИ ОТ ЦЕЛИ И ТИПА
-                // ============================================================
                 if (mainGoal === 'набор массы') {
-                    // Для набора массы — всегда гипертрофия + сила
                     if (athleteType === 'выносливый') {
                         focus = 'Гипертрофия + силовая база (набор массы для выносливого)';
                         exercises = [
@@ -2149,7 +2455,6 @@
                         ];
                     }
                 } else if (mainGoal === 'снижение веса') {
-                    // Для снижения веса — много работы с весом тела + кардио
                     if (athleteType === 'силовой') {
                         focus = 'Сохранение силы + жиросжигание';
                         exercises = [
@@ -2179,7 +2484,6 @@
                         ];
                     }
                 } else {
-                    // Поддержание — сбалансированная программа
                     if (athleteType === 'силовой') {
                         focus = 'Поддержание силы (силовая периодизация)';
                         exercises = [
@@ -2209,10 +2513,6 @@
                     }
                 }
 
-                // ============================================================
-                // 3. ДОПОЛНИТЕЛЬНЫЕ КОРРЕКТИРОВКИ
-                // ============================================================
-                // Для худых — всегда добавляем базовые упражнения
                 if (bodyType === 'худощавое' || bodyType === 'стройное') {
                     if (!exercises.some(e => e[0] === 'Становая тяга' || e[0] === 'Присед со штангой')) {
                         exercises.splice(0, 0, ['Присед со штангой', '4×8-10', '75% от 1ПМ']);
@@ -2222,7 +2522,6 @@
                     }
                 }
 
-                // Для крупных — бережём суставы
                 if (bodyType === 'крупное' || bodyType === 'избыточное') {
                     exercises = exercises.map(e => {
                         if (e[0] === 'Присед со штангой' || e[0] === 'Присед') {
@@ -2230,15 +2529,11 @@
                         }
                         return e;
                     });
-                    // Добавляем кардио если его нет
                     if (!exercises.some(e => e[0] === 'Берпи')) {
                         exercises.push(['Берпи', '3×12-15', 'вес тела']);
                     }
                 }
 
-                // ============================================================
-                // 4. СОВЕТЫ ПО ПРОГРЕССИИ И ПИТАНИЮ
-                // ============================================================
                 let progressionAdvice = '';
                 if (mainGoal === 'набор массы') {
                     progressionAdvice = '💪 Увеличивай вес на 2-5 кг каждую неделю. Делай 8-12 повторений для гипертрофии.';
@@ -2258,9 +2553,6 @@
                     nutritionAdvice = '🍽️ Рекомендация: сбалансированное питание с достаточным количеством белка (1.8-2 г/кг веса).';
                 }
 
-                // ============================================================
-                // 5. ВЫВОД
-                // ============================================================
                 const weekDays = days.slice(0, 4);
                 msg.innerHTML = `
                     <div style="margin-bottom:8px;">
@@ -2362,9 +2654,11 @@
                 if (exWithRecords.length < 8) recs.push('🎯 Попробуй новые упражнения из списка для разнообразия.');
 
                 if (analysis.bodyType === 'худощавое' || analysis.bodyType === 'стройное') {
-                    recs.push('🍽️ Набор массы: профицит калорий +200-300 ккал, белок 2-2.2 г/кг, базовые упражнения 3-4 раза в неделю.');
+                    recs.push(
+                        '🍽️ Набор массы: профицит калорий +200-300 ккал, белок 2-2.2 г/кг, базовые упражнения 3-4 раза в неделю.');
                 } else if (analysis.bodyType === 'крупное' || analysis.bodyType === 'избыточное') {
-                    recs.push('⚖️ Снижение веса: дефицит калорий -200-300 ккал, белок 2-2.5 г/кг, кардио 2-3 раза в неделю.');
+                    recs.push(
+                        '⚖️ Снижение веса: дефицит калорий -200-300 ккал, белок 2-2.5 г/кг, кардио 2-3 раза в неделю.');
                 }
 
                 if (recs.length === 0) recs.push('🔥 Отличный уровень! Продолжай прогрессировать!');
@@ -2377,23 +2671,23 @@
                         </div>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;">
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                        <div style="background:var(--bg-input);padding:8px;border-radius:12px;text-align:center;border:1px solid var(--border-subtle);">
                             <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">💪 Сила</div>
                             <div style="font-size:1.2rem;font-weight:900;color:var(--cyan);">${analysis.strengthScore}</div>
                             <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${strengthLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                        <div style="background:var(--bg-input);padding:8px;border-radius:12px;text-align:center;border:1px solid var(--border-subtle);">
                             <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🏃 Выносливость</div>
                             <div style="font-size:1.2rem;font-weight:900;color:var(--purple);">${analysis.enduranceScore}</div>
                             <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${enduranceLabel}</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.02);padding:8px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.04);">
+                        <div style="background:var(--bg-input);padding:8px;border-radius:12px;text-align:center;border:1px solid var(--border-subtle);">
                             <div style="font-size:0.45rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:700;">🧬 Тело</div>
                             <div style="font-size:1.2rem;font-weight:900;color:var(--gold);">${analysis.bodyEmoji}</div>
                             <div style="font-size:0.45rem;color:var(--text-secondary);font-weight:600;">${analysis.bodyType}</div>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);margin-bottom:6px;">
+                    <div style="background:var(--bg-input);padding:10px;border-radius:12px;border:1px solid var(--border-subtle);margin-bottom:6px;">
                         <div style="display:flex;justify-content:space-between;font-size:0.75rem;">
                             <span style="color:var(--text-muted);font-weight:500;">🏆 Лучший рекорд</span>
                             <span style="font-weight:700;">${analysis.maxWeight} кг</span>
@@ -2407,7 +2701,7 @@
                             <span style="font-weight:700;">${analysis.bodyBMI.toFixed(1)} (${analysis.bodyType})</span>
                         </div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:12px;border-left:3px solid var(--gold);">
+                    <div style="background:var(--bg-input);padding:10px;border-radius:12px;border-left:3px solid var(--gold);">
                         <div style="font-weight:700;font-size:0.8rem;color:var(--gold);">📋 Рекомендации</div>
                         ${recs.map(r => `<div style="font-size:0.7rem;color:var(--text-secondary);padding:2px 0;font-weight:500;">• ${r}</div>`).join('')}
                     </div>
@@ -2426,14 +2720,32 @@
                     showToast('❌ Введи корректные данные', 1600);
                     return;
                 }
-                let rm = 0, name = '';
+                let rm = 0,
+                    name = '';
                 switch (formula) {
-                    case 'brzycki': rm = weight * (36 / (37 - Math.min(reps, 36))); name = 'Бжицки'; break;
-                    case 'epley': rm = weight * (1 + reps / 30); name = 'Эпли'; break;
-                    case 'lombardi': rm = weight * Math.pow(reps, 0.10); name = 'Ломбарди'; break;
-                    case 'mayhew': rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps))); name = 'Мэйхью'; break;
-                    case 'oconnor': rm = weight * (1 + reps / 40); name = 'О\'Коннор'; break;
-                    default: rm = weight * (1 + reps / 30); name = 'Эпли';
+                    case 'brzycki':
+                        rm = weight * (36 / (37 - Math.min(reps, 36)));
+                        name = 'Бжицки';
+                        break;
+                    case 'epley':
+                        rm = weight * (1 + reps / 30);
+                        name = 'Эпли';
+                        break;
+                    case 'lombardi':
+                        rm = weight * Math.pow(reps, 0.10);
+                        name = 'Ломбарди';
+                        break;
+                    case 'mayhew':
+                        rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps)));
+                        name = 'Мэйхью';
+                        break;
+                    case 'oconnor':
+                        rm = weight * (1 + reps / 40);
+                        name = 'О\'Коннор';
+                        break;
+                    default:
+                        rm = weight * (1 + reps / 30);
+                        name = 'Эпли';
                 }
                 document.getElementById('calcResultValue').textContent = rm.toFixed(1) + ' кг';
                 document.getElementById('calcResultSub').textContent =
@@ -2441,37 +2753,7 @@
             }
 
             // ============================================================
-            // 16. NAVIGATION
-            // ============================================================
-            window.navigateTo = function(pageId) {
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                const target = document.getElementById('page-' + pageId);
-                if (target) target.classList.add('active');
-
-                document.querySelectorAll('.side-menu .menu-item').forEach(item => {
-                    item.classList.remove('active');
-                    if (item.dataset.page === pageId) item.classList.add('active');
-                });
-
-                closeMenu();
-
-                if (navigator.vibrate) navigator.vibrate(4);
-
-                if (pageId === 'progress') { renderProgress(); updateChart(); }
-                if (pageId === 'forecast') renderForecast();
-                if (pageId === 'reports') renderReport();
-                if (pageId === 'challenges') renderChallenges();
-                if (pageId === 'calc') calc1RM();
-                if (pageId === 'records') { renderRecords(); renderTodaySets(); }
-                if (pageId === 'ai') {
-                    const analysis = getFitnessLevel();
-                    document.getElementById('aiStatus').textContent =
-                        `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
-                }
-            };
-
-            // ============================================================
-            // 17. BLOCKCHAIN HASH
+            // 16. HASH
             // ============================================================
             function generateHash(str) {
                 let hash = 0;
@@ -2498,30 +2780,10 @@
             }
 
             // ============================================================
-            // 18. TOAST
-            // ============================================================
-            let toastTimer = null;
-
-            function showToast(text, duration = 1800) {
-                const el = document.getElementById('toast');
-                el.textContent = text;
-                el.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => el.classList.remove('show'), duration);
-            }
-
-            function showAchievementToast(icon, title, desc) {
-                document.getElementById('achToastIcon').textContent = icon;
-                document.getElementById('achToastTitle').textContent = title;
-                document.getElementById('achToastDesc').textContent = desc;
-                document.getElementById('achievementToast').classList.add('show');
-                if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
-            }
-
-            // ============================================================
-            // 19. INIT
+            // 17. INIT
             // ============================================================
             function init() {
+                loadTheme(); // ← Загружаем тему
                 loadData();
                 updateExerciseSelects();
 
@@ -2551,8 +2813,6 @@
                 if (!challenges.some(c => c.week === weekStart)) generateChallenges();
                 updateChallenges();
 
-                document.getElementById('menuOverlay').addEventListener('click', closeMenu);
-
                 document.getElementById('addRecordBtn').addEventListener('click', function() {
                     const name = document.getElementById('recordExSelect').value;
                     const weight = parseFloat(document.getElementById('recordExWeight').value);
@@ -2579,14 +2839,20 @@
                 document.getElementById('aiAnalyzeBtn').addEventListener('click', analyzeFitness);
                 document.getElementById('calcBtn').addEventListener('click', calc1RM);
 
-                document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter') document.getElementById('addRecordBtn').click(); });
+                document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        document.getElementById('addRecordBtn').click(); });
                 document.getElementById('setWeight').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
                 document.getElementById('setReps').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
-                document.getElementById('weightInput').addEventListener('keypress', e => { if (e.key === 'Enter') addProgress(); });
-                document.getElementById('heightInput').addEventListener('keypress', e => { if (e.key === 'Enter') addProgress(); });
-                document.getElementById('forecastTarget').addEventListener('keypress', e => { if (e.key === 'Enter') generateForecast(); });
-                document.getElementById('calcWeight').addEventListener('keypress', e => { if (e.key === 'Enter') calc1RM(); });
-                document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter') calc1RM(); });
+                document.getElementById('weightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        addProgress(); });
+                document.getElementById('heightInput').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        addProgress(); });
+                document.getElementById('forecastTarget').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        generateForecast(); });
+                document.getElementById('calcWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
+                        calc1RM(); });
+                document.getElementById('calcReps').addEventListener('keypress', e => { if (e.key === 'Enter')
+                    calc1RM(); });
 
                 setInterval(checkNewDay, 60000);
 
@@ -2601,7 +2867,7 @@
                     `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
 
                 setTimeout(calc1RM, 150);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v6.0 (Умный AI с приоритетом цели)');
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v6.0 с темами');
             }
 
             document.addEventListener('DOMContentLoaded', init);
