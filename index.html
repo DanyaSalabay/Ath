@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           КРУПНЫЙ ТЕЛЕФОННЫЙ ДИЗАЙН + ГРАФИКИ УПРАЖНЕНИЙ
+           УНИВЕРСАЛЬНЫЙ ДИЗАЙН — ДЕСКТОП + МОБИЛЬНЫЙ
            ============================================================ */
         * {
             margin: 0;
@@ -59,7 +59,16 @@
                               linear-gradient(90deg, rgba(255,255,255,0.006) 1px, transparent 1px);
             background-size: 40px 40px; pointer-events: none; z-index: 0;
         }
-        .app { max-width: 560px; width: 100%; padding: var(--spacing-base) var(--spacing-base) 100px; position: relative; z-index: 1; }
+
+        /* ===== ШИРИНА ПРИЛОЖЕНИЯ ===== */
+        .app {
+            max-width: 1440px;
+            width: 100%;
+            padding: var(--spacing-base) var(--spacing-base) 100px;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+        }
 
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -408,43 +417,193 @@
             font-size: 0.85rem;
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        /* ============================================================
+           АДАПТИВНОСТЬ ДЛЯ ДЕСКТОПА (шире 768px)
+           ============================================================ */
+        @media (min-width: 768px) {
+            .app {
+                padding: 28px 40px 100px;
+            }
+            #page-records.active {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+            #page-progress.active {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+            #page-challenges.active,
+            #page-ai.active,
+            #page-forecast.active,
+            #page-reports.active {
+                grid-template-columns: 1fr;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .exercise-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+            }
+            .exercise-card {
+                min-height: 120px;
+                padding: 12px 10px;
+            }
+            .exercise-card .ex-name {
+                font-size: 0.65rem;
+                margin-top: 18px;
+            }
+            .exercise-card .ex-weight {
+                font-size: clamp(1.4rem, 2.5vw, 2rem);
+            }
+            .btn {
+                padding: 12px 20px;
+                min-height: 48px;
+                font-size: 0.75rem;
+            }
+            .input-row input,
+            .input-row select {
+                min-height: 44px;
+                font-size: 0.9rem;
+                padding: 10px 14px;
+            }
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            .header-logo {
+                width: 56px;
+                height: 56px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+            .stat-box .value {
+                font-size: 2.6rem;
+            }
+            .exercise-chart-modal .modal-content {
+                max-width: 720px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .exercise-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            #page-records.active {
+                grid-template-columns: 1.4fr 1fr;
+            }
+            .app {
+                padding: 32px 60px 100px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .exercise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            #page-records.active {
+                grid-template-columns: 1fr;
+            }
+            #page-progress.active {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .header-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .burger-btn {
+                width: 42px;
+                height: 42px;
+            }
+            .card {
+                padding: 16px;
+            }
+            .input-row input,
+            .input-row select {
+                min-height: 48px;
+                font-size: 0.9rem;
+            }
+            .btn {
+                min-height: 48px;
+                font-size: 0.75rem;
+                padding: 12px 16px;
+            }
+            .stat-box .value {
+                font-size: 1.8rem;
+            }
+        }
+
         @media (max-width: 480px) {
-            .app { padding: 14px 14px 90px; }
-            .header { padding: 12px 16px; flex-wrap: wrap; gap: 6px; border-radius: 20px; }
-            .header h1 { font-size: 1.4rem; }
-            .header .version .dot { display: none; }
-            .card { padding: 18px; border-radius: 20px; }
-            .exercise-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .exercise-card { min-height: 110px; padding: 12px; }
-            .exercise-card .ex-name { font-size: 0.6rem; margin-top: 18px; }
-            .exercise-card .ex-weight { font-size: 1.4rem; }
-            .input-row input, .input-row select { min-width: 60px; padding: 10px 14px; font-size: 0.9rem; min-height: 44px; }
-            .btn { padding: 12px 18px; font-size: 0.75rem; min-height: 48px; }
-            .stat-box .value { font-size: 1.8rem; }
-            .side-menu { width: 300px; padding: 80px 18px 20px; }
-            .side-menu .menu-item { font-size: 0.9rem; padding: 14px 16px; }
-            .header .version { font-size: 0.45rem; padding: 4px 10px; }
-            .deco-banner { height: 50px; }
-            .header-logo { width: 40px; height: 40px; }
-            .burger-btn { width: 42px; height: 42px; padding: 8px; }
-            .burger-btn span { width: 18px; height: 2px; }
-            .category-tabs { gap: 6px; padding: 4px 0 10px 0; }
-            .category-tab { font-size: 0.6rem; padding: 8px 14px; }
-            .card-header h2 { font-size: 1rem; }
-            .exercise-chart-modal .modal-content { padding: 16px; }
-            .exercise-chart-modal .modal-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-            .exercise-chart-modal .modal-stats .ms-item .ms-value { font-size: 1rem; }
+            .exercise-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .exercise-card {
+                min-height: 100px;
+                padding: 10px;
+            }
+            .exercise-card .ex-name {
+                font-size: 0.55rem;
+                margin-top: 14px;
+            }
+            .exercise-card .ex-weight {
+                font-size: 1.3rem;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            .header .version {
+                display: none;
+            }
+            .category-tab {
+                font-size: 0.55rem;
+                padding: 6px 12px;
+            }
+            .card-header h2 {
+                font-size: 1rem;
+            }
+            .input-row input,
+            .input-row select {
+                min-width: 50px;
+                padding: 8px 10px;
+                font-size: 0.8rem;
+                min-height: 40px;
+            }
+            .btn {
+                padding: 8px 14px;
+                font-size: 0.65rem;
+                min-height: 40px;
+            }
+            .stat-box .value {
+                font-size: 1.5rem;
+            }
+            .side-menu {
+                width: 280px;
+                padding: 70px 16px 20px;
+            }
+            .side-menu .menu-item {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+            }
         }
+
         @media (max-width: 380px) {
-            .exercise-grid { grid-template-columns: 1fr; }
-            .header .version { display: none; }
-            .header h1 { font-size: 1.2rem; }
-            .header h1 .sub { display: none; }
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            .header h1 .sub {
+                display: none;
+            }
         }
-        @media (min-width: 600px) {
-            .exercise-grid { grid-template-columns: repeat(3, 1fr); }
-        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
         }
@@ -468,6 +627,7 @@
 
     <!-- SIDE MENU -->
     <div class="side-menu" id="sideMenu">
+        <div class="menu-title">📋 Навигация</div>
         <button class="menu-item active" data-page="records" onclick="navigateTo('records')">
             <span class="icon">🏋️</span> Тренировки
         </button>
@@ -504,7 +664,6 @@
                 <h1>ATHLETE <span class="sub">elite</span></h1>
             </div>
             <div class="header-actions">
-                
                 <button class="btn-reset" onclick="openResetModal()">🗑️</button>
                 <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
                     <span></span><span></span><span></span>
@@ -522,7 +681,7 @@
         <div id="page-records" class="page active">
             <div class="card">
                 <div class="card-header">
-                    <h2>🏆 Рекорды </h2>
+                    <h2>🏆 Рекорды</h2>
                     <span class="badge" id="recordCountBadge">0 упражнений</span>
                 </div>
 
@@ -563,11 +722,10 @@
                     <button class="btn" id="addSetBtn">➕</button>
                 </div>
                 <div id="setSummary" class="set-summary" style="display:none;"></div>
-                <div class="btn-row"><button class="btn btn-success" id="finishWorkoutBtn"> Завершить</button></div>
+                <div class="btn-row"><button class="btn btn-success" id="finishWorkoutBtn">Завершить</button></div>
                 <div class="workout-timer">
-                    <span><span class="label"></span> <span id="todayDate">—</span></span>
-                    <span><span class="label"></span> <span id="todaySetsCount">0</span> подходов</span>
-                    
+                    <span><span class="label">📅</span> <span id="todayDate">—</span></span>
+                    <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
                 </div>
             </div>
         </div>
@@ -592,7 +750,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h2>📈 График веса </h2>
+                    <h2>📈 График веса</h2>
                     <span class="badge">динамика</span>
                 </div>
                 <div class="chart-container"><canvas id="progressChart"></canvas></div>
@@ -644,7 +802,6 @@
             <div class="card">
                 <div class="card-header">
                     <h2>🤖 AI-тренер</h2>
-                    
                 </div>
                 <div class="ai-bubble">
                     <div class="label">📊 анализ боеспособности</div>
@@ -677,7 +834,7 @@
                         <option value="oconnor">О'Коннор</option>
                     </select>
                 </div>
-                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;"> Рассчитать</button>
+                <button class="btn btn-block" id="calcBtn" style="margin-top:10px;">Рассчитать</button>
                 <div class="calc-result" id="calcResult">
                     <div class="label">Ваш 1ПМ</div>
                     <div class="value" id="calcResultValue">—</div>
@@ -963,33 +1120,25 @@
             // НОВЫЙ ОПТИМИЗИРОВАННЫЙ СПИСОК УПРАЖНЕНИЙ
             // ============================================================
             const defaultExercises = [
-                // Ноги
                 'жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                 'болгарский сплит-присед', 'разгибание ног сидя',
                 'становая тяга', 'присед со штангой', 'жим платформы ногами',
-                // Грудь
                 'жим от груди', 'жим гантелей лёжа',
                 'жим в наклоне', 'сведение в кроссовере', 'отжимания от пола',
                 'отжимания с хлопком',
-                // Спина
                 'тяга штанги в наклоне', 'тяга верхнего блока', 'тяга гантели в наклоне',
                 'гиперэкстензия', 'шраги с гантелями', 'подтягивания',
                 'подтягивания обратным хватом',
-                // Плечи
                 'разводка гантелей в стороны', 'разводка гантелей в наклоне',
                 'подъём гантелей перед собой', 'жим гантелей сидя', 'жим Арнольда',
                 'тяга штанги к подбородку',
-                // Руки
                 'подъём гантелей на бицепс', 'французский жим', 'молотковые сгибания',
                 'жим из-за головы для трицепса', 'отжимания на брусьях (с весом тела)',
-                // Кор
                 'планка', 'скручивания',
-                // Функциональные
                 'запрыгивания на тумбу', 'берпи', 'ягодичный мост',
                 'подъём на носки стоя'
             ];
 
-            // КАТЕГОРИИ (обновлены)
             const exerciseCategories = {
                 legs: ['жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                     'болгарский сплит-присед', 'разгибание ног сидя',
@@ -1016,7 +1165,6 @@
                 ]
             };
 
-            // Упражнения с весом тела (обновлены)
             const bodyweightExercises = [
                 'присед (с весом тела)',
                 'отжимания от пола',
@@ -1043,9 +1191,6 @@
                 return 'кг';
             }
 
-            // ============================================================
-            // 4. ФУНКЦИЯ ОПРЕДЕЛЕНИЯ ТЕЛОСЛОЖЕНИЯ
-            // ============================================================
             function getBodyType(weight, height) {
                 if (!weight || !height) return { type: 'неизвестно', bmi: 0, desc: 'Нет данных о весе и росте' };
                 const heightM = height / 100;
@@ -1070,7 +1215,7 @@
             }
 
             // ============================================================
-            // 5. LOAD DATA
+            // 4. LOAD DATA
             // ============================================================
             function loadData() {
                 exerciseList = [...defaultExercises];
@@ -1113,15 +1258,23 @@
 
             function saveCategory() { localStorage.setItem(STORAGE_CATEGORY, currentCategory); }
 
+            // ============================================================
+            // ИСПРАВЛЕННАЯ ФУНКЦИЯ checkNewDay — СУММИРУЕТ, а не перезаписывает
+            // ============================================================
             function checkNewDay() {
                 const today = new Date().toISOString().slice(0, 10);
                 if (lastDate !== today) {
                     const todaySets = sets.filter(s => s.date === today);
+
+                    // Если есть подходы за сегодня и есть предыдущий день — суммируем
                     if (todaySets.length > 0) {
                         if (!weeklySets[lastDate || today]) weeklySets[lastDate || today] = [];
-                        weeklySets[lastDate || today] = [...todaySets];
+                        // ✅ СУММИРУЕМ, а не перезаписываем
+                        weeklySets[lastDate || today] = [...weeklySets[lastDate || today], ...todaySets];
                         saveWeeklySets();
                     }
+
+                    // Оставляем только сегодняшние подходы в sets (для отображения)
                     sets = sets.filter(s => s.date === today);
                     saveSets();
                     lastDate = today;
@@ -1131,7 +1284,7 @@
             }
 
             // ============================================================
-            // 6. ГРУППИРОВКА УПРАЖНЕНИЙ В SELECT (optgroup)
+            // 5. ГРУППИРОВКА УПРАЖНЕНИЙ В SELECT (optgroup)
             // ============================================================
             function updateExerciseSelects() {
                 const selectIds = ['recordExSelect', 'setExSelect', 'forecastExSelect'];
@@ -1151,7 +1304,6 @@
                     const currentVal = select.value;
                     select.innerHTML = '';
 
-                    // Группируем упражнения по категориям
                     const grouped = {};
                     for (let ex of exerciseList) {
                         const cat = getExerciseCategory(ex);
@@ -1159,7 +1311,6 @@
                         grouped[cat].push(ex);
                     }
 
-                    // Опция "Все" для удобства
                     const allOpt = document.createElement('option');
                     allOpt.value = '';
                     allOpt.textContent = '— Выбери упражнение —';
@@ -1185,7 +1336,7 @@
             }
 
             // ============================================================
-            // 7. CATEGORY TABS
+            // 6. CATEGORY TABS
             // ============================================================
             function getCategoryCounts() {
                 const counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
@@ -1214,7 +1365,7 @@
             }
 
             // ============================================================
-            // 8. RENDER RECORDS (с открытием графика по клику)
+            // 7. RENDER RECORDS (с открытием графика по клику)
             // ============================================================
             function renderRecords() {
                 const container = document.getElementById('recordsContainer');
@@ -1257,7 +1408,7 @@
             }
 
             // ============================================================
-            // 9. RENDER SETS
+            // 8. RENDER SETS
             // ============================================================
             function renderTodaySets() {
                 const container = document.getElementById('todaySetsContainer');
@@ -1315,19 +1466,28 @@
                 document.getElementById('todaySetsCount').textContent = sets.filter(s => s.date === today).length;
             }
 
+            // ============================================================
+            // ИСПРАВЛЕННАЯ ФУНКЦИЯ finishWorkout — СУММИРУЕТ, а не перезаписывает
+            // ============================================================
             function finishWorkout() {
                 const today = new Date().toISOString().slice(0, 10);
                 const todaySets = sets.filter(s => s.date === today);
                 if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1200); return; }
+
                 if (!weeklySets[today]) weeklySets[today] = [];
-                weeklySets[today] = [...todaySets];
+
+                // ✅ СУММИРУЕМ, а не перезаписываем
+                weeklySets[today] = [...weeklySets[today], ...todaySets];
                 saveWeeklySets();
+
+                // Очищаем сегодняшние подходы из основного списка
                 sets = sets.filter(s => s.date !== today);
                 saveSets();
+
                 renderTodaySets();
                 updateChallenges();
                 updateBlockHash();
-                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов`, 1600);
+                showToast(`✅ Тренировка завершена! ${todaySets.length} подходов сохранено. Всего за день: ${weeklySets[today].length}`, 1800);
             }
 
             function addSet() {
@@ -1352,7 +1512,7 @@
             }
 
             // ============================================================
-            // 10. PROGRESS
+            // 9. PROGRESS
             // ============================================================
             function renderProgress() {
                 const wDisplay = document.getElementById('currentWeightDisplay');
@@ -1402,7 +1562,7 @@
             }
 
             // ============================================================
-            // 11. CHART (вес тела)
+            // 10. CHART (вес тела)
             // ============================================================
             let chartRAF = null;
 
@@ -1497,7 +1657,7 @@
             }
 
             // ============================================================
-            // 12. FORECAST
+            // 11. FORECAST
             // ============================================================
             function renderForecast() {
                 const container = document.getElementById('forecastContainer');
@@ -1596,7 +1756,7 @@
             }
 
             // ============================================================
-            // 13. CHALLENGES (сокращённо)
+            // 12. CHALLENGES
             // ============================================================
             function getWeekStart() {
                 const now = new Date();
@@ -1762,7 +1922,7 @@
                         <div class="ch-desc">${ch.desc}</div>
                         <div class="ch-progress"><div class="ch-progress-bar" style="width:${progress}%;background:${color};"></div></div>
                         <div class="ch-progress-text">${Math.round(progress)}% (${ch.progress}/${ch.target})</div>
-                        ${ch.completed ? '<div style="font-size:0.6rem;color:#54ff8f;margin-top:2px;"> Завершено!</div>' : ''}
+                        ${ch.completed ? '<div style="font-size:0.6rem;color:#54ff8f;margin-top:2px;">✅ Завершено!</div>' : ''}
                     `;
                     container.appendChild(div);
                 }
@@ -1780,7 +1940,7 @@
             }
 
             // ============================================================
-            // 14. REPORTS
+            // 13. REPORTS
             // ============================================================
             function renderReport() {
                 const container = document.getElementById('reportContainer');
@@ -1829,19 +1989,18 @@
                             <span style="font-weight:700;">${challenges.filter(c => c.week === weekStart && c.completed).length}/${challenges.filter(c => c.week === weekStart).length}</span>
                         </div>
                     </div>
-                    <div style="margin-top:8px;text-align:center;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.4px;"> Отчёт за неделю ${weekStart}</div>
+                    <div style="margin-top:8px;text-align:center;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.4px;">📅 Отчёт за неделю ${weekStart}</div>
                 `;
             }
 
             // ============================================================
-            // 15. AI ТРЕНЕР — ОБНОВЛЁННЫЙ
+            // 14. AI ТРЕНЕР
             // ============================================================
             function getFitnessLevel() {
                 const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
                 const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
                 const bodyInfo = getBodyType(currentWeight, currentHeight);
 
-                // Силовые упражнения (обновлены)
                 const strengthExercises = ['жим от груди', 'присед со штангой', 'становая тяга'];
                 let strengthScores = {};
                 for (let ex of strengthExercises) {
@@ -1853,7 +2012,6 @@
                     Object.values(strengthScores).reduce((a, b) => a + b, 0) / Object.values(strengthScores).length :
                     0;
 
-                // Выносливость (обновлены)
                 const enduranceExercises = ['отжимания от пола', 'подтягивания', 'берпи', 'планка',
                     'отжимания на брусьях (с весом тела)', 'присед (с весом тела)'
                 ];
@@ -2177,7 +2335,7 @@
             }
 
             // ============================================================
-            // 16. CALCULATOR
+            // 15. CALCULATOR
             // ============================================================
             function calc1RM() {
                 const weight = parseFloat(document.getElementById('calcWeight').value);
@@ -2220,7 +2378,7 @@
             }
 
             // ============================================================
-            // 17. NAVIGATION
+            // 16. NAVIGATION
             // ============================================================
             window.navigateTo = function(pageId) {
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -2252,7 +2410,7 @@
             };
 
             // ============================================================
-            // 18. BLOCKCHAIN HASH
+            // 17. BLOCKCHAIN HASH
             // ============================================================
             function generateHash(str) {
                 let hash = 0;
@@ -2279,7 +2437,7 @@
             }
 
             // ============================================================
-            // 19. TOAST
+            // 18. TOAST
             // ============================================================
             let toastTimer = null;
 
@@ -2300,13 +2458,12 @@
             }
 
             // ============================================================
-            // 20. INIT
+            // 19. INIT
             // ============================================================
             function init() {
                 loadData();
                 updateExerciseSelects();
 
-                // Category tabs
                 document.querySelectorAll('.category-tab').forEach(tab => {
                     tab.addEventListener('click', function() {
                         currentCategory = this.dataset.category;
@@ -2335,7 +2492,6 @@
 
                 document.getElementById('menuOverlay').addEventListener('click', closeMenu);
 
-                // BUTTONS
                 document.getElementById('addRecordBtn').addEventListener('click', function() {
                     const name = document.getElementById('recordExSelect').value;
                     const weight = parseFloat(document.getElementById('recordExWeight').value);
@@ -2362,7 +2518,6 @@
                 document.getElementById('aiAnalyzeBtn').addEventListener('click', analyzeFitness);
                 document.getElementById('calcBtn').addEventListener('click', calc1RM);
 
-                // ENTER
                 document.getElementById('recordExWeight').addEventListener('keypress', e => { if (e.key === 'Enter')
                         document.getElementById('addRecordBtn').click(); });
                 document.getElementById('setWeight').addEventListener('keypress', e => { if (e.key === 'Enter') addSet(); });
@@ -2393,7 +2548,7 @@
                     `📊 Уровень: ${analysis.level} | Сила: ${analysis.strengthScore} | Выносливость: ${analysis.enduranceScore} | ${analysis.bodyEmoji} ${analysis.bodyType}`;
 
                 setTimeout(calc1RM, 150);
-                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.8 с оптимизированным списком упражнений');
+                console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v5.8 (Исправлено суммирование подходов)');
             }
 
             document.addEventListener('DOMContentLoaded', init);
