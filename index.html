@@ -11,9 +11,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ============================================================
-           ОПТИМИЗИРОВАННАЯ ВЕРСИЯ — ПЛАВНО НА ТЕЛЕФОНЕ
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +19,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* ===== ТЁМНАЯ ТЕМА (по умолчанию) ===== */
         :root {
             --bg-deep: #04060a;
             --bg-card: rgba(255, 255, 255, 0.04);
@@ -58,7 +54,6 @@
             --nav-height: 64px;
         }
 
-        /* ===== СВЕТЛАЯ ТЕМА ===== */
         [data-theme="light"] {
             --bg-deep: #f0f2f5;
             --bg-card: rgba(255, 255, 255, 0.7);
@@ -127,7 +122,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.15); border-radius: 10px; }
 
-        /* ---------- HEADER ---------- */
         .header {
             flex-shrink: 0;
             z-index: 70;
@@ -186,7 +180,6 @@
         }
         .btn-reset:active { transform: scale(0.92); }
 
-        /* ---------- PAGES CONTAINER ---------- */
         .pages-container {
             flex: 1;
             position: relative;
@@ -216,7 +209,6 @@
         }
         .page::-webkit-scrollbar { width: 2px; }
 
-        /* ---------- BOTTOM NAV ---------- */
         .bottom-nav {
             position: absolute;
             bottom: 0;
@@ -275,7 +267,6 @@
         .nav-item .nav-badge.show { display: block; }
         .nav-item:active { transform: scale(0.92); }
 
-        /* ---------- CARDS ---------- */
         .card {
             padding: var(--card-padding);
             border: 1px solid var(--border-subtle);
@@ -290,7 +281,6 @@
         .card-header h2 { font: 800 clamp(0.9rem, 1.8vw, 1.2rem)/0.95 'Impact','Arial Black',Inter,sans-serif; text-transform: uppercase; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 4px; }
         .card-header .badge { border: 1px solid var(--badge-border); background: var(--badge-bg); color: var(--badge-color); font: 600 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 12px; border-radius: 40px; flex-shrink: 0; }
 
-        /* ---------- CATEGORY TABS ---------- */
         .category-tabs {
             display: flex;
             gap: 4px;
@@ -322,7 +312,6 @@
         .category-tab.active { background: var(--badge-bg); border-color: var(--badge-border); color: var(--cyan); }
         .category-tab .count { display: inline-block; margin-left: 3px; padding: 0 4px; border-radius: 20px; background: rgba(255,255,255,0.04); font-size: 0.45rem; color: var(--text-muted); }
 
-        /* ---------- EXERCISE GRID ---------- */
         .exercise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
         .exercise-card {
             min-height: 96px; padding: 10px 8px; border-radius: 14px;
@@ -341,7 +330,6 @@
         .exercise-card:active { transform: scale(0.95); }
         .exercise-card.hidden { display: none; }
 
-        /* ---------- FORMS ---------- */
         .input-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
         .input-row input, .input-row select { flex: 1; min-width: 50px; min-height: 38px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 8px 12px; color: var(--text-primary); font-size: 0.8rem; outline: none; font-weight: 500; }
         .input-row select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 12 12'%3E%3Cpath fill='%2300f0ff' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
@@ -349,7 +337,6 @@
         .exercise-select-wrapper { position: relative; flex: 1; min-width: 60px; }
         .exercise-select-wrapper select { width: 100%; }
 
-        /* ---------- BUTTONS ---------- */
         .btn { border: none; border-radius: 12px; background: var(--btn-gradient); color: #fff; font: 700 0.6rem/1 Inter, system-ui, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; box-shadow: var(--btn-shadow); padding: 10px 14px; min-height: 40px; cursor: pointer; border: 1px solid var(--border-subtle); display: inline-flex; align-items: center; justify-content: center; gap: 3px; transition: transform 0.1s ease; }
         .btn:active { transform: scale(0.94); }
         .btn-outline { background: transparent; color: var(--text-secondary); border-color: var(--border-subtle); box-shadow: none; }
@@ -359,14 +346,12 @@
         .btn-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
         .btn-row .btn { flex: 1; min-width: 60px; text-align: center; }
 
-        /* ---------- STATS ---------- */
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
         .stat-box { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 14px; padding: 12px 8px; text-align: center; }
         .stat-box label { font-size: 0.5rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
         .stat-box .value { font: 900 clamp(1.4rem, 4vw, 2.4rem)/0.9 'Impact','Arial Black',Inter,sans-serif; letter-spacing: -0.03em; color: var(--text-primary); margin-top: 1px; }
         .stat-box .unit { color: var(--neon-green); font-weight: 700; font-size: 0.5rem; }
 
-        /* ---------- SETS ---------- */
         .set-item { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 12px; padding: 8px 12px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
         .set-item .set-info { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .set-item .set-info span:first-child { font-weight: 600; font-size: 0.7rem; color: var(--text-secondary); }
@@ -378,7 +363,6 @@
         .set-summary .stat { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
         .set-summary .stat .num { font-size: 1rem; font-weight: 900; color: var(--text-primary); display: block; margin-bottom: 1px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* ---------- CHALLENGES ---------- */
         .challenge-card { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 12px; padding: 12px 14px; margin-bottom: 6px; position: relative; overflow: hidden; }
         .challenge-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: linear-gradient(180deg, var(--cyan), var(--purple)); opacity: 0.4; }
         .challenge-card.active { border-color: var(--cyan); background: var(--badge-bg); }
@@ -391,7 +375,6 @@
         .challenge-card .ch-progress-bar { height: 100%; border-radius: 4px; transition: width 0.3s ease; background: linear-gradient(90deg, var(--cyan), var(--purple)); }
         .challenge-card .ch-progress-text { font-size: 0.5rem; color: var(--text-muted); margin-top: 2px; text-align: right; font-weight: 600; }
 
-        /* ---------- AI ---------- */
         .ai-program { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 12px; padding: 12px 14px; margin-bottom: 6px; border-left: 3px solid var(--cyan); }
         .ai-program .day { font-weight: 900; color: var(--cyan); font-size: 0.7rem; letter-spacing: 0.3px; margin-bottom: 2px; text-transform: uppercase; }
         .ai-program .exercise { font-size: 0.65rem; color: var(--text-secondary); padding: 1px 0; font-weight: 500; }
@@ -419,15 +402,12 @@
 
         .empty-state { color: var(--text-muted); text-align: center; padding: 12px 0; font-size: 0.7rem; font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
-        /* ---------- TOAST ---------- */
         .toast { position: fixed; top: 12px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--nav-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--border-subtle); padding: 10px 20px; border-radius: 12px; color: var(--text-primary); font-size: 0.7rem; z-index: 9999; opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease; pointer-events: none; max-width: 90%; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.3); font-weight: 600; }
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* ---------- WORKOUT TIMER ---------- */
         .workout-timer { border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 12px; padding: 8px 12px; text-align: center; font-size: 0.6rem; color: var(--text-secondary); margin-top: 6px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; font-weight: 500; }
         .workout-timer .label { font-weight: 700; color: var(--cyan); text-transform: uppercase; font-size: 0.5rem; letter-spacing: 0.3px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
-        /* ---------- ACHIEVEMENT TOAST ---------- */
         .achievement-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-subtle); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-radius: 18px; padding: 22px 26px; text-align: center; z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1); max-width: 90%; width: 320px; }
         .achievement-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
         .achievement-toast .big-icon { font-size: 2.2rem; display: block; margin-bottom: 3px; }
@@ -435,7 +415,6 @@
         .achievement-toast .sub { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
         .achievement-toast .btn { margin-top: 0; }
 
-        /* ---------- CALC ---------- */
         .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .calc-input-group { display: flex; flex-direction: column; gap: 2px; }
         .calc-input-group label { font-size: 0.45rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
@@ -446,7 +425,6 @@
         .calc-result .value { font-size: 1.6rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Impact','Arial Black',Inter,sans-serif; }
         .calc-result .sub { font-size: 0.6rem; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
 
-        /* ---------- RESET MODAL ---------- */
         .reset-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 9997; display: none; align-items: center; justify-content: center; padding: 20px; }
         .reset-modal.show { display: flex; }
         .reset-modal-content { background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-subtle); box-shadow: 0 20px 50px rgba(0,0,0,0.4); border-radius: 18px; padding: 22px; max-width: 340px; width: 100%; text-align: center; }
@@ -456,19 +434,12 @@
         .reset-modal-content .btn-row .btn { flex: 1; }
         .reset-modal-content .btn-row .btn-outline { background: transparent; border: 1px solid var(--border-subtle); color: var(--text-secondary); box-shadow: none; }
 
-        /* ---------- WEEK LIST ---------- */
         .week-list { max-height: 160px; overflow-y: auto; margin-top: 6px; border: 1px solid var(--border-subtle); background: var(--bg-input); border-radius: 12px; padding: 2px; }
         .week-item { display: flex; justify-content: space-between; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); font-size: 0.65rem; border-radius: 6px; }
         .week-item:last-child { border: none; }
         .week-item .date { color: var(--text-muted); font-weight: 500; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.6rem; }
         .week-item .data { font-weight: 600; color: var(--text-secondary); }
 
-        /* ---------- DECORATIVE BANNER ---------- */
-        .deco-banner { width: 100%; height: 50px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 10px; position: relative; background: var(--bg-input); }
-        .deco-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .deco-banner .overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, rgba(0,0,0,0.15)); pointer-events: none; }
-
-        /* ---------- GRAPH MODAL ---------- */
         .exercise-chart-modal {
             position: fixed;
             inset: 0;
@@ -506,7 +477,6 @@
         .exercise-chart-modal canvas { width: 100% !important; height: auto !important; max-height: 180px; border-radius: 10px; background: var(--bg-input); }
         .exercise-chart-modal .no-data { color: var(--text-muted); text-align: center; padding: 16px 0; font-size: 0.7rem; }
 
-        /* ---------- GUIDE ---------- */
         .guide-section { margin-bottom: 10px; }
         .guide-section h3 { font-size: 0.7rem; font-weight: 700; color: var(--cyan); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.03em; border-bottom: 1px solid var(--border-subtle); padding-bottom: 3px; }
         .guide-item { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.6rem; gap: 4px; }
@@ -515,7 +485,6 @@
         .guide-item .guide-rule.single-arm { color: var(--pink); }
         .guide-item .guide-rule.bw { color: var(--neon-green); }
 
-        /* ---------- ANIMATIONS ---------- */
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -525,7 +494,6 @@
         .exercise-card { animation: fade-in 0.15s ease both; }
         .exercise-card:nth-child(n+4) { animation-delay: 0.02s; }
 
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
             .app { max-width: 100%; }
             .header { padding: 8px 12px; }
@@ -573,10 +541,8 @@
 </head>
 <body>
 
-    <!-- TOAST -->
     <div id="toast" class="toast"></div>
 
-    <!-- ACHIEVEMENT TOAST -->
     <div id="achievementToast" class="achievement-toast">
         <span class="big-icon" id="achToastIcon">🏆</span>
         <div class="title" id="achToastTitle">Достижение!</div>
@@ -584,15 +550,8 @@
         <button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
     </div>
 
-    <!-- КНОПКА УСТАНОВКИ (PWA) -->
-    <button id="installBtn" style="display:none; position:fixed; bottom:76px; left:50%; transform:translateX(-50%); z-index:9999; background:linear-gradient(135deg,#00f0ff,#8b5cf6); color:#fff; border:none; border-radius:14px; padding:12px 24px; font-weight:700; font-size:0.9rem; cursor:pointer; box-shadow:0 8px 30px rgba(0,240,255,0.3);">
-        📲 Установить приложение
-    </button>
-
-    <!-- APP -->
     <div class="app">
 
-        <!-- HEADER -->
         <div class="header">
             <div class="header-left">
                 <div class="header-logo">
@@ -610,11 +569,9 @@
             </div>
         </div>
 
-        <!-- PAGES CONTAINER -->
         <div class="pages-container" id="pagesContainer">
             <div class="pages-wrapper" id="pagesWrapper">
 
-                <!-- PAGE: RECORDS -->
                 <div class="page" data-page="records">
                     <div class="card">
                         <div class="card-header">
@@ -666,7 +623,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: PROGRESS -->
                 <div class="page" data-page="progress">
                     <div class="card">
                         <div class="card-header">
@@ -693,7 +649,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: FORECAST -->
                 <div class="page" data-page="forecast">
                     <div class="card">
                         <div class="card-header">
@@ -711,7 +666,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: AI -->
                 <div class="page" data-page="ai">
                     <div class="card">
                         <div class="card-header">
@@ -730,7 +684,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: GUIDE -->
                 <div class="page" data-page="guide">
                     <div class="card">
                         <div class="card-header">
@@ -779,7 +732,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: CHALLENGES -->
                 <div class="page" data-page="challenges">
                     <div class="card">
                         <div class="card-header">
@@ -790,7 +742,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: REPORTS -->
                 <div class="page" data-page="reports">
                     <div class="card">
                         <div class="card-header">
@@ -801,7 +752,6 @@
                     </div>
                 </div>
 
-                <!-- PAGE: CALC -->
                 <div class="page" data-page="calc">
                     <div class="card">
                         <div class="card-header">
@@ -831,7 +781,6 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAVIGATION -->
         <div class="bottom-nav" id="bottomNav">
             <button class="nav-item active" data-page="records">
                 <span class="nav-icon">🏋️</span>
@@ -868,7 +817,6 @@
             </button>
         </div>
 
-        <!-- RESET MODAL -->
         <div class="reset-modal" id="resetModal">
             <div class="reset-modal-content">
                 <h2>⚠️ Полный сброс</h2>
@@ -882,7 +830,6 @@
 
     </div>
 
-    <!-- GRAPH MODAL -->
     <div class="exercise-chart-modal" id="exerciseChartModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -902,28 +849,6 @@
     <script>
     (function() {
         'use strict';
-
-        // ============================================================
-        // PWA — УСТАНОВКА ПРИЛОЖЕНИЯ
-        // ============================================================
-        let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBtn.style.display = 'block';
-        });
-
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const result = await deferredPrompt.userChoice;
-                console.log('Установка:', result.outcome);
-                deferredPrompt = null;
-                installBtn.style.display = 'none';
-            }
-        });
 
         // ============================================================
         // ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
@@ -974,39 +899,20 @@
         }
 
         // ============================================================
-        // БЛОКИРОВКА PULL-TO-REFRESH
+        // БЛОКИРОВКА PULL-TO-REFRESH (СКРОЛЛ ВНИЗ РАБОТАЕТ)
         // ============================================================
-        // Запрещаем обновление страницы при скролле вверх
         document.addEventListener('touchmove', function(e) {
             const target = e.target;
-            const scrollable = target.closest('.page, .pages-container, .exercise-grid, .week-list, #todaySetsContainer, .card');
+            const scrollable = target.closest('.page, .exercise-grid, .week-list, #todaySetsContainer, .card');
             if (scrollable) {
                 const scrollTop = scrollable.scrollTop;
-                if (scrollTop === 0 && e.touches[0].clientY > 0) {
+                const touch = e.touches[0];
+                // Блокируем только если мы в самом верху И тянем вниз (pull-to-refresh)
+                if (scrollTop === 0 && touch.clientY > 0) {
                     e.preventDefault();
                     return false;
                 }
-            }
-        }, { passive: false });
-
-        // Также блокируем на уровне body
-        document.body.addEventListener('touchmove', function(e) {
-            const target = e.target;
-            const scrollable = target.closest('.page');
-            if (scrollable) {
-                const scrollTop = scrollable.scrollTop;
-                if (scrollTop === 0) {
-                    // Разрешаем только если есть контент ниже
-                    const scrollHeight = scrollable.scrollHeight;
-                    const clientHeight = scrollable.clientHeight;
-                    if (scrollHeight > clientHeight) {
-                        // Если есть контент для скролла, но мы в самом верху — блокируем pull-to-refresh
-                        if (e.touches[0].clientY > 0) {
-                            e.preventDefault();
-                            return false;
-                        }
-                    }
-                }
+                // В остальных случаях - разрешаем скролл
             }
         }, { passive: false });
 
@@ -1068,7 +974,7 @@
         });
 
         // ============================================================
-        // СВАЙП (с защитой от конфликта со скроллом)
+        // СВАЙП
         // ============================================================
         let touchStartX = 0;
         let touchStartY = 0;
@@ -1372,7 +1278,6 @@
         const STORAGE_CHALLENGES = 'athlete_challenges_v5';
         const STORAGE_LAST_DATE = 'athlete_last_date_v5';
         const STORAGE_CATEGORY = 'athlete_category_v5';
-        const STORAGE_PREV_RECORDS = 'athlete_prev_records_v5';
 
         let records = {};
         let progressData = [];
@@ -1382,13 +1287,6 @@
         let exerciseList = [];
         let lastDate = '';
         let currentCategory = localStorage.getItem(STORAGE_CATEGORY) || 'all';
-        let prevWeekRecords = {};
-
-        // Загружаем предыдущие рекорды для челленджа "Рекордсмен"
-        try {
-            const pr = localStorage.getItem(STORAGE_PREV_RECORDS);
-            if (pr) prevWeekRecords = JSON.parse(pr);
-        } catch (e) { prevWeekRecords = {}; }
 
         const defaultExercises = [
             'жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
@@ -1526,11 +1424,7 @@
             updateBlockHash();
         }
 
-        function saveRecords() { 
-            localStorage.setItem(STORAGE_RECORDS, JSON.stringify(records));
-            // Сохраняем текущие рекорды как "предыдущие" для челленджа
-            localStorage.setItem(STORAGE_PREV_RECORDS, JSON.stringify(records));
-        }
+        function saveRecords() { localStorage.setItem(STORAGE_RECORDS, JSON.stringify(records)); }
 
         function saveProgress() { localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(progressData)); }
 
@@ -2051,7 +1945,7 @@
         }
 
         // ============================================================
-        // 10. CHALLENGES (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+        // 10. CHALLENGES
         // ============================================================
         function getWeekStart() {
             const now = new Date();
@@ -2131,15 +2025,12 @@
             if (weekChallenges.length === 0) { generateChallenges(); return; }
 
             const allWeeklySets = getAllWeeklySets();
-            // Получаем текущие рекорды для сравнения
-            const currentRecords = JSON.parse(JSON.stringify(records));
             
             // Сохраняем рекорды начала недели, если их нет
             if (!localStorage.getItem('week_start_records_' + weekStart)) {
-                localStorage.setItem('week_start_records_' + weekStart, JSON.stringify(currentRecords));
+                localStorage.setItem('week_start_records_' + weekStart, JSON.stringify(records));
             }
             
-            // Загружаем рекорды начала недели
             let weekStartRecords = {};
             try {
                 const ws = localStorage.getItem('week_start_records_' + weekStart);
@@ -2153,8 +2044,7 @@
                     isCompleted = false;
                 switch (ch.type) {
                     case 'add_weight': {
-                        // Сравниваем с рекордами начала недели
-                        const currentMax = Math.max.apply(null, Object.values(currentRecords).map(function(r) { return r.weight || 0; }));
+                        const currentMax = Math.max.apply(null, Object.values(records).map(function(r) { return r.weight || 0; }));
                         const weekStartMax = Math.max.apply(null, Object.values(weekStartRecords).map(function(r) { return r.weight || 0; }));
                         const diff = currentMax - weekStartMax;
                         progress = Math.min(ch.target, Math.max(0, diff));
@@ -2163,8 +2053,8 @@
                     }
                     case 'two_records': {
                         let count = 0;
-                        for (let ex in currentRecords) {
-                            const current = currentRecords[ex]?.weight || 0;
+                        for (let ex in records) {
+                            const current = records[ex]?.weight || 0;
                             const start = weekStartRecords[ex]?.weight || 0;
                             if (current > start) count++;
                         }
@@ -2185,8 +2075,8 @@
                         break;
                     }
                     case 'bodyweight_reps': {
-                        if (ch.exercise && currentRecords[ch.exercise]) {
-                            const cur = currentRecords[ch.exercise].weight || 0;
+                        if (ch.exercise && records[ch.exercise]) {
+                            const cur = records[ch.exercise].weight || 0;
                             progress = Math.min(ch.target, cur);
                             if (cur >= ch.target) isCompleted = true;
                         }
@@ -2202,7 +2092,7 @@
                         break;
                     }
                     case 'three_exercises': {
-                        const exWithRecords = Object.keys(currentRecords).filter(function(k) { return currentRecords[k].weight > 0; });
+                        const exWithRecords = Object.keys(records).filter(function(k) { return records[k].weight > 0; });
                         progress = Math.min(ch.target, exWithRecords.length);
                         if (exWithRecords.length >= ch.target) isCompleted = true;
                         break;
@@ -2211,7 +2101,7 @@
                         let cnt = 0;
                         for (let si = 0; si < allWeeklySets.length; si++) {
                             const set = allWeeklySets[si];
-                            const record = currentRecords[set.exercise];
+                            const record = records[set.exercise];
                             if (record && record.weight > 0) {
                                 const oneRM = record.weight * (1 + 0.025 * 10);
                                 if (set.weight > oneRM * 0.8) cnt++;
@@ -2839,7 +2729,6 @@
             renderCategoryTabs();
 
             const weekStart = getWeekStart();
-            // Проверяем, есть ли челленджи на эту неделю
             const hasWeekChallenges = challenges.some(function(c) { return c.week === weekStart; });
             if (!hasWeekChallenges) generateChallenges();
             updateChallenges();
@@ -2902,7 +2791,7 @@
                 ' ' + analysis.bodyType;
 
             setTimeout(calc1RM, 150);
-            console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v6.1 (исправлен скролл и челленджи)');
+            console.log('🏋️ ATHLETE // CRYPTO SPORT OS — v6.2 (скролл вниз работает)');
         }
 
         document.addEventListener('DOMContentLoaded', init);
