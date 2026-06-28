@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#05070b" id="themeColor">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ATHLETE">
     <title>ATHLETE // CRYPTO SPORT OS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -583,6 +584,11 @@
         <button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
     </div>
 
+    <!-- КНОПКА УСТАНОВКИ (PWA) -->
+    <button id="installBtn" style="display:none; position:fixed; bottom:76px; left:50%; transform:translateX(-50%); z-index:9999; background:linear-gradient(135deg,#00f0ff,#8b5cf6); color:#fff; border:none; border-radius:14px; padding:12px 24px; font-weight:700; font-size:0.9rem; cursor:pointer; box-shadow:0 8px 30px rgba(0,240,255,0.3);">
+        📲 Установить приложение
+    </button>
+
     <!-- APP -->
     <div class="app">
 
@@ -898,18 +904,40 @@
             'use strict';
 
             // ============================================================
+            // PWA — УСТАНОВКА ПРИЛОЖЕНИЯ
+            // ============================================================
+            let deferredPrompt;
+            const installBtn = document.getElementById('installBtn');
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                installBtn.style.display = 'block';
+            });
+
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const result = await deferredPrompt.userChoice;
+                    console.log('Установка:', result.outcome);
+                    deferredPrompt = null;
+                    installBtn.style.display = 'none';
+                }
+            });
+
+            // ============================================================
             // ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
             // ============================================================
             window.toggleTheme = function() {
-                var html = document.documentElement;
-                var currentTheme = html.getAttribute('data-theme') || 'dark';
-                var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme') || 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
                 html.setAttribute('data-theme', newTheme);
                 localStorage.setItem('athlete_theme', newTheme);
 
-                var icon = document.getElementById('themeIcon');
-                var label = document.getElementById('themeLabel');
+                const icon = document.getElementById('themeIcon');
+                const label = document.getElementById('themeLabel');
                 if (newTheme === 'dark') {
                     icon.textContent = '🌙';
                     label.textContent = 'Тёмная';
@@ -918,19 +946,19 @@
                     label.textContent = 'Светлая';
                 }
 
-                var meta = document.getElementById('themeColor');
+                const meta = document.getElementById('themeColor');
                 if (meta) {
                     meta.setAttribute('content', newTheme === 'dark' ? '#05070b' : '#f0f2f5');
                 }
             };
 
             function loadTheme() {
-                var saved = localStorage.getItem('athlete_theme') || 'dark';
-                var html = document.documentElement;
+                const saved = localStorage.getItem('athlete_theme') || 'dark';
+                const html = document.documentElement;
                 html.setAttribute('data-theme', saved);
 
-                var icon = document.getElementById('themeIcon');
-                var label = document.getElementById('themeLabel');
+                const icon = document.getElementById('themeIcon');
+                const label = document.getElementById('themeLabel');
                 if (saved === 'dark') {
                     icon.textContent = '🌙';
                     label.textContent = 'Тёмная';
@@ -939,20 +967,20 @@
                     label.textContent = 'Светлая';
                 }
 
-                var meta = document.getElementById('themeColor');
+                const meta = document.getElementById('themeColor');
                 if (meta) {
                     meta.setAttribute('content', saved === 'dark' ? '#05070b' : '#f0f2f5');
                 }
             }
 
             // ============================================================
-            // 1. НАВИГАЦИЯ (нижняя + swipe)
+            // 1. НАВИГАЦИЯ (нижняя + swipe) — ИСПРАВЛЕННАЯ
             // ============================================================
-            var pagesWrapper = document.getElementById('pagesWrapper');
-            var navItems = document.querySelectorAll('.nav-item');
-            var pageMap = {};
-            var currentPage = 'records';
-            var isTransitioning = false;
+            const pagesWrapper = document.getElementById('pagesWrapper');
+            const navItems = document.querySelectorAll('.nav-item');
+            const pageMap = {};
+            let currentPage = 'records';
+            let isTransitioning = false;
 
             document.querySelectorAll('.page').forEach(function(page) {
                 pageMap[page.dataset.page] = page;
@@ -963,11 +991,11 @@
                 if (isTransitioning || currentPage === pageId) return;
                 isTransitioning = true;
 
-                var pages = Object.keys(pageMap);
-                var index = pages.indexOf(pageId);
+                const pages = Object.keys(pageMap);
+                const index = pages.indexOf(pageId);
                 if (index === -1) return;
 
-                var offset = -index * 100;
+                const offset = -index * 100;
                 pagesWrapper.style.transition = animate ? 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
                 pagesWrapper.style.transform = 'translateX(' + offset + '%)';
 
@@ -986,7 +1014,7 @@
                 if (pageId === 'challenges') renderChallenges();
                 if (pageId === 'calc') calc1RM();
                 if (pageId === 'ai') {
-                    var analysis = getFitnessLevel();
+                    const analysis = getFitnessLevel();
                     document.getElementById('aiStatus').textContent = '📊 Уровень: ' + analysis.level + ' | Сила: ' + analysis
                         .strengthScore + ' | Выносливость: ' + analysis.enduranceScore + ' | ' + analysis.bodyEmoji +
                         ' ' + analysis.bodyType;
@@ -1002,65 +1030,92 @@
                 });
             });
 
-            // БЛОКИРУЕМ СВАЙП ПРИ ВЗАИМОДЕЙСТВИИ С ВКЛАДКАМИ
-            var categoryTabs = document.getElementById('categoryTabs');
-            if (categoryTabs) {
-                categoryTabs.addEventListener('touchstart', function(e) {
-                    e.stopPropagation();
-                }, { passive: true });
-            }
+            // ============================================================
+            // СВАЙП — ИСПРАВЛЕННАЯ ВЕРСИЯ (без ложных срабатываний)
+            // ============================================================
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let isSwiping = false;
+            let isScrolling = false;
 
-            // Swipe
-            var touchStartX = 0,
-                touchStartY = 0,
-                isSwiping = false;
-            var container = document.getElementById('pagesContainer');
+            const container = document.getElementById('pagesContainer');
 
             container.addEventListener('touchstart', function(e) {
                 if (isTransitioning) return;
-                var touch = e.touches[0];
+                const touch = e.touches[0];
                 touchStartX = touch.clientX;
                 touchStartY = touch.clientY;
                 isSwiping = true;
+                isScrolling = false;
             }, { passive: true });
 
             container.addEventListener('touchmove', function(e) {
                 if (!isSwiping || isTransitioning) return;
-                var touch = e.touches[0];
-                var diffX = touch.clientX - touchStartX;
-                var diffY = touch.clientY - touchStartY;
-                if (Math.abs(diffX) < Math.abs(diffY) || Math.abs(diffX) < 20) return;
+                const touch = e.touches[0];
+                const diffX = touch.clientX - touchStartX;
+                const diffY = touch.clientY - touchStartY;
+
+                // Если уже определили, что это вертикальный скролл — не мешаем
+                if (isScrolling) return;
+
+                // Если вертикальное движение значительно больше горизонтального — это скролл
+                if (Math.abs(diffY) > Math.abs(diffX) * 1.5) {
+                    isScrolling = true;
+                    return;
+                }
+
+                // Минимальное расстояние для свайпа — 50px
+                if (Math.abs(diffX) < 50) return;
+
+                // Блокируем скролл при горизонтальном свайпе
                 e.preventDefault();
 
-                var pages = Object.keys(pageMap);
-                var currentIndex = pages.indexOf(currentPage);
-                var newIndex = currentIndex;
+                const pages = Object.keys(pageMap);
+                const currentIndex = pages.indexOf(currentPage);
+                let newIndex = currentIndex;
 
-                if (diffX < -40 && currentIndex < pages.length - 1) {
+                if (diffX < -50 && currentIndex < pages.length - 1) {
                     newIndex = currentIndex + 1;
-                } else if (diffX > 40 && currentIndex > 0) {
+                } else if (diffX > 50 && currentIndex > 0) {
                     newIndex = currentIndex - 1;
-                } else return;
+                } else {
+                    return;
+                }
 
-                var newPage = pages[newIndex];
+                const newPage = pages[newIndex];
                 if (newPage) {
                     navigateToPage(newPage);
                     touchStartX = touch.clientX;
+                    touchStartY = touch.clientY;
                 }
             }, { passive: false });
 
             container.addEventListener('touchend', function() {
                 isSwiping = false;
+                isScrolling = false;
             }, { passive: true });
+
+            // ============================================================
+            // БЛОКИРУЕМ СВАЙП НА СТРАНИЦЕ С ВКЛАДКАМИ
+            // ============================================================
+            const categoryTabs = document.getElementById('categoryTabs');
+            if (categoryTabs) {
+                categoryTabs.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+                categoryTabs.addEventListener('touchmove', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+            }
 
             // ============================================================
             // 2. TOAST
             // ============================================================
-            var toastTimer = null;
+            let toastTimer = null;
 
             function showToast(text, duration) {
                 duration = duration || 1800;
-                var el = document.getElementById('toast');
+                const el = document.getElementById('toast');
                 el.textContent = text;
                 el.classList.add('show');
                 clearTimeout(toastTimer);
@@ -1099,11 +1154,11 @@
             // ============================================================
             // 3. ГРАФИК УПРАЖНЕНИЯ
             // ============================================================
-            var chartModalOpen = false;
-            var exerciseChartInstance = null;
+            let chartModalOpen = false;
+            let exerciseChartInstance = null;
 
             window.openExerciseChart = function(exerciseName) {
-                var modal = document.getElementById('exerciseChartModal');
+                const modal = document.getElementById('exerciseChartModal');
                 modal.classList.add('show');
                 chartModalOpen = true;
                 document.getElementById('chartModalTitle').textContent = exerciseName;
@@ -1120,28 +1175,28 @@
             };
 
             function renderExerciseChart(exerciseName) {
-                var canvas = document.getElementById('exerciseChart');
-                var ctx = canvas.getContext('2d');
+                const canvas = document.getElementById('exerciseChart');
+                const ctx = canvas.getContext('2d');
 
-                var allSets = [].concat(sets);
-                for (var date in weeklySets) {
+                let allSets = [].concat(sets);
+                for (let date in weeklySets) {
                     allSets = allSets.concat(weeklySets[date]);
                 }
-                var exSets = allSets.filter(function(s) { return s.exercise === exerciseName; });
+                const exSets = allSets.filter(function(s) { return s.exercise === exerciseName; });
 
-                var record = records[exerciseName] ? records[exerciseName].weight : 0;
-                var unit = getUnitForExercise(exerciseName);
+                const record = records[exerciseName] ? records[exerciseName].weight : 0;
+                const unit = getUnitForExercise(exerciseName);
                 document.getElementById('chartRecord').textContent = record + ' ' + unit;
                 document.getElementById('chartSetsCount').textContent = exSets.length;
 
                 if (exSets.length >= 3) {
-                    var sorted = exSets.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
-                    var first = sorted.slice(0, 3);
-                    var last = sorted.slice(-3);
-                    var firstAvg = first.reduce(function(s, set) { return s + set.weight * set.reps; }, 0) / first.length;
-                    var lastAvg = last.reduce(function(s, set) { return s + set.weight * set.reps; }, 0) / last.length;
-                    var diff = lastAvg - firstAvg;
-                    var pct = firstAvg > 0 ? (diff / firstAvg * 100) : 0;
+                    const sorted = exSets.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
+                    const first = sorted.slice(0, 3);
+                    const last = sorted.slice(-3);
+                    const firstAvg = first.reduce(function(s, set) { return s + set.weight * set.reps; }, 0) / first.length;
+                    const lastAvg = last.reduce(function(s, set) { return s + set.weight * set.reps; }, 0) / last.length;
+                    const diff = lastAvg - firstAvg;
+                    const pct = firstAvg > 0 ? (diff / firstAvg * 100) : 0;
                     document.getElementById('chartProgress').textContent = (pct > 0 ? '+' : '') + pct.toFixed(0) + '%';
                 } else {
                     document.getElementById('chartProgress').textContent = '—';
@@ -1155,27 +1210,27 @@
                 document.getElementById('chartNoData').style.display = 'none';
                 canvas.style.display = 'block';
 
-                var dateMap = {};
-                for (var i = 0; i < exSets.length; i++) {
-                    var set = exSets[i];
-                    var date = set.date;
+                const dateMap = {};
+                for (let i = 0; i < exSets.length; i++) {
+                    const set = exSets[i];
+                    const date = set.date;
                     if (!dateMap[date]) dateMap[date] = { total: 0, count: 0 };
-                    var oneRM = set.weight * (36 / (37 - Math.min(set.reps, 36)));
+                    const oneRM = set.weight * (36 / (37 - Math.min(set.reps, 36)));
                     dateMap[date].total += oneRM;
                     dateMap[date].count++;
                 }
 
-                var sortedDates = Object.keys(dateMap).sort();
-                var data = [];
-                for (var j = 0; j < sortedDates.length; j++) {
-                    var d = sortedDates[j];
+                const sortedDates = Object.keys(dateMap).sort();
+                const data = [];
+                for (let j = 0; j < sortedDates.length; j++) {
+                    const d = sortedDates[j];
                     data.push({ date: d, value: dateMap[d].total / dateMap[d].count });
                 }
 
-                var rect = canvas.parentElement.getBoundingClientRect();
-                var dpr = window.devicePixelRatio || 1;
-                var w = Math.floor(rect.width - 20);
-                var h = 180;
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                const w = Math.floor(rect.width - 20);
+                const h = 180;
 
                 canvas.width = w * dpr;
                 canvas.height = h * dpr;
@@ -1183,32 +1238,32 @@
                 canvas.style.height = h + 'px';
                 ctx.scale(dpr, dpr);
 
-                var textColor = 'rgba(255,255,255,0.3)';
-                var gridColor = 'rgba(0,231,255,0.05)';
-                var accentColor = '#00f0ff';
-                var fillGrad = ctx.createLinearGradient(0, 0, 0, h);
+                const textColor = 'rgba(255,255,255,0.3)';
+                const gridColor = 'rgba(0,231,255,0.05)';
+                const accentColor = '#00f0ff';
+                const fillGrad = ctx.createLinearGradient(0, 0, 0, h);
                 fillGrad.addColorStop(0, 'rgba(0, 240, 255, 0.1)');
                 fillGrad.addColorStop(1, 'rgba(0, 240, 255, 0.01)');
 
-                var padding = { top: 8, bottom: 16, left: 32, right: 6 };
-                var chartW = w - padding.left - padding.right;
-                var chartH = h - padding.top - padding.bottom;
+                const padding = { top: 8, bottom: 16, left: 32, right: 6 };
+                const chartW = w - padding.left - padding.right;
+                const chartH = h - padding.top - padding.bottom;
 
-                var values = data.map(function(d) { return d.value; });
-                var minVal = Math.max(0, Math.min.apply(null, values) - (Math.max.apply(null, values) - Math.min.apply(null,
+                const values = data.map(function(d) { return d.value; });
+                const minVal = Math.max(0, Math.min.apply(null, values) - (Math.max.apply(null, values) - Math.min.apply(null,
                     values)) * 0.1);
-                var maxVal = Math.max.apply(null, values) + (Math.max.apply(null, values) - Math.min.apply(null, values)) *
+                const maxVal = Math.max.apply(null, values) + (Math.max.apply(null, values) - Math.min.apply(null, values)) *
                     0.1;
 
                 ctx.strokeStyle = gridColor;
                 ctx.lineWidth = 0.5;
-                for (var k = 0; k <= 4; k++) {
-                    var y = padding.top + (chartH / 4) * k;
+                for (let k = 0; k <= 4; k++) {
+                    const y = padding.top + (chartH / 4) * k;
                     ctx.beginPath();
                     ctx.moveTo(padding.left, y);
                     ctx.lineTo(w - padding.right, y);
                     ctx.stroke();
-                    var val = maxVal - ((maxVal - minVal) / 4) * k;
+                    const val = maxVal - ((maxVal - minVal) / 4) * k;
                     ctx.fillStyle = textColor;
                     ctx.font = '7px system-ui';
                     ctx.textAlign = 'right';
@@ -1221,10 +1276,10 @@
                 ctx.lineJoin = 'round';
                 ctx.lineCap = 'round';
 
-                var points = [];
-                for (var m = 0; m < data.length; m++) {
-                    var x = padding.left + (m / (data.length - 1)) * chartW;
-                    var y = padding.top + chartH - ((data[m].value - minVal) / (maxVal - minVal)) * chartH;
+                const points = [];
+                for (let m = 0; m < data.length; m++) {
+                    const x = padding.left + (m / (data.length - 1)) * chartW;
+                    const y = padding.top + chartH - ((data[m].value - minVal) / (maxVal - minVal)) * chartH;
                     points.push({ x: x, y: y });
                     if (m === 0) ctx.moveTo(x, y);
                     else ctx.lineTo(x, y);
@@ -1232,7 +1287,7 @@
                 ctx.stroke();
 
                 if (points.length > 1) {
-                    var lastX = points[points.length - 1].x;
+                    const lastX = points[points.length - 1].x;
                     ctx.lineTo(lastX, padding.top + chartH);
                     ctx.lineTo(points[0].x, padding.top + chartH);
                     ctx.closePath();
@@ -1240,8 +1295,8 @@
                     ctx.fill();
                 }
 
-                for (var n = 0; n < points.length; n++) {
-                    var p = points[n];
+                for (let n = 0; n < points.length; n++) {
+                    const p = points[n];
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
                     ctx.fillStyle = accentColor;
@@ -1258,7 +1313,7 @@
                 }
 
                 if (record > 0) {
-                    var yRecord = padding.top + chartH - ((record - minVal) / (maxVal - minVal)) * chartH;
+                    const yRecord = padding.top + chartH - ((record - minVal) / (maxVal - minVal)) * chartH;
                     if (yRecord >= padding.top && yRecord <= padding.top + chartH) {
                         ctx.setLineDash([3, 3]);
                         ctx.strokeStyle = 'rgba(251, 191, 36, 0.2)';
@@ -1279,24 +1334,24 @@
             // ============================================================
             // 4. ДАННЫЕ
             // ============================================================
-            var STORAGE_RECORDS = 'athlete_records_v5';
-            var STORAGE_PROGRESS = 'athlete_progress_v5';
-            var STORAGE_SETS = 'athlete_sets_v5';
-            var STORAGE_SETS_WEEKLY = 'athlete_sets_weekly_v5';
-            var STORAGE_CHALLENGES = 'athlete_challenges_v5';
-            var STORAGE_LAST_DATE = 'athlete_last_date_v5';
-            var STORAGE_CATEGORY = 'athlete_category_v5';
+            const STORAGE_RECORDS = 'athlete_records_v5';
+            const STORAGE_PROGRESS = 'athlete_progress_v5';
+            const STORAGE_SETS = 'athlete_sets_v5';
+            const STORAGE_SETS_WEEKLY = 'athlete_sets_weekly_v5';
+            const STORAGE_CHALLENGES = 'athlete_challenges_v5';
+            const STORAGE_LAST_DATE = 'athlete_last_date_v5';
+            const STORAGE_CATEGORY = 'athlete_category_v5';
 
-            var records = {};
-            var progressData = [];
-            var sets = [];
-            var weeklySets = {};
-            var challenges = [];
-            var exerciseList = [];
-            var lastDate = '';
-            var currentCategory = localStorage.getItem(STORAGE_CATEGORY) || 'all';
+            let records = {};
+            let progressData = [];
+            let sets = [];
+            let weeklySets = {};
+            let challenges = [];
+            let exerciseList = [];
+            let lastDate = '';
+            let currentCategory = localStorage.getItem(STORAGE_CATEGORY) || 'all';
 
-            var defaultExercises = [
+            const defaultExercises = [
                 'жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                 'болгарский сплит-присед', 'разгибание ног сидя',
                 'становая тяга', 'присед со штангой', 'жим платформы ногами',
@@ -1316,7 +1371,7 @@
                 'подъём на носки стоя'
             ];
 
-            var exerciseCategories = {
+            const exerciseCategories = {
                 legs: ['жим ногами', 'присед (с весом тела)', 'выпады с гантелями', 'румынская тяга',
                     'болгарский сплит-присед', 'разгибание ног сидя',
                     'становая тяга', 'присед со штангой', 'жим платформы ногами'
@@ -1342,7 +1397,7 @@
                 ]
             };
 
-            var bodyweightExercises = [
+            const bodyweightExercises = [
                 'присед (с весом тела)',
                 'отжимания от пола',
                 'отжимания с хлопком',
@@ -1355,12 +1410,12 @@
                 'берпи'
             ];
 
-            var singleArmExercises = [
+            const singleArmExercises = [
                 'тяга гантели в наклоне'
             ];
 
             function getExerciseCategory(ex) {
-                for (var cat in exerciseCategories) {
+                for (let cat in exerciseCategories) {
                     if (exerciseCategories[cat].indexOf(ex) !== -1) return cat;
                 }
                 return 'other';
@@ -1382,9 +1437,9 @@
 
             function getBodyType(weight, height) {
                 if (!weight || !height) return { type: 'неизвестно', bmi: 0, desc: 'Нет данных о весе и росте' };
-                var heightM = height / 100;
-                var bmi = weight / (heightM * heightM);
-                var type = '',
+                const heightM = height / 100;
+                const bmi = weight / (heightM * heightM);
+                let type = '',
                     desc = '',
                     emoji = '';
                 if (bmi < 18.5) { type = 'худощавое';
@@ -1410,21 +1465,22 @@
                 exerciseList = defaultExercises.slice(0);
                 localStorage.setItem('athlete_exercises_v5', JSON.stringify(exerciseList));
 
-                try { var r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records = {}; }
+                try { const r = localStorage.getItem(STORAGE_RECORDS); if (r) records = JSON.parse(r); } catch (e) { records =
+                    {}; }
                 exerciseList.forEach(function(ex) { if (!(ex in records)) records[ex] = { weight: 0, date: new Date()
                         .toISOString().slice(0, 10) }; });
 
-                try { var p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) {
+                try { const p = localStorage.getItem(STORAGE_PROGRESS); if (p) progressData = JSON.parse(p); } catch (e) {
                     progressData = []; }
-                if (progressData.length === 0) { var today = new Date().toISOString().slice(0, 10);
+                if (progressData.length === 0) { const today = new Date().toISOString().slice(0, 10);
                     progressData.push({ date: today, weight: 75, height: 175 }); }
                 progressData.sort(function(a, b) { return a.date < b.date ? 1 : -1; });
 
-                try { var s = localStorage.getItem(STORAGE_SETS); if (s) sets = JSON.parse(s); } catch (e) { sets = []; }
-                try { var w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) {
+                try { const s = localStorage.getItem(STORAGE_SETS); if (s) sets = JSON.parse(s); } catch (e) { sets = []; }
+                try { const w = localStorage.getItem(STORAGE_SETS_WEEKLY); if (w) weeklySets = JSON.parse(w); } catch (e) {
                     weeklySets = {}; }
-                try { var d = localStorage.getItem(STORAGE_LAST_DATE); if (d) lastDate = d; } catch (e) { lastDate = ''; }
-                try { var c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) {
+                try { const d = localStorage.getItem(STORAGE_LAST_DATE); if (d) lastDate = d; } catch (e) { lastDate = ''; }
+                try { const c = localStorage.getItem(STORAGE_CHALLENGES); if (c) challenges = JSON.parse(c); } catch (e) {
                     challenges = []; }
 
                 checkNewDay();
@@ -1447,9 +1503,9 @@
             function saveCategory() { localStorage.setItem(STORAGE_CATEGORY, currentCategory); }
 
             function checkNewDay() {
-                var today = new Date().toISOString().slice(0, 10);
+                const today = new Date().toISOString().slice(0, 10);
                 if (lastDate !== today) {
-                    var todaySets = sets.filter(function(s) { return s.date === today; });
+                    const todaySets = sets.filter(function(s) { return s.date === today; });
                     if (todaySets.length > 0) {
                         if (!weeklySets[lastDate || today]) weeklySets[lastDate || today] = [];
                         weeklySets[lastDate || today] = weeklySets[lastDate || today].concat(todaySets);
@@ -1464,8 +1520,8 @@
             }
 
             function updateExerciseSelects() {
-                var selectIds = ['recordExSelect', 'setExSelect', 'forecastExSelect'];
-                var categoryNames = {
+                const selectIds = ['recordExSelect', 'setExSelect', 'forecastExSelect'];
+                const categoryNames = {
                     legs: '🦵 Ноги',
                     chest: '💪 Грудь',
                     back: '🔙 Спина',
@@ -1475,39 +1531,39 @@
                     functional: '🏃 Функциональные'
                 };
 
-                for (var idIdx = 0; idIdx < selectIds.length; idIdx++) {
-                    var id = selectIds[idIdx];
-                    var select = document.getElementById(id);
+                for (let idIdx = 0; idIdx < selectIds.length; idIdx++) {
+                    const id = selectIds[idIdx];
+                    const select = document.getElementById(id);
                     if (!select) continue;
-                    var currentVal = select.value;
+                    const currentVal = select.value;
                     select.innerHTML = '';
 
-                    var grouped = {};
-                    for (var exIdx = 0; exIdx < exerciseList.length; exIdx++) {
-                        var ex = exerciseList[exIdx];
-                        var cat = getExerciseCategory(ex);
+                    const grouped = {};
+                    for (let exIdx = 0; exIdx < exerciseList.length; exIdx++) {
+                        const ex = exerciseList[exIdx];
+                        const cat = getExerciseCategory(ex);
                         if (!grouped[cat]) grouped[cat] = [];
                         grouped[cat].push(ex);
                     }
 
-                    var allOpt = document.createElement('option');
+                    const allOpt = document.createElement('option');
                     allOpt.value = '';
                     allOpt.textContent = '— Выбери упражнение —';
                     select.appendChild(allOpt);
 
-                    var catOrder = ['legs', 'chest', 'back', 'shoulders', 'arms', 'core', 'functional'];
-                    for (var catIdx = 0; catIdx < catOrder.length; catIdx++) {
-                        var cat = catOrder[catIdx];
+                    const catOrder = ['legs', 'chest', 'back', 'shoulders', 'arms', 'core', 'functional'];
+                    for (let catIdx = 0; catIdx < catOrder.length; catIdx++) {
+                        const cat = catOrder[catIdx];
                         if (!grouped[cat] || grouped[cat].length === 0) continue;
-                        var optgroup = document.createElement('optgroup');
+                        const optgroup = document.createElement('optgroup');
                         optgroup.label = categoryNames[cat] || cat;
-                        var sortedEx = grouped[cat].sort();
-                        for (var sIdx = 0; sIdx < sortedEx.length; sIdx++) {
-                            var ex = sortedEx[sIdx];
-                            var opt = document.createElement('option');
+                        const sortedEx = grouped[cat].sort();
+                        for (let sIdx = 0; sIdx < sortedEx.length; sIdx++) {
+                            const ex = sortedEx[sIdx];
+                            const opt = document.createElement('option');
                             opt.value = ex;
-                            var unit = getUnitForExercise(ex);
-                            var hint = '';
+                            const unit = getUnitForExercise(ex);
+                            let hint = '';
                             if (isBodyweightExercise(ex)) hint = ' (повторы)';
                             else if (ex === 'планка') hint = ' (сек)';
                             else if (isSingleArmExercise(ex)) hint = ' (1 рука)';
@@ -1529,11 +1585,11 @@
             // 6. CATEGORY TABS & RENDER RECORDS
             // ============================================================
             function getCategoryCounts() {
-                var counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
-                for (var ex in records) {
+                const counts = { all: 0, legs: 0, chest: 0, back: 0, shoulders: 0, arms: 0, core: 0, functional: 0 };
+                for (let ex in records) {
                     if (records[ex].weight > 0) {
                         counts.all++;
-                        var cat = getExerciseCategory(ex);
+                        const cat = getExerciseCategory(ex);
                         if (counts[cat] !== undefined) counts[cat]++;
                     }
                 }
@@ -1541,42 +1597,42 @@
             }
 
             function renderCategoryTabs() {
-                var counts = getCategoryCounts();
-                var tabIds = ['all', 'legs', 'chest', 'back', 'shoulders', 'arms', 'core', 'functional'];
-                for (var i = 0; i < tabIds.length; i++) {
-                    var id = tabIds[i];
-                    var el = document.getElementById('tabCount' + id.charAt(0).toUpperCase() + id.slice(1));
+                const counts = getCategoryCounts();
+                const tabIds = ['all', 'legs', 'chest', 'back', 'shoulders', 'arms', 'core', 'functional'];
+                for (let i = 0; i < tabIds.length; i++) {
+                    const id = tabIds[i];
+                    const el = document.getElementById('tabCount' + id.charAt(0).toUpperCase() + id.slice(1));
                     if (el) el.textContent = counts[id] || 0;
                 }
                 document.getElementById('recordCountBadge').textContent = counts.all + ' упражнений';
 
-                var tabs = document.querySelectorAll('.category-tab');
-                for (var j = 0; j < tabs.length; j++) {
-                    var tab = tabs[j];
+                const tabs = document.querySelectorAll('.category-tab');
+                for (let j = 0; j < tabs.length; j++) {
+                    const tab = tabs[j];
                     tab.classList.toggle('active', tab.dataset.category === currentCategory);
                 }
             }
 
             function renderRecords() {
-                var container = document.getElementById('recordsContainer');
+                const container = document.getElementById('recordsContainer');
                 container.innerHTML = '';
-                var sorted = Object.keys(records).sort();
-                var currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const sorted = Object.keys(records).sort();
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
 
-                var visibleCount = 0;
-                for (var i = 0; i < sorted.length; i++) {
-                    var ex = sorted[i];
-                    var entry = records[ex];
-                    var w = entry.weight || 0;
-                    var d = entry.date || '—';
-                    var isBW = bodyweightExercises.indexOf(ex) !== -1;
-                    var unit = getUnitForExercise(ex);
-                    var cat = getExerciseCategory(ex);
-                    var hash = generateHash(ex + w + d).slice(0, 5);
+                let visibleCount = 0;
+                for (let i = 0; i < sorted.length; i++) {
+                    const ex = sorted[i];
+                    const entry = records[ex];
+                    const w = entry.weight || 0;
+                    const d = entry.date || '—';
+                    const isBW = bodyweightExercises.indexOf(ex) !== -1;
+                    const unit = getUnitForExercise(ex);
+                    const cat = getExerciseCategory(ex);
+                    const hash = generateHash(ex + w + d).slice(0, 5);
 
                     if (currentCategory !== 'all' && cat !== currentCategory) continue;
 
-                    var div = document.createElement('div');
+                    const div = document.createElement('div');
                     div.className = 'exercise-card';
                     div.innerHTML =
                         '<div class="ex-name">' + ex + '</div>' +
@@ -1601,10 +1657,10 @@
             // 7. RENDER SETS
             // ============================================================
             function renderTodaySets() {
-                var container = document.getElementById('todaySetsContainer');
-                var summary = document.getElementById('setSummary');
-                var today = new Date().toISOString().slice(0, 10);
-                var todaySets = sets.filter(function(s) { return s.date === today; });
+                const container = document.getElementById('todaySetsContainer');
+                const summary = document.getElementById('setSummary');
+                const today = new Date().toISOString().slice(0, 10);
+                const todaySets = sets.filter(function(s) { return s.date === today; });
                 if (todaySets.length === 0) {
                     container.innerHTML = '<div class="empty-state">Нет записей за сегодня</div>';
                     summary.style.display = 'none';
@@ -1613,11 +1669,11 @@
                     return;
                 }
                 container.innerHTML = '';
-                var reversed = todaySets.slice().reverse();
-                for (var i = 0; i < reversed.length; i++) {
-                    var set = reversed[i];
-                    var isBW = isBodyweightExercise(set.exercise);
-                    var div = document.createElement('div');
+                const reversed = todaySets.slice().reverse();
+                for (let i = 0; i < reversed.length; i++) {
+                    const set = reversed[i];
+                    const isBW = isBodyweightExercise(set.exercise);
+                    const div = document.createElement('div');
                     div.className = 'set-item';
                     div.innerHTML =
                         '<div class="set-info">' +
@@ -1639,9 +1695,9 @@
                     });
                     container.appendChild(div);
                 }
-                var total = todaySets.length;
-                var volume = todaySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
-                var avg = total > 0 ? todaySets.reduce(function(s, set) { return s + set.weight; }, 0) / total : 0;
+                const total = todaySets.length;
+                const volume = todaySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
+                const avg = total > 0 ? todaySets.reduce(function(s, set) { return s + set.weight; }, 0) / total : 0;
                 summary.style.display = 'grid';
                 summary.innerHTML =
                     '<div class="stat"><span class="num">' + total + '</span>подходов</div>' +
@@ -1652,15 +1708,15 @@
             }
 
             function updateTodayInfo() {
-                var today = new Date().toISOString().slice(0, 10);
+                const today = new Date().toISOString().slice(0, 10);
                 document.getElementById('todayDate').textContent = today;
                 document.getElementById('todaySetsCount').textContent = sets.filter(function(s) { return s.date === today; })
                     .length;
             }
 
             function finishWorkout() {
-                var today = new Date().toISOString().slice(0, 10);
-                var todaySets = sets.filter(function(s) { return s.date === today; });
+                const today = new Date().toISOString().slice(0, 10);
+                const todaySets = sets.filter(function(s) { return s.date === today; });
                 if (todaySets.length === 0) { showToast('⚠️ Нет подходов за сегодня', 1200); return; }
 
                 if (!weeklySets[today]) weeklySets[today] = [];
@@ -1678,14 +1734,14 @@
             }
 
             function addSet() {
-                var ex = document.getElementById('setExSelect').value;
-                var weight = parseFloat(document.getElementById('setWeight').value);
-                var reps = parseInt(document.getElementById('setReps').value);
+                const ex = document.getElementById('setExSelect').value;
+                let weight = parseFloat(document.getElementById('setWeight').value);
+                const reps = parseInt(document.getElementById('setReps').value);
 
                 if (!ex) { showToast('❌ Выбери упражнение', 1600); return; }
 
-                var isBW = isBodyweightExercise(ex);
-                var unit = getUnitForExercise(ex);
+                const isBW = isBodyweightExercise(ex);
+                const unit = getUnitForExercise(ex);
 
                 if (!isBW && (isNaN(weight) || weight <= 0)) {
                     showToast('❌ Введи вес для этого упражнения', 1600);
@@ -1694,9 +1750,9 @@
                 if (isBW) { weight = 0; }
                 if (isNaN(reps) || reps < 1) { showToast('❌ Введи количество повторений', 1600); return; }
 
-                var today = new Date().toISOString().slice(0, 10);
-                var now = new Date();
-                var time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+                const today = new Date().toISOString().slice(0, 10);
+                const now = new Date();
+                const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
                 sets.push({ id: Date.now() + Math.random(), exercise: ex, weight: weight, reps: reps, date: today,
                 time: time });
                 saveSets();
@@ -1711,28 +1767,28 @@
             }
 
             // ============================================================
-            // 8. PROGRESS & CHART (сокращённо для экономии)
+            // 8. PROGRESS & CHART
             // ============================================================
             function renderProgress() {
-                var wDisplay = document.getElementById('currentWeightDisplay');
-                var hDisplay = document.getElementById('currentHeightDisplay');
-                var list = document.getElementById('progressWeekList');
+                const wDisplay = document.getElementById('currentWeightDisplay');
+                const hDisplay = document.getElementById('currentHeightDisplay');
+                const list = document.getElementById('progressWeekList');
                 if (progressData.length === 0) {
                     wDisplay.textContent = '—';
                     hDisplay.textContent = '—';
                     list.innerHTML = '<div class="empty-state">Нет данных</div>';
                     return;
                 }
-                var latest = progressData[0];
+                const latest = progressData[0];
                 wDisplay.textContent = latest.weight ? latest.weight.toFixed(1) : '—';
                 hDisplay.textContent = latest.height ? latest.height.toFixed(1) : '—';
                 list.innerHTML = '';
-                for (var i = 0; i < progressData.length; i++) {
-                    var item = progressData[i];
-                    var row = document.createElement('div');
+                for (let i = 0; i < progressData.length; i++) {
+                    const item = progressData[i];
+                    const row = document.createElement('div');
                     row.className = 'week-item';
-                    var w = item.weight ? item.weight.toFixed(1) + ' кг' : '—';
-                    var h = item.height ? item.height.toFixed(1) + ' см' : '—';
+                    const w = item.weight ? item.weight.toFixed(1) + ' кг' : '—';
+                    const h = item.height ? item.height.toFixed(1) + ' см' : '—';
                     row.innerHTML = '<span class="date">' + (item.date || '—') + '</span><span class="data">' + w +
                         ' · ' + h + '</span>';
                     list.appendChild(row);
@@ -1740,15 +1796,15 @@
             }
 
             function addProgress() {
-                var weight = parseFloat(document.getElementById('weightInput').value);
-                var height = parseFloat(document.getElementById('heightInput').value);
+                const weight = parseFloat(document.getElementById('weightInput').value);
+                const height = parseFloat(document.getElementById('heightInput').value);
                 if (isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0) {
                     showToast('❌ Введи вес и рост (числа > 0)', 1600);
                     return;
                 }
-                var today = new Date().toISOString().slice(0, 10);
-                var idx = -1;
-                for (var i = 0; i < progressData.length; i++) {
+                const today = new Date().toISOString().slice(0, 10);
+                let idx = -1;
+                for (let i = 0; i < progressData.length; i++) {
                     if (progressData[i].date === today) { idx = i; break; }
                 }
                 if (idx !== -1) { progressData[idx].weight = weight;
@@ -1765,30 +1821,30 @@
                 showToast('📊 ' + weight + ' кг · ' + height + ' см');
             }
 
-            var chartRAF = null;
+            let chartRAF = null;
 
             function updateChart() {
                 if (chartRAF) { cancelAnimationFrame(chartRAF);
                     chartRAF = null; }
                 chartRAF = requestAnimationFrame(function() {
-                    var canvas = document.getElementById('progressChart');
+                    const canvas = document.getElementById('progressChart');
                     if (!canvas) return;
-                    var ctx = canvas.getContext('2d');
-                    var rect = canvas.parentElement.getBoundingClientRect();
-                    var dpr = window.devicePixelRatio || 1;
-                    var w = Math.floor(rect.width - 16);
-                    var h = 100;
+                    const ctx = canvas.getContext('2d');
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    const dpr = window.devicePixelRatio || 1;
+                    const w = Math.floor(rect.width - 16);
+                    const h = 100;
                     canvas.width = w * dpr;
                     canvas.height = h * dpr;
                     canvas.style.width = w + 'px';
                     canvas.style.height = h + 'px';
                     ctx.scale(dpr, dpr);
 
-                    var textColor = 'rgba(255,255,255,0.25)';
-                    var gridColor = 'rgba(0,231,255,0.04)';
-                    var accentColor = '#00f0ff';
+                    const textColor = 'rgba(255,255,255,0.25)';
+                    const gridColor = 'rgba(0,231,255,0.04)';
+                    const accentColor = '#00f0ff';
 
-                    var data = progressData.slice().reverse();
+                    const data = progressData.slice().reverse();
                     if (data.length < 2) {
                         ctx.fillStyle = textColor;
                         ctx.font = '11px system-ui';
@@ -1797,23 +1853,23 @@
                         return;
                     }
 
-                    var padding = { top: 6, bottom: 12, left: 18, right: 4 };
-                    var chartW = w - padding.left - padding.right;
-                    var chartH = h - padding.top - padding.bottom;
+                    const padding = { top: 6, bottom: 12, left: 18, right: 4 };
+                    const chartW = w - padding.left - padding.right;
+                    const chartH = h - padding.top - padding.bottom;
 
-                    var weights = data.map(function(d) { return d.weight; });
-                    var minWeight = Math.max(0, Math.min.apply(null, weights) - 1.5);
-                    var maxWeight = Math.max.apply(null, weights) + 1.5;
+                    const weights = data.map(function(d) { return d.weight; });
+                    const minWeight = Math.max(0, Math.min.apply(null, weights) - 1.5);
+                    const maxWeight = Math.max.apply(null, weights) + 1.5;
 
                     ctx.strokeStyle = gridColor;
                     ctx.lineWidth = 0.5;
-                    for (var i = 0; i <= 3; i++) {
-                        var y = padding.top + (chartH / 3) * i;
+                    for (let i = 0; i <= 3; i++) {
+                        const y = padding.top + (chartH / 3) * i;
                         ctx.beginPath();
                         ctx.moveTo(padding.left, y);
                         ctx.lineTo(w - padding.right, y);
                         ctx.stroke();
-                        var val = maxWeight - ((maxWeight - minWeight) / 3) * i;
+                        const val = maxWeight - ((maxWeight - minWeight) / 3) * i;
                         ctx.fillStyle = textColor;
                         ctx.font = '6px system-ui';
                         ctx.textAlign = 'right';
@@ -1826,17 +1882,17 @@
                     ctx.lineJoin = 'round';
                     ctx.lineCap = 'round';
 
-                    for (var j = 0; j < data.length; j++) {
-                        var x = padding.left + (j / (data.length - 1)) * chartW;
-                        var y = padding.top + chartH - ((data[j].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                    for (let j = 0; j < data.length; j++) {
+                        const x = padding.left + (j / (data.length - 1)) * chartW;
+                        const y = padding.top + chartH - ((data[j].weight - minWeight) / (maxWeight - minWeight)) * chartH;
                         if (j === 0) ctx.moveTo(x, y);
                         else ctx.lineTo(x, y);
                     }
                     ctx.stroke();
 
-                    for (var k = 0; k < data.length; k++) {
-                        var x = padding.left + (k / (data.length - 1)) * chartW;
-                        var y = padding.top + chartH - ((data[k].weight - minWeight) / (maxWeight - minWeight)) * chartH;
+                    for (let k = 0; k < data.length; k++) {
+                        const x = padding.left + (k / (data.length - 1)) * chartW;
+                        const y = padding.top + chartH - ((data[k].weight - minWeight) / (maxWeight - minWeight)) * chartH;
                         ctx.beginPath();
                         ctx.arc(x, y, 3, 0, Math.PI * 2);
                         ctx.fillStyle = accentColor;
@@ -1856,14 +1912,14 @@
             }
 
             // ============================================================
-            // 9. FORECAST (сокращённо)
+            // 9. FORECAST
             // ============================================================
             function renderForecast() {
-                var container = document.getElementById('forecastContainer');
-                var saved = localStorage.getItem('last_forecast');
+                const container = document.getElementById('forecastContainer');
+                const saved = localStorage.getItem('last_forecast');
                 if (saved) {
                     try {
-                        var data = JSON.parse(saved);
+                        const data = JSON.parse(saved);
                         container.innerHTML =
                             '<div class="forecast-card">' +
                             '<div style="font-size:0.65rem;color:var(--text-muted);">🎯 ' + data.exercise + '</div>' +
@@ -1885,56 +1941,56 @@
             }
 
             function generateForecast() {
-                var ex = document.getElementById('forecastExSelect').value;
-                var target = parseFloat(document.getElementById('forecastTarget').value);
+                const ex = document.getElementById('forecastExSelect').value;
+                const target = parseFloat(document.getElementById('forecastTarget').value);
                 if (!ex || isNaN(target) || target <= 0) { showToast('❌ Выбери упражнение и введи цель', 1600); return; }
-                var current = records[ex] ? records[ex].weight : 0;
+                const current = records[ex] ? records[ex].weight : 0;
                 if (current === 0) { showToast('❌ Сначала запиши текущий рекорд', 1600); return; }
                 if (target <= current) { showToast('⚠️ Цель должна быть больше текущего рекорда', 1600); return; }
 
-                var unit = getUnitForExercise(ex);
-                var isBW = bodyweightExercises.indexOf(ex) !== -1;
-                var currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const unit = getUnitForExercise(ex);
+                const isBW = bodyweightExercises.indexOf(ex) !== -1;
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
 
-                var diff = target - current;
-                var exSets = sets.filter(function(s) { return s.exercise === ex; });
+                const diff = target - current;
+                const exSets = sets.filter(function(s) { return s.exercise === ex; });
 
-                var avgProgress = (unit === 'сек') ? 5 : (unit === 'повторов') ? 2 : 2.5;
+                let avgProgress = (unit === 'сек') ? 5 : (unit === 'повторов') ? 2 : 2.5;
 
                 if (isBW) {
                     if (currentWeight >= 90) avgProgress *= 0.7;
                     else if (currentWeight <= 65) avgProgress *= 1.3;
                 } else {
-                    var relativeStrength = current / currentWeight;
+                    const relativeStrength = current / currentWeight;
                     if (relativeStrength > 1.5) avgProgress *= 1.1;
                     else if (relativeStrength < 0.8) avgProgress *= 0.9;
                 }
 
                 if (exSets.length > 3) {
-                    var sorted = exSets.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
-                    var first = sorted[0];
-                    var last = sorted[sorted.length - 1];
-                    var weeks = Math.max(1, (new Date(last.date) - new Date(first.date)) / (7 * 24 * 60 * 60 * 1000));
-                    var wDiff = last.weight - first.weight;
-                    var historicalAvg = Math.max(0.3, wDiff / weeks);
+                    const sorted = exSets.sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
+                    const first = sorted[0];
+                    const last = sorted[sorted.length - 1];
+                    const weeks = Math.max(1, (new Date(last.date) - new Date(first.date)) / (7 * 24 * 60 * 60 * 1000));
+                    const wDiff = last.weight - first.weight;
+                    const historicalAvg = Math.max(0.3, wDiff / weeks);
                     avgProgress = historicalAvg * 0.7 + avgProgress * 0.3;
                 }
 
-                var weeksNeeded = Math.ceil(diff / avgProgress);
-                var forecastDate = new Date();
+                const weeksNeeded = Math.ceil(diff / avgProgress);
+                const forecastDate = new Date();
                 forecastDate.setDate(forecastDate.getDate() + weeksNeeded * 7);
-                var dateStr = forecastDate.toISOString().slice(0, 10);
-                var progress = Math.min(100, (current / target) * 100);
+                const dateStr = forecastDate.toISOString().slice(0, 10);
+                const progress = Math.min(100, (current / target) * 100);
 
-                var confidence = 'Низкая';
-                var weeksToGoal = '';
+                let confidence = 'Низкая';
+                let weeksToGoal = '';
                 if (weeksNeeded < 4) { confidence = 'Высокая 🔥';
                     weeksToGoal = '🎯 Достигнешь через ' + weeksNeeded + ' недели!'; } else if (weeksNeeded < 8) { confidence =
                         'Средняя 📈';
                     weeksToGoal = '📊 Цель через ' + weeksNeeded + ' недель'; } else { confidence = 'Низкая (требуется больше данных) 📉';
                     weeksToGoal = '⏳ Потребуется ~' + weeksNeeded + ' недель'; }
 
-                var data = {
+                const data = {
                     exercise: ex,
                     target: target,
                     current: current,
@@ -1952,29 +2008,29 @@
             }
 
             // ============================================================
-            // 10. CHALLENGES (сокращённо)
+            // 10. CHALLENGES
             // ============================================================
             function getWeekStart() {
-                var now = new Date();
-                var day = now.getDay();
-                var diff = now.getDate() - day + (day === 0 ? -6 : 1);
-                var monday = new Date(now);
+                const now = new Date();
+                const day = now.getDay();
+                const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+                const monday = new Date(now);
                 monday.setDate(diff);
                 return monday.toISOString().slice(0, 10);
             }
 
             function getAllWeeklySets() {
-                var weekStart = getWeekStart();
-                var allSets = [];
-                for (var date in weeklySets) {
+                const weekStart = getWeekStart();
+                let allSets = [];
+                for (let date in weeklySets) {
                     if (date >= weekStart) allSets = allSets.concat(weeklySets[date]);
                 }
-                var today = new Date().toISOString().slice(0, 10);
+                const today = new Date().toISOString().slice(0, 10);
                 if (today >= weekStart) allSets = allSets.concat(sets.filter(function(s) { return s.date === today; }));
                 return allSets;
             }
 
-            var CHALLENGE_POOL = [
+            const CHALLENGE_POOL = [
                 { name: '💪 Силовой рывок', desc: 'Добавь 5 кг к любому рекорду', type: 'add_weight', target: 5,
                     reward: '⭐ +50' },
                 { name: '🏋️ Тяжёлый вес', desc: 'Добавь 7 кг к любому рекорду', type: 'add_weight', target: 7,
@@ -2000,11 +2056,11 @@
             ];
 
             function generateChallenges() {
-                var weekStart = getWeekStart();
+                const weekStart = getWeekStart();
                 challenges = challenges.filter(function(c) { return c.week !== weekStart; });
-                var shuffled = CHALLENGE_POOL.slice().sort(function() { return Math.random() - 0.5; });
-                var selected = shuffled.slice(0, 5);
-                var newChallenges = selected.map(function(ch, index) {
+                const shuffled = CHALLENGE_POOL.slice().sort(function() { return Math.random() - 0.5; });
+                const selected = shuffled.slice(0, 5);
+                const newChallenges = selected.map(function(ch, index) {
                     return {
                         id: 'ch_' + Date.now() + '_' + index,
                         name: ch.name,
@@ -2027,25 +2083,25 @@
             }
 
             function updateChallenges() {
-                var weekStart = getWeekStart();
-                var weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
                 if (weekChallenges.length === 0) { generateChallenges(); return; }
 
-                var allWeeklySets = getAllWeeklySets();
-                for (var ci = 0; ci < weekChallenges.length; ci++) {
-                    var ch = weekChallenges[ci];
+                const allWeeklySets = getAllWeeklySets();
+                for (let ci = 0; ci < weekChallenges.length; ci++) {
+                    const ch = weekChallenges[ci];
                     if (ch.completed) continue;
-                    var progress = 0,
+                    let progress = 0,
                         isCompleted = false;
                     switch (ch.type) {
                         case 'add_weight': {
-                            var currentMax = Math.max.apply(null, Object.values(records).map(function(r) { return r
+                            const currentMax = Math.max.apply(null, Object.values(records).map(function(r) { return r
                                 .weight; }));
-                            var prev = localStorage.getItem('prev_week_records');
+                            const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
                                 try {
-                                    var p = JSON.parse(prev);
-                                    var diff = currentMax - Math.max.apply(null, Object.values(p).map(function(r) { return r
+                                    const p = JSON.parse(prev);
+                                    const diff = currentMax - Math.max.apply(null, Object.values(p).map(function(r) { return r
                                             .weight; }));
                                     progress = Math.min(ch.target, diff);
                                     if (diff >= ch.target) isCompleted = true;
@@ -2054,12 +2110,12 @@
                             break;
                         }
                         case 'two_records': {
-                            var prev = localStorage.getItem('prev_week_records');
+                            const prev = localStorage.getItem('prev_week_records');
                             if (prev) {
                                 try {
-                                    var p = JSON.parse(prev);
-                                    var count = 0;
-                                    for (var ex in records) {
+                                    const p = JSON.parse(prev);
+                                    let count = 0;
+                                    for (let ex in records) {
                                         if (records[ex].weight > (p[ex]?.weight || 0)) count++;
                                     }
                                     progress = Math.min(ch.target, count);
@@ -2069,20 +2125,20 @@
                             break;
                         }
                         case 'total_sets': {
-                            var count = allWeeklySets.length;
+                            const count = allWeeklySets.length;
                             progress = Math.min(ch.target, count);
                             if (count >= ch.target) isCompleted = true;
                             break;
                         }
                         case 'total_volume': {
-                            var vol = allWeeklySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
+                            const vol = allWeeklySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
                             progress = Math.min(ch.target, vol);
                             if (vol >= ch.target) isCompleted = true;
                             break;
                         }
                         case 'bodyweight_reps': {
                             if (ch.exercise && records[ch.exercise]) {
-                                var cur = records[ch.exercise].weight || 0;
+                                const cur = records[ch.exercise].weight || 0;
                                 progress = Math.min(ch.target, cur);
                                 if (cur >= ch.target) isCompleted = true;
                             }
@@ -2090,7 +2146,7 @@
                         }
                         case 'bodyweight_total': {
                             if (ch.exercise) {
-                                var total = allWeeklySets.filter(function(s) { return s.exercise === ch.exercise; })
+                                const total = allWeeklySets.filter(function(s) { return s.exercise === ch.exercise; })
                                     .reduce(function(s, set) { return s + set.reps; }, 0);
                                 progress = Math.min(ch.target, total);
                                 if (total >= ch.target) isCompleted = true;
@@ -2098,18 +2154,18 @@
                             break;
                         }
                         case 'three_exercises': {
-                            var exWithRecords = Object.keys(records).filter(function(k) { return records[k].weight > 0; });
+                            const exWithRecords = Object.keys(records).filter(function(k) { return records[k].weight > 0; });
                             progress = Math.min(ch.target, exWithRecords.length);
                             if (exWithRecords.length >= ch.target) isCompleted = true;
                             break;
                         }
                         case 'heavy_sets': {
-                            var cnt = 0;
-                            for (var si = 0; si < allWeeklySets.length; si++) {
-                                var set = allWeeklySets[si];
-                                var record = records[set.exercise];
+                            let cnt = 0;
+                            for (let si = 0; si < allWeeklySets.length; si++) {
+                                const set = allWeeklySets[si];
+                                const record = records[set.exercise];
                                 if (record && record.weight > 0) {
-                                    var oneRM = record.weight * (1 + 0.025 * 10);
+                                    const oneRM = record.weight * (1 + 0.025 * 10);
                                     if (set.weight > oneRM * 0.8) cnt++;
                                 }
                             }
@@ -2130,8 +2186,8 @@
                 renderChallenges();
                 updateChallengeBadge();
 
-                for (var ci2 = 0; ci2 < weekChallenges.length; ci2++) {
-                    var ch2 = weekChallenges[ci2];
+                for (let ci2 = 0; ci2 < weekChallenges.length; ci2++) {
+                    const ch2 = weekChallenges[ci2];
                     if (ch2.completed && !ch2.notified) {
                         ch2.notified = true;
                         showAchievementToast('🎯', 'Челлендж завершён!', ch2.name + ' — ' + ch2.reward);
@@ -2142,18 +2198,18 @@
             }
 
             function renderChallenges() {
-                var container = document.getElementById('challengesContainer');
-                var weekStart = getWeekStart();
-                var weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
+                const container = document.getElementById('challengesContainer');
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
                 if (weekChallenges.length === 0) { container.innerHTML =
                     '<div class="empty-state">Нет активных челленджей</div>'; return; }
                 container.innerHTML = '';
-                for (var i = 0; i < weekChallenges.length; i++) {
-                    var ch = weekChallenges[i];
-                    var div = document.createElement('div');
+                for (let i = 0; i < weekChallenges.length; i++) {
+                    const ch = weekChallenges[i];
+                    const div = document.createElement('div');
                     div.className = 'challenge-card ' + (ch.completed ? 'completed' : 'active');
-                    var progress = ch.target > 0 ? Math.min(100, (ch.progress / ch.target) * 100) : 0;
-                    var color = ch.completed ? '#54ff8f' : 'var(--cyan)';
+                    const progress = ch.target > 0 ? Math.min(100, (ch.progress / ch.target) * 100) : 0;
+                    const color = ch.completed ? '#54ff8f' : 'var(--cyan)';
                     div.innerHTML =
                         '<div class="ch-header"><span class="ch-name">' + ch.name + '</span><span class="ch-reward">' +
                         ch.reward + '</span></div>' +
@@ -2169,10 +2225,10 @@
             }
 
             function updateChallengeBadge() {
-                var weekStart = getWeekStart();
-                var weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
-                var active = weekChallenges.filter(function(c) { return !c.completed; }).length;
-                var badge = document.getElementById('navChallengeBadge');
+                const weekStart = getWeekStart();
+                const weekChallenges = challenges.filter(function(c) { return c.week === weekStart; });
+                const active = weekChallenges.filter(function(c) { return !c.completed; }).length;
+                const badge = document.getElementById('navChallengeBadge');
                 badge.style.display = active > 0 ? 'block' : 'none';
                 if (active > 0) badge.textContent = active;
                 document.getElementById('challengeBadge').textContent = weekChallenges.filter(function(c) { return c
@@ -2180,31 +2236,31 @@
             }
 
             // ============================================================
-            // 11. REPORTS (сокращённо)
+            // 11. REPORTS
             // ============================================================
             function renderReport() {
-                var container = document.getElementById('reportContainer');
-                var weekStart = getWeekStart();
-                var allWeeklySets = getAllWeeklySets();
-                var totalSets = allWeeklySets.length;
-                var totalVolume = allWeeklySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
-                var avgWeight = totalSets > 0 ? allWeeklySets.reduce(function(s, set) { return s + set.weight; }, 0) /
+                const container = document.getElementById('reportContainer');
+                const weekStart = getWeekStart();
+                const allWeeklySets = getAllWeeklySets();
+                const totalSets = allWeeklySets.length;
+                const totalVolume = allWeeklySets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
+                const avgWeight = totalSets > 0 ? allWeeklySets.reduce(function(s, set) { return s + set.weight; }, 0) /
                     totalSets : 0;
 
-                var lastWeek = new Date();
+                const lastWeek = new Date();
                 lastWeek.setDate(lastWeek.getDate() - 7);
-                var lastStart = lastWeek.toISOString().slice(0, 10);
-                var lastSets = [];
-                for (var date in weeklySets) {
+                const lastStart = lastWeek.toISOString().slice(0, 10);
+                let lastSets = [];
+                for (let date in weeklySets) {
                     if (date >= lastStart && date < weekStart) lastSets = lastSets.concat(weeklySets[date]);
                 }
-                var lastVol = lastSets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
-                var volChange = lastVol > 0 ? ((totalVolume - lastVol) / lastVol * 100) : 0;
+                const lastVol = lastSets.reduce(function(s, set) { return s + set.weight * set.reps; }, 0);
+                const volChange = lastVol > 0 ? ((totalVolume - lastVol) / lastVol * 100) : 0;
 
-                var recordsCount = Object.values(records).filter(function(r) { return r.weight > 0; }).length;
-                var maxRecord = Math.max.apply(null, Object.values(records).map(function(r) { return r.weight; }), 0);
-                var bestEx = Object.keys(records).filter(function(k) { return records[k].weight === maxRecord; })[0] || '—';
-                var bwCount = bodyweightExercises.filter(function(ex) { return records[ex] && records[ex].weight > 0; })
+                const recordsCount = Object.values(records).filter(function(r) { return r.weight > 0; }).length;
+                const maxRecord = Math.max.apply(null, Object.values(records).map(function(r) { return r.weight; }), 0);
+                const bestEx = Object.keys(records).filter(function(k) { return records[k].weight === maxRecord; })[0] || '—';
+                const bwCount = bodyweightExercises.filter(function(ex) { return records[ex] && records[ex].weight > 0; })
                     .length;
 
                 container.innerHTML =
@@ -2235,14 +2291,14 @@
             }
 
             // ============================================================
-            // 12. AI ТРЕНЕР (сокращённо)
+            // 12. AI ТРЕНЕР
             // ============================================================
             function getFitnessLevel() {
-                var currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
-                var currentHeight = progressData.length > 0 ? progressData[0].height : 175;
-                var bodyInfo = getBodyType(currentWeight, currentHeight);
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const currentHeight = progressData.length > 0 ? progressData[0].height : 175;
+                const bodyInfo = getBodyType(currentWeight, currentHeight);
 
-                var strengthExercises = [
+                const strengthExercises = [
                     'жим ногами', 'присед со штангой', 'становая тяга', 'румынская тяга',
                     'выпады с гантелями', 'жим от груди', 'жим гантелей лёжа',
                     'тяга штанги в наклоне', 'тяга гантели в наклоне',
@@ -2251,21 +2307,21 @@
                     'французский жим', 'жим из-за головы для трицепса'
                 ];
 
-                var strengthCount = 0;
-                var totalStrengthRatio = 0;
+                let strengthCount = 0;
+                let totalStrengthRatio = 0;
 
-                for (var i = 0; i < strengthExercises.length; i++) {
-                    var ex = strengthExercises[i];
+                for (let i = 0; i < strengthExercises.length; i++) {
+                    const ex = strengthExercises[i];
                     if (records[ex] && records[ex].weight > 0) {
-                        var ratio = records[ex].weight / currentWeight;
+                        const ratio = records[ex].weight / currentWeight;
                         totalStrengthRatio += ratio;
                         strengthCount++;
                     }
                 }
 
-                var avgStrength = strengthCount > 0 ? totalStrengthRatio / strengthCount : 0;
+                const avgStrength = strengthCount > 0 ? totalStrengthRatio / strengthCount : 0;
 
-                var enduranceExercises = [
+                const enduranceExercises = [
                     { name: 'отжимания от пола', target: 50 },
                     { name: 'подтягивания', target: 15 },
                     { name: 'подтягивания обратным хватом', target: 15 },
@@ -2277,46 +2333,46 @@
                     { name: 'запрыгивания на тумбу', target: 20 }
                 ];
 
-                var enduranceCount = 0;
-                var totalEnduranceRatio = 0;
+                let enduranceCount = 0;
+                let totalEnduranceRatio = 0;
 
-                for (var j = 0; j < enduranceExercises.length; j++) {
-                    var ex = enduranceExercises[j];
+                for (let j = 0; j < enduranceExercises.length; j++) {
+                    const ex = enduranceExercises[j];
                     if (records[ex.name] && records[ex.name].weight > 0) {
-                        var val = records[ex.name].weight;
-                        var ratio = Math.min(1, val / ex.target);
+                        const val = records[ex.name].weight;
+                        const ratio = Math.min(1, val / ex.target);
                         totalEnduranceRatio += ratio;
                         enduranceCount++;
                     }
                 }
 
-                var avgEndurance = enduranceCount > 0 ? totalEnduranceRatio / enduranceCount : 0;
+                const avgEndurance = enduranceCount > 0 ? totalEnduranceRatio / enduranceCount : 0;
 
-                var athleteType = 'сбалансированный';
+                let athleteType = 'сбалансированный';
                 if (avgStrength > 1.2 && avgEndurance < 0.4) athleteType = 'силовой';
                 else if (avgEndurance > 0.7 && avgStrength < 0.8) athleteType = 'выносливый';
                 else if (avgStrength > 1.0 && avgEndurance > 0.6) athleteType = 'элитный';
                 else if (avgStrength < 0.5 && avgEndurance < 0.3) athleteType = 'новичок';
 
-                var totalScore = Math.min(100,
+                const totalScore = Math.min(100,
                     (avgStrength * 40) +
                     (avgEndurance * 40) +
                     (Object.keys(records).filter(function(k) { return records[k].weight > 0; }).length / exerciseList
                         .length * 20)
                 );
 
-                var level = 'Начинающий 🏃';
+                let level = 'Начинающий 🏃';
                 if (totalScore >= 85) level = 'Элитный 💎';
                 else if (totalScore >= 70) level = 'Продвинутый 🔥';
                 else if (totalScore >= 50) level = 'Средний 💪';
                 else if (totalScore >= 30) level = 'Начинающий 🏃';
 
-                var focus = 'сбалансированная';
+                let focus = 'сбалансированная';
                 if (athleteType === 'силовой') focus = 'сила 🏋️';
                 else if (athleteType === 'выносливый') focus = 'выносливость 🏃';
                 else if (athleteType === 'элитный') focus = 'максимальная производительность 🔥';
 
-                var weakPoints = [];
+                let weakPoints = [];
                 if (avgStrength < 0.8) weakPoints.push('💪 сила');
                 if (avgEndurance < 0.4) weakPoints.push('🏃 выносливость');
                 if (Object.keys(records).filter(function(k) { return records[k].weight > 0; }).length < 8) weakPoints.push(
@@ -2351,19 +2407,19 @@
             }
 
             function generateAIProgram() {
-                var msg = document.getElementById('aiMessage');
-                var analysis = getFitnessLevel();
-                var athleteType = analysis.athleteType;
-                var bodyType = analysis.bodyType;
-                var currentWeight = analysis.currentWeight;
-                var avgStrength = analysis.avgStrength;
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const athleteType = analysis.athleteType;
+                const bodyType = analysis.bodyType;
+                const currentWeight = analysis.currentWeight;
+                const avgStrength = analysis.avgStrength;
 
-                var days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
-                var exercises = [];
-                var focus = '';
+                const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
+                let exercises = [];
+                let focus = '';
 
-                var mainGoal = 'поддержание';
-                var bodyGoal = '';
+                let mainGoal = 'поддержание';
+                let bodyGoal = '';
 
                 if (bodyType === 'худощавое' || bodyType === 'стройное') {
                     mainGoal = 'набор массы';
@@ -2481,7 +2537,7 @@
                     }
                 }
 
-                var progressionAdvice = '';
+                let progressionAdvice = '';
                 if (mainGoal === 'набор массы') {
                     progressionAdvice = '💪 Увеличивай вес на 2-5 кг каждую неделю. Делай 8-12 повторений для гипертрофии.';
                     if (avgStrength < 0.6) progressionAdvice += ' Сосредоточься на технике.';
@@ -2491,7 +2547,7 @@
                     progressionAdvice = '📊 Используй микро-прогрессию (0.5-1 кг) и периодизацию нагрузок.';
                 }
 
-                var nutritionAdvice = '';
+                let nutritionAdvice = '';
                 if (bodyType === 'худощавое' || bodyType === 'стройное') {
                     nutritionAdvice = '🍽️ Рекомендация: увеличь потребление белка (2-2.2 г/кг веса) и углеводов. Ешь 4-5 раз в день.';
                 } else if (bodyType === 'крупное' || bodyType === 'избыточное') {
@@ -2500,7 +2556,7 @@
                     nutritionAdvice = '🍽️ Рекомендация: сбалансированное питание с достаточным количеством белка (1.8-2 г/кг веса).';
                 }
 
-                var weekDays = days.slice(0, 4);
+                const weekDays = days.slice(0, 4);
                 msg.innerHTML =
                     '<div style="margin-bottom:6px;">' +
                     '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;">' +
@@ -2538,19 +2594,19 @@
             }
 
             function getAIAdvice() {
-                var msg = document.getElementById('aiMessage');
-                var analysis = getFitnessLevel();
-                var allWeights = Object.values(records).map(function(r) { return r.weight; }).filter(function(w) { return w >
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const allWeights = Object.values(records).map(function(r) { return r.weight; }).filter(function(w) { return w >
                         0; });
                 if (allWeights.length === 0) { msg.innerHTML = '🤔 Нет рекордов. Запиши результаты!'; return; }
 
-                var maxWeight = Math.max.apply(null, allWeights);
-                var bestEx = Object.keys(records).filter(function(k) { return records[k].weight === maxWeight; })[0] ||
+                const maxWeight = Math.max.apply(null, allWeights);
+                const bestEx = Object.keys(records).filter(function(k) { return records[k].weight === maxWeight; })[0] ||
                     'упражнение';
-                var totalSets = getAllWeeklySets().length;
-                var currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const totalSets = getAllWeeklySets().length;
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
 
-                var advice = '🏅 Лучший рекорд: ' + bestEx + ' — ' + maxWeight + ' ' + getUnitForExercise(bestEx) + '. ';
+                let advice = '🏅 Лучший рекорд: ' + bestEx + ' — ' + maxWeight + ' ' + getUnitForExercise(bestEx) + '. ';
                 advice += '📊 Подходов за неделю: ' + totalSets + '. ';
                 advice += '⚖️ Вес тела: ' + currentWeight + ' кг. ';
                 advice += '📈 Уровень: ' + analysis.level + '. ';
@@ -2571,22 +2627,22 @@
             }
 
             function analyzeFitness() {
-                var msg = document.getElementById('aiMessage');
-                var analysis = getFitnessLevel();
-                var currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
-                var exWithRecords = Object.keys(records).filter(function(k) { return records[k].weight > 0; });
+                const msg = document.getElementById('aiMessage');
+                const analysis = getFitnessLevel();
+                const currentWeight = progressData.length > 0 ? progressData[0].weight : 75;
+                const exWithRecords = Object.keys(records).filter(function(k) { return records[k].weight > 0; });
 
-                var strengthLabel = '🔴 Низкий';
+                let strengthLabel = '🔴 Низкий';
                 if (analysis.strengthScore >= 70) strengthLabel = '🟢 Отличный!';
                 else if (analysis.strengthScore >= 45) strengthLabel = '🟡 Хороший';
                 else if (analysis.strengthScore >= 20) strengthLabel = '🟠 Средний';
 
-                var enduranceLabel = '🔴 Низкий';
+                let enduranceLabel = '🔴 Низкий';
                 if (analysis.enduranceScore >= 70) enduranceLabel = '🟢 Отличный!';
                 else if (analysis.enduranceScore >= 45) enduranceLabel = '🟡 Хороший';
                 else if (analysis.enduranceScore >= 20) enduranceLabel = '🟠 Средний';
 
-                var recs = [];
+                let recs = [];
                 if (analysis.strengthScore < 45) recs.push(
                     '💪 Добавь базовые: присед со штангой, жим, становая с прогрессией веса.');
                 if (analysis.enduranceScore < 45) recs.push(
@@ -2635,14 +2691,14 @@
             // 13. CALCULATOR
             // ============================================================
             function calc1RM() {
-                var weight = parseFloat(document.getElementById('calcWeight').value);
-                var reps = parseInt(document.getElementById('calcReps').value);
-                var formula = document.getElementById('calcFormula').value;
+                const weight = parseFloat(document.getElementById('calcWeight').value);
+                const reps = parseInt(document.getElementById('calcReps').value);
+                const formula = document.getElementById('calcFormula').value;
                 if (isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
                     showToast('❌ Введи корректные данные', 1600);
                     return;
                 }
-                var rm = 0,
+                let rm = 0,
                     name = '';
                 switch (formula) {
                     case 'brzycki':
@@ -2678,9 +2734,9 @@
             // 14. HASH
             // ============================================================
             function generateHash(str) {
-                var hash = 0;
-                for (var i = 0; i < str.length; i++) {
-                    var char = str.charCodeAt(i);
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
                     hash = hash & hash;
                 }
@@ -2688,16 +2744,16 @@
             }
 
             function updateBlockHash() {
-                var el = document.getElementById('blockHash');
+                const el = document.getElementById('blockHash');
                 if (!el) return;
-                var data = JSON.stringify({
+                const data = JSON.stringify({
                     records: Object.keys(records).length,
                     sets: sets.length,
                     progress: progressData.length,
                     challenges: challenges.filter(function(c) { return c.completed; }).length,
                     ts: Date.now()
                 });
-                var h = generateHash(data);
+                const h = generateHash(data);
                 el.textContent = h.slice(0, 5);
             }
 
@@ -2709,14 +2765,14 @@
                 loadData();
                 updateExerciseSelects();
 
-                var tabs = document.querySelectorAll('.category-tab');
-                for (var i = 0; i < tabs.length; i++) {
+                const tabs = document.querySelectorAll('.category-tab');
+                for (let i = 0; i < tabs.length; i++) {
                     tabs[i].addEventListener('click', function() {
                         currentCategory = this.dataset.category;
                         saveCategory();
                         renderRecords();
-                        var allTabs = document.querySelectorAll('.category-tab');
-                        for (var j = 0; j < allTabs.length; j++) {
+                        const allTabs = document.querySelectorAll('.category-tab');
+                        for (let j = 0; j < allTabs.length; j++) {
                             allTabs[j].classList.remove('active');
                         }
                         this.classList.add('active');
@@ -2735,13 +2791,13 @@
                 updateBlockHash();
                 renderCategoryTabs();
 
-                var weekStart = getWeekStart();
+                const weekStart = getWeekStart();
                 if (!challenges.some(function(c) { return c.week === weekStart; })) generateChallenges();
                 updateChallenges();
 
                 document.getElementById('addRecordBtn').addEventListener('click', function() {
-                    var name = document.getElementById('recordExSelect').value;
-                    var weight = parseFloat(document.getElementById('recordExWeight').value);
+                    const name = document.getElementById('recordExSelect').value;
+                    const weight = parseFloat(document.getElementById('recordExWeight').value);
                     if (!name || isNaN(weight) || weight <= 0) {
                         showToast('❌ Выбери упражнение и введи вес', 1600);
                         return;
@@ -2785,13 +2841,13 @@
 
                 setInterval(checkNewDay, 60000);
 
-                var resizeTimer;
+                let resizeTimer;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(function() { updateChart(); }, 150);
                 });
 
-                var analysis = getFitnessLevel();
+                const analysis = getFitnessLevel();
                 document.getElementById('aiStatus').textContent = '📊 Уровень: ' + analysis.level + ' | Сила: ' + analysis
                     .strengthScore + ' | Выносливость: ' + analysis.enduranceScore + ' | ' + analysis.bodyEmoji +
                     ' ' + analysis.bodyType;
