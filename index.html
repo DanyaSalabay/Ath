@@ -1,16 +1,17 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><!DOCTYPE html>
+
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#05070b" id="themeColor">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ATHLETE">
-    <title>ATHLETE // CRYPTO SPORT OS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<meta content="#05070b" id="themeColor" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="ATHLETE" name="apple-mobile-web-app-title"/>
+<title>ATHLETE // CRYPTO SPORT OS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
         /* Стили такие же как в оригинале, оставляю без изменений для краткости */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
         :root {
@@ -70,7 +71,7 @@
         .btn-reset:active { transform: scale(0.92); }
         .pages-container { flex: 1; position: relative; overflow: hidden; touch-action: pan-y; transform: translateZ(0); }
         .pages-wrapper { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; transform: translateZ(0); }
-        .page { flex: 0 0 100%; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 0 var(--spacing-base) calc(var(--nav-height) + 12px) var(--spacing-base); -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+        .page { flex: 0 0 100%; height: 100%; overflow-y: auto; overflow-x: hidden; padding: 0 var(--spacing-base) calc(var(--nav-height) + 12px) var(--spacing-base); -webkit-overflow-scrolling: touch; overscroll-behavior-y: auto; }
         .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: var(--nav-height); background: var(--nav-bg); backdrop-filter: blur(6px); border-top: 1px solid var(--border-subtle); display: flex; align-items: stretch; justify-content: space-around; z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0); overflow-x: auto; }
         .nav-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; background: none; border: none; color: var(--text-muted); font-size: 0.45rem; font-weight: 600; cursor: pointer; padding: 2px 10px; position: relative; min-width: 44px; transition: color 0.15s ease; }
         .nav-item .nav-icon { font-size: 1rem; line-height: 1; }
@@ -135,12 +136,80 @@
         .set-item .set-reps { color: var(--text-secondary); font-size: 0.7rem; font-weight: 500; }
         .set-item .set-delete { background: none; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 0 3px; }
         .set-item .set-delete:active { color: #ef4444; }
-        .category-tabs { display: flex; gap: 4px; overflow-x: auto; padding: 2px 0 8px 0; margin-bottom: 2px; scrollbar-width: none; flex-wrap: nowrap; }
+        .category-tabs{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:8px;
+margin-bottom:10px;
+scrollbar-width:none;
+flex-wrap:nowrap;
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:22px;
+box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.05);
+scroll-behavior:smooth;
+}
+.category-tabs::-webkit-scrollbar{display:none;}
         .category-tabs::-webkit-scrollbar { display: none; }
-        .category-tab { flex-shrink: 0; padding: 6px 12px; border-radius: 40px; border: 1px solid var(--border-subtle); background: var(--bg-input); color: var(--text-muted); font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; cursor: pointer; white-space: nowrap; touch-action: auto; }
-        .category-tab:active { transform: scale(0.94); }
-        .category-tab.active { background: var(--badge-bg); border-color: var(--badge-border); color: var(--cyan); }
-        .category-tab .count { display: inline-block; margin-left: 3px; padding: 0 4px; border-radius: 20px; background: rgba(255,255,255,0.04); font-size: 0.45rem; color: var(--text-muted); }
+        
+.category-tab{
+flex-shrink:0;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+padding:11px 18px;
+border-radius:18px;
+background:rgba(255,255,255,.03);
+border:1px solid transparent;
+color:var(--text-secondary);
+font-size:.58rem;
+font-weight:800;
+letter-spacing:.03em;
+transition:all .28s cubic-bezier(.2,.8,.2,1);
+position:relative;
+}
+.category-tab:hover{transform:translateY(-1px)}
+.category-tab:active{transform:scale(.96)}
+.category-tab.active{
+background:linear-gradient(135deg,#ff6a00,#ff9e1a);
+color:#fff;
+box-shadow:0 10px 24px rgba(255,120,0,.35), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.category-tab::after{
+content:"";
+position:absolute;
+left:12px;
+right:12px;
+bottom:6px;
+height:2px;
+background:transparent;
+border-radius:2px;
+transition:.25s;
+}
+.category-tab.active::after{
+background:rgba(255,255,255,.9);
+}
+.category-tab .count{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-width:22px;
+height:22px;
+border-radius:50%;
+background:rgba(255,255,255,.18);
+font-size:.46rem;
+font-weight:900;
+transition:transform .25s;
+}
+.category-tab.active .count{
+background:#fff;
+color:#ff6a00;
+transform:scale(1.08);
+}
+
         .set-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 8px; padding: 10px; background: var(--bg-input); border-radius: 12px; text-align: center; border: 1px solid var(--border-subtle); }
         .set-summary .stat { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
         .set-summary .stat .num { font-size: 1rem; font-weight: 900; color: var(--text-primary); display: block; margin-bottom: 1px; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -265,257 +334,374 @@
         .progress-stat-grid .stat-mini .num { font-weight: 700; font-size: 0.75rem; color: var(--cyan); }
         .progress-stat-grid .stat-mini .label { font-size: 0.3rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.03em; }
     </style>
-</head>
+<style id="astron-splash-style">
+#splashScreen{
+position:fixed;inset:0;z-index:99999;
+display:flex;align-items:center;justify-content:center;
+background:radial-gradient(circle at top,#14202f,#04060a 55%,#000);
+flex-direction:column;color:#fff;
+transition:opacity .7s ease,visibility .7s ease;
+}
+#splashScreen.hide{opacity:0;visibility:hidden}
+#splashLogo{
+font:900 3rem/1 Impact,'Arial Black',sans-serif;
+letter-spacing:.08em;
+background:linear-gradient(90deg,#fff,#8cecff,#ff8a00,#fff);
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+animation:pulseLogo 2s infinite;
+}
+#splashSub{margin-top:8px;color:#9fb7c8;letter-spacing:.35em;font-size:.8rem}
+#bootStatus{margin-top:40px;font:600 .75rem Inter,sans-serif;color:#b8d7e8}
+.bootline{margin:6px 0;opacity:0;animation:fadeIn .5s forwards}
+.bootline:nth-child(1){animation-delay:.2s}
+.bootline:nth-child(2){animation-delay:.6s}
+.bootline:nth-child(3){animation-delay:1s}
+#loader{width:220px;height:4px;border-radius:999px;background:#223;overflow:hidden;margin-top:28px}
+#loader span{display:block;height:100%;width:0;background:linear-gradient(90deg,#00e7ff,#ff8a00);animation:load 1.8s forwards}
+@keyframes load{to{width:100%}}
+@keyframes pulseLogo{50%{transform:scale(1.03);filter:drop-shadow(0 0 18px rgba(0,231,255,.35));}}
+@keyframes fadeIn{to{opacity:1}}
+</style>
+<style>
+.hub-tile{position:relative;overflow:hidden;border-radius:24px;padding:22px;min-height:120px;
+background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px);
+transition:.25s;display:flex;flex-direction:column;justify-content:space-between}
+.hub-tile:active{transform:scale(.97)}
+.hub-icon{font-size:2rem}.hub-title{font-weight:900;font-size:.95rem}
+.hub-sub{font-size:.6rem;opacity:.75}
+</style></head>
 <body>
-
-<div id="toast" class="toast"></div>
-<div id="achievementToast" class="achievement-toast">
-    <span class="big-icon" id="achToastIcon">🏆</span>
-    <div class="title" id="achToastTitle">Достижение!</div>
-    <div class="sub" id="achToastDesc">Ты сделал это!</div>
-    <button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
+<div id="splashScreen">
+<div id="splashLogo">ASTRON</div>
+<div id="splashSub">ELITE OS</div>
+<div id="bootStatus">
+<div class="bootline">● SYSTEM ONLINE</div>
+<div class="bootline">✓ Загрузка профиля</div>
+<div class="bootline">✓ AI Coach готов</div>
 </div>
-
+<div id="loader"><span></span></div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="achievement-toast" id="achievementToast">
+<span class="big-icon" id="achToastIcon">🏆</span>
+<div class="title" id="achToastTitle">Достижение!</div>
+<div class="sub" id="achToastDesc">Ты сделал это!</div>
+<button class="btn" onclick="closeAchievementToast()">🔥 Отлично!</button>
+</div>
 <div class="app">
-
-    <div class="header">
-        <div class="header-left">
-            <div class="header-logo">
-                <img src="https://static.vecteezy.com/system/resources/previews/046/267/287/large_2x/fitness-and-bodybuilder-logo-illustration-black-and-white-free-vector.jpg" alt="ATHLETE" loading="lazy" decoding="async">
-            </div>
-            <h1>ASTRON <span class="sub">elite</span></h1>
-        </div>
-        <div class="header-actions">
-            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
-                <span class="icon" id="themeIcon">🌙</span>
-                <span id="themeLabel">Тёмная</span>
-            </button>
-            <button class="btn-reset" onclick="openResetModal()">🗑️</button>
-
-        </div>
-    </div>
-
-    <div class="pages-container" id="pagesContainer">
-        <div class="pages-wrapper" id="pagesWrapper">
-
-            <!-- Страница Тренировки -->
-            <div class="page" data-page="records">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>🏆 Рекорды</h2>
-                        <span class="badge" id="recordCountBadge">0 упражнений</span>
-                    </div>
-                    <div class="category-tabs" id="categoryTabs">
-                        <button class="category-tab active" data-category="all">🏋️ Все <span class="count" id="tabCountAll">0</span></button>
-                        <button class="category-tab" data-category="legs">🦵 Ноги <span class="count" id="tabCountLegs">0</span></button>
-                        <button class="category-tab" data-category="chest">💪 Грудь <span class="count" id="tabCountChest">0</span></button>
-                        <button class="category-tab" data-category="back">🔙 Спина <span class="count" id="tabCountBack">0</span></button>
-                        <button class="category-tab" data-category="shoulders">🏋️ Плечи <span class="count" id="tabCountShoulders">0</span></button>
-                        <button class="category-tab" data-category="arms">💪 Руки <span class="count" id="tabCountArms">0</span></button>
-                        <button class="category-tab" data-category="core">🏋️ Кор <span class="count" id="tabCountCore">0</span></button>
-                        <button class="category-tab" data-category="functional">🏃 Функц. <span class="count" id="tabCountFunctional">0</span></button>
-                    </div>
-                    <div class="exercise-grid" id="recordsContainer"></div>
-                    <div class="input-row">
-                        <div class="exercise-select-wrapper"><select id="recordExSelect"></select></div>
-                        <input type="number" id="recordExWeight" placeholder="Вес/повторы" step="0.5">
-                        <button class="btn" id="addRecordBtn">➕</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h2>📋 Рабочие подходы</h2>
-                        <span class="badge" id="setsCount">0 подходов</span>
-                    </div>
-                    <div id="todaySetsContainer"><div class="empty-state">Нет записей за сегодня</div></div>
-                    <div class="input-row">
-                        <div class="exercise-select-wrapper"><select id="setExSelect"></select></div>
-                        <input type="number" id="setWeight" placeholder="Вес" step="0.5">
-                        <input type="number" id="setReps" placeholder="Повторы" min="1" max="999">
-                        <button class="btn" id="addSetBtn">➕</button>
-                    </div>
-                    <div id="setSummary" class="set-summary" style="display:none;"></div>
-                    <div class="btn-row">
-                        <button class="btn btn-success" id="finishWorkoutBtn">Завершить</button>
-                        <div class="io-group">
-                            <button class="btn-import-export" onclick="exportData()">📤 Выгрузить</button>
-                            <button class="btn-import-export" onclick="document.getElementById('importFileInput').click()">📥 Загрузить</button>
-                            <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
-                        </div>
-                    </div>
-                    <div class="workout-timer">
-                        <span><span class="label">📅</span> <span id="todayDate">--</span></span>
-                        <span><span class="label">⏱️</span> <span id="todaySetsCount">0</span> подходов</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Страница Вес -->
-            <div class="page" data-page="progress">
-                <div class="card">
-                    <div class="card-header"><h2>📊 Вес и рост</h2><span class="badge">еженедельно</span></div>
-                    <div class="stats-row">
-                        <div class="stat-box"><label>Вес</label><div class="value" id="currentWeightDisplay">--</div><div class="unit">кг</div></div>
-                        <div class="stat-box"><label>Рост</label><div class="value" id="currentHeightDisplay">--</div><div class="unit">см</div></div>
-                    </div>
-                    <div class="input-row">
-                        <input type="number" id="weightInput" placeholder="Вес (кг)" step="0.1">
-                        <input type="number" id="heightInput" placeholder="Рост (см)" step="0.5">
-                        <button class="btn" id="addProgressBtn">📝</button>
-                    </div>
-                    <div class="week-list" id="progressWeekList"></div>
-                </div>
-                <div class="card">
-                    <div class="card-header"><h2>📈 График веса</h2><span class="badge">динамика</span></div>
-                    <div class="chart-container"><canvas id="progressChart"></canvas></div>
-                </div>
-            </div>
-
-            <!-- Страница Прогноз -->
-            <div class="page" data-page="forecast">
-                <div class="card">
-                    <div class="card-header"><h2>📈 Прогноз прогресса</h2><span class="badge">AI прогноз</span></div>
-                    <div id="forecastContainer"><div class="empty-state">Выбери упражнение и цель</div></div>
-                    <div class="input-row">
-                        <div class="exercise-select-wrapper"><select id="forecastExSelect"></select></div>
-                        <input type="number" id="forecastTarget" placeholder="Цель (кг/повторы)" step="0.5">
-                        <button class="btn" id="forecastBtn">🔮</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Страница AI -->
-            <div class="page" data-page="ai">
-                <div class="card">
-                    <div class="card-header"><h2>🤖 AI-тренер</h2></div>
-                    <div class="ai-bubble">
-                        <div class="label">📊 анализ боеспособности</div>
-                        <p id="aiStatus">Анализирую все данные...</p>
-                    </div>
-                    <div class="ai-actions">
-                        <button class="btn" id="aiProgramBtn">📋 Программа</button>
-                        <button class="btn btn-outline" id="aiAdviceBtn">💡 Совет</button>
-                        <button class="btn btn-outline" id="aiAnalyzeBtn">📊 Анализ</button>
-                        <button class="btn btn-outline" id="aiDeepBtn">🔬 Глубокий анализ</button>
-                    </div>
-                    <div class="ai-message" id="aiMessage">Нажми «Анализ» или «Программа»</div>
-                </div>
-            </div>
-
-            <!-- Страница Справка -->
-            <div class="page" data-page="guide">
-                <div class="card">
-                    <div class="card-header"><h2>📖 Справочник</h2><span class="badge">как записывать</span></div>
-                    <div class="guide-section"><h3>🏋️ С отягощениями (кг) -- общий вес снаряда</h3>
-                        <div class="guide-item"><span class="guide-ex">жим от груди, присед со штангой, становая тяга</span><span class="guide-rule">общий вес штанги</span></div>
-                        <div class="guide-item"><span class="guide-ex">жим гантелей лёжа, жим гантелей сидя</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                        <div class="guide-item"><span class="guide-ex">подъём гантелей на бицепс, молотковые сгибания</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                        <div class="guide-item"><span class="guide-ex">жим из-за головы для трицепса, французский жим</span><span class="guide-rule">общий вес штанги/гантели</span></div>
-                        <div class="guide-item"><span class="guide-ex">разводка гантелей в стороны / в наклоне</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                        <div class="guide-item"><span class="guide-ex">выпады с гантелями</span><span class="guide-rule">общий вес 2 гантелей</span></div>
-                    </div>
-                    <div class="guide-section"><h3>💪 На одну руку -- записывай отдельный подход на каждую</h3>
-                        <div class="guide-item"><span class="guide-ex">тяга гантели в наклоне</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
-                    </div>
-                    <div class="guide-section"><h3>🏃 С весом тела (повторы) -- вес не вводится</h3>
-                        <div class="guide-item"><span class="guide-ex">отжимания от пола</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">подтягивания</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">берпи</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">отжимания на брусьях (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">присед (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">скручивания</span><span class="guide-rule bw">только повторения</span></div>
-                        <div class="guide-item"><span class="guide-ex">запрыгивания на тумбу</span><span class="guide-rule bw">только повторения</span></div>
-                    </div>
-                    <div class="guide-section"><h3>⏱️ На время -- секунды</h3>
-                        <div class="guide-item"><span class="guide-ex">планка</span><span class="guide-rule">секунды</span></div>
-                    </div>
-                    <div style="margin-top:8px; padding:8px; background:var(--bg-input); border-radius:10px; border:1px solid var(--border-subtle);">
-                        <div style="font-size:0.6rem; color:var(--text-muted);">💡 <strong style="color:var(--gold);">Важно:</strong> Для упражнений с гантелями (на две руки) указывай <strong>общий вес двух гантелей</strong>.</div>
-                        <div style="font-size:0.6rem; color:var(--text-muted); margin-top:2px;">💡 Для упражнений на <strong>одну руку</strong> -- записывай вес одной гантели и делай <strong>отдельный подход</strong> на каждую руку.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Страница Челленджи -->
-            <div class="page" data-page="challenges">
-                <div class="card">
-                    <div class="card-header"><h2>🎯 Челленджи</h2><span class="badge" id="challengeBadge">0 активных</span></div>
-                    <div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
-                </div>
-            </div>
-
-            <!-- Страница Отчёты -->
-            <div class="page" data-page="reports">
-                <div class="card">
-                    <div class="card-header"><h2>📊 Отчёты</h2><span class="badge">неделя</span></div>
-                    <div id="reportContainer"><div class="empty-state">Данные появятся после тренировок</div></div>
-                </div>
-            </div>
-
-            <!-- Страница Калькулятор -->
-            <div class="page" data-page="calc">
-                <div class="card">
-                    <div class="card-header"><h2>📐 Калькулятор 1ПМ</h2><span class="badge">одноповторный максимум</span></div>
-                    <div class="calc-grid">
-                        <div class="calc-input-group"><label>Вес (кг)</label><input type="number" id="calcWeight" value="80" step="0.5"></div>
-                        <div class="calc-input-group"><label>Повторения</label><input type="number" id="calcReps" value="5" min="1" max="50"></div>
-                    </div>
-                    <div class="calc-input-group" style="margin-top:8px;"><label>Формула</label>
-                        <select id="calcFormula">
-                            <option value="brzycki">Бжицки</option><option value="epley">Эпли</option>
-                            <option value="lombardi">Ломбарди</option><option value="mayhew">Мэйхью</option>
-                            <option value="oconnor">О'Коннор</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-block" id="calcBtn" style="margin-top:8px;">Рассчитать</button>
-                    <div class="calc-result" id="calcResult">
-                        <div class="label">Ваш 1ПМ</div>
-                        <div class="value" id="calcResultValue">--</div>
-                        <div class="sub" id="calcResultSub">введите вес и повторения</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="bottom-nav" id="bottomNav">
-        <button class="nav-item active" data-page="records"><span class="nav-icon">🏋️</span><span class="nav-label">Тренировки</span></button>
-        <button class="nav-item" data-page="progress"><span class="nav-icon">📊</span><span class="nav-label">Вес</span></button>
-        <button class="nav-item" data-page="forecast"><span class="nav-icon">📈</span><span class="nav-label">Прогноз</span></button>
-        <button class="nav-item" data-page="ai"><span class="nav-icon">🤖</span><span class="nav-label">AI</span></button>
-        <button class="nav-item" data-page="guide"><span class="nav-icon">📖</span><span class="nav-label">Справка</span></button>
-        <button class="nav-item" data-page="challenges"><span class="nav-icon">🎯</span><span class="nav-label">Челленджи</span><span class="nav-badge" id="navChallengeBadge">0</span></button>
-        <button class="nav-item" data-page="reports"><span class="nav-icon">📊</span><span class="nav-label">Отчёты</span></button>
-        <button class="nav-item" data-page="calc"><span class="nav-icon">📐</span><span class="nav-label">1ПМ</span></button>
-    </div>
-
-    <div class="reset-modal" id="resetModal">
-        <div class="reset-modal-content">
-            <h2>⚠️ Полный сброс</h2>
-            <p>Все данные будут удалены навсегда!</p>
-            <div class="btn-row">
-                <button class="btn btn-outline" onclick="closeResetModal()">❌ Отмена</button>
-                <button class="btn btn-danger" id="resetConfirmBtn">🗑️ Сбросить всё</button>
-            </div>
-        </div>
-    </div>
-
+<div class="header">
+<div class="header-left">
+<div class="header-logo">
+<img alt="ATHLETE" decoding="async" loading="lazy" src="https://static.vecteezy.com/system/resources/previews/046/267/287/large_2x/fitness-and-bodybuilder-logo-illustration-black-and-white-free-vector.jpg"/>
 </div>
-
+<h1>ASTRON <span class="sub">elite</span></h1>
+</div>
+<div class="header-actions">
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+<span class="icon" id="themeIcon">🌙</span>
+<span id="themeLabel">Тёмная</span>
+</button>
+<button class="btn-reset" onclick="openResetModal()">🗑️</button>
+<span class="version"><span class="dot"></span> v7.3</span>
+</div>
+</div>
+<div class="pages-container" id="pagesContainer">
+<div class="pages-wrapper" id="pagesWrapper">
+<div class="page" data-page="home">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Добро пожаловать</div>
+<div style="font-size:2rem;font-weight:900">ASTRON OS</div>
+<div style="margin-top:16px;font-size:1.1rem;font-weight:700">Сегодняшняя тренировка</div>
+<div style="opacity:.9">Выбери категорию и начни тренировку</div>
+<button onclick="navigateToPage('records')" style="margin-top:20px;width:100%;padding:16px;border:none;border-radius:16px;background:#fff;color:#ff6a00;font-weight:800;font-size:1rem">НАЧАТЬ ТРЕНИРОВКУ</button>
+</div>
+</div>
+<div id="hubTiles" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0"><div class="hub-tile" onclick="navigateToPage('progress')" style=""><div class="hub-icon">📊</div><div><div class="hub-title">ПРОГРЕСС</div><div class="hub-sub">Статистика</div></div></div><div class="hub-tile" onclick="navigateToPage('ai')" style=""><div class="hub-icon">🤖</div><div><div class="hub-title">AI COACH</div><div class="hub-sub">Советы</div></div></div><div class="hub-tile" onclick="navigateToPage('forecast')" style=""><div class="hub-icon">📈</div><div><div class="hub-title">ПРОГНОЗ</div><div class="hub-sub">Следующая цель</div></div></div><div class="hub-tile" onclick="navigateToPage('challenges')" style=""><div class="hub-icon">🎯</div><div><div class="hub-title">ЧЕЛЛЕНДЖИ</div><div class="hub-sub">Награды</div></div></div><div class="hub-tile" onclick="navigateToPage('reports')" style=""><div class="hub-icon">📝</div><div><div class="hub-title">ОТЧЁТЫ</div><div class="hub-sub">История</div></div></div><div class="hub-tile" onclick="navigateToPage('calc')" style=""><div class="hub-icon">📐</div><div><div class="hub-title">1ПМ</div><div class="hub-sub">Калькулятор</div></div></div><div class="hub-tile" onclick="navigateToPage('guide')" style="grid-column:1/3;"><div class="hub-icon">📖</div><div><div class="hub-title">СПРАВОЧНИК</div><div class="hub-sub">Все упражнения</div></div></div></div>
+</div>
+<!-- Страница Тренировки -->
+<div class="page" data-page="records">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Workout Session</div>
+<div style="font-size:2rem;font-weight:900">ТРЕНИРОВКА</div>
+<div style="margin-top:8px;opacity:.9">Записывай подходы, отслеживай прогресс и устанавливай новые рекорды.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<h2>🏆 Рекорды</h2>
+<span class="badge" id="recordCountBadge">0 упражнений</span>
+</div>
+<div class="category-tabs" id="categoryTabs">
+<button class="category-tab active" data-category="legs">🦵 Ноги <span class="count" id="tabCountLegs">0</span></button>
+<button class="category-tab" data-category="chest">💪 Грудь <span class="count" id="tabCountChest">0</span></button>
+<button class="category-tab" data-category="back">🔙 Спина <span class="count" id="tabCountBack">0</span></button>
+<button class="category-tab" data-category="shoulders">🏋️ Плечи <span class="count" id="tabCountShoulders">0</span></button>
+<button class="category-tab" data-category="arms">💪 Руки <span class="count" id="tabCountArms">0</span></button>
+<button class="category-tab" data-category="core">🏋️ Кор <span class="count" id="tabCountCore">0</span></button>
+<button class="category-tab" data-category="functional">🏃 Функц. <span class="count" id="tabCountFunctional">0</span></button>
+</div>
+<div class="exercise-grid" id="recordsContainer"></div>
+<div class="input-row">
+<div class="exercise-select-wrapper"><select id="recordExSelect"></select></div>
+<input id="recordExWeight" placeholder="Вес/повторы" step="0.5" type="number"/>
+<button class="btn" id="addRecordBtn">➕</button>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<h2>💪 Текущая тренировка</h2>
+<span class="badge" id="setsCount">0 подходов</span>
+</div>
+<div id="todaySetsContainer"><div class="empty-state">Нет записей за сегодня</div></div>
+<div class="input-row">
+<div class="exercise-select-wrapper"><select id="setExSelect"></select></div>
+<input id="setWeight" placeholder="Вес" step="0.5" type="number"/>
+<input id="setReps" max="999" min="1" placeholder="Повторы" type="number"/>
+<button class="btn" id="addSetBtn">➕</button>
+</div>
+<div class="set-summary" id="setSummary" style="display:none;"></div>
+<div class="btn-row">
+<button class="btn btn-success" id="finishWorkoutBtn">✅ Завершить тренировку</button>
+<div class="io-group">
+<button class="btn-import-export" onclick="exportData()">📤 Выгрузить</button>
+<button class="btn-import-export" onclick="document.getElementById('importFileInput').click()">📥 Загрузить</button>
+<input accept=".json" id="importFileInput" onchange="importData(event)" style="display:none" type="file"/>
+</div>
+</div>
+<div class="stats-row" style="grid-template-columns:repeat(4,1fr);margin-top:14px">
+<div class="stat-box"><label>Подходы</label><div class="value" id="todaySetsCount">0</div><div class="unit">SETS</div></div>
+<div class="stat-box"><label>Упражнения</label><div class="value" id="todayExercisesCount">0</div><div class="unit">EX</div></div>
+<div class="stat-box"><label>Тоннаж</label><div class="value" id="todayVolume">0</div><div class="unit">KG</div></div>
+<div class="stat-box"><label>Дата</label><div class="value" id="todayDate" style="font-size:.8rem">--</div><div class="unit">TODAY</div></div>
+</div>
+</div>
+</div>
+<!-- Страница Вес -->
+<div class="page" data-page="progress">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Отслеживание изменений</div>
+<div style="font-size:2rem;font-weight:900">ПРОГРЕСС</div>
+<div style="margin-top:8px;opacity:.9">Вес, рост и динамика изменений</div>
+</div>
+</div>
+<div class="card hub-tile">
+<div class="card-header"><h2>📊 Вес и рост</h2><span class="badge">еженедельно</span></div>
+<div class="stats-row">
+<div class="stat-box"><label>Вес</label><div class="value" id="currentWeightDisplay">--</div><div class="unit">кг</div></div>
+<div class="stat-box"><label>Рост</label><div class="value" id="currentHeightDisplay">--</div><div class="unit">см</div></div>
+</div>
+<div class="input-row">
+<input id="weightInput" placeholder="Вес (кг)" step="0.1" type="number"/>
+<input id="heightInput" placeholder="Рост (см)" step="0.5" type="number"/>
+<button class="btn" id="addProgressBtn">📝</button>
+</div>
+<div class="week-list" id="progressWeekList"></div>
+</div>
+<div class="card hub-tile">
+<div class="card-header"><h2>📈 График веса</h2><span class="badge">динамика</span></div>
+<div class="chart-container"><canvas id="progressChart"></canvas></div>
+</div>
+</div>
+<!-- Страница Прогноз -->
+<div class="page" data-page="forecast">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">AI Prediction System</div>
+<div style="font-size:2rem;font-weight:900">ПРОГНОЗ</div>
+<div style="margin-top:8px;opacity:.9">Рассчитай, когда достигнешь новой цели</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><h2>🎯 Построить прогноз</h2><span class="badge">AI</span></div>
+<div class="input-row">
+<div class="exercise-select-wrapper"><select id="forecastExSelect"></select></div>
+<input id="forecastTarget" placeholder="Цель (кг/повторы)" step="0.5" type="number"/>
+</div>
+<div class="btn-row"><button class="btn btn-block" id="forecastBtn">🔮 Построить прогноз</button></div>
+</div>
+<div id="forecastContainer">
+<div class="empty-state">Выбери упражнение и нажми «Построить прогноз»</div>
+</div>
+</div>
+<!-- Страница AI -->
+<div class="page" data-page="ai">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Personal AI Coach</div>
+<div style="font-size:2rem;font-weight:900">AI ТРЕНЕР</div>
+<div style="margin-top:8px;opacity:.9">Персональный анализ, программа и рекомендации</div>
+</div>
+</div>
+<div class="hub-tile" style="margin-bottom:16px;background:linear-gradient(145deg,#101722,#0b1018);">
+<div class="card-header"><h2>🤖 AI CORE</h2><span class="badge">ONLINE</span></div>
+<div class="stats-row">
+<div class="stat-box"><label>Статус</label><div class="value" style="font-size:1rem;color:#4ade80">●</div><div class="unit">Активен</div></div>
+<div class="stat-box"><label>Готовность</label><div class="value" style="font-size:1rem">100%</div><div class="unit">AI</div></div>
+</div>
+<div class="ai-bubble"><div class="label">📊 анализ</div><p id="aiStatus">Анализирую все данные...</p></div>
+</div>
+<div class="hub-tile" style="margin-bottom:16px">
+<div class="card-header"><h2>⚡ Инструменты</h2></div>
+<div class="ai-actions" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button class="btn" id="aiProgramBtn">📋 Программа</button>
+<button class="btn" id="aiAnalyzeBtn">📊 Анализ</button>
+<button class="btn btn-outline" id="aiAdviceBtn">💡 Совет</button>
+<button class="btn btn-outline" id="aiDeepBtn">🔬 Глубокий анализ</button>
+</div>
+</div>
+<div class="hub-tile">
+<div class="card-header"><h2>🧠 Ответ AI</h2><span class="badge">LIVE</span></div>
+<div class="ai-message" id="aiMessage" style="min-height:220px;border-radius:18px">Нажми «Анализ» или «Программа»</div>
+</div>
+</div>
+<!-- Страница Справка -->
+<div class="page" data-page="guide">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">База знаний</div>
+<div style="font-size:2rem;font-weight:900">СПРАВОЧНИК</div>
+<div style="opacity:.9;margin-top:8px">Правила записи упражнений</div>
+</div>
+</div>
+<style>
+.guide-modern{display:grid;gap:14px}
+.guide-modern .hub-tile{min-height:auto}
+.guide-modern .guide-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.guide-modern h3{margin-bottom:10px;font-size:.75rem}
+</style>
+<div class="guide-modern">
+<div class="hub-tile">
+<div class="hub-icon">🏋️</div>
+<div><div class="hub-title">С отягощениями (кг) — общий вес снаряда</div></div>
+<div class="guide-item"><span class="guide-ex">жим от груди, присед со штангой, становая тяга</span><span class="guide-rule">общий вес штанги</span></div>
+<div class="guide-item"><span class="guide-ex">жим гантелей лёжа, жим гантелей сидя</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+<div class="guide-item"><span class="guide-ex">подъём гантелей на бицепс, молотковые сгибания</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+<div class="guide-item"><span class="guide-ex">жим из-за головы для трицепса, французский жим</span><span class="guide-rule">общий вес штанги/гантели</span></div>
+<div class="guide-item"><span class="guide-ex">разводка гантелей в стороны / в наклоне</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+<div class="guide-item"><span class="guide-ex">выпады с гантелями</span><span class="guide-rule">общий вес 2 гантелей</span></div>
+</div>
+<div class="hub-tile">
+<div class="hub-icon">💪</div>
+<div class="hub-title">На одну руку — записывай отдельный подход на каждую</div>
+<div class="guide-item"><span class="guide-ex">тяга гантели в наклоне</span><span class="guide-rule single-arm">вес 1 гантели · подход на каждую руку</span></div>
+</div>
+<div class="hub-tile">
+<div class="hub-icon">🏃</div>
+<div class="hub-title">С весом тела (повторы) — вес не вводится</div>
+<div class="guide-item"><span class="guide-ex">отжимания от пола</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">подтягивания</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">берпи</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">отжимания на брусьях (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">присед (с весом тела)</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">скручивания</span><span class="guide-rule bw">только повторения</span></div>
+<div class="guide-item"><span class="guide-ex">запрыгивания на тумбу</span><span class="guide-rule bw">только повторения</span></div>
+</div>
+<div class="hub-tile">
+<div class="hub-icon">⏱️</div>
+<div class="hub-title">На время — секунды</div>
+<div class="guide-item"><span class="guide-ex">планка</span><span class="guide-rule">секунды</span></div>
+</div>
+<div class="hub-tile" style="background:linear-gradient(135deg,#1b2735,#2d4f66)">
+<div class="hub-icon">💡</div>
+<div class="hub-title">Важно</div>
+<div class="hub-sub">Для упражнений с гантелями (на две руки) указывай <strong>общий вес двух гантелей</strong>.</div>
+<div class="hub-sub" style="margin-top:8px">Для упражнений на <strong>одну руку</strong> — записывай вес одной гантели и делай <strong>отдельный подход</strong> на каждую руку.</div>
+</div>
+</div>
+</div>
+<!-- Страница Челленджи -->
+<div class="page" data-page="challenges"><div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Спортивные достижения</div>
+<div style="font-size:2rem;font-weight:900">ЧЕЛЛЕНДЖИ</div>
+<div style="margin-top:8px;opacity:.9">Выполняй задания и отслеживай прогресс</div>
+</div>
+</div>
+<div class="hub-tile" style="min-height:auto;margin-bottom:16px;">
+<div class="card-header"><h2>🎯 Активные челленджи</h2><span class="badge" id="challengeBadge">0 активных</span></div>
+<div id="challengesContainer"><div class="empty-state">Загрузка...</div></div>
+</div>
+</div>
+<!-- Страница Отчёты -->
+<div class="page" data-page="reports">
+<div style="padding:18px 0 14px">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Аналитика тренировок</div>
+<div style="font-size:2rem;font-weight:900">ОТЧЁТЫ</div>
+<div style="margin-top:8px;opacity:.9">История и статистика всех тренировок</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><h2>📊 Отчёты</h2><span class="badge">неделя</span></div>
+<div id="reportContainer"><div class="empty-state">Данные появятся после тренировок</div></div>
+</div>
+</div>
+<!-- Страница Калькулятор -->
+<div class="page" data-page="calc">
+<div style="padding:18px 0">
+<div style="background:linear-gradient(135deg,#ff6a00,#ff9e1a);border-radius:24px;padding:24px;color:#fff;box-shadow:0 15px 40px rgba(255,120,0,.35)">
+<div style="font-size:.75rem;opacity:.85">Калькулятор силы</div>
+<div style="font-size:2rem;font-weight:900">ONE REP MAX</div>
+<div class="value" id="calcResultValueHero" style="font-size:3rem;font-weight:900;margin-top:14px">--</div>
+<div style="opacity:.9">Твой предполагаемый максимум</div>
+</div>
+</div>
+<div class="card">
+<div class="calc-grid">
+<div class="calc-input-group"><label>🏋️ Вес (кг)</label><input id="calcWeight" step="0.5" type="number" value="80"/></div>
+<div class="calc-input-group"><label>🔁 Повторы</label><input id="calcReps" max="50" min="1" type="number" value="5"/></div>
+</div>
+<div style="margin:12px 0;font-size:.55rem;font-weight:700;color:var(--text-muted)">ФОРМУЛА</div>
+<div class="hub-tile" style="min-height:auto;padding:14px;margin-top:8px">
+<div class="hub-title">Бжицки</div>
+<div class="hub-sub">Используется как единственная формула расчёта 1ПМ.</div>
+</div>
+<select id="calcFormula" style="display:none">
+<option selected="" value="brzycki">Бжицки</option>
+</select>
+<div id="calcPercentTable" style="margin-top:18px"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bottom-nav" id="bottomNav" style="display:none !important;">
+<button class="nav-item active" data-page="home"><span class="nav-icon">🏠</span><span class="nav-label">Главная</span></button>
+<button class="nav-item" data-page="records"><span class="nav-icon">🏋️</span><span class="nav-label">Тренировки</span></button>
+<button class="nav-item" data-page="progress"><span class="nav-icon">📊</span><span class="nav-label">Вес</span></button>
+<button class="nav-item" data-page="forecast"><span class="nav-icon">📈</span><span class="nav-label">Прогноз</span></button>
+<button class="nav-item" data-page="ai"><span class="nav-icon">🤖</span><span class="nav-label">AI</span></button>
+<button class="nav-item" data-page="guide"><span class="nav-icon">📖</span><span class="nav-label">Справка</span></button>
+<button class="nav-item" data-page="challenges"><span class="nav-icon">🎯</span><span class="nav-label">Челленджи</span><span class="nav-badge" id="navChallengeBadge">0</span></button>
+<button class="nav-item" data-page="reports"><span class="nav-icon">📊</span><span class="nav-label">Отчёты</span></button>
+<button class="nav-item" data-page="calc"><span class="nav-icon">📐</span><span class="nav-label">1ПМ</span></button>
+</div>
+<div class="reset-modal" id="resetModal">
+<div class="reset-modal-content">
+<h2>⚠️ Полный сброс</h2>
+<p>Все данные будут удалены навсегда!</p>
+<div class="btn-row">
+<button class="btn btn-outline" onclick="closeResetModal()">❌ Отмена</button>
+<button class="btn btn-danger" id="resetConfirmBtn">🗑️ Сбросить всё</button>
+</div>
+</div>
+</div>
 <div class="exercise-chart-modal" id="exerciseChartModal">
-    <div class="modal-content">
-        <div class="modal-header"><h3 id="chartModalTitle">Упражнение</h3><button class="close-btn" onclick="closeExerciseChart()">✕</button></div>
-        <div class="modal-stats" id="chartModalStats">
-            <div class="ms-item"><div class="ms-label">Рекорд</div><div class="ms-value gold" id="chartRecord">--</div></div>
-            <div class="ms-item"><div class="ms-label">Подходов</div><div class="ms-value cyan" id="chartSetsCount">0</div></div>
-            <div class="ms-item"><div class="ms-label">Прогресс</div><div class="ms-value green" id="chartProgress">--</div></div>
-        </div>
-        <canvas id="exerciseChart"></canvas>
-        <div id="chartNoData" class="no-data" style="display:none;">Нет данных для графика</div>
-    </div>
+<div class="modal-content">
+<div class="modal-header"><h3 id="chartModalTitle">Упражнение</h3><button class="close-btn" onclick="closeExerciseChart()">✕</button></div>
+<div class="modal-stats" id="chartModalStats">
+<div class="ms-item"><div class="ms-label">Рекорд</div><div class="ms-value gold" id="chartRecord">--</div></div>
+<div class="ms-item"><div class="ms-label">Подходов</div><div class="ms-value cyan" id="chartSetsCount">0</div></div>
+<div class="ms-item"><div class="ms-label">Прогресс</div><div class="ms-value green" id="chartProgress">--</div></div>
 </div>
-
+<canvas id="exerciseChart"></canvas>
+<div class="no-data" id="chartNoData" style="display:none;">Нет данных для графика</div>
+</div>
+</div>
 <script>
 (function() {
     'use strict';
@@ -536,6 +722,17 @@
         const meta = document.getElementById('themeColor');
         if (meta) { meta.setAttribute('content', newTheme === 'dark' ? '#05070b' : '#f0f2f5'); }
     };
+
+    
+    function updateDashboard(){
+      try{
+        const rec=JSON.parse(localStorage.getItem('athlete_records')||'{}');
+        const sets=JSON.parse(localStorage.getItem('athlete_sets')||'[]');
+        document.getElementById('dashRecords').textContent=Object.keys(rec).length;
+        document.getElementById('dashSets').textContent=sets.length;
+        document.getElementById('dashStreak').textContent=Math.min(sets.length,30);
+      }catch(e){}
+    }
 
     function loadTheme() {
         const saved = localStorage.getItem('athlete_theme') || 'dark';
@@ -588,7 +785,7 @@
     const pagesWrapper = document.getElementById('pagesWrapper');
     const navItems = document.querySelectorAll('.nav-item');
     const pageMap = {};
-    let currentPage = 'records';
+    let currentPage = 'home';
     let isTransitioning = false;
 
     document.querySelectorAll('.page').forEach(function(page) {
@@ -953,6 +1150,8 @@
             summary.style.display = 'none';
             document.getElementById('setsCount').textContent = '0 подходов';
             document.getElementById('todaySetsCount').textContent = '0';
+            document.getElementById('todayExercisesCount').textContent='0';
+            document.getElementById('todayVolume').textContent='0';
             return;
         }
         container.innerHTML = '';
@@ -991,6 +1190,8 @@
             '<div class="stat"><span class="num">' + avg.toFixed(1) + '</span>ср. вес (кг)</div>';
         document.getElementById('setsCount').textContent = total + ' подходов';
         document.getElementById('todaySetsCount').textContent = total;
+        document.getElementById('todayExercisesCount').textContent = new Set(todaySets.map(function(s){return s.exercise;})).size;
+        document.getElementById('todayVolume').textContent = volume;
     }
 
     function addSet() {
@@ -1026,6 +1227,9 @@
         sets = sets.filter(function(s) { return s.date !== today; });
         saveSets();
         renderTodaySets();
+        renderReport();
+        updateTodayInfo();
+        updateChallengeBadge();
         updateChallenges();
         updateBlockHash();
         showToast('✅ Тренировка завершена! ' + todaySets.length + ' подходов сохранено.', 1800);
@@ -1157,7 +1361,8 @@
                     ctx.fillStyle = textColor;
                     ctx.font = '5px system-ui';
                     ctx.textAlign = 'center';
-                    ctx.fillText(data[k].date.slice(5), x, h - 2);
+                    const todayLabel = new Date().toLocaleDateString('ru-RU');
+                    ctx.fillText(todayLabel, x, h - 2);
                 }
             }
             chartRAF = null;
@@ -1465,7 +1670,9 @@
         const recordsCount = Object.values(records).filter(function(r) { return r.weight > 0; }).length;
         const maxRecord = Math.max.apply(null, Object.values(records).map(function(r) { return r.weight; }), 0);
         const bestEx = Object.keys(records).filter(function(k) { return records[k].weight === maxRecord; })[0] || '--';
-        const bwCount = bodyweightExercises.filter(function(ex) { return records[ex] && records[ex].weight > 0; }).length;
+        const bwSets = allWeeklySets.filter(function(set){ return bodyweightExercises.indexOf(set.exercise)!==-1; });
+        const bwCount = bwSets.length;
+        const bwExercises = [...new Set(bwSets.map(function(s){return s.exercise;}))].join(', ') || 'Нет';
         container.innerHTML =
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">' +
             '<div class="stat-box"><label>Подходов</label><div class="value">' + totalSets + '</div><div class="unit">за неделю</div></div>' +
@@ -1475,7 +1682,8 @@
             '</div>' +
             '<div style="background:var(--bg-input);padding:10px;border-radius:12px;border:1px solid var(--border-subtle);">' +
             '<div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span style="color:var(--text-muted);">🏆 Лучший рекорд</span><span style="font-weight:700;">' + bestEx + ': ' + maxRecord + ' кг</span></div>' +
-            '<div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;"><span style="color:var(--text-muted);">💪 Упражнений с весом тела</span><span style="font-weight:700;">' + bwCount + '/' + bodyweightExercises.length + '</span></div>' +
+            '<div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;"><span style="color:var(--text-muted);">💪 Подходов с собственным весом</span><span style="font-weight:700;">' + bwCount + '</span></div>' +
+            '<div style="font-size:0.65rem;margin-top:4px;color:var(--text-secondary);"><b>Упражнения с собственным весом:</b> ' + bwExercises + '</div>' +
             '<div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;"><span style="color:var(--text-muted);">📊 Изменение тоннажа</span><span style="font-weight:700;color:' + (volChange >= 0 ? '#54ff8f' : '#ff315c') + ';">' + (volChange >= 0 ? '↑' : '↓') + ' ' + Math.abs(volChange).toFixed(0) + '%</span></div>' +
             '<div style="display:flex;justify-content:space-between;font-size:0.7rem;margin-top:2px;"><span style="color:var(--text-muted);">🎯 Челленджи</span><span style="font-weight:700;">' + challenges.filter(function(c) { return c.week === weekStart && c.completed; }).length + '/' + challenges.filter(function(c) { return c.week === weekStart; }).length + '</span></div>' +
             '</div>' +
@@ -1618,7 +1826,8 @@
                 ctx.fillStyle = textColor;
                 ctx.font = '6px system-ui';
                 ctx.textAlign = 'center';
-                ctx.fillText(data[n].date.slice(5), p.x, h - 2);
+                const todayLabel = new Date().toLocaleDateString('ru-RU');
+                ctx.fillText(todayLabel, p.x, h - 2);
             }
         }
         if (record > 0) {
@@ -2194,24 +2403,29 @@
     // 12. КАЛЬКУЛЯТОР
     // ============================================================
     function calc1RM() {
-        const weight = parseFloat(document.getElementById('calcWeight').value);
-        const reps = parseInt(document.getElementById('calcReps').value);
-        const formula = document.getElementById('calcFormula').value;
-        if (isNaN(weight) || weight <= 0 || isNaN(reps) || reps < 1) {
-            showToast('❌ Введи корректные данные', 1600);
-            return;
+        const weight=parseFloat(document.getElementById('calcWeight').value);
+        const reps=parseInt(document.getElementById('calcReps').value);
+        const formula=document.getElementById('calcFormula').value;
+        if(isNaN(weight)||weight<=0||isNaN(reps)||reps<1){showToast('❌ Введи корректные данные',1600);return;}
+        let rm,name;
+        switch(formula){
+          case 'brzycki': rm=weight*(36/(37-Math.min(reps,36))); name='Бжицки'; break;
+          case 'epley': rm=weight*(1+reps/30); name='Эпли'; break;
+          case 'lombardi': rm=weight*Math.pow(reps,0.10); name='Ломбарди'; break;
+          case 'mayhew': rm=(100*weight)/(52.2+41.9*Math.exp(-0.055*reps)); name='Мэйхью'; break;
+          case 'oconnor': rm=weight*(1+reps/40); name='О\'Коннор'; break;
+          default: rm=weight*(1+reps/30); name='Эпли';
         }
-        let rm = 0, name = '';
-        switch (formula) {
-            case 'brzycki': rm = weight * (36 / (37 - Math.min(reps, 36))); name = 'Бжицки'; break;
-            case 'epley': rm = weight * (1 + reps / 30); name = 'Эпли'; break;
-            case 'lombardi': rm = weight * Math.pow(reps, 0.10); name = 'Ломбарди'; break;
-            case 'mayhew': rm = weight * (100 / (52.2 + 41.9 * Math.exp(-0.055 * reps))); name = 'Мэйхью'; break;
-            case 'oconnor': rm = weight * (1 + reps / 40); name = 'О\'Коннор'; break;
-            default: rm = weight * (1 + reps / 30); name = 'Эпли';
+        rm=Math.round(rm*10)/10;
+        const hero=document.getElementById('calcResultValueHero');
+        if(hero) hero.textContent=rm.toFixed(1)+' кг';
+        const tbl=document.getElementById('calcPercentTable');
+        if(tbl){
+          let h='<div class="card"><div class="card-header"><h2>🎯 Рабочие веса</h2><span class="badge">'+name+'</span></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">';
+          [100,95,90,85,80,75,70].forEach(p=>{h+=`<div style="padding:12px;border-radius:12px;background:var(--bg-input);display:flex;justify-content:space-between"><b>${p}%</b><span>${(rm*p/100).toFixed(1)} кг</span></div>`;});
+          h+='</div></div>';
+          tbl.innerHTML=h;
         }
-        document.getElementById('calcResultValue').textContent = rm.toFixed(1) + ' кг';
-        document.getElementById('calcResultSub').textContent = 'по ' + name + ' · 70%: ' + (rm * 0.7).toFixed(1) + ' кг · 80%: ' + (rm * 0.8).toFixed(1) + ' кг · 90%: ' + (rm * 0.9).toFixed(1) + ' кг';
     }
 
     // ============================================================
@@ -2325,6 +2539,7 @@
 
     function init() {
         loadTheme();
+    updateDashboard();
         loadData();
         updateExerciseSelects();
 
@@ -2387,8 +2602,6 @@
         document.getElementById('aiAdviceBtn').addEventListener('click', getAIAdvice);
         document.getElementById('aiAnalyzeBtn').addEventListener('click', analyzeFitness);
         document.getElementById('aiDeepBtn').addEventListener('click', deepAnalyze);
-        document.getElementById('calcBtn').addEventListener('click', calc1RM);
-
         // ИСПРАВЛЕНО: кнопка сброса
         document.getElementById('resetConfirmBtn').addEventListener('click', function() {
             localStorage.clear();
@@ -2427,6 +2640,320 @@
     }
 
     document.addEventListener('DOMContentLoaded', init);
+})();
+
+    // Prevent pull-to-refresh while allowing normal scrolling
+    document.addEventListener('touchmove', function(e){
+      if(window.scrollY===0){
+        const t=e.touches[0];
+      }
+    }, {passive:true});
+
+
+function updateXP(){
+ const sets=JSON.parse(localStorage.getItem('athlete_sets')||'[]');
+ const xp=sets.length*10;
+ const lvl=Math.floor(xp/500)+1;
+ const pct=(xp%500)/5;
+ let f=document.getElementById('xpFill'); if(f)f.style.width=pct+'%';
+ let l=document.getElementById('xpLevel'); if(l)l.textContent=lvl;
+ let t=document.getElementById('xpText'); if(t)t.textContent=xp+' XP';
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(updateXP,500));
+</script>
+<script>
+window.addEventListener('load',()=>{
+ const s=document.getElementById('splashScreen');
+ setTimeout(()=>{s.classList.add('hide');},2000);
+});
+
+function updateDashboard(){
+try{
+const rec=JSON.parse(localStorage.getItem('athlete_records')||'[]');
+const sets=JSON.parse(localStorage.getItem('athlete_sets')||'[]');
+document.getElementById('dashRecords')&&(dashRecords.textContent=rec.length);
+document.getElementById('dashSets')&&(dashSets.textContent=sets.length);
+document.getElementById('dashStreak')&&(dashStreak.textContent=Math.min(30,new Set(sets.map(s=>(s.date||'').slice(0,10))).size));
+}catch(e){}
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(updateDashboard,300));
+</script>
+<script>
+(function(){
+function updateMission(){
+const sets=JSON.parse(localStorage.getItem('todaySets')||'[]').length;
+const fill=document.getElementById('missionFill');
+if(fill){fill.style.width=Math.min(100,sets/20*100)+'%';}}
+window.addEventListener('load',updateMission);
+})();
+</script><script>
+(function(){
+window.navigateToPage=function(page){
+ const pages=[...document.querySelectorAll('.page')];
+ const wrapper=document.getElementById('pagesWrapper');
+ const nav=[...document.querySelectorAll('.nav-item')];
+ const idx=pages.findIndex(p=>p.dataset.page===page);
+ if(idx<0||!wrapper)return;
+ wrapper.style.transform='translateX(-'+(idx*100)+'%)';
+ nav.forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+};
+document.querySelectorAll('.nav-item').forEach(btn=>{
+ btn.addEventListener('click',()=>navigateToPage(btn.dataset.page));
+});
+window.addEventListener('load',()=>navigateToPage('home'));
+})();
+</script>
+<script>
+(function(){
+const b=document.createElement('button');
+b.innerHTML='🏠';
+b.style.cssText='position:fixed;right:18px;bottom:18px;width:56px;height:56px;border:none;border-radius:50%;background:linear-gradient(135deg,#ff6a00,#ff9e1a);color:#fff;font-size:24px;z-index:9999;box-shadow:0 10px 24px rgba(0,0,0,.35)';
+b.onclick=()=>navigateToPage('home');
+document.body.appendChild(b);
+})();
+</script>
+<script>
+setInterval(function(){
+ var a=document.getElementById('calcResultValue');
+ var b=document.getElementById('calcResultValueHero');
+ if(a&&b&&b.textContent!==a.textContent){b.textContent=a.textContent;}
+ var r=document.getElementById('calcResult');
+ if(r){r.style.display='none';}
+},100);
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const hero=document.getElementById('calcResultValueHero');
+  const old=document.getElementById('calcResultValue');
+  const wrap=document.getElementById('calcResult');
+  if(wrap) wrap.style.display='none';
+  function sync(){
+    if(hero&&old){
+      hero.textContent=old.textContent.trim();
+    }
+  }
+  sync();
+  const obs=new MutationObserver(sync);
+  if(old) obs.observe(old,{childList:true,characterData:true,subtree:true});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const btn=document.getElementById('calcBtn');
+ if(!btn) return;
+ btn.onclick=function(){
+   const w=parseFloat(document.getElementById('calcWeight').value)||0;
+   const r=parseInt(document.getElementById('calcReps').value)||1;
+   const f=document.getElementById('calcFormula').value;
+   let orm=0;
+   switch(f){
+     case 'epley': orm=w*(1+r/30); break;
+     case 'lombardi': orm=w*Math.pow(r,0.10); break;
+     case 'mayhew': orm=(100*w)/(52.2+41.9*Math.exp(-0.055*r)); break;
+     case 'oconnor': orm=w*(1+0.025*r); break;
+     default: orm=w*36/(37-r);
+   }
+   if(!isFinite(orm)||orm<=0){orm=0;}
+   orm=Math.round(orm*10)/10;
+   document.getElementById('calcResultValueHero').textContent=orm?orm+' кг':'--';
+   const levels=[100,95,90,85,80,75,70];
+   let out='<div class="card"><div class="card-header"><h2>🎯 Рабочие веса</h2></div>';
+   out+='<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">';
+   levels.forEach(p=>{
+      out+=`<div style="padding:14px;border-radius:14px;background:var(--bg-input);border:1px solid var(--border-subtle);display:flex;justify-content:space-between"><b>${p}%</b><span>${(orm*p/100).toFixed(1)} кг</span></div>`;
+   });
+   out+='</div></div>';
+   document.getElementById('calcPercentTable').innerHTML=out;
+ };
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const btn=document.getElementById('calcBtn');
+ if(!btn) return;
+ const tabs=[...document.querySelectorAll('.page[data-page="calc"] .category-tab')];
+ const formulas=['brzycki','epley','lombardi'];
+ tabs.forEach((t,i)=>t.onclick=()=>{
+   tabs.forEach(x=>x.classList.remove('active'));
+   t.classList.add('active');
+   document.getElementById('calcFormula').value=formulas[i];
+ });
+ btn.replaceWith(btn.cloneNode(true));
+ const newBtn=document.getElementById('calcBtn');
+ newBtn.addEventListener('click',()=>{
+   const w=parseFloat(document.getElementById('calcWeight').value)||0;
+   const r=parseInt(document.getElementById('calcReps').value)||0;
+   const f=document.getElementById('calcFormula').value;
+   if(w<=0||r<=0){return;}
+   let orm;
+   switch(f){
+    case 'epley': orm=w*(1+r/30); break;
+    case 'lombardi': orm=w*Math.pow(r,0.10); break;
+    default: orm=w*36/(37-r);
+   }
+   orm=Math.round(orm*10)/10;
+   document.getElementById('calcResultValueHero').textContent=orm+' кг';
+   const arr=[100,95,90,85,80,75,70];
+   document.getElementById('calcPercentTable').innerHTML=
+    '<div class="card"><div class="card-header"><h2>Рабочие веса</h2></div>'+
+    arr.map(p=>`<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid rgba(255,255,255,.08)"><b>${p}%</b><span>${(orm*p/100).toFixed(1)} кг</span></div>`).join('')+
+    '</div>';
+ });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const w=document.getElementById('calcWeight');
+ const r=document.getElementById('calcReps');
+ const f=document.getElementById('calcFormula');
+ const hero=document.getElementById('calcResultValueHero');
+ const table=document.getElementById('calcPercentTable');
+ const tabs=[...document.querySelectorAll('.page[data-page="calc"] .category-tab')];
+ const vals=['brzycki','epley','lombardi'];
+ tabs.forEach((t,i)=>t.onclick=()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');f.value=vals[i];calc();});
+ function ormCalc(weight,reps,form){
+   switch(form){
+    case 'epley': return weight*(1+reps/30);
+    case 'lombardi': return weight*Math.pow(reps,0.10);
+    case 'mayhew': return (100*weight)/(52.2+41.9*Math.exp(-0.055*reps));
+    case 'oconnor': return weight*(1+0.025*reps);
+    default: return weight*36/(37-reps);
+   }
+ }
+ function calc(){
+   const weight=parseFloat(w.value)||0;
+   const reps=parseInt(r.value)||0;
+   if(weight<=0||reps<=0){hero.textContent='--';table.innerHTML='';return;}
+   const rm = ormCalc(weight, reps, f.value);
+hero.textContent = rm.toFixed(1)+' кг';
+   let levels=[100,95,90,85,80,75,70];
+   table.innerHTML='<div class="card"><div class="card-header"><h2>Рабочие веса</h2><span class="badge">AVG</span></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">'+levels.map(p=>`<div style="padding:12px;border-radius:14px;background:var(--bg-input);display:flex;justify-content:space-between"><b>${p}%</b><span>${(avg*p/100).toFixed(1)} кг</span></div>`).join('')+'</div></div>';
+ }
+ document.getElementById('calcBtn').onclick=calc;
+ w.oninput=calc;r.oninput=calc;
+ calc();
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  function calc1RM(w,r,f){
+    w=parseFloat(w)||0; r=parseInt(r)||1;
+    switch(f){
+      case 'epley': return w*(1+r/30);
+      case 'lombardi': return w*Math.pow(r,0.10);
+      case 'mayhew': return (100*w)/(52.2+41.9*Math.exp(-0.055*r));
+      case 'oconnor': return w*(1+0.025*r);
+      default: return (36*w)/(37-r);
+    }
+  }
+  function refreshPercentTable(){
+    const w=document.getElementById('calcWeight')?.value;
+    const r=document.getElementById('calcReps')?.value;
+    const f='brzycki';
+    const orm=calc1RM(w,r,f);
+    const hero=document.getElementById('calcResultValueHero');
+    if(hero) hero.textContent=orm.toFixed(1)+' кг';
+    const box=document.getElementById('calcPercentTable');
+    if(!box) return;
+    const perc=[100,95,90,85,80,75,70,65,60,55,50];
+    box.innerHTML=perc.map(p=>`<div class="guide-item"><span>${p}%</span><span>${(orm*p/100).toFixed(1)} кг</span></div>`).join('');
+  }
+  ['calcWeight','calcReps','calcFormula'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.addEventListener('input',refreshPercentTable);
+      el.addEventListener('change',refreshPercentTable);
+    }
+  });
+  setTimeout(refreshPercentTable,300);
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const btn=document.getElementById('forecastBtn');
+ if(!btn) return;
+ btn.addEventListener('click',()=>{
+   const target=parseFloat(document.getElementById('forecastTarget').value)||0;
+   const sel=document.getElementById('forecastExSelect');
+   const ex=sel?sel.options[sel.selectedIndex].text:'Упражнение';
+   let current=0;
+   try{
+      if(window.records){
+        const r=window.records.find(x=>x.name===ex||x.exercise===ex);
+        if(r) current=parseFloat(r.weight||r.value||r.record)||0;
+      }
+   }catch(e){}
+   const diff=Math.max(0,target-current);
+   const weeks=Math.max(1,Math.ceil(diff/2.5));
+   const d=new Date(); d.setDate(d.getDate()+weeks*7);
+   const chance=Math.max(35,Math.min(98,Math.round(95-diff*2)));
+   const fmt=d.toLocaleDateString('ru-RU');
+   document.getElementById('forecastGoalMini').textContent=target?target+' кг':'—';
+   document.getElementById('forecastDiffMini').textContent=(diff?diff.toFixed(1):0)+' кг';
+   document.getElementById('forecastDateMini').textContent=fmt;
+   const el=document.getElementById('forecastChanceMini');
+   el.textContent=chance+'%';
+   el.style.color=chance>=80?'#4ade80':chance>=50?'#fbbf24':'#ff5a5a';
+ });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const d=new Date();
+ const el=document.getElementById('todayDate');
+ if(el) el.textContent=d.toLocaleDateString('ru-RU');
+ function update(){
+  const items=[...document.querySelectorAll('#todaySetsContainer .set-item')];
+  const ex=new Set(); let vol=0;
+  items.forEach(it=>{
+    const txt=it.innerText;
+    const m=txt.match(/([0-9]+(?:[\.,][0-9]+)?)\s*к?г?.*?(\d+)/i);
+    if(m){vol+=parseFloat(m[1].replace(',','.'))*parseInt(m[2]);}
+    const name=txt.split(/\d/)[0].trim(); if(name) ex.add(name);
+  });
+  let e=document.getElementById('todayExercisesCount'); if(e)e.textContent=ex.size;
+  let v=document.getElementById('todayVolume'); if(v)v.textContent=Math.round(vol);
+ }
+ setInterval(update,1000); update();
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const pc=document.getElementById('pagesContainer');
+ if(pc){
+   pc.style.touchAction='pan-y';
+ }
+ let sx=0, sy=0;
+ document.addEventListener('touchstart',e=>{
+   sx=e.touches[0].clientX; sy=e.touches[0].clientY;
+ },{passive:true,capture:true});
+ document.addEventListener('touchmove',e=>{
+   const dx=Math.abs(e.touches[0].clientX-sx);
+   const dy=Math.abs(e.touches[0].clientY-sy);
+   if(dx>dy){ e.stopImmediatePropagation(); }
+ },{passive:true,capture:true});
+ if(typeof window.handleTouchStart==='function') window.handleTouchStart=function(){};
+ if(typeof window.handleTouchMove==='function') window.handleTouchMove=function(){};
+ if(typeof window.handleTouchEnd==='function') window.handleTouchEnd=function(){};
+})();
+</script>
+
+<script>
+(function(){
+const wrapper=document.getElementById('pagesWrapper');
+if(!wrapper) return;
+
+// Отключаем CSS transition, если логика сама анимирует
+wrapper.style.transition='transform 220ms cubic-bezier(.22,1,.36,1)';
+wrapper.style.willChange='transform';
+
+const orig=window.navigateToPage;
+if(typeof orig==='function'){
+  window.navigateToPage=function(page){
+    wrapper.style.transition='transform 220ms cubic-bezier(.22,1,.36,1)';
+    return orig.apply(this,arguments);
+  };
+}
 })();
 </script>
 
